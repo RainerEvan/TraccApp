@@ -21,8 +21,8 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-@Table(name = "support_attachment")
-public class SupportAttachment {
+@Table(name = "support_attachments")
+public class SupportAttachments {
     
     @Id
     @GeneratedValue(generator = "UUID")
@@ -36,7 +36,7 @@ public class SupportAttachment {
     private String fileBase64;
     private String type;
 
-    public SupportAttachment(Supports support, String fileBase64, String type) {
+    public SupportAttachments(Supports support, String fileBase64, String type) {
         this.support = support;
         this.fileBase64 = fileBase64;
         this.type = type;

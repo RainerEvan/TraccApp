@@ -1,5 +1,6 @@
 package com.traccapp.demo.model;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import javax.persistence.Entity;
@@ -7,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -16,14 +16,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-
 @Entity
 @NoArgsConstructor
 @Getter
 @Setter
 @ToString
-@Table(name = "ticket_attachment")
-public class TicketAttachment {
+public class Comments {
     
     @Id
     @GeneratedValue(generator = "UUID")
@@ -34,14 +32,21 @@ public class TicketAttachment {
     @JoinColumn(name="ticket_id")
     private Tickets ticket;
 
-    private String fileBase64;
-    private String type;
+    @ManyToOne
+    @JoinColumn(name="author_id")
+    private Accounts author;
     
-    public TicketAttachment(Tickets ticket, String fileBase64, String type) {
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+    private String body;
+    private Boolean isDeleted = false;
+
+    public Comments(Tickets ticket, Accounts author, LocalDateTime createdAt, LocalDateTime updatedAt, String body) {
         this.ticket = ticket;
-        this.fileBase64 = fileBase64;
-        this.type = type;
+        this.author = author;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.body = body;
     }
 
-    
 }

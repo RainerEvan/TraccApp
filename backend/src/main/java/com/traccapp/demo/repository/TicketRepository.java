@@ -10,5 +10,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TicketRepository extends JpaRepository<Tickets, UUID> {
+    Optional<Tickets> findById(UUID id);
     Optional<Tickets> findByTicketNo(String ticketNo);
 }
