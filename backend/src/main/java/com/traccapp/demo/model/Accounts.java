@@ -9,22 +9,19 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
 @Entity
 @NoArgsConstructor
-@Getter
-@Setter
-@ToString
+@Data
 public class Accounts {
      
     @Id
@@ -42,6 +39,7 @@ public class Accounts {
     @JoinColumn(name="division_id")
     private Divisions division;
 
+    @Lob
     private String profileImg;
     private Boolean isActive;
 
@@ -51,4 +49,18 @@ public class Accounts {
                 inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Roles> role = new HashSet<>();
 
+    public Accounts(String username, String password, String email, String displayName, String contactNo,
+            Divisions division, String profileImg, Boolean isActive, Set<Roles> role) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.displayName = displayName;
+        this.contactNo = contactNo;
+        this.division = division;
+        this.profileImg = profileImg;
+        this.isActive = isActive;
+        this.role = role;
+    }
+
+    
 }

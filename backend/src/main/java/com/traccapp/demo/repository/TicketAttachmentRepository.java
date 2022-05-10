@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface TicketAttachmentsRepository extends JpaRepository<TicketAttachments,UUID>{
+public interface TicketAttachmentRepository extends JpaRepository<TicketAttachments,UUID>{
     
 }

@@ -11,16 +11,12 @@ import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
 @Entity
 @NoArgsConstructor
-@Getter
-@Setter
-@ToString
+@Data
 public class Supports {
     
     @Id
@@ -41,17 +37,17 @@ public class Supports {
     private String result;
     private String description;
     private String devNote;
-    private Boolean isResolved;
+    private Boolean isActive;
     
     public Supports(Tickets ticket, LocalDate dateTaken, Accounts developer, String result, String description,
-            String devNote, Boolean isResolved) {
+            String devNote, Boolean isActive) {
         this.ticket = ticket;
         this.dateTaken = dateTaken;
         this.developer = developer;
         this.result = result;
         this.description = description;
         this.devNote = devNote;
-        this.isResolved = isResolved;
+        this.isActive = isActive;
     }
 
     

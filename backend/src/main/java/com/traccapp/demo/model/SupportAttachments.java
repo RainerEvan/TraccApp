@@ -6,21 +6,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
 @Entity
 @NoArgsConstructor
-@Getter
-@Setter
-@ToString
+@Data
 @Table(name = "support_attachments")
 public class SupportAttachments {
     
@@ -33,14 +30,15 @@ public class SupportAttachments {
     @JoinColumn(name="support_id")
     private Supports support;
 
+    @Lob
     private String fileBase64;
-    private String type;
+    private String fileName;
+    private String fileType;
 
-    public SupportAttachments(Supports support, String fileBase64, String type) {
+    public SupportAttachments(Supports support, String fileBase64, String fileName, String fileType) {
         this.support = support;
         this.fileBase64 = fileBase64;
-        this.type = type;
+        this.fileName = fileName;
+        this.fileType = fileType;
     }
-
-    
 }
