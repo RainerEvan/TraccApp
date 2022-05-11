@@ -7,6 +7,9 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
+
+import com.traccapp.demo.data.ERoles;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -16,6 +19,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 @Data
+@Table(name = "m_roles")
 public class Roles {
     
     @Id

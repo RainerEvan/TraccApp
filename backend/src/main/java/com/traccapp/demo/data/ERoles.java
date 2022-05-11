@@ -1,4 +1,4 @@
-package com.traccapp.demo.model;
+package com.traccapp.demo.data;
 
 public enum ERoles {
     ROLE_ADMIN,

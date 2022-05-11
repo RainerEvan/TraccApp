@@ -31,5 +31,5 @@ public class TicketService {
         return ticketRepository.findByTicketNo(ticketNo);
     }
 
-    
+
 }

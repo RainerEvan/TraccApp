@@ -1,20 +1,20 @@
 package com.traccapp.demo.model;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import com.traccapp.demo.utils.TicketNoGenerator;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,6 +23,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 @Data
+@Table(name = "m_tickets")
 public class Tickets {
 
     @Id
@@ -30,8 +31,14 @@ public class Tickets {
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
 
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ticket_seq")
+    @GenericGenerator(
+        name = "ticket_seq",
+        strategy = "com.traccapp.demo.utils.TicketNoGenerator",
+        parameters = {@Parameter(name = TicketNoGenerator.INCREMENT_PARAM, value = "50")}
+    )
     private String ticketNo;
-
+  
     @ManyToOne
     @JoinColumn(name="application_id")
     private Applications application;
@@ -50,22 +57,10 @@ public class Tickets {
     @JoinColumn(name="status_id")
     private Status status;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable( name = "tickets_tags",
-                joinColumns = @JoinColumn(name = "tickets_id"),
-                inverseJoinColumns = @JoinColumn(name = "tags_id"))
-    private Set<Tags> tags = new HashSet<>();
-
-    public Tickets(String ticketNo, Applications application, LocalDate dateAdded, Accounts reporter, String title,
-            String description, LocalDate dateClosed, Status status) {
-        this.ticketNo = ticketNo;
-        this.application = application;
-        this.dateAdded = dateAdded;
-        this.reporter = reporter;
+    public Tickets(String title) {
         this.title = title;
-        this.description = description;
-        this.dateClosed = dateClosed;
-        this.status = status;
     }
+
+  
 
 }

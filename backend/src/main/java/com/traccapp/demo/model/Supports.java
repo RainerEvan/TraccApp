@@ -1,13 +1,19 @@
 package com.traccapp.demo.model;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -17,6 +23,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 @Data
+@Table(name = "m_supports")
 public class Supports {
     
     @Id
@@ -36,19 +43,21 @@ public class Supports {
 
     private String result;
     private String description;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable( name = "supports_tags",
+                joinColumns = @JoinColumn(name = "supports_id"),
+                inverseJoinColumns = @JoinColumn(name = "tags_id"))
+    private Set<Tags> tags = new HashSet<>();
+    
     private String devNote;
     private Boolean isActive;
-    
-    public Supports(Tickets ticket, LocalDate dateTaken, Accounts developer, String result, String description,
-            String devNote, Boolean isActive) {
+
+    public Supports(Tickets ticket, LocalDate dateTaken, Accounts developer, Boolean isActive) {
         this.ticket = ticket;
         this.dateTaken = dateTaken;
         this.developer = developer;
-        this.result = result;
-        this.description = description;
-        this.devNote = devNote;
         this.isActive = isActive;
     }
-
     
 }

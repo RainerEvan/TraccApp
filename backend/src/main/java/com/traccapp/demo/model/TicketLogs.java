@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 @Data
-@Table(name = "ticket_logs")
+@Table(name = "t_ticket_logs")
 public class TicketLogs {
     
     @Id
@@ -35,8 +35,8 @@ public class TicketLogs {
     private Supports support;
 
     @ManyToOne
-    @JoinColumn(name="actuator_id")
-    private Accounts actuator;
+    @JoinColumn(name="actor_id")
+    private Accounts actor;
 
     private String action;
     private LocalDateTime dateTime;
@@ -45,11 +45,11 @@ public class TicketLogs {
     @JoinColumn(name="status_id")
     private Status status;
 
-    public TicketLogs(Tickets ticket, Supports support, Accounts actuator, String action, LocalDateTime dateTime,
+    public TicketLogs(Tickets ticket, Supports support, Accounts actor, String action, LocalDateTime dateTime,
             Status status) {
         this.ticket = ticket;
         this.support = support;
-        this.actuator = actuator;
+        this.actor = actor;
         this.action = action;
         this.dateTime = dateTime;
         this.status = status;
