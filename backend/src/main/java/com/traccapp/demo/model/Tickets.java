@@ -1,6 +1,7 @@
 package com.traccapp.demo.model;
 
 import java.time.LocalDate;
+import java.util.Set;
 import java.util.UUID;
 
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.traccapp.demo.utils.TicketNoGenerator;
@@ -56,6 +58,9 @@ public class Tickets {
     @ManyToOne
     @JoinColumn(name="status_id")
     private Status status;
+
+    @OneToMany(mappedBy = "ticket")
+    private Set<Supports> support;
 
     public Tickets(String title) {
         this.title = title;
