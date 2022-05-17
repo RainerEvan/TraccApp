@@ -12,10 +12,12 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
+@AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Table(name = "t_ticket_attachments")
@@ -34,11 +36,4 @@ public class TicketAttachments {
     private String fileBase64;
     private String fileName;
     private String fileType;
-
-    public TicketAttachments(Tickets ticket, String fileBase64, String fileName, String fileType) {
-        this.ticket = ticket;
-        this.fileBase64 = fileBase64;
-        this.fileName = fileName;
-        this.fileType = fileType;
-    }
 }

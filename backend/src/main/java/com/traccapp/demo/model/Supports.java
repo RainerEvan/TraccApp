@@ -17,10 +17,12 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
+@AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Table(name = "m_supports")
@@ -52,12 +54,5 @@ public class Supports {
     
     private String devNote;
     private Boolean isActive;
-
-    public Supports(Tickets ticket, LocalDate dateTaken, Accounts developer, Boolean isActive) {
-        this.ticket = ticket;
-        this.dateTaken = dateTaken;
-        this.developer = developer;
-        this.isActive = isActive;
-    }
     
 }

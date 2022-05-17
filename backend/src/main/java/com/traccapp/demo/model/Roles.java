@@ -13,10 +13,12 @@ import com.traccapp.demo.data.ERoles;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
+@AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Table(name = "m_roles")
@@ -30,7 +32,4 @@ public class Roles {
     @Enumerated(EnumType.STRING)
     private ERoles name;
 
-    public Roles(ERoles name) {
-        this.name = name;
-    }
 }

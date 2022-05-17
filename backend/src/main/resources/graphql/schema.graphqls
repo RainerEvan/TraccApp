@@ -1,0 +1,122 @@
+scalar Date
+scalar DateTime
+
+schema {
+    query:query
+    mutation:Mutation
+}
+
+type Query{
+
+}
+
+type Mutation{
+
+}
+
+type Accounts{
+    id:ID
+    username:String
+    password:String
+    email:String
+    displayName:String
+    contactNo:String
+    division:Divisions
+    profileImg:String
+    isActive:Boolean
+}
+
+type Roles{
+    id:ID
+    name:String
+}
+
+type Divisions{
+    id:ID
+    name:String
+}
+
+type Notifications{
+    id:ID
+    sender:Accounts
+    receiver:Accounts
+    sentAt:DateTime
+    readAt:DateTime
+    title:String
+    body:String
+    link:String
+}
+
+type Tickets{
+    id:ID
+    ticketNo:String
+    application:Applications
+    dateAdded:Date
+    reporter:Accounts
+    title:String
+    description:String
+    dateClosed:Date
+    status:Status
+}
+
+type TicketAttachments{
+    id:ID
+    ticket:Tickets
+    fileBase64:String
+    fileName:String
+    fileType:String
+}
+
+type Status{
+    id:ID
+    name:String
+}
+
+type Applications{
+    id:ID
+    name:String
+}
+
+type Comments{
+    id:ID
+    ticket:Tickets
+    author:Accounts
+    createdAt:DateTime
+    updatedAt:DateTime
+    body:String
+    isDeleted:Boolean
+}
+
+type TicketLogs{
+    id:ID
+    ticket:Tickets
+    support:Supports
+    actor:Accounts
+    action:String
+    dateTime:DateTime
+    status:Status
+}
+
+type Supports{
+    id:ID
+    ticket:Tickets
+    dateTaken:DateTime
+    developer:Accounts
+    result:String
+    description:String
+    devNote:String
+    isActive:Boolean
+}
+
+type SupportAttachments{
+    id:ID
+    support:Supports
+    fileBase64:String
+    fileName:String
+    fileType:String
+}
+
+type Tags{
+    id:ID
+    name:String
+}

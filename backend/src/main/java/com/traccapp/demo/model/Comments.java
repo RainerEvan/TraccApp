@@ -12,10 +12,12 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
+@AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Table(name = "t_comments")
@@ -38,13 +40,5 @@ public class Comments {
     private LocalDateTime updatedAt;
     private String body;
     private Boolean isDeleted = false;
-
-    public Comments(Tickets ticket, Accounts author, LocalDateTime createdAt, LocalDateTime updatedAt, String body) {
-        this.ticket = ticket;
-        this.author = author;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-        this.body = body;
-    }
 
 }

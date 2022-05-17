@@ -12,10 +12,12 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
+@AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Table(name = "t_ticket_logs")
@@ -44,16 +46,5 @@ public class TicketLogs {
     @ManyToOne
     @JoinColumn(name="status_id")
     private Status status;
-
-    public TicketLogs(Tickets ticket, Supports support, Accounts actor, String action, LocalDateTime dateTime,
-            Status status) {
-        this.ticket = ticket;
-        this.support = support;
-        this.actor = actor;
-        this.action = action;
-        this.dateTime = dateTime;
-        this.status = status;
-    }
-
     
 }

@@ -9,10 +9,12 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
+@AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Table(name = "m_applications")
@@ -24,10 +26,6 @@ public class Applications {
     private UUID id;
 
     private String name;
-
-    public Applications(String name) {
-        this.name = name;
-    }
 
     
 }

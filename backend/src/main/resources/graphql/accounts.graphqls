@@ -1,0 +1,7 @@
+type Accounts{
+
+}
+
+extend type Query{
+
+}

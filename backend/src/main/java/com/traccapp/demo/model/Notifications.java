@@ -12,10 +12,12 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
+@AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Table(name = "t_notifications")
@@ -39,16 +41,5 @@ public class Notifications {
     private String title;
     private String body;
     private String link;
-
-    public Notifications(Accounts sender, Accounts receiver, LocalDateTime sentAt, LocalDateTime readAt, String title,
-            String body, String link) {
-        this.sender = sender;
-        this.receiver = receiver;
-        this.sentAt = sentAt;
-        this.readAt = readAt;
-        this.title = title;
-        this.body = body;
-        this.link = link;
-    }
 
 }

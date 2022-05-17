@@ -13,10 +13,12 @@ import com.traccapp.demo.data.EStatus;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
+@AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Table(name = "m_status")
@@ -29,9 +31,5 @@ public class Status {
 
     @Enumerated(EnumType.STRING)
     private EStatus name;
-
-    public Status(EStatus name) {
-        this.name = name;
-    }
     
 }

@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -18,14 +19,17 @@ import com.traccapp.demo.utils.TicketNoGenerator;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
 @Entity
+@AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Table(name = "m_tickets")
+@IdClass(TicketPK.class)
 public class Tickets {
 
     @Id
@@ -33,11 +37,12 @@ public class Tickets {
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
 
+    @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ticket_seq")
     @GenericGenerator(
         name = "ticket_seq",
         strategy = "com.traccapp.demo.utils.TicketNoGenerator",
-        parameters = {@Parameter(name = TicketNoGenerator.INCREMENT_PARAM, value = "50")}
+        parameters = {@Parameter(name = TicketNoGenerator.INCREMENT_PARAM, value = "1")}
     )
     private String ticketNo;
   
@@ -61,11 +66,5 @@ public class Tickets {
 
     @OneToMany(mappedBy = "ticket")
     private Set<Supports> support;
-
-    public Tickets(String title) {
-        this.title = title;
-    }
-
-  
 
 }

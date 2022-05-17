@@ -17,10 +17,12 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
+@AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Table(name = "m_accounts")
@@ -50,19 +52,5 @@ public class Accounts {
                 joinColumns = @JoinColumn(name = "account_id"),
                 inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Roles> role = new HashSet<>();
-
-    public Accounts(String username, String password, String email, String displayName, String contactNo,
-            Divisions division, String profileImg, Boolean isActive, Set<Roles> role) {
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.displayName = displayName;
-        this.contactNo = contactNo;
-        this.division = division;
-        this.profileImg = profileImg;
-        this.isActive = isActive;
-        this.role = role;
-    }
-
     
 }
