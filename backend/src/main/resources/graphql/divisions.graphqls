@@ -1,0 +1,4 @@
+type Divisions{
+    id:ID
+    name:String
+}

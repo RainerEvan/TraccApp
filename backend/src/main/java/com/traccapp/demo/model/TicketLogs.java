@@ -1,6 +1,6 @@
 package com.traccapp.demo.model;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.UUID;
 
 import javax.persistence.Entity;
@@ -41,7 +41,7 @@ public class TicketLogs {
     private Accounts actor;
 
     private String action;
-    private LocalDateTime dateTime;
+    private OffsetDateTime dateTime;
 
     @ManyToOne
     @JoinColumn(name="status_id")

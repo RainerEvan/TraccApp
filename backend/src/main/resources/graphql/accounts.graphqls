@@ -1,7 +1,39 @@
 type Accounts{
-
+    id:ID!
+    username:String
+    password:String
+    email:String
+    contactNo:String
+    division:Divisions
+    profileImg:String
+    isActive:Boolean
+    role:Roles
 }
 
 extend type Query{
+    getAllAccounts:[Accounts]
+    getAccount(id:ID!):Accounts
+}
 
+extend type Mutation{
+    addAccount(
+        username:String!,
+        password:String!,
+        email:String!,
+        contactNo:String,
+        division:Divisions!,
+        profileImg:String
+        isActive:Boolean!,
+        role:Roles!
+    ):Accounts
+
+    editAccount(
+        accountId:ID!,
+        username:String!,
+        email:String!,
+        contactNo:String,
+        division:Divisions!,
+        profileImg:String
+        isActive:Boolean!,
+    ):Accounts
 }

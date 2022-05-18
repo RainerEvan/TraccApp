@@ -67,4 +67,7 @@ public class Tickets {
     @OneToMany(mappedBy = "ticket")
     private Set<Supports> support;
 
+    @OneToMany(mappedBy = "ticket")
+    private Set<TicketAttachments> attachments;
+
 }

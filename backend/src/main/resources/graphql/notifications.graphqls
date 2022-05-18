@@ -1,0 +1,10 @@
+type Notifications{
+    id:ID
+    sender:Accounts
+    receiver:Accounts
+    sentAt:DateTime
+    readAt:DateTime
+    title:String
+    body:String
+    link:String
+}

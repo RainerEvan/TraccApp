@@ -1,6 +1,6 @@
 package com.traccapp.demo.model;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.UUID;
 
 import javax.persistence.Entity;
@@ -36,8 +36,8 @@ public class Notifications {
     @JoinColumn(name="receiver_id")
     private Accounts receiver;
 
-    private LocalDateTime sentAt;
-    private LocalDateTime readAt;
+    private OffsetDateTime sentAt;
+    private OffsetDateTime readAt;
     private String title;
     private String body;
     private String link;

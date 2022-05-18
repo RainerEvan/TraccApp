@@ -1,0 +1,10 @@
+type Supports{
+    id:ID
+    ticket:Tickets
+    dateTaken:DateTime
+    developer:Accounts
+    result:String
+    description:String
+    devNote:String
+    isActive:Boolean
+}

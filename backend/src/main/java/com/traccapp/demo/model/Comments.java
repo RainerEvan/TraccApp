@@ -1,6 +1,6 @@
 package com.traccapp.demo.model;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.UUID;
 
 import javax.persistence.Entity;
@@ -36,8 +36,8 @@ public class Comments {
     @JoinColumn(name="author_id")
     private Accounts author;
     
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+    private OffsetDateTime createdAt;
+    private OffsetDateTime updatedAt;
     private String body;
     private Boolean isDeleted = false;
 

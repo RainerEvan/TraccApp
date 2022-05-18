@@ -1,0 +1,9 @@
+type Comments{
+    id:ID
+    ticket:Tickets
+    author:Accounts
+    createdAt:DateTime
+    updatedAt:DateTime
+    body:String
+    isDeleted:Boolean
+}

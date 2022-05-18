@@ -1,0 +1,11 @@
+type Tickets{
+    id:ID
+    ticketNo:String
+    application:Applications
+    dateAdded:Date
+    reporter:Accounts
+    title:String
+    description:String
+    dateClosed:Date
+    status:Status
+}

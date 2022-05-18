@@ -1,0 +1,7 @@
+type TicketAttachments{
+    id:ID
+    ticket:Tickets
+    fileBase64:String
+    fileName:String
+    fileType:String
+}

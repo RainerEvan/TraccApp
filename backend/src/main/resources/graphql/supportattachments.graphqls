@@ -1,0 +1,7 @@
+type SupportAttachments{
+    id:ID
+    support:Supports
+    fileBase64:String
+    fileName:String
+    fileType:String
+}

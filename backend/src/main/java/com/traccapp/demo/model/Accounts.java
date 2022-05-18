@@ -36,7 +36,6 @@ public class Accounts {
     private String username;
     private String password;
     private String email;
-    private String displayName;
     private String contactNo;
 
     @ManyToOne
