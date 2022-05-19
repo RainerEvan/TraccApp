@@ -7,3 +7,22 @@ type Comments{
     body:String
     isDeleted:Boolean
 }
+
+extend type Query{
+    getAllCommentsForTicket(ticketId:ID!):[Comments]
+}
+
+extend type Mutation{
+    addComment(
+        ticketId:ID!,
+        authorId:ID!,
+        body:String!
+    ):Comments
+
+    editComment(
+        commentId:ID!,
+        body:String!
+    ):Comments
+
+    deleteComment(commentId:ID!):Boolean
+}

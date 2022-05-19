@@ -5,8 +5,10 @@ type Applications{
 
 extend type Query{
     getAllApplications:[Applications]
+    getApplication(applicationId:ID!):Applications
 }
 
 extend type Mutation{
-    
+    addApplication(name:String!):Applications
+    deleteApplication(applicationId:ID!):Boolean
 }

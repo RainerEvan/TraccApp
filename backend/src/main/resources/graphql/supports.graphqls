@@ -5,6 +5,33 @@ type Supports{
     developer:Accounts
     result:String
     description:String
+    tags:Tags
     devNote:String
     isActive:Boolean
+}
+
+extend type Query{
+    getSupportForTicket(ticketId:ID!):Supports
+    getAllSupportsForDeveloper(accountId:ID!):[Supports]
+}
+
+extend type Mutation{
+    addSupport(
+        ticketId:ID!,
+        developerId:ID!
+    ):Supports
+
+    solveSupport(
+        supportId:ID!,
+        result:String!,
+        description:String!,
+        devNote:String!,
+        tags:[Tags]!
+    ):Supports
+
+    withdrawSupport(
+        supportId:ID!,
+        result:String!,
+        description:String!,
+    ):Supports
 }

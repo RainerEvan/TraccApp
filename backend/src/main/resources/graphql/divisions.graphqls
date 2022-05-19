@@ -2,3 +2,13 @@ type Divisions{
     id:ID
     name:String
 }
+
+extend type Query{
+    getAllDivisions:[Divisions]
+    getDivision(divisionId:ID!):Divisions
+}
+
+extend type Mutation{
+    addDivision(name:String!):Divisions
+    deleteDivision(divisionId:ID!):Boolean
+}

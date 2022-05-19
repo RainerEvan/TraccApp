@@ -8,3 +8,8 @@ type Notifications{
     body:String
     link:String
 }
+
+extend type Query{
+    getNotification(notificationId:ID!):Notifications
+    getAllNotificationsForAccount(accountId:ID!):[Notifications]
+}

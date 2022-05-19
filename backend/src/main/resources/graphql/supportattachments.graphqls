@@ -5,3 +5,8 @@ type SupportAttachments{
     fileName:String
     fileType:String
 }
+
+extend type Query{
+    getSupportAttachment(attachmentId:ID!):SupportAttachments
+    getAllSupportAttachmentsForSupport(supportId:ID!):[SupportAttachments]
+}

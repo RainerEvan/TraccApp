@@ -13,7 +13,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -55,8 +54,5 @@ public class Supports {
     
     private String devNote;
     private Boolean isActive;
-
-    @OneToMany(mappedBy = "ticket")
-    private Set<SupportAttachments> attachments;
     
 }

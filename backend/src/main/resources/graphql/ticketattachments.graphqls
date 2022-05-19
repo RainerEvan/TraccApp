@@ -5,3 +5,8 @@ type TicketAttachments{
     fileName:String
     fileType:String
 }
+
+extend type Query{
+    getTicketAttachment(attachmentId:ID!):TicketAttachments
+    getAllTicketAttachmentsForTicket(ticketId:ID!):[TicketAttachments]
+}

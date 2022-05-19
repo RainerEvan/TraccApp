@@ -2,3 +2,8 @@ type Roles{
     id:ID
     name:String
 }
+
+extend type Query{
+    getAllRoles:[Roles]
+    getRole(roleId:ID!):Roles
+}

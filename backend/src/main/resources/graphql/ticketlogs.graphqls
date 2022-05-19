@@ -7,3 +7,4 @@ type TicketLogs{
     dateTime:DateTime
     status:Status
 }
+

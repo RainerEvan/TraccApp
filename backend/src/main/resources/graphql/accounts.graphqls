@@ -12,7 +12,7 @@ type Accounts{
 
 extend type Query{
     getAllAccounts:[Accounts]
-    getAccount(id:ID!):Accounts
+    getAccount(accountId:ID!):Accounts
 }
 
 extend type Mutation{
@@ -24,7 +24,7 @@ extend type Mutation{
         division:Divisions!,
         profileImg:String
         isActive:Boolean!,
-        role:Roles!
+        roleId:ID!        
     ):Accounts
 
     editAccount(
@@ -35,5 +35,11 @@ extend type Mutation{
         division:Divisions!,
         profileImg:String
         isActive:Boolean!,
+    ):Accounts
+
+    changePassword(
+        accountId:ID!
+        oldPassword:String!
+        newPassword:String!
     ):Accounts
 }

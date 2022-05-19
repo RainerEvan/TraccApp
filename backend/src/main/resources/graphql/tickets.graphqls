@@ -9,3 +9,25 @@ type Tickets{
     dateClosed:Date
     status:Status
 }
+
+extend type Query{
+    getAllTickets:[Tickets]
+    getTicket(ticketId:ID!):Tickets
+    getAllTicketsForUser(accountId:ID!):[Tickets]
+
+}
+
+extend type Mutation{
+    addTicket(
+        applicationId:ID!,
+        reporterId:ID!,
+        title:String,
+        description:String
+    )
+
+    closeTicket(ticketId:ID!):Tickets
+
+    dropTicket(ticketId:ID!):Tickets
+
+    cancelTicket(ticketId:ID!):Boolean
+}
