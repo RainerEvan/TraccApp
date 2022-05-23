@@ -7,7 +7,7 @@ type Accounts{
     division:Divisions
     profileImg:String
     isActive:Boolean
-    role:Roles
+    roles:[Roles]
 }
 
 extend type Query{
@@ -21,10 +21,9 @@ extend type Mutation{
         password:String!,
         email:String!,
         contactNo:String,
-        division:Divisions!,
-        profileImg:String
+        divisonId:ID!,
         isActive:Boolean!,
-        roleId:ID!        
+        roleId:[ID!]        
     ):Accounts
 
     editAccount(
@@ -32,14 +31,8 @@ extend type Mutation{
         username:String!,
         email:String!,
         contactNo:String,
-        division:Divisions!,
-        profileImg:String
+        divisionId:ID!,
         isActive:Boolean!,
     ):Accounts
 
-    changePassword(
-        accountId:ID!
-        oldPassword:String!
-        newPassword:String!
-    ):Accounts
 }

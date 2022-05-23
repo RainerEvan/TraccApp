@@ -1,8 +1,10 @@
 package com.traccapp.demo.repository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import com.traccapp.demo.model.Accounts;
 import com.traccapp.demo.model.TicketPK;
 import com.traccapp.demo.model.Tickets;
 
@@ -13,4 +15,5 @@ import org.springframework.stereotype.Repository;
 public interface TicketRepository extends JpaRepository<Tickets, TicketPK> {
     Optional<Tickets> findById(UUID id);
     Optional<Tickets> findByTicketNo(String ticketNo);
+    List<Tickets> findAllByReporter(Accounts reporter);
 }

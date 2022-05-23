@@ -50,6 +50,6 @@ public class Accounts {
     @JoinTable( name = "account_role",
                 joinColumns = @JoinColumn(name = "account_id"),
                 inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Roles> role = new HashSet<>();
+    private Set<Roles> roles = new HashSet<>();
     
 }

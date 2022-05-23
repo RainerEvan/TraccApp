@@ -5,7 +5,7 @@ import java.util.UUID;
 
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import com.traccapp.demo.model.Accounts;
-import com.traccapp.demo.repository.AccountRepository;
+import com.traccapp.demo.service.AccountService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -17,13 +17,13 @@ import lombok.AllArgsConstructor;
 public class AccountsQueryResolver implements GraphQLQueryResolver{
     
     @Autowired
-    private final AccountRepository accountRepository;
+    private final AccountService accountService;
 
     public List<Accounts> getAllAccounts(){
-        return accountRepository.findAll();
+        return accountService.getAllAccounts();
     }
 
     public Accounts getAccounts(UUID accountId){
-        return accountRepository.findById(accountId).orElse(null);
+        return accountService.getAccount(accountId);
     }
 }

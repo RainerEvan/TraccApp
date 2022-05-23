@@ -5,7 +5,7 @@ type Supports{
     developer:Accounts
     result:String
     description:String
-    tags:Tags
+    tags:[Tags]
     devNote:String
     isActive:Boolean
 }
@@ -26,7 +26,7 @@ extend type Mutation{
         result:String!,
         description:String!,
         devNote:String!,
-        tags:[Tags]!
+        tags:[String]!
     ):Supports
 
     withdrawSupport(

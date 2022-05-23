@@ -1,4 +1,4 @@
-package com.traccapp.demo.utils;
+package com.traccapp.demo.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

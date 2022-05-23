@@ -20,14 +20,7 @@ extend type Query{
 extend type Mutation{
     addTicket(
         applicationId:ID!,
-        reporterId:ID!,
         title:String,
         description:String
-    )
-
-    closeTicket(ticketId:ID!):Tickets
-
-    dropTicket(ticketId:ID!):Tickets
-
-    cancelTicket(ticketId:ID!):Boolean
+    ):Tickets
 }

@@ -1,6 +1,6 @@
 package com.traccapp.demo.exception;
 
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -10,16 +10,16 @@ import graphql.language.SourceLocation;
 
 public class AbstractGraphQLException extends RuntimeException implements GraphQLError{
 
-    private Map<String,Object> parameters = new HashMap<>();
+    private String invalidField;
 
     public AbstractGraphQLException(String message){
         super(message);
     }
 
-    public AbstractGraphQLException(String message, Map<String,Object> additionParam){
-        this(message);
+    public AbstractGraphQLException(String message, String additionParam){
+        super(message);
         if(additionParam!=null){
-            parameters = additionParam;
+            this.invalidField = additionParam;
         }
     }
 
@@ -35,7 +35,7 @@ public class AbstractGraphQLException extends RuntimeException implements GraphQ
 
     @Override
     public Map<String, Object> getExtensions() {
-        return this.parameters;
+        return Collections.singletonMap("invalidField", invalidField);
     }
 
     @Override
