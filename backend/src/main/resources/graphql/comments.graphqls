@@ -5,7 +5,7 @@ type Comments{
     createdAt:DateTime
     updatedAt:DateTime
     body:String
-    isDeleted:Boolean
+    isActive:Boolean
 }
 
 extend type Query{
@@ -15,7 +15,6 @@ extend type Query{
 extend type Mutation{
     addComment(
         ticketId:ID!,
-        authorId:ID!,
         body:String!
     ):Comments
 
@@ -24,5 +23,4 @@ extend type Mutation{
         body:String!
     ):Comments
 
-    deleteComment(commentId:ID!):Boolean
 }

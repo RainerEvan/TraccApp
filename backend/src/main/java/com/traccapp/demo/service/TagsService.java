@@ -1,6 +1,7 @@
 package com.traccapp.demo.service;
 
 import java.util.List;
+import java.util.UUID;
 
 import com.traccapp.demo.exception.AbstractGraphQLException;
 import com.traccapp.demo.model.Tags;
@@ -27,6 +28,11 @@ public class TagsService {
             .orElseThrow(() -> new AbstractGraphQLException("Tags with current name cannot be found: "+name,"tagName"));
     }
 
+    public Tags getTags(UUID tagsId){
+        return tagsRepository.findById(tagsId)
+            .orElseThrow(() -> new AbstractGraphQLException("Tags with current id cannot be found: "+tagsId,"tagId"));
+    }
+
     public Tags addTags(String name){
 
         if(tagsRepository.existsByName(name)){
@@ -36,5 +42,9 @@ public class TagsService {
         Tags tags = new Tags();
         tags.setName(name);
         return tagsRepository.save(tags);
+    }
+
+    public void deleteTags(UUID tagsId){
+        tagsRepository.delete(getTags(tagsId));
     }
 }

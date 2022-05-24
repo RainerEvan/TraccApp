@@ -13,3 +13,28 @@ type Query{
 type Mutation{
 
 }
+
+type Roles{
+    id:ID!
+    name:ERoles
+}
+
+enum ERoles{
+    ADMIN
+    SUPERVISOR
+    DEVELOPER
+    USER
+}
+
+type Status{
+    id:ID!
+    name:EStatus
+}
+
+enum EStatus{
+    PENDING
+    IN_PROGRESS
+    RESOLVED
+    CLOSED
+    DROPPED
+}

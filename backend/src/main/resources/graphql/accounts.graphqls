@@ -12,6 +12,7 @@ type Accounts{
 
 extend type Query{
     getAllAccounts:[Accounts]
+    getAllAccountsByRole(name:ERoles!):[Accounts]
     getAccount(accountId:ID!):Accounts
 }
 
@@ -23,7 +24,7 @@ extend type Mutation{
         contactNo:String,
         divisonId:ID!,
         isActive:Boolean!,
-        roleId:[ID!]        
+        roles:[ERoles]!
     ):Accounts
 
     editAccount(

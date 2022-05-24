@@ -9,5 +9,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ApplicationRepository extends JpaRepository<Applications, UUID>{
-    
+
+    Boolean existsByName(String name);
+
 }

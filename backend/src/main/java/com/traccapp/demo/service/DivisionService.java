@@ -19,7 +19,7 @@ public class DivisionService {
     @Autowired
     private final DivisionRepository divisionRepository;
     
-    public List<Divisions> getAlldivision(){
+    public List<Divisions> getAllDivisions(){
         return divisionRepository.findAll();
     }
 
@@ -37,5 +37,9 @@ public class DivisionService {
         Divisions division = new Divisions();
         division.setName(name);
         return divisionRepository.save(division);
+    }
+
+    public void deleteDivision(UUID divisionId){
+        divisionRepository.delete(getDivision(divisionId));
     }
 }

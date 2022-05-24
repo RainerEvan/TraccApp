@@ -1,9 +1,0 @@
-type Status{
-    id:ID
-    name:String
-}
-
-extend type Query{
-    getAllStatus:[Status]
-    getStatus(statusId:ID!):Status
-}

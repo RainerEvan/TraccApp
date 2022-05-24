@@ -39,6 +39,6 @@ public class Comments {
     private OffsetDateTime createdAt;
     private OffsetDateTime updatedAt;
     private String body;
-    private Boolean isDeleted = false;
+    private Boolean isActive;
 
 }
