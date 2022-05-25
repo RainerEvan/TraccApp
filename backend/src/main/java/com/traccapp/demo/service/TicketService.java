@@ -7,7 +7,12 @@ import java.util.UUID;
 import com.traccapp.demo.data.EStatus;
 import com.traccapp.demo.exception.AbstractGraphQLException;
 import com.traccapp.demo.model.Accounts;
+import com.traccapp.demo.model.Applications;
+import com.traccapp.demo.model.Status;
 import com.traccapp.demo.model.Tickets;
+import com.traccapp.demo.repository.AccountRepository;
+import com.traccapp.demo.repository.ApplicationRepository;
+import com.traccapp.demo.repository.StatusRepository;
 import com.traccapp.demo.repository.TicketRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +27,11 @@ public class TicketService {
     @Autowired
     private final TicketRepository ticketRepository;
     @Autowired
-    private final ApplicationService applicationService;
+    private final ApplicationRepository applicationRepository;
     @Autowired
-    private final AccountService accountService;
+    private final AccountRepository accountRepository;
     @Autowired
-    private final StatusService statusService;
-    @Autowired
-    private final SupportService supportService;
+    private final StatusRepository statusRepository;
     @Autowired
     private final AuthService authService;
 
@@ -37,65 +40,57 @@ public class TicketService {
     }
 
     public Tickets getTicket(UUID ticketId){
-        return ticketRepository.findById(ticketId).orElseThrow(() -> new AbstractGraphQLException("Ticket with current id cannot be found: "+ticketId, "ticketId"));
+        return ticketRepository.findByTicketId(ticketId)
+            .orElseThrow(() -> new AbstractGraphQLException("Ticket with current id cannot be found: "+ticketId, "ticketId"));
     }
 
     public List<Tickets> getAllTicketsForUser(UUID accountId){
-        Accounts user = accountService.getAccount(accountId);
+        Accounts user = accountRepository.findById(accountId)
+            .orElseThrow(() -> new AbstractGraphQLException("Account with current id cannot be found: "+accountId,"accountId"));
 
         return ticketRepository.findAllByReporter(user);
     }
 
     public Tickets addTicket(UUID applicationId, String title, String description){
+
+        Applications application = applicationRepository.findById(applicationId)
+            .orElseThrow(() -> new AbstractGraphQLException("Application with current id cannot be found: "+applicationId,"applicationId"));
         
         Tickets ticket = new Tickets();
-        ticket.setApplication(applicationService.getApplication(applicationId));
+        ticket.setApplication(application);
         ticket.setTitle(title);
         ticket.setDescription(description);
         ticket.setReporter(authService.getCurrentAccount());
         ticket.setDateAdded(LocalDate.now());
-        ticket.setStatus(statusService.getStatus(EStatus.PENDING));
+
+        Status status = statusRepository.findByName(EStatus.PENDING)
+            .orElseThrow(() -> new AbstractGraphQLException("Status with current name cannot be found: "+EStatus.PENDING, "statusName"));
+
+        ticket.setStatus(status);
 
         return ticketRepository.save(ticket);
     }
 
-    public void takeTicket(UUID ticketId){
-        Tickets ticket = getTicket(ticketId);
-        ticket.setStatus(statusService.getStatus(EStatus.IN_PROGRESS));
+    public Tickets updateTicket(UUID ticketId, EStatus name){
+        Tickets ticket = ticketRepository.findByTicketId(ticketId).orElseThrow(() -> new AbstractGraphQLException("Ticket with current id cannot be found: "+ticketId, "ticketId"));
 
-        ticketRepository.save(ticket);
+        Status status = statusRepository.findByName(name)
+            .orElseThrow(() -> new AbstractGraphQLException("Status with current name cannot be found: "+name, "statusName"));
+
+        ticket.setStatus(status);
+        return ticketRepository.save(ticket);
     }
 
-    public void resolveTicket(UUID ticketId){
-        Tickets ticket = getTicket(ticketId);
-        ticket.setStatus(statusService.getStatus(EStatus.RESOLVED));
+    public Tickets closeTicket(UUID ticketId, EStatus name){
+        Tickets ticket = ticketRepository.findByTicketId(ticketId).orElseThrow(() -> new AbstractGraphQLException("Ticket with current id cannot be found: "+ticketId, "ticketId"));
+        
+        Status status = statusRepository.findByName(name)
+            .orElseThrow(() -> new AbstractGraphQLException("Status with current name cannot be found: "+name, "statusName"));
 
-        ticketRepository.save(ticket);
-    }
-
-    public void reassignTicket(UUID ticketId, UUID currSupportId, UUID developerId){
-        Tickets ticket = getTicket(ticketId);
-        ticket.setStatus(statusService.getStatus(EStatus.IN_PROGRESS));
-
-        supportService.reassignSupport(ticketId, currSupportId, developerId);
-
-        ticketRepository.save(ticket);
-    }
-
-    public void dropTicket(UUID ticketId){
-        Tickets ticket = getTicket(ticketId);
-        ticket.setStatus(statusService.getStatus(EStatus.DROPPED));
+        ticket.setStatus(status);
         ticket.setDateClosed(LocalDate.now());
 
-        ticketRepository.save(ticket);
-    }
-
-    public void closeTicket(UUID ticketId){
-        Tickets ticket = getTicket(ticketId);
-        ticket.setStatus(statusService.getStatus(EStatus.CLOSED));
-        ticket.setDateClosed(LocalDate.now());
-
-        ticketRepository.save(ticket);
+        return ticketRepository.save(ticket);
     }
 
     public void deleteTicket(UUID ticketId){

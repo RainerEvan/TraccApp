@@ -1,4 +1,4 @@
-package com.traccapp.demo.payload;
+package com.traccapp.demo.payload.response;
 
 import java.util.Date;
 

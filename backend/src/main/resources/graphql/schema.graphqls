@@ -2,16 +2,35 @@ scalar Date
 scalar DateTime
 
 schema {
-    query:query
+    query:Query
     mutation:Mutation
 }
 
 type Query{
-
 }
 
 type Mutation{
+}
 
+type Notifications{
+    id:ID
+    sender:Accounts
+    receiver:Accounts
+    sentAt:DateTime
+    readAt:DateTime
+    title:String
+    body:String
+    link:String
+}
+
+type Divisions{
+    id:ID!
+    name:String
+}
+
+type Tags{
+    id:ID!
+    name:String
 }
 
 type Roles{
@@ -38,3 +57,4 @@ enum EStatus{
     CLOSED
     DROPPED
 }
+

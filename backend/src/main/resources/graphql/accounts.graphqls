@@ -1,7 +1,6 @@
 type Accounts{
     id:ID!
     username:String
-    password:String
     email:String
     contactNo:String
     division:Divisions
@@ -20,7 +19,7 @@ extend type Mutation{
     addAccount(
         username:String!,
         password:String!,
-        email:String!,
+        email:String,
         contactNo:String,
         divisonId:ID!,
         isActive:Boolean!,
@@ -29,11 +28,11 @@ extend type Mutation{
 
     editAccount(
         accountId:ID!,
-        username:String!,
-        email:String!,
+        username:String,
+        email:String,
         contactNo:String,
-        divisionId:ID!,
-        isActive:Boolean!,
+        divisionId:ID,
+        isActive:Boolean,
     ):Accounts
 
 }

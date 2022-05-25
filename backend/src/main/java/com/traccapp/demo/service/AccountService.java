@@ -9,8 +9,11 @@ import java.util.UUID;
 import com.traccapp.demo.data.ERoles;
 import com.traccapp.demo.exception.AbstractGraphQLException;
 import com.traccapp.demo.model.Accounts;
+import com.traccapp.demo.model.Divisions;
 import com.traccapp.demo.model.Roles;
 import com.traccapp.demo.repository.AccountRepository;
+import com.traccapp.demo.repository.DivisionRepository;
+import com.traccapp.demo.repository.RoleRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -25,9 +28,9 @@ public class AccountService {
     @Autowired
     private final AccountRepository accountRepository;
     @Autowired
-    private final RoleService roleService;
+    private final RoleRepository roleRepository;
     @Autowired
-    private final DivisionService divisionService;
+    private final DivisionRepository divisionRepository;
     @Autowired
     private final PasswordEncoder passwordEncoder;
 
@@ -36,7 +39,10 @@ public class AccountService {
     }
 
     public List<Accounts> getAllAccountsByRole(ERoles name){
-        return accountRepository.findAllByRoles(roleService.getRole(name));
+        Roles role = roleRepository.findByName(name)
+            .orElseThrow(() -> new AbstractGraphQLException("Role with current name cannot be found"+name,"roleName"));
+
+        return accountRepository.findAllByRoles(role);
     }
 
     public Accounts getAccount(UUID accountId){
@@ -56,12 +62,17 @@ public class AccountService {
         account.setEmail(email);
         account.setContactNo(contactNo);
         account.setIsActive(isActive);
-        account.setDivision(divisionService.getDivision(divisionId));
+
+        Divisions division = divisionRepository.findById(divisionId)
+            .orElseThrow(() -> new AbstractGraphQLException("Division with current id cannot be found: "+divisionId,"divisionId"));
+
+        account.setDivision(division);
 
         Set<Roles> roleSet = new HashSet<>();
 
         for(ERoles role: roles){
-            Roles currRole =  roleService.getRole(role);
+            Roles currRole = roleRepository.findByName(role)
+                .orElseThrow(() -> new AbstractGraphQLException("Role with current name cannot be found"+role,"roleName"));
             
             roleSet.add(currRole);
         }
@@ -71,7 +82,7 @@ public class AccountService {
         return accountRepository.save(account);
     }
 
-    public Accounts editAccountAccount(UUID accountId, String username, String email, String contactNo, UUID divisionId, Boolean isActive) {
+    public Accounts editAccount(UUID accountId, String username, String email, String contactNo, UUID divisionId, Boolean isActive) {
         
         Accounts account = getAccount(accountId);
 
@@ -92,7 +103,10 @@ public class AccountService {
         }
 
         if(divisionId != null && !Objects.equals(account.getDivision().getId(), divisionId)){
-            account.setDivision(divisionService.getDivision(divisionId));
+            Divisions division = divisionRepository.findById(divisionId)
+                .orElseThrow(() -> new AbstractGraphQLException("Division with current id cannot be found: "+divisionId,"divisionId"));
+
+            account.setDivision(division);
         }
 
         if(isActive != null && !Objects.equals(account.getIsActive(), isActive)){

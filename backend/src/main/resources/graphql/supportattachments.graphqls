@@ -7,6 +7,6 @@ type SupportAttachments{
 }
 
 extend type Query{
-    getSupportAttachment(attachmentId:ID!):SupportAttachments
-    getAllSupportAttachmentsForSupport(supportId:ID!):[SupportAttachments]
+    # getSupportAttachment(attachmentId:ID!):SupportAttachments
+    # getAllSupportAttachmentsForSupport(supportId:ID!):[SupportAttachments]
 }

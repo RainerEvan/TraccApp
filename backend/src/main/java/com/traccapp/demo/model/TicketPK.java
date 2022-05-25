@@ -12,6 +12,6 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode
 public class TicketPK implements Serializable{
     
-    private UUID id;
+    private UUID ticketId;
     private String ticketNo;
 }

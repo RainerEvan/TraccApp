@@ -1,5 +1,5 @@
 type Tickets{
-    id:ID
+    ticketId:ID
     ticketNo:String
     application:Applications
     dateAdded:Date
@@ -14,7 +14,6 @@ extend type Query{
     getAllTickets:[Tickets]
     getTicket(ticketId:ID!):Tickets
     getAllTicketsForUser(accountId:ID!):[Tickets]
-
 }
 
 extend type Mutation{

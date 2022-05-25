@@ -4,6 +4,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import graphql.ErrorType;
 import graphql.GraphQLError;
 import graphql.language.SourceLocation;
@@ -26,6 +28,12 @@ public class AbstractGraphQLException extends RuntimeException implements GraphQ
     @Override
     public String getMessage() {
         return super.getMessage();
+    }
+
+    @Override
+    @JsonIgnore
+    public StackTraceElement[] getStackTrace() {
+        return super.getStackTrace();
     }
 
     @Override

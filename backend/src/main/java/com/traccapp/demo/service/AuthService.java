@@ -3,7 +3,8 @@ package com.traccapp.demo.service;
 import java.util.Date;
 
 import com.traccapp.demo.model.Accounts;
-import com.traccapp.demo.payload.JwtResponse;
+import com.traccapp.demo.payload.request.LoginRequest;
+import com.traccapp.demo.payload.response.JwtResponse;
 import com.traccapp.demo.repository.AccountRepository;
 import com.traccapp.demo.security.details.UserDetailsImpl;
 import com.traccapp.demo.security.jwt.JwtUtils;
@@ -36,14 +37,14 @@ public class AuthService {
             .orElseThrow(() -> new UsernameNotFoundException("Account with current username cannot be found: "+principal));
     }
 
-    public JwtResponse loginAccount(String username, String password){
+    public JwtResponse loginAccount(LoginRequest loginRequest){
 
-        if(!accountRepository.existsByUsername(username)){
+        if(!accountRepository.existsByUsername(loginRequest.getUsername())){
             throw new IllegalStateException("Invalid credentials");
         }
 
         Authentication authentication = authenticationManager.authenticate(
-            new UsernamePasswordAuthenticationToken(username, password)
+            new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword())
         );
 
         SecurityContextHolder.getContext().setAuthentication(authentication);

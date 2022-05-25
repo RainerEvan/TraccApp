@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -29,7 +30,10 @@ public class TicketLogs {
     private UUID id;
 
     @ManyToOne
-    @JoinColumn(name="ticket_id")
+    @JoinColumns({
+        @JoinColumn(name="ticket_id", referencedColumnName = "ticket_id"),
+        @JoinColumn(name="ticket_no", referencedColumnName = "ticket_no")
+    })
     private Tickets ticket;
 
     @ManyToOne

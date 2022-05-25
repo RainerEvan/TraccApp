@@ -7,6 +7,6 @@ type TicketAttachments{
 }
 
 extend type Query{
-    getTicketAttachment(attachmentId:ID!):TicketAttachments
-    getAllTicketAttachmentsForTicket(ticketId:ID!):[TicketAttachments]
+    # getTicketAttachment(attachmentId:ID!):TicketAttachments
+    # getAllTicketAttachmentsForTicket(ticketId:ID!):[TicketAttachments]
 }

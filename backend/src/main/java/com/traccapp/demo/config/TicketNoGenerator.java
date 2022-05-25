@@ -19,7 +19,7 @@ public class TicketNoGenerator extends SequenceStyleGenerator{
     public static final String DATE_FORMAT_DEFAULT = "%td%tm%td";
      
     public static final String NUMBER_FORMAT_PARAMETER = "numberFormat";
-    public static final String NUMBER_FORMAT_DEFAULT = "%d";
+    public static final String NUMBER_FORMAT_DEFAULT = "%03d";
      
     public static final String DATE_NUMBER_SEPARATOR_PARAMETER = "dateNumberSeparator";
     public static final String DATE_NUMBER_SEPARATOR_DEFAULT = "_";

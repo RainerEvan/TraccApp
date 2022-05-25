@@ -22,7 +22,7 @@ public class CommentsMutationResolver implements GraphQLMutationResolver{
         return commentService.addComment(ticketId,body);
     }
 
-    public Comments ediComments(UUID commentId, String body){
+    public Comments editComment(UUID commentId, String body){
         return commentService.editComment(commentId, body);
     }
 }

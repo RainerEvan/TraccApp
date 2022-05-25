@@ -25,6 +25,6 @@ public class AccountsMutationResolver implements GraphQLMutationResolver{
     }
 
     public Accounts editAccount(UUID accountId, String username, String email, String contactNo, UUID divisionId, Boolean isActive){
-        return accountService.editAccountAccount(accountId,username,email,contactNo,divisionId,isActive);
+        return accountService.editAccount(accountId,username,email,contactNo,divisionId,isActive);
     }
 }

@@ -28,7 +28,7 @@ public class AccountsQueryResolver implements GraphQLQueryResolver{
         return accountService.getAllAccountsByRole(name);
     }
 
-    public Accounts getAccounts(UUID accountId){
+    public Accounts getAccount(UUID accountId){
         return accountService.getAccount(accountId);
     }
 }

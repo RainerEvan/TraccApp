@@ -3,6 +3,7 @@ package com.traccapp.demo.model;
 import java.time.LocalDate;
 import java.util.UUID;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -33,15 +34,17 @@ public class Tickets {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    private UUID id;
+    @Column(name = "ticket_id")
+    private UUID ticketId;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ticket_seq")
     @GenericGenerator(
         name = "ticket_seq",
-        strategy = "com.traccapp.demo.utils.TicketNoGenerator",
-        parameters = {@Parameter(name = TicketNoGenerator.INCREMENT_PARAM, value = "1")}
+        strategy = "com.traccapp.demo.config.TicketNoGenerator",
+        parameters = {@Parameter(name = TicketNoGenerator.INCREMENT_PARAM, value = "50")}
     )
+    @Column(name = "ticket_no")
     private String ticketNo;
   
     @ManyToOne

@@ -17,8 +17,7 @@ extend type Query{
 
 extend type Mutation{
     addSupport(
-        ticketId:ID!,
-        developerId:ID!
+        ticketId:ID!
     ):Supports
 
     solveSupport(
