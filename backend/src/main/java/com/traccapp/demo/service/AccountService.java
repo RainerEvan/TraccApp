@@ -1,10 +1,10 @@
 package com.traccapp.demo.service;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import com.traccapp.demo.data.ERoles;
 import com.traccapp.demo.exception.AbstractGraphQLException;
@@ -68,14 +68,9 @@ public class AccountService {
 
         account.setDivision(division);
 
-        Set<Roles> roleSet = new HashSet<>();
-
-        for(ERoles role: roles){
-            Roles currRole = roleRepository.findByName(role)
-                .orElseThrow(() -> new AbstractGraphQLException("Role with current name cannot be found"+role,"roleName"));
-            
-            roleSet.add(currRole);
-        }
+        Set<Roles> roleSet = roles.stream()
+            .map(role -> roleRepository.findByName(role).orElseThrow(() -> new AbstractGraphQLException("Role with current name cannot be found"+role,"roleName")))
+            .collect(Collectors.toSet());
 
         account.setRoles(roleSet);
 
