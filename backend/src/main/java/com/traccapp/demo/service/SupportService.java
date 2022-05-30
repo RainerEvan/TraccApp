@@ -42,13 +42,9 @@ public class SupportService {
         return supportRepository.findById(supportId).orElseThrow(() -> new AbstractGraphQLException("Support with current id cannot be found: "+supportId, "supportId"));
     }
     
-    public Supports getSupportForTicket(UUID ticketId){
+    public List<Supports> getSupportForTicket(Tickets ticket){
 
-        Tickets ticket = ticketRepository.findByTicketId(ticketId)
-            .orElseThrow(() -> new AbstractGraphQLException("Ticket with current id cannot be found: "+ticketId, "ticketId"));
-
-        return supportRepository.findByTicketAndIsActive(ticket, true)
-            .orElseThrow(() -> new AbstractGraphQLException("Support for current ticket id cannot be found: "+ticketId, "ticketId"));
+        return supportRepository.findAllByTicketAndIsActive(ticket, true);
     }
 
     public List<Supports> getAllSupportsForDeveloper(UUID accountId){

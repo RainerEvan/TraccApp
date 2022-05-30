@@ -1,9 +1,9 @@
 package com.traccapp.demo.model;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -67,7 +67,7 @@ public class Tickets {
     @JoinColumn(name="status_id")
     private Status status;
 
-    // @OneToMany(mappedBy = "ticket_id", cascade = CascadeType.ALL)
-    // private Supports support;
+    @OneToMany(mappedBy = "ticket")
+    private List<Supports> support;
 
 }

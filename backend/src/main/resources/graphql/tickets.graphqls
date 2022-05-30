@@ -8,7 +8,7 @@ type Tickets{
     description:String
     dateClosed:Date
     status:Status
-    # support:Supports
+    support:[Supports]
 }
 
 extend type Query{

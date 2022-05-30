@@ -1,14 +1,20 @@
 // package com.traccapp.demo.config;
 
+// import java.time.LocalDate;
 // import java.util.Set;
 
 // import com.traccapp.demo.data.ERoles;
 // import com.traccapp.demo.data.EStatus;
+// import com.traccapp.demo.model.Accounts;
 // import com.traccapp.demo.model.Divisions;
 // import com.traccapp.demo.model.Roles;
 // import com.traccapp.demo.model.Status;
+// import com.traccapp.demo.model.Supports;
+// import com.traccapp.demo.model.Tickets;
 // import com.traccapp.demo.repository.RoleRepository;
 // import com.traccapp.demo.repository.StatusRepository;
+// import com.traccapp.demo.repository.SupportRepository;
+// import com.traccapp.demo.repository.TicketRepository;
 // import com.traccapp.demo.service.AccountService;
 // import com.traccapp.demo.service.ApplicationService;
 // import com.traccapp.demo.service.DivisionService;
@@ -20,7 +26,7 @@
 // @Configuration
 // public class StartAppConfig {
 //     @Bean
-//     CommandLineRunner commandLineRunner(AccountService accountService, ApplicationService applicationService, DivisionService divisionService, RoleRepository roleRepository, StatusRepository statusRepository){
+//     CommandLineRunner commandLineRunner(AccountService accountService, ApplicationService applicationService, DivisionService divisionService, RoleRepository roleRepository, StatusRepository statusRepository, TicketRepository ticketRepository, SupportRepository supportRepository){
 //         return args -> {
 
 //             Roles role1 = new Roles();
@@ -62,17 +68,7 @@
 //             applicationService.addApplication("CAMS");
 //             Divisions division = divisionService.addDivision("ITXB");
             
-//             accountService.addAccount(
-//                 "rainerevan", 
-//                 "pass123", 
-//                 "rainerevan@gmail.com", 
-//                 "098303930", 
-//                 division.getId(),
-//                 true,
-//                 Set.of(ERoles.USER)
-//             );
-
-//             accountService.addAccount(
+//             Accounts account = accountService.addAccount(
 //                 "maman", 
 //                 "pass123", 
 //                 "maman@gmail.com", 
@@ -81,6 +77,28 @@
 //                 true,
 //                 Set.of(ERoles.USER)
 //             );
+
+//             // Tickets ticket = new Tickets();
+//             // ticket.setDateAdded(LocalDate.now());
+//             // ticket.setReporter(account);
+//             // ticket.setTitle("Aplikasi CAMS error");
+//             // ticket.setDescription("Form gabisa diisi lagi gimana dong");
+//             // ticket.setStatus(status1);
+//             // ticketRepository.save(ticket);
+
+//             // Supports support = new Supports();
+//             // support.setTicket(ticket);
+//             // support.setDateTaken(LocalDate.now());
+//             // support.setDeveloper(account);
+//             // support.setIsActive(true);
+//             // supportRepository.save(support);
+
+//             // Supports support2 = new Supports();
+//             // support2.setTicket(ticket);
+//             // support2.setDateTaken(LocalDate.now());
+//             // support2.setDeveloper(account);
+//             // support2.setIsActive(false);
+//             // supportRepository.save(support2);
 //         };
 //     }
 // }

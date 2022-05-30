@@ -36,4 +36,6 @@ public class SupportAttachments {
     private String fileBase64;
     private String fileName;
     private String fileType;
+    private Long fileSize;
+
 }

@@ -40,4 +40,5 @@ public class TicketAttachments {
     private String fileBase64;
     private String fileName;
     private String fileType;
+    private Long fileSize;
 }

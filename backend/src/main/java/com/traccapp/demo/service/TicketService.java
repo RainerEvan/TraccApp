@@ -71,29 +71,28 @@ public class TicketService {
         return ticketRepository.save(ticket);
     }
 
-    public Tickets updateTicket(UUID ticketId, EStatus name){
+    public Tickets updateTicketStatus(UUID ticketId, EStatus statusName){
         Tickets ticket = ticketRepository.findByTicketId(ticketId).orElseThrow(() -> new AbstractGraphQLException("Ticket with current id cannot be found: "+ticketId, "ticketId"));
 
-        Status status = statusRepository.findByName(name)
-            .orElseThrow(() -> new AbstractGraphQLException("Status with current name cannot be found: "+name, "statusName"));
+        Status status = statusRepository.findByName(statusName)
+            .orElseThrow(() -> new AbstractGraphQLException("Status with current name cannot be found: "+statusName, "statusName"));
 
         ticket.setStatus(status);
-        return ticketRepository.save(ticket);
-    }
 
-    public Tickets closeTicket(UUID ticketId, EStatus name){
-        Tickets ticket = ticketRepository.findByTicketId(ticketId).orElseThrow(() -> new AbstractGraphQLException("Ticket with current id cannot be found: "+ticketId, "ticketId"));
-        
-        Status status = statusRepository.findByName(name)
-            .orElseThrow(() -> new AbstractGraphQLException("Status with current name cannot be found: "+name, "statusName"));
-
-        ticket.setStatus(status);
-        ticket.setDateClosed(LocalDate.now());
+        if(statusName.equals(EStatus.CLOSED) || statusName.equals(EStatus.DROPPED)){
+            ticket.setDateClosed(LocalDate.now());
+        }
 
         return ticketRepository.save(ticket);
     }
 
     public void deleteTicket(UUID ticketId){
+        Tickets ticket = ticketRepository.findByTicketId(ticketId).orElseThrow(() -> new AbstractGraphQLException("Ticket with current id cannot be found: "+ticketId, "ticketId"));
+
+        if(!ticket.getStatus().getName().equals(EStatus.PENDING)){
+            throw new IllegalStateException("Ticket cannot be canceled, because it has been taken to be resolved: "+ticket.getTicketNo());
+        }
+
         ticketRepository.delete(getTicket(ticketId));
     }
 }

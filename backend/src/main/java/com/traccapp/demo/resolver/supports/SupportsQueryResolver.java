@@ -18,10 +18,6 @@ public class SupportsQueryResolver implements GraphQLQueryResolver{
     
     @Autowired
     private final SupportService supportService;
-    
-    public Supports getSupportForTicket(UUID ticketId){
-        return supportService.getSupportForTicket(ticketId);
-    }
 
     public List<Supports> getAllSupportsForDeveloper(UUID accountId){
         return supportService.getAllSupportsForDeveloper(accountId);
