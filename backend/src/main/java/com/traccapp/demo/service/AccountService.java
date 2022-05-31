@@ -1,5 +1,7 @@
 package com.traccapp.demo.service;
 
+import java.io.IOException;
+import java.util.Base64;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -11,6 +13,7 @@ import com.traccapp.demo.exception.AbstractGraphQLException;
 import com.traccapp.demo.model.Accounts;
 import com.traccapp.demo.model.Divisions;
 import com.traccapp.demo.model.Roles;
+import com.traccapp.demo.payload.request.AccountRequest;
 import com.traccapp.demo.repository.AccountRepository;
 import com.traccapp.demo.repository.DivisionRepository;
 import com.traccapp.demo.repository.RoleRepository;
@@ -18,6 +21,7 @@ import com.traccapp.demo.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.AllArgsConstructor;
 
@@ -33,6 +37,8 @@ public class AccountService {
     private final DivisionRepository divisionRepository;
     @Autowired
     private final PasswordEncoder passwordEncoder;
+    @Autowired
+    private final AuthService authService;
 
     public List<Accounts> getAllAccounts(){
         return accountRepository.findAll();
@@ -50,26 +56,32 @@ public class AccountService {
             .orElseThrow(() -> new AbstractGraphQLException("Account with current id cannot be found: "+accountId,"accountId"));
     }
 
-    public Accounts addAccount(String username, String password, String email, String contactNo, UUID divisionId, Boolean isActive, Set<ERoles> roles) {
+    public Accounts addAccount(MultipartFile file, AccountRequest accountRequest) {
+
+        String username = accountRequest.getUsername();
         
         if(accountRepository.existsByUsername(username)){
-            throw new AbstractGraphQLException("Account with current username already exists: "+username,"username");
+            throw new IllegalStateException("Account with current username already exists: "+username);
         }
 
         Accounts account = new Accounts();
         account.setUsername(username);
-        account.setPassword(passwordEncoder.encode(password));
-        account.setEmail(email);
-        account.setContactNo(contactNo);
-        account.setIsActive(isActive);
+        account.setPassword(passwordEncoder.encode(accountRequest.getPassword()));
+        account.setEmail(accountRequest.getEmail());
+        account.setContactNo(accountRequest.getContactNo());
+        account.setIsActive(accountRequest.getIsActive());
 
-        Divisions division = divisionRepository.findById(divisionId)
-            .orElseThrow(() -> new AbstractGraphQLException("Division with current id cannot be found: "+divisionId,"divisionId"));
+        Divisions division = divisionRepository.findById(accountRequest.getDivisionId())
+            .orElseThrow(() -> new IllegalStateException("Division with current id cannot be found: "+accountRequest.getDivisionId()));
 
         account.setDivision(division);
 
-        Set<Roles> roleSet = roles.stream()
-            .map(role -> roleRepository.findByName(role).orElseThrow(() -> new AbstractGraphQLException("Role with current name cannot be found"+role,"roleName")))
+        if(!file.isEmpty()){
+            account.setProfileImg(addImage(file));
+        }
+
+        Set<Roles> roleSet = accountRequest.getRoles().stream()
+            .map(role -> roleRepository.findByName(role).orElseThrow(() -> new IllegalStateException("Role with current name cannot be found"+role)))
             .collect(Collectors.toSet());
 
         account.setRoles(roleSet);
@@ -77,12 +89,18 @@ public class AccountService {
         return accountRepository.save(account);
     }
 
-    public Accounts editAccount(UUID accountId, String username, String email, String contactNo, UUID divisionId, Boolean isActive) {
+    public Accounts editAccount(MultipartFile file, AccountRequest accountRequest) {
         
-        Accounts account = getAccount(accountId);
+        Accounts account = getAccount(accountRequest.getId());
+
+        String username = accountRequest.getUsername();
+        String email = accountRequest.getEmail();
+        String contactNo = accountRequest.getContactNo();
+        UUID divisionId = accountRequest.getDivisionId();
+        Boolean isActive = accountRequest.getIsActive();
 
         if(accountRepository.existsByUsername(username)){
-            throw new AbstractGraphQLException("Account with current username already exists: "+username,"username");
+            throw new IllegalStateException("Account with current username already exists: "+username);
         }
 
         if(username != null && username.length() > 0 && !Objects.equals(account.getUsername(), username)){
@@ -97,9 +115,13 @@ public class AccountService {
             account.setContactNo(contactNo);
         }
 
+        if(!file.isEmpty()){
+            account.setProfileImg(addImage(file));
+        }
+
         if(divisionId != null && !Objects.equals(account.getDivision().getId(), divisionId)){
             Divisions division = divisionRepository.findById(divisionId)
-                .orElseThrow(() -> new AbstractGraphQLException("Division with current id cannot be found: "+divisionId,"divisionId"));
+                .orElseThrow(() -> new IllegalStateException("Division with current id cannot be found: "+divisionId));
 
             account.setDivision(division);
         }
@@ -111,9 +133,9 @@ public class AccountService {
         return accountRepository.save(account);
     }
 
-    public void changePassword(UUID accountId, String currentPassword, String newPassword){
+    public void changePassword(String currentPassword, String newPassword){
         
-        Accounts account = getAccount(accountId);
+        Accounts account = authService.getCurrentAccount();
 
         if(!Objects.equals(account.getPassword(), currentPassword)){
             throw new IllegalStateException("The current password is not correct");
@@ -124,5 +146,25 @@ public class AccountService {
         }
 
         accountRepository.save(account);
+    }
+
+    public String addImage(MultipartFile file){
+        try{
+            String encodedString = Base64.getEncoder().encodeToString(file.getBytes());
+
+            return encodedString;
+            
+        } catch (IOException exception){
+            throw new IllegalStateException("Could not add the current file", exception);
+        }
+    }
+
+    public byte[] getProfileImage(UUID accountId){
+
+        Accounts account = getAccount(accountId);
+
+        byte[] decodedBytes = Base64.getDecoder().decode(account.getProfileImg());
+
+        return decodedBytes;
     }
 }

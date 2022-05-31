@@ -18,4 +18,5 @@ public class ScalarConfig {
     public GraphQLScalarType dateTime(){
         return ExtendedScalars.DateTime;
     }
+
 }

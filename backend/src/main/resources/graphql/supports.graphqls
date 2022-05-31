@@ -1,13 +1,14 @@
 type Supports{
     id:ID
     ticket:Tickets
-    dateTaken:DateTime
+    dateTaken:Date
     developer:Accounts
     result:String
     description:String
     tags:[Tags]
     devNote:String
     isActive:Boolean
+    attachments:[SupportAttachments]
 }
 
 extend type Query{

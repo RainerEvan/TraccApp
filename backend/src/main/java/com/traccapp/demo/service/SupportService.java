@@ -43,7 +43,6 @@ public class SupportService {
     }
     
     public List<Supports> getSupportForTicket(Tickets ticket){
-
         return supportRepository.findAllByTicketAndIsActive(ticket, true);
     }
 

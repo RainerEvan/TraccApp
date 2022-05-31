@@ -78,27 +78,27 @@
 //                 Set.of(ERoles.USER)
 //             );
 
-//             // Tickets ticket = new Tickets();
-//             // ticket.setDateAdded(LocalDate.now());
-//             // ticket.setReporter(account);
-//             // ticket.setTitle("Aplikasi CAMS error");
-//             // ticket.setDescription("Form gabisa diisi lagi gimana dong");
-//             // ticket.setStatus(status1);
-//             // ticketRepository.save(ticket);
+//             Tickets ticket = new Tickets();
+//             ticket.setDateAdded(LocalDate.now());
+//             ticket.setReporter(account);
+//             ticket.setTitle("Aplikasi CAMS error");
+//             ticket.setDescription("Form gabisa diisi lagi gimana dong");
+//             ticket.setStatus(status1);
+//             ticketRepository.save(ticket);
 
-//             // Supports support = new Supports();
-//             // support.setTicket(ticket);
-//             // support.setDateTaken(LocalDate.now());
-//             // support.setDeveloper(account);
-//             // support.setIsActive(true);
-//             // supportRepository.save(support);
+//             Supports support = new Supports();
+//             support.setTicket(ticket);
+//             support.setDateTaken(LocalDate.now());
+//             support.setDeveloper(account);
+//             support.setIsActive(true);
+//             supportRepository.save(support);
 
-//             // Supports support2 = new Supports();
-//             // support2.setTicket(ticket);
-//             // support2.setDateTaken(LocalDate.now());
-//             // support2.setDeveloper(account);
-//             // support2.setIsActive(false);
-//             // supportRepository.save(support2);
+//             Supports support2 = new Supports();
+//             support2.setTicket(ticket);
+//             support2.setDateTaken(LocalDate.now());
+//             support2.setDeveloper(account);
+//             support2.setIsActive(false);
+//             supportRepository.save(support2);
 //         };
 //     }
 // }

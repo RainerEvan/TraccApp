@@ -2,6 +2,7 @@ package com.traccapp.demo.model;
 
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -14,6 +15,7 @@ import javax.persistence.JoinColumns;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -59,4 +61,6 @@ public class Supports {
     private String devNote;
     private Boolean isActive;
     
+    @OneToMany(mappedBy = "support")
+    private List<SupportAttachments> attachments;
 }

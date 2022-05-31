@@ -58,3 +58,20 @@ enum EStatus{
     DROPPED
 }
 
+type TicketAttachments{
+    id:ID
+    ticket:Tickets
+    fileBase64:String
+    fileName:String
+    fileType:String
+    fileSize:Int
+}
+
+type SupportAttachments{
+    id:ID
+    support:Supports
+    fileBase64:String
+    fileName:String
+    fileType:String
+    fileSize:Int
+}

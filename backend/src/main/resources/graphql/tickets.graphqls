@@ -9,6 +9,7 @@ type Tickets{
     dateClosed:Date
     status:Status
     support:[Supports]
+    attachments:[TicketAttachments]
 }
 
 extend type Query{
