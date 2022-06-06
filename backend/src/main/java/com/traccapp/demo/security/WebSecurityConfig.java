@@ -17,6 +17,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import lombok.AllArgsConstructor;
 
@@ -56,13 +57,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()
             .httpBasic().disable();
-		// 	.exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
-		// 	.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-        //     .authorizeRequests()
-        //     .antMatchers("/api/auth/**").permitAll()
-        //     .antMatchers("/graphql").permitAll()
-        //     .antMatchers("/graphiql").permitAll()
-        //     .anyRequest().authenticated();
+			// .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
+			// .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+            // .authorizeRequests()
+            // .antMatchers("/api/auth/**").permitAll()
+            // .antMatchers("/graphql").permitAll()
+            // .antMatchers("/graphiql").permitAll()
+            // .antMatchers("/api/**").permitAll()
+            // .anyRequest().authenticated()
+            // .and()
+            // .logout()
+            //     .logoutUrl("/logout")
+            //     .clearAuthentication(true)
+            //     .invalidateHttpSession(true)
+            //     .deleteCookies("JSESSIONID")
+            //     .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+            //     .permitAll();
 
         // http.addFilterBefore(authTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     }

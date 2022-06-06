@@ -5,12 +5,13 @@ import java.util.Base64;
 import java.util.List;
 import java.util.UUID;
 
+import javax.transaction.Transactional;
+
 import com.traccapp.demo.exception.AbstractGraphQLException;
 import com.traccapp.demo.exception.FileUploadException;
 import com.traccapp.demo.model.TicketAttachments;
 import com.traccapp.demo.model.Tickets;
 import com.traccapp.demo.repository.TicketAttachmentRepository;
-import com.traccapp.demo.repository.TicketRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,9 +26,8 @@ public class TicketAttachmentService{
 
     @Autowired
     private final TicketAttachmentRepository ticketAttachmentRepository;
-    @Autowired
-    private final TicketRepository ticketRepository;
 
+    @Transactional
     public List<TicketAttachments> getAllFilesForTicket(Tickets ticket){
         return ticketAttachmentRepository.findAllByTicket(ticket);
     }
@@ -37,14 +37,10 @@ public class TicketAttachmentService{
             .orElseThrow(() -> new AbstractGraphQLException("Attachment with current id cannot be found: "+attachmentId,"attachmentId"));
     }
 
-    public TicketAttachments addFile(MultipartFile file, UUID ticketId) {
+    public TicketAttachments addFile(MultipartFile file, Tickets ticket) {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 
         try{
-
-            Tickets ticket = ticketRepository.findByTicketId(ticketId)
-                .orElseThrow(() -> new AbstractGraphQLException("Ticket with current id cannot be found: "+ticketId, "ticketId"));
-
             if(fileName.contains("..")){
                 throw new FileUploadException("Filename contains invalid path sequence: " + fileName);
             }
@@ -65,5 +61,11 @@ public class TicketAttachmentService{
         }
     }
     
+    public void deleteFile(UUID attachmentId){
+        TicketAttachments ticketAttachments = ticketAttachmentRepository.findById(attachmentId)
+            .orElseThrow(() -> new IllegalStateException("Ticket attachment with current id cannot be found: "+attachmentId));
+
+        ticketAttachmentRepository.delete(ticketAttachments);
+    }
     
 }

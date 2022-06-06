@@ -31,7 +31,7 @@ public class ApplicationService {
     public Applications addApplication(String name){
 
         if(applicationRepository.existsByName(name)){
-            throw new AbstractGraphQLException("Application with current name already exists: "+name,"applicationName");
+            throw new IllegalStateException("Application with current name already exists: "+name);
         }
 
         Applications application = new Applications();

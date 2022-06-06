@@ -11,16 +11,3 @@ type Comments{
 extend type Query{
     getAllCommentsForTicket(ticketId:ID!):[Comments]
 }
-
-extend type Mutation{
-    addComment(
-        ticketId:ID!,
-        body:String!
-    ):Comments
-
-    editComment(
-        commentId:ID!,
-        body:String!
-    ):Comments
-
-}

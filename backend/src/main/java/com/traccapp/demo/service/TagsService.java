@@ -23,28 +23,28 @@ public class TagsService {
         return tagsRepository.findAll();
     }
 
-    public Tags getTags(String name){
+    public Tags getTag(String name){
         return tagsRepository.findByName(name)
             .orElseThrow(() -> new AbstractGraphQLException("Tags with current name cannot be found: "+name,"tagName"));
     }
 
-    public Tags getTags(UUID tagsId){
-        return tagsRepository.findById(tagsId)
-            .orElseThrow(() -> new AbstractGraphQLException("Tags with current id cannot be found: "+tagsId,"tagId"));
+    public Tags getTag(UUID tagId){
+        return tagsRepository.findById(tagId)
+            .orElseThrow(() -> new AbstractGraphQLException("Tags with current id cannot be found: "+tagId,"tagId"));
     }
 
-    public Tags addTags(String name){
+    public Tags addTag(String name){
 
         if(tagsRepository.existsByName(name)){
-            throw new AbstractGraphQLException("Tags with current name already exists: "+name,"tagName");
+            throw new IllegalStateException("Tags with current name already exists: "+name);
         }
 
-        Tags tags = new Tags();
-        tags.setName(name);
-        return tagsRepository.save(tags);
+        Tags tag = new Tags();
+        tag.setName(name);
+        return tagsRepository.save(tag);
     }
 
-    public void deleteTags(UUID tagsId){
-        tagsRepository.delete(getTags(tagsId));
+    public void deleteTags(UUID tagId){
+        tagsRepository.delete(getTag(tagId));
     }
 }

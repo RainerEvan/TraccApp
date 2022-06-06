@@ -6,11 +6,14 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
+import javax.transaction.Transactional;
+
 import com.traccapp.demo.exception.AbstractGraphQLException;
 import com.traccapp.demo.model.Accounts;
 import com.traccapp.demo.model.Supports;
 import com.traccapp.demo.model.Tags;
 import com.traccapp.demo.model.Tickets;
+import com.traccapp.demo.payload.request.SupportRequest;
 import com.traccapp.demo.repository.AccountRepository;
 import com.traccapp.demo.repository.SupportRepository;
 import com.traccapp.demo.repository.TagsRepository;
@@ -39,13 +42,15 @@ public class SupportService {
     private final AuthService authService;
 
     public Supports getSupport(UUID supportId){
-        return supportRepository.findById(supportId).orElseThrow(() -> new AbstractGraphQLException("Support with current id cannot be found: "+supportId, "supportId"));
+        return supportRepository.findById(supportId)
+            .orElseThrow(() -> new AbstractGraphQLException("Support with current id cannot be found: "+supportId, "supportId"));
     }
     
     public List<Supports> getSupportForTicket(Tickets ticket){
         return supportRepository.findAllByTicketAndIsActive(ticket, true);
     }
 
+    @Transactional
     public List<Supports> getAllSupportsForDeveloper(UUID accountId){
 
         Accounts developer = accountRepository.findById(accountId)
@@ -57,7 +62,7 @@ public class SupportService {
     public Supports addSupport(UUID ticketId) {
 
         Tickets ticket = ticketRepository.findByTicketId(ticketId)
-            .orElseThrow(() -> new AbstractGraphQLException("Ticket with current id cannot be found: "+ticketId, "ticketId")); 
+            .orElseThrow(() -> new IllegalStateException("Ticket with current id cannot be found: "+ticketId)); 
 
         Supports support = new Supports();        
         support.setTicket(ticket);
@@ -68,25 +73,27 @@ public class SupportService {
         return supportRepository.save(support);
     }
 
-    public Supports solveSupport(UUID supportId, String result, String description, String devNote, Set<String> tags) {
+    public Supports solveSupport(SupportRequest supportRequest) {
         
-        Supports support = supportRepository
-            .findById(supportId).orElseThrow(() -> new AbstractGraphQLException("Support with current id cannot be found: "+supportId, "supportId"));
+        Supports support = supportRepository.findById(supportRequest.getSupportId())
+            .orElseThrow(() -> new IllegalStateException("Support with current id cannot be found: "+supportRequest.getSupportId()));
 
-        support.setResult(result);
-        support.setDescription(description);
-        support.setDevNote(devNote);
+        support.setResult(supportRequest.getResult());
+        support.setDescription(supportRequest.getDescription());
+        support.setDevNote(supportRequest.getDevNote());
 
+        Set<String> tags = supportRequest.getTags();
+        
         Set<Tags> tagSet = new HashSet<>();
         
         for(String tag: tags){
             Tags currTag = new Tags();
 
             if(tagsRepository.existsByName(tag)){
-                currTag = tagsService.getTags(tag);
+                currTag = tagsService.getTag(tag);
             }
 
-            currTag = tagsService.addTags(tag);
+            currTag = tagsService.addTag(tag);
             
             tagSet.add(currTag);
         }
@@ -98,7 +105,7 @@ public class SupportService {
 
     public Supports withdrawSupport(UUID supportId, String result, String description) {
         Supports support = supportRepository
-            .findById(supportId).orElseThrow(() -> new AbstractGraphQLException("Support with current id cannot be found: "+supportId, "supportId"));
+            .findById(supportId).orElseThrow(() -> new IllegalStateException("Support with current id cannot be found: "+supportId));
 
         support.setResult(result);
         support.setDescription(description);
@@ -108,15 +115,15 @@ public class SupportService {
 
     public Supports reassignSupport(UUID ticketId, UUID currSupportId, UUID developerId){
         Supports currSupport = supportRepository.findById(currSupportId)
-            .orElseThrow(() -> new AbstractGraphQLException("Support with current id cannot be found: "+currSupportId, "supportId"));
+            .orElseThrow(() -> new IllegalStateException("Support with current id cannot be found: "+currSupportId));
         currSupport.setIsActive(false);
         supportRepository.save(currSupport);
         
         Tickets ticket = ticketRepository.findByTicketId(ticketId)
-            .orElseThrow(() -> new AbstractGraphQLException("Ticket with current id cannot be found: "+ticketId, "ticketId"));
+            .orElseThrow(() -> new IllegalStateException("Ticket with current id cannot be found: "+ticketId));
 
         Accounts developer = accountRepository.findById(developerId)
-            .orElseThrow(() -> new AbstractGraphQLException("Account with current id cannot be found: "+developerId,"accountId"));
+            .orElseThrow(() -> new IllegalStateException("Account with current id cannot be found: "+developerId));
 
         Supports newSupport = new Supports();          
         newSupport.setTicket(ticket);

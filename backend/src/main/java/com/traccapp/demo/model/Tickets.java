@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -68,10 +69,10 @@ public class Tickets {
     @JoinColumn(name="status_id")
     private Status status;
 
-    @OneToMany(mappedBy = "ticket", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "ticket", fetch = FetchType.EAGER)
     private List<Supports> support;
 
-    @OneToMany(mappedBy = "ticket")
+    @OneToMany(mappedBy = "ticket",cascade = CascadeType.PERSIST,orphanRemoval = true,fetch = FetchType.LAZY)
     private List<TicketAttachments> attachments;
 
 }

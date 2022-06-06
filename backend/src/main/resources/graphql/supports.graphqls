@@ -14,23 +14,3 @@ type Supports{
 extend type Query{
     getAllSupportsForDeveloper(accountId:ID!):[Supports]
 }
-
-extend type Mutation{
-    addSupport(
-        ticketId:ID!
-    ):Supports
-
-    solveSupport(
-        supportId:ID!,
-        result:String!,
-        description:String!,
-        devNote:String!,
-        tags:[String]!
-    ):Supports
-
-    withdrawSupport(
-        supportId:ID!,
-        result:String!,
-        description:String!,
-    ):Supports
-}

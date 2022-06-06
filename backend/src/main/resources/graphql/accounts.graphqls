@@ -14,25 +14,3 @@ extend type Query{
     getAllAccountsByRole(name:ERoles!):[Accounts]
     getAccount(accountId:ID!):Accounts
 }
-
-extend type Mutation{
-    addAccount(
-        username:String!,
-        password:String!,
-        email:String,
-        contactNo:String,
-        divisonId:ID!,
-        isActive:Boolean!,
-        roles:[ERoles]!
-    ):Accounts
-
-    editAccount(
-        accountId:ID!,
-        username:String,
-        email:String,
-        contactNo:String,
-        divisionId:ID,
-        isActive:Boolean,
-    ):Accounts
-
-}

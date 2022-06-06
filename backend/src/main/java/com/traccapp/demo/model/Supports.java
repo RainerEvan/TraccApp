@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -52,7 +53,7 @@ public class Supports {
     private String result;
     private String description;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable( name = "supports_tags",
                 joinColumns = @JoinColumn(name = "supports_id"),
                 inverseJoinColumns = @JoinColumn(name = "tags_id"))
@@ -61,6 +62,6 @@ public class Supports {
     private String devNote;
     private Boolean isActive;
     
-    @OneToMany(mappedBy = "support")
+    @OneToMany(mappedBy = "support",cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private List<SupportAttachments> attachments;
 }

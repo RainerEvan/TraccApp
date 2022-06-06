@@ -76,7 +76,7 @@ public class AccountService {
 
         account.setDivision(division);
 
-        if(!file.isEmpty()){
+        if(file != null){
             account.setProfileImg(addImage(file));
         }
 
@@ -115,7 +115,7 @@ public class AccountService {
             account.setContactNo(contactNo);
         }
 
-        if(!file.isEmpty()){
+        if(file != null){
             account.setProfileImg(addImage(file));
         }
 

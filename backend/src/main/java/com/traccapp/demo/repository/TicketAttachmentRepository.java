@@ -12,5 +12,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TicketAttachmentRepository extends JpaRepository<TicketAttachments,UUID>{
     List<TicketAttachments> findAllByTicket(Tickets ticket);
-    
 }

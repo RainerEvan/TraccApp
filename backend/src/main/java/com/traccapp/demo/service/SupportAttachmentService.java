@@ -5,12 +5,13 @@ import java.util.Base64;
 import java.util.List;
 import java.util.UUID;
 
+import javax.transaction.Transactional;
+
 import com.traccapp.demo.exception.AbstractGraphQLException;
 import com.traccapp.demo.exception.FileUploadException;
 import com.traccapp.demo.model.SupportAttachments;
 import com.traccapp.demo.model.Supports;
 import com.traccapp.demo.repository.SupportAttachmentRepository;
-import com.traccapp.demo.repository.SupportRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,9 +26,8 @@ public class SupportAttachmentService {
 
     @Autowired
     private final SupportAttachmentRepository supportAttachmentRepository;
-    @Autowired
-    private final SupportRepository supportRepository;
 
+    @Transactional
     public List<SupportAttachments> getAllFilesForsupport(Supports support){
         return supportAttachmentRepository.findAllBySupport(support);
     }
@@ -37,14 +37,10 @@ public class SupportAttachmentService {
             .orElseThrow(() -> new AbstractGraphQLException("Attachment with current id cannot be found: "+attachmentId,"attachmentId"));
     }
 
-    public SupportAttachments addFile(MultipartFile file, UUID supportId) {
+    public SupportAttachments addFile(MultipartFile file, Supports support) {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 
         try{
-
-            Supports support = supportRepository.findById(supportId)
-                .orElseThrow(() -> new AbstractGraphQLException("support with current id cannot be found: "+supportId, "supportId"));
-
             if(fileName.contains("..")){
                 throw new FileUploadException("Filename contains invalid path sequence: " + fileName);
             }

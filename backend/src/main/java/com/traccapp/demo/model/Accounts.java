@@ -46,7 +46,7 @@ public class Accounts {
     private String profileImg;
     private Boolean isActive;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable( name = "account_role",
                 joinColumns = @JoinColumn(name = "account_id"),
                 inverseJoinColumns = @JoinColumn(name = "role_id"))

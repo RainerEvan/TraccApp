@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class JwtResponse {
-    private String tokem;
+    private String token;
     private Date expirationDate;
     private String username;
 }

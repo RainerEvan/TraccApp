@@ -29,17 +29,11 @@ public class Notifications {
     private UUID id;
 
     @ManyToOne
-    @JoinColumn(name="sender_id")
-    private Accounts sender;
-
-    @ManyToOne
     @JoinColumn(name="receiver_id")
     private Accounts receiver;
 
-    private OffsetDateTime sentAt;
+    private OffsetDateTime createdAt;
     private OffsetDateTime readAt;
     private String title;
     private String body;
-    private String link;
-
 }

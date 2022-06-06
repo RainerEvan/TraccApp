@@ -17,11 +17,3 @@ extend type Query{
     getTicket(ticketId:ID!):Tickets
     getAllTicketsForUser(accountId:ID!):[Tickets]
 }
-
-extend type Mutation{
-    addTicket(
-        applicationId:ID!,
-        title:String,
-        description:String
-    ):Tickets
-}

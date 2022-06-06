@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -28,14 +29,14 @@ public class AccountController {
     private final AccountService accountService;
 
     @PostMapping(path = "/add")
-    public ResponseEntity<String> addAccount(@RequestParam("image") MultipartFile image, @RequestParam("account") AccountRequest accountRequest){
+    public ResponseEntity<String> addAccount(@RequestPart("image") MultipartFile image, @RequestPart("account") AccountRequest accountRequest){
         accountService.addAccount(image, accountRequest);
 
         return ResponseEntity.status(HttpStatus.OK).body("Account has been created successfully!");
     }
 
     @PutMapping(path = "/edit")
-    public ResponseEntity<String> editAccount(@RequestParam("image") MultipartFile image, @RequestParam("account") AccountRequest accountRequest){
+    public ResponseEntity<String> editAccount(@RequestPart("image") MultipartFile image, @RequestPart("account") AccountRequest accountRequest){
         accountService.editAccount(image, accountRequest);
 
         return ResponseEntity.status(HttpStatus.OK).body("Account has been updated successfully!");

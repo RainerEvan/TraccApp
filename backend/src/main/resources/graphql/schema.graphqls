@@ -3,24 +3,17 @@ scalar DateTime
 
 schema {
     query:Query
-    mutation:Mutation
 }
 
 type Query{
+    getAllApplications:[Applications]
+    getAllDivisions:[Divisions]
+    getAllTags:[Tags]
 }
 
-type Mutation{
-}
-
-type Notifications{
-    id:ID
-    sender:Accounts
-    receiver:Accounts
-    sentAt:DateTime
-    readAt:DateTime
-    title:String
-    body:String
-    link:String
+type Applications{
+    id:ID!
+    name:String
 }
 
 type Divisions{

@@ -31,7 +31,7 @@ public class DivisionService {
     public Divisions addDivision(String name){
 
         if(divisionRepository.existsByName(name)){
-            throw new AbstractGraphQLException("Division with current name already exists: "+name,"divisionName");
+            throw new IllegalStateException("Division with current name already exists: "+name);
         }
 
         Divisions division = new Divisions();
