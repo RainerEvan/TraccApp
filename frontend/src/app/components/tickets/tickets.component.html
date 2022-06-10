@@ -1,0 +1,37 @@
+<app-header></app-header>
+<div class="bg-white drop-shadow-lg max-w-7xl mx-auto mb-8 px-10 py-4">
+    <div class="py-6">
+        <h1 class="font-bold text-lg text-center mb-4">
+            Tickets List
+        </h1>
+        <div class="bg-white border-2 border-gray-100 shadow-md p-8">
+            <p-table #dt [value]="(tickets|async)!" responsiveLayout="scroll">
+                
+                <ng-template pTemplate="header">
+                    <tr class="border-b-2">
+                        <th>Ticket No</th>
+                        <th>Application</th>
+                        <th>Title</th>
+                        <th>User</th>
+                        <th>Date Added</th>
+                        <th>Developer</th>
+                        <th>Date Taken</th>
+                        <th>Status</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-ticket>
+                    <tr>
+                        <td>{{ticket.ticketNo}}</td>
+                        <td>{{ticket.application.name}}</td>
+                        <td>{{ticket.title}}</td>
+                        <td>{{ticket.reporter.username}}</td>
+                        <td>{{ticket.dateAdded | date:'longDate'}}</td>
+                        <td>{{ticket.support[0]?.developer.username ? ticket.support:'-'}}</td>
+                        <td>{{(ticket.support[0]?.dateTaken | date:'longDate') ? ticket.support:'-'}}</td>
+                        <td>{{ticket.status.name}}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+</div>

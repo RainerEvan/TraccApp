@@ -5,10 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { LoginComponent } from './login/login.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { HeaderComponent } from './header/header.component';
-import { TicketsComponent } from './tickets/tickets.component';
+import { TableModule } from 'primeng/table';
+import { LoginComponent } from './components/login/login.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { HeaderComponent } from './components/header/header.component';
+import { TicketsComponent } from './components/tickets/tickets.component';
+import { ApolloModule, APOLLO_OPTIONS } from 'apollo-angular';
+import { HttpLink } from 'apollo-angular/http';
+import { InMemoryCache } from '@apollo/client/core';
 
 @NgModule({
   declarations: [
@@ -22,9 +26,24 @@ import { TicketsComponent } from './tickets/tickets.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    TableModule,
+    ApolloModule,
   ], 
-  providers: [],
+  providers: [
+    {
+      provide: APOLLO_OPTIONS,
+      useFactory: (httpLink: HttpLink)=>{
+        return {
+          cache: new InMemoryCache(),
+          link: httpLink.create({
+            uri:'http://localhost:8080/graphql',
+          }),
+        };
+      },
+      deps:[HttpLink],
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

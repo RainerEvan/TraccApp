@@ -1,0 +1,7 @@
+th{
+    @apply font-montserrat font-semibold text-sm text-black bg-white !important;
+}
+
+td{
+    @apply font-montserrat font-regular text-sm text-black !important;
+}
