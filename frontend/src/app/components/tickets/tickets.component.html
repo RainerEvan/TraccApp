@@ -4,15 +4,22 @@
         <h1 class="font-bold text-lg text-center mb-4">
             Tickets List
         </h1>
-        <div class="bg-white border-2 border-gray-100 shadow-md p-8">
-            <p-table #dt [value]="(tickets|async)!" responsiveLayout="scroll">
-                
+        <div #dt class="bg-white border-2 border-gray-100 shadow-md p-8">
+            <p-table #ticketTable [value]="(tickets|async)!" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" selectionMode="single" responsiveLayout="scroll" [filterDelay]="1" [globalFilterFields]="['ticketNo','application.name','title','reporter.username','dateAdded','support[0].developer.username','support[0].dateTaken','status.name']">
+                <ng-template pTemplate="caption">
+                    <div class="flex">
+                        <span class="p-input-icon-left">
+                            <i class="pi pi-search pl-1 opacity-60"></i>
+                            <input class="pl-10 py-1 border-2 border-gray-300 rounded-full text-sm" pInputText type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Search Tickets" />
+                        </span>
+                    </div>
+                </ng-template>
                 <ng-template pTemplate="header">
                     <tr class="border-b-2">
                         <th>Ticket No</th>
-                        <th>Application</th>
+                        <th>App</th>
                         <th>Title</th>
-                        <th>User</th>
+                        <th>Reporter</th>
                         <th>Date Added</th>
                         <th>Developer</th>
                         <th>Date Taken</th>
@@ -28,7 +35,9 @@
                         <td>{{ticket.dateAdded | date:'longDate'}}</td>
                         <td>{{ticket.support[0]?.developer.username ? ticket.support:'-'}}</td>
                         <td>{{(ticket.support[0]?.dateTaken | date:'longDate') ? ticket.support:'-'}}</td>
-                        <td>{{ticket.status.name}}</td>
+                        <td>
+                            <div [class]="'ticket-status-'+ticket.status.name">{{ticket.status.name}}</div>
+                        </td>
                     </tr>
                 </ng-template>
             </p-table>

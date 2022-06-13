@@ -16,6 +16,7 @@ public class AccountRequest {
     private UUID id;
     private String username;
     private String password;
+    private String fullname;
     private String email;
     private String contactNo;
     private UUID divisionId;

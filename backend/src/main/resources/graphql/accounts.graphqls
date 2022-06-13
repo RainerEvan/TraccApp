@@ -1,6 +1,7 @@
 type Accounts{
     id:ID!
     username:String
+    fullname:String
     email:String
     contactNo:String
     division:Divisions

@@ -67,6 +67,7 @@ public class AccountService {
         Accounts account = new Accounts();
         account.setUsername(username);
         account.setPassword(passwordEncoder.encode(accountRequest.getPassword()));
+        account.setFullname(accountRequest.getFullname());
         account.setEmail(accountRequest.getEmail());
         account.setContactNo(accountRequest.getContactNo());
         account.setIsActive(accountRequest.getIsActive());
@@ -94,6 +95,7 @@ public class AccountService {
         Accounts account = getAccount(accountRequest.getId());
 
         String username = accountRequest.getUsername();
+        String fullname = accountRequest.getFullname();
         String email = accountRequest.getEmail();
         String contactNo = accountRequest.getContactNo();
         UUID divisionId = accountRequest.getDivisionId();
@@ -105,6 +107,10 @@ public class AccountService {
 
         if(username != null && username.length() > 0 && !Objects.equals(account.getUsername(), username)){
             account.setUsername(username);
+        }
+
+        if(fullname != null && fullname.length() > 0 && !Objects.equals(account.getFullname(), fullname)){
+            account.setFullname(fullname);
         }
 
         if(email != null && email.length() > 0 && !Objects.equals(account.getEmail(), email)){

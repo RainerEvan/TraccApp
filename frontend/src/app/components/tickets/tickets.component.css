@@ -5,3 +5,23 @@ th{
 td{
     @apply font-montserrat font-regular text-sm text-black !important;
 }
+
+.ticket-status-PENDING{
+    @apply px-1 w-full bg-gray-300 font-medium text-[10px] text-center rounded-full !important;
+}
+
+.ticket-status-IN_PROGRESS{
+    @apply px-1 w-full bg-gray-400 font-medium text-[10px] text-center rounded-full !important;
+}
+
+.ticket-status-RESOLVED{
+    @apply px-1 w-full bg-gray-400 font-medium text-white text-[10px] text-center rounded-full !important;
+}
+
+.ticket-status-CLOSED{
+    @apply px-1 w-full bg-gray-500 font-medium text-white text-[10px] text-center rounded-full !important;
+}
+
+.ticket-status-DROPPED{
+    @apply px-1 w-full bg-gray-600 font-medium text-white text-[10px] text-center rounded-full !important;
+}

@@ -96,16 +96,64 @@ public class StartAppConfig {
             
             Accounts account2 = accountService.addAccount(null,accountRequest2);
 
+            for(int i=0;i<4;i++){
+                
+                Tickets ticket = new Tickets();
+                ticket.setDateAdded(LocalDate.now());
+                ticket.setApplication(application);
+                ticket.setReporter(account);
+                ticket.setTitle("Aplikasi CAMS error");
+                ticket.setDescription("Form gabisa diisi lagi gimana dong");
+                ticket.setStatus(status1);
+                ticketRepository.save(ticket);
+            }
+
+            for(int i=0;i<4;i++){
+                
+                Tickets ticket = new Tickets();
+                ticket.setDateAdded(LocalDate.now());
+                ticket.setApplication(application);
+                ticket.setReporter(account);
+                ticket.setTitle("Form Rusak");
+                ticket.setDescription("Form gabisa diisi lagi gimana dong");
+                ticket.setStatus(status2);
+                ticketRepository.save(ticket);
+            }
+
             for(int i=0;i<3;i++){
                 
-            Tickets ticket = new Tickets();
-            ticket.setDateAdded(LocalDate.now());
-            ticket.setApplication(application);
-            ticket.setReporter(account);
-            ticket.setTitle("Aplikasi CAMS error");
-            ticket.setDescription("Form gabisa diisi lagi gimana dong");
-            ticket.setStatus(status1);
-            ticketRepository.save(ticket);
+                Tickets ticket = new Tickets();
+                ticket.setDateAdded(LocalDate.now());
+                ticket.setApplication(application);
+                ticket.setReporter(account);
+                ticket.setTitle("Data Output Error");
+                ticket.setDescription("Form gabisa diisi lagi gimana dong");
+                ticket.setStatus(status3);
+                ticketRepository.save(ticket);
+            }
+
+            for(int i=0;i<6;i++){
+                
+                Tickets ticket = new Tickets();
+                ticket.setDateAdded(LocalDate.now());
+                ticket.setApplication(application);
+                ticket.setReporter(account);
+                ticket.setTitle("Data Output Error");
+                ticket.setDescription("Form gabisa diisi lagi gimana dong");
+                ticket.setStatus(status4);
+                ticketRepository.save(ticket);
+            }
+
+            for(int i=0;i<2;i++){
+                
+                Tickets ticket = new Tickets();
+                ticket.setDateAdded(LocalDate.now());
+                ticket.setApplication(application);
+                ticket.setReporter(account);
+                ticket.setTitle("Data Output Error");
+                ticket.setDescription("Form gabisa diisi lagi gimana dong");
+                ticket.setStatus(status5);
+                ticketRepository.save(ticket);
             }
             // Supports support = new Supports();
             // support.setTicket(ticket);
