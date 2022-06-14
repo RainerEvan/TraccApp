@@ -1,0 +1,27 @@
+.ticket-field{
+    @apply text-right font-semibold text-sm !important;
+}
+
+.ticket-value{
+    @apply text-left font-regular text-sm text-gray-600 !important;
+}
+
+.ticket-status-PENDING{
+    @apply px-4 py-0.5 w-24 bg-gray-300 font-medium text-xs text-center rounded-md !important;
+}
+
+.ticket-status-IN_PROGRESS{
+    @apply px-4 py-0.5 w-24 bg-gray-400 font-medium text-xs text-center rounded-md !important;
+}
+
+.ticket-status-RESOLVED{
+    @apply px-4 py-0.5 w-24 bg-gray-400 font-medium text-white text-xs text-center rounded-md !important;
+}
+
+.ticket-status-CLOSED{
+    @apply px-4 py-0.5 w-24 bg-gray-500 font-medium text-white text-xs text-center rounded-md !important;
+}
+
+.ticket-status-DROPPED{
+    @apply px-4 py-0.5 w-24 bg-gray-600 font-medium text-white text-xs text-center rounded-md !important;
+}

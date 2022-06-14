@@ -1,16 +1,16 @@
-<app-header></app-header>
 <div class="bg-white drop-shadow-lg max-w-7xl mx-auto mb-8 px-10 py-4">
     <div class="py-6">
         <h1 class="font-bold text-lg text-center mb-4">
-            Tickets List
+            Ticket List
         </h1>
-        <div #dt class="bg-white border-2 border-gray-100 shadow-md p-8">
-            <p-table #ticketTable [value]="(tickets|async)!" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" selectionMode="single" responsiveLayout="scroll" [filterDelay]="1" [globalFilterFields]="['ticketNo','application.name','title','reporter.username','dateAdded','support[0].developer.username','support[0].dateTaken','status.name']">
+        <div class="bg-white border-2 border-gray-100 shadow-md p-8">
+            <p-table #ticketTable [value]="tickets" [lazy]="true" (onLazyLoad)="loadTickets($event)" [loading]="loading" [totalRecords]="totalRecords" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" selectionMode="single" responsiveLayout="scroll" [filterDelay]="1"
+                [globalFilterFields]="['ticketNo','application.name','title','reporter.username','dateAdded','support[0].developer.username','support[0].dateTaken','status.name']">
                 <ng-template pTemplate="caption">
                     <div class="flex">
                         <span class="p-input-icon-left">
                             <i class="pi pi-search pl-1 opacity-60"></i>
-                            <input class="pl-10 py-1 border-2 border-gray-300 rounded-full text-sm" pInputText type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Search Tickets" />
+                            <input class="pl-10 py-1 border-2 border-gray-300 rounded-full text-sm hover:border-gray-400" pInputText type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Search Tickets" />
                         </span>
                     </div>
                 </ng-template>
@@ -27,7 +27,7 @@
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-ticket>
-                    <tr>
+                    <tr routerLink="ticket-detail/{{ticket.ticketId}}">
                         <td>{{ticket.ticketNo}}</td>
                         <td>{{ticket.application.name}}</td>
                         <td>{{ticket.title}}</td>

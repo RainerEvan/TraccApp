@@ -9,10 +9,12 @@ import { TableModule } from 'primeng/table';
 import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HeaderComponent } from './components/header/header.component';
-import { TicketsComponent } from './components/tickets/tickets.component';
 import { ApolloModule, APOLLO_OPTIONS } from 'apollo-angular';
 import { HttpLink } from 'apollo-angular/http';
 import { InMemoryCache } from '@apollo/client/core';
+import { TicketListComponent } from './components/tickets/ticket-list/ticket-list.component';
+import { TicketDetailComponent } from './components/tickets/ticket-detail/ticket-detail.component';
+import { TicketsComponent } from './components/tickets/tickets/tickets.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import { InMemoryCache } from '@apollo/client/core';
     LoginComponent,
     DashboardComponent,
     HeaderComponent,
+    TicketListComponent,
+    TicketDetailComponent,
     TicketsComponent
   ],
   imports: [
