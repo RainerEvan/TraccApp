@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { LazyLoadEvent } from 'primeng/api';
 import { Table } from 'primeng/table';
@@ -12,7 +13,6 @@ import { Ticket } from 'src/app/types/ticket';
 export class TicketListComponent implements OnInit {
 
   tickets: Ticket[];
-  virtualDatabase: Ticket[];
   loading: boolean;
   totalRecords: number;
 
@@ -25,23 +25,18 @@ export class TicketListComponent implements OnInit {
   }
 
   getAllTickets(): void{
-    this.ticketService.getAllTickets().subscribe(tickets => {
-      this.virtualDatabase = tickets;
-      this.totalRecords = tickets.length;
-    });
-    
-    this.totalRecords = this.tickets.length;
-  }
-
-  loadTickets(event: LazyLoadEvent){
     this.loading = true;
 
-    setTimeout(() => {
-      if(this.virtualDatabase){
-        this.tickets = this.virtualDatabase.slice(event.first, (event.first + event.rows));
+    this.ticketService.getAllTickets().subscribe({
+      next: (tickets: Ticket[]) => {
+        this.tickets = tickets;
         this.loading = false;
+        this.totalRecords = tickets.length;
+      },
+      error: (err: HttpErrorResponse) => {
+        alert(err.message);
       }
-    }, 1000);
+    });
   }
 
   applyFilterGlobal($event:any, stringVal:any) {
