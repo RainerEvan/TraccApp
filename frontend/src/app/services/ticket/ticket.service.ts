@@ -13,7 +13,7 @@ export class TicketService {
   public getAllTickets(): Observable<Ticket[]>{
     return this.apollo.watchQuery<any>({
       query:gql`
-        query{
+        query getAllTickets{
           getAllTickets{
             ticketId
             ticketNo
@@ -22,14 +22,14 @@ export class TicketService {
             }
             title
             reporter{
-              username
+              fullname
             }
             dateAdded
             support{
-              developer{
-                username
-              }
               dateTaken
+              developer{
+                fullname
+              }
             }
             status{
               name
@@ -38,6 +38,60 @@ export class TicketService {
         }
       `,
     })
-      .valueChanges.pipe(map((result)=>result.data.getAllTickets),);
+      .valueChanges.pipe(map((result)=>result.data.getAllTickets));
   }
+
+  public getTicket(ticketId: string): Observable<Ticket>{
+    return this.apollo.watchQuery<any>({
+      query: gql`
+        query getTicket($ticketId:ID!){
+          getTicket(ticketId: $ticketId){
+            ticketId
+            ticketNo
+            application{
+              name
+            }
+            dateAdded
+            reporter{
+              fullname
+            }
+            title
+            description
+            dateClosed
+            status{
+              name
+            }
+            support{
+              dateTaken
+              developer{
+                fullname
+              }
+              result
+              description
+              tags{
+                name
+              }
+              devNote
+              isActive
+              attachments{
+                fileBase64
+                fileName
+              }
+            }
+            attachments{
+              fileBase64
+              fileName
+            }
+          }
+        }
+      `, 
+      variables: {
+        ticketId: ticketId,
+      },
+    })
+      .valueChanges.pipe(map((result)=>result.data.getTicket));
+  }
+
+
+
 }

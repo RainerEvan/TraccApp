@@ -10,6 +10,10 @@ td{
     @apply font-montserrat font-regular text-sm text-black cursor-pointer !important;
 }
 
+.rotate{
+    @apply animate-spin;
+}
+
 .ticket-status-PENDING{
     @apply px-1 w-full bg-gray-300 font-medium text-[10px] text-center rounded-full !important;
 }

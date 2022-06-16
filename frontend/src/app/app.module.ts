@@ -16,6 +16,7 @@ import { InMemoryCache } from '@apollo/client/core';
 import { TicketListComponent } from './components/tickets/ticket-list/ticket-list.component';
 import { TicketDetailComponent } from './components/tickets/ticket-detail/ticket-detail.component';
 import { TicketsComponent } from './components/tickets/tickets/tickets.component';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { TicketsComponent } from './components/tickets/tickets/tickets.component
     HttpClientModule,
     FormsModule,
     TableModule,
+    ButtonModule,
     OverlayPanelModule,
     ApolloModule,
   ], 

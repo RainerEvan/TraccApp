@@ -39,6 +39,10 @@ export class TicketListComponent implements OnInit {
     });
   }
 
+  refresh(){
+    window.location.reload();
+  }
+
   applyFilterGlobal($event:any, stringVal:any) {
     this.ticketTable.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
   }
