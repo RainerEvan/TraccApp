@@ -36,8 +36,8 @@ public class AccountController {
     }
 
     @PutMapping(path = "/edit")
-    public ResponseEntity<String> editAccount(@RequestPart("image") MultipartFile image, @RequestPart("account") AccountRequest accountRequest){
-        accountService.editAccount(image, accountRequest);
+    public ResponseEntity<String> editAccount(@RequestPart("image") MultipartFile image, @RequestPart("accountId") UUID accountId, @RequestPart("account") AccountRequest accountRequest){
+        accountService.editAccount(image, accountId, accountRequest);
 
         return ResponseEntity.status(HttpStatus.OK).body("Account has been updated successfully!");
     }

@@ -90,9 +90,9 @@ public class AccountService {
         return accountRepository.save(account);
     }
 
-    public Accounts editAccount(MultipartFile file, AccountRequest accountRequest) {
+    public Accounts editAccount(MultipartFile file, UUID accountId, AccountRequest accountRequest) {
         
-        Accounts account = getAccount(accountRequest.getId());
+        Accounts account = getAccount(accountId);
 
         String username = accountRequest.getUsername();
         String fullname = accountRequest.getFullname();

@@ -4,24 +4,20 @@
         <div class="flex flex-row items-end mx-10">
             <div class="w-full flex-1 m-6">
                 <a href="#" class="flex items-center">
-                    <img src="assets/image/Logo.png" alt="Logo" class="mr-2 h-7" />
+                    <img src="assets/image/logo.png" alt="Logo" class="mr-2 h-7" />
                     <span class="text-center font-medium text-2xl italic tracking-widest hover:text-gray-600">TRACC APP</span>
                 </a>
             </div>
             <div class="w-full flex-1 m-6">
                 <div class="flex space-x-4 justify-end">
-                    <button class="items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 hover:stroke-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                        </svg>
+                    <button class="inline-flex items-center hover:text-gray-400">
+                        <i class="pi pi-envelope" style="font-size: 22px"></i>
                     </button>
-                    <button (click)="profileDrop.toggle($event)" class="inline-flex items-center stroke-black hover:stroke-gray-600">
+                    <button (click)="profileDrop.toggle($event)" class="inline-flex items-center stroke-black hover:stroke-gray-600 hover:text-gray-600">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 stroke-inherit" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 stroke-inherit" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                        </svg>
+                        <i class="pi pi-angle-down"></i>
                     </button>
 
                     <!-- Dropdown Profile -->

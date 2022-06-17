@@ -1,6 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { LazyLoadEvent } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { TicketService } from 'src/app/services/ticket/ticket.service';
 import { Ticket } from 'src/app/types/ticket';

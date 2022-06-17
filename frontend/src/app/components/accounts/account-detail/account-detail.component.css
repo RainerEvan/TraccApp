@@ -1,0 +1,15 @@
+.account-field{
+    @apply text-right font-semibold text-sm !important;
+}
+
+.account-value{
+    @apply text-left font-regular text-sm text-gray-600 !important;
+}
+
+.account-status-true{
+    @apply px-6 py-0.5 w-24 bg-gray-300 font-medium text-xs text-center rounded-md !important;
+}
+
+.account-status-false{
+    @apply px-6 py-0.5 w-24 bg-gray-500 font-medium text-xs text-white text-center rounded-md !important;
+}

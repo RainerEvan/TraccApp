@@ -1,0 +1,23 @@
+tr{
+    @apply focus:outline-gray-300 !important;
+}
+
+th{
+    @apply font-montserrat font-semibold text-sm text-black bg-white !important;
+}
+
+td{
+    @apply font-montserrat font-regular text-sm text-black cursor-pointer !important;
+}
+
+.rotate{
+    @apply animate-spin;
+}
+
+.account-status-true{
+    @apply px-1 w-full bg-gray-300 font-medium text-[10px] text-center rounded-full !important;
+}
+
+.account-status-false{
+    @apply px-1 w-full bg-gray-500 font-medium text-[10px] text-white text-center rounded-full !important;
+}

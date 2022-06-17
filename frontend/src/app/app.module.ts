@@ -15,8 +15,15 @@ import { HttpLink } from 'apollo-angular/http';
 import { InMemoryCache } from '@apollo/client/core';
 import { TicketListComponent } from './components/tickets/ticket-list/ticket-list.component';
 import { TicketDetailComponent } from './components/tickets/ticket-detail/ticket-detail.component';
-import { TicketsComponent } from './components/tickets/tickets/tickets.component';
 import { ButtonModule } from 'primeng/button';
+import { ImageModule } from 'primeng/image';
+import { BadgeModule } from 'primeng/badge';
+import { ChipModule } from 'primeng/chip';
+import { TicketPageComponent } from './components/tickets/ticket-page/ticket-page.component';
+import { AccountListComponent } from './components/accounts/account-list/account-list.component';
+import { AccountDetailComponent } from './components/accounts/account-detail/account-detail.component';
+import { AccountPageComponent } from './components/accounts/account-page/account-page.component';
+import { ConfigPageComponent } from './components/config/config-page/config-page.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +33,11 @@ import { ButtonModule } from 'primeng/button';
     HeaderComponent,
     TicketListComponent,
     TicketDetailComponent,
-    TicketsComponent
+    TicketPageComponent,
+    AccountListComponent,
+    AccountDetailComponent,
+    AccountPageComponent,
+    ConfigPageComponent
   ],
   imports: [
     BrowserModule,
@@ -36,8 +47,11 @@ import { ButtonModule } from 'primeng/button';
     FormsModule,
     TableModule,
     ButtonModule,
+    ChipModule,
     OverlayPanelModule,
-    ApolloModule,
+    ImageModule,
+    BadgeModule,
+    ApolloModule
   ], 
   providers: [
     {
