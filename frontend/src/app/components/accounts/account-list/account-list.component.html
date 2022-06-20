@@ -7,7 +7,7 @@
             <p-table #accountTable [value]="accounts" [loading]="loading" [totalRecords]="totalRecords" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" selectionMode="single" responsiveLayout="scroll" [filterDelay]="0"
                 [globalFilterFields]="['username','email','fullname','roles[0].name','isActive']">
                 <ng-template pTemplate="caption">
-                    <div class="px-2 flex items-center place-content-between font-montserrat">
+                    <div class="px-2 flex items-center place-content-between">
                         <span class="p-input-icon-left">
                             <i class="pi pi-search pl-1 opacity-60"></i>
                             <input class="pl-10 py-2 border-2 border-gray-300 rounded-md text-sm hover:border-gray-400" type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Search Accounts" />

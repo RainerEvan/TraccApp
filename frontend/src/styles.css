@@ -5,7 +5,12 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
+body{
+    font-family: "Montserrat", sans-serif;
     background: rgb(233,233,233);
     background: linear-gradient(90deg, rgba(233,233,233,1) 0%, rgba(242,242,242,1) 49%, rgba(237,237,237,1) 100%);
+}
+
+body .p-component{
+    font-family: "Montserrat", sans-serif;
 }

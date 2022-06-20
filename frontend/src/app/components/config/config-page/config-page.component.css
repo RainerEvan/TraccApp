@@ -1,0 +1,15 @@
+:host ::ng-deep .p-dropdown{
+    .p=component{
+        @apply text-xs bg-yellow-300 !important;
+
+    }
+
+}
+
+.account-field{
+    @apply text-right font-semibold text-sm bg-yellow-300 !important;
+}
+
+.account-value{
+    @apply text-left font-regular text-sm text-gray-600 bg-red-200 !important;
+}

@@ -7,10 +7,10 @@
             <p-table #ticketTable [value]="tickets" [loading]="loading" [totalRecords]="totalRecords" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" selectionMode="single" responsiveLayout="scroll" [filterDelay]="0"
                 [globalFilterFields]="['ticketNo','application.name','title','reporter.username','dateAdded','support[0].developer.username','support[0].dateTaken','status.name']">
                 <ng-template pTemplate="caption">
-                    <div class="px-2 flex items-center place-content-between font-montserrat">
+                    <div class="px-2 flex items-center place-content-between">
                         <span class="p-input-icon-left">
                             <i class="pi pi-search pl-1 opacity-60"></i>
-                            <input class="pl-10 py-2 border-2 border-gray-300 rounded-md text-sm hover:border-gray-400" type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Search Tickets" />
+                            <input class="pl-10 py-2 border-2 border-gray-300 rounded-md outline-none text-sm hover:border-gray-400 focus:border-gray-600" type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Search Tickets" />
                         </span>
                         <div class="flex flex-row space-x-4">
                             <button (click)="refresh()" class="py-2 px-3 flex flex-row items-center space-x-2 rounded-md stroke-gray-500 text-gray-500 hover:bg-gray-300/60">
@@ -19,7 +19,7 @@
                                 </svg>
                                 <span class="font-medium text-sm text-inherit">Refresh</span>
                             </button>
-                            <button class="bg-gray-600 rounded-md px-4 py-1 font-medium text-xs text-white hover:bg-gray-800">Add Ticket</button>
+                            <button (click)="showAddTicketModal()" class="bg-gray-600 rounded-md px-4 py-1 font-medium text-xs text-white hover:bg-gray-800">Add Ticket</button>
                         </div>
                     </div>
                 </ng-template>
@@ -66,3 +66,52 @@
         </div>
     </div>
 </div>
+
+<!-- Add Ticket Modal -->
+<p-dialog [(visible)]="displayAddTicketModal" [modal]="true" [style]="{width: '60vw'}" [draggable]="false" [resizable]="false">
+    <ng-template pTemplate="header">
+        <span class="font-semibold text-2xl">New Ticket</span>
+    </ng-template>
+    <ng-template pTemplate="content">
+        <form [formGroup]="addTicketForm" (ngSubmit)="onSubmitTicket()">
+            <div class="flex flex-row px-6 space-x-2">
+                <div class="w-full flex-1 pr-16">
+                    <div class="flex flex-row items-start space-x-8 my-6">
+                        <label class="w-1/3 form-field">Title</label>
+                        <div class="w-2/3">
+                            <input type="text" placeholder="Enter title" class="form-value w-full outline-none rounded-md border-2 border-gray-400 focus:border-gray-600">
+                        </div>
+                    </div>
+                    <div class="flex flex-row items-start space-x-8 my-6">
+                        <label class="w-1/3 form-field">Description</label>
+                        <div class="w-2/3">
+                            <input type="text" placeholder="Enter title" class="form-value w-full outline-none rounded-md border-2 border-gray-400 focus:border-gray-600">
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="w-full flex-1 pr-16">
+                    <div class="flex flex-row items-start space-x-8 my-6">
+                        <label class="w-1/3 form-field">Application</label>
+                        <div class="w-2/3">
+                            <select class="w-full form-field outline-none rounded-md border-2 border-gray-400" formControlName="application">
+                                <option value="" disabled>Choose application</option>
+                                <option *ngFor="let app of applications" [ngValue]="application.id">{{application.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="flex flex-row items-start space-x-8 my-6">
+                        <label class="w-1/3 form-field">Attachments</label>
+                        <div class="w-2/3">
+                            <input type="text" placeholder="Enter title" class="form-value w-full outline-none rounded-md border-2 border-gray-400 focus:border-gray-600">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <button class="w-24 bg-white border-2 border-gray-400 rounded-md px-6 py-1.5 font-medium text-xs text-gray-600 hover:bg-gray-400 hover:text-white">Reset</button>
+        <button (click)="displayModal=false" class="w-24 bg-gray-600 border-2 border-gray-600 rounded-md px-6 py-1.5 font-medium text-xs text-white hover:bg-gray-800 hover:border-gray-800">Submit</button>
+    </ng-template>
+</p-dialog>

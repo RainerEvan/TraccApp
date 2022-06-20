@@ -3,11 +3,19 @@ tr{
 }
 
 th{
-    @apply font-montserrat font-semibold text-sm text-black bg-white !important;
+    @apply font-semibold text-sm text-black bg-white !important;
 }
 
 td{
-    @apply font-montserrat font-regular text-sm text-black cursor-pointer !important;
+    @apply font-regular text-sm text-black cursor-pointer !important;
+}
+
+.form-field{
+    @apply text-right font-semibold text-sm py-2 !important;
+}
+
+.form-value{
+    @apply text-left font-regular text-sm p-2 !important;
 }
 
 .rotate{

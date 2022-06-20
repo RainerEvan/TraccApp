@@ -4,7 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TableModule } from 'primeng/table';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { LoginComponent } from './components/login/login.component';
@@ -19,11 +19,13 @@ import { ButtonModule } from 'primeng/button';
 import { ImageModule } from 'primeng/image';
 import { BadgeModule } from 'primeng/badge';
 import { ChipModule } from 'primeng/chip';
+import { DialogModule } from 'primeng/dialog';
 import { TicketPageComponent } from './components/tickets/ticket-page/ticket-page.component';
 import { AccountListComponent } from './components/accounts/account-list/account-list.component';
 import { AccountDetailComponent } from './components/accounts/account-detail/account-detail.component';
 import { AccountPageComponent } from './components/accounts/account-page/account-page.component';
 import { ConfigPageComponent } from './components/config/config-page/config-page.component';
+import { DropdownModule } from 'primeng/dropdown';
 
 @NgModule({
   declarations: [
@@ -45,9 +47,12 @@ import { ConfigPageComponent } from './components/config/config-page/config-page
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     TableModule,
     ButtonModule,
     ChipModule,
+    DialogModule,
+    DropdownModule,
     OverlayPanelModule,
     ImageModule,
     BadgeModule,

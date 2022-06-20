@@ -1,7 +1,9 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Table } from 'primeng/table';
 import { TicketService } from 'src/app/services/ticket/ticket.service';
+import { Application } from 'src/app/types/application';
 import { Ticket } from 'src/app/types/ticket';
 
 @Component({
@@ -14,16 +16,21 @@ export class TicketListComponent implements OnInit {
   tickets: Ticket[];
   loading: boolean;
   totalRecords: number;
+  displayAddTicketModal: boolean;
+  ticketForm: FormGroup;
+  isTicketFormSubmitted: boolean = false;
+  applications: Application[];
 
   @ViewChild('ticketTable') ticketTable: Table | undefined;
 
-  constructor(private ticketService: TicketService) { }
+  constructor(private formBuilder: FormBuilder, private ticketService: TicketService) { }
 
   ngOnInit() {
     this.getAllTickets();
+    this.generateTicketForm();
   }
 
-  getAllTickets(): void{
+  public getAllTickets(): void{
     this.loading = true;
 
     this.ticketService.getAllTickets().subscribe({
@@ -38,12 +45,34 @@ export class TicketListComponent implements OnInit {
     });
   }
 
+  showAddTicketModal() {
+    this.displayAddTicketModal = true;
+  }
+
   refresh(){
     window.location.reload();
   }
 
   applyFilterGlobal($event:any, stringVal:any) {
     this.ticketTable.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
+  }
+
+  generateTicketForm(){
+    this.ticketForm = this.formBuilder.group({
+      title: ['', [Validators.required]],
+      description: ['', [Validators.required]],
+      application: ['', [Validators.required]],
+      attachments: [null]
+    });
+
+  }
+
+  onSubmitTicket(){
+
+  }
+
+  resetForm(form: FormGroup){
+    form.reset();
   }
 
 }
