@@ -71,7 +71,9 @@ public class StartAppConfig {
             statusRepository.save(status5);
 
             Applications application = applicationService.addApplication("CAMS");
-            log.info("Application id: "+application.getId());
+            Applications application2 = applicationService.addApplication("SMILE");
+            Applications application3 = applicationService.addApplication("GEOSPACIAL");
+            Applications application4 = applicationService.addApplication("UIDM");
             Divisions division = divisionService.addDivision("ITXB");
 
             AccountRequest accountRequest = new AccountRequest();
