@@ -45,7 +45,7 @@ public class TicketSupportController {
     private final SupportAttachmentService supportAttachmentService;
 
     @PostMapping(path = "/add")
-    public ResponseEntity<String> addTicket(@RequestPart("files") MultipartFile[] files, @RequestPart("ticket") TicketRequest ticketRequest){
+    public ResponseEntity<?> addTicket(@RequestPart(name="files", required = false) MultipartFile[] files, @RequestPart("ticket") TicketRequest ticketRequest){
         Tickets ticket = ticketService.addTicket(ticketRequest);
 
         if(files != null){

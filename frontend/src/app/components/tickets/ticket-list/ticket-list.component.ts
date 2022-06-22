@@ -22,8 +22,7 @@ export class TicketListComponent implements OnInit {
   ticketForm: FormGroup;
   isTicketFormSubmitted: boolean = false;
   applications: Application[];
-  ticketAttachments: File[] = [];
-
+  ticketAttachments: File[]=[];
   @ViewChild('ticketTable') ticketTable: Table | undefined;
 
   constructor(private formBuilder: FormBuilder, private ticketService: TicketService, private applicationService: ApplicationService) { }
@@ -59,12 +58,32 @@ export class TicketListComponent implements OnInit {
     });
   }
 
-  showAddTicketModal() {
-    this.displayAddTicketModal = true;
-  }
+  public addTicket(): void{
+    if(this.ticketForm.valid){
+      const formData = new FormData();
+      const ticket = this.ticketForm.value;
 
-  showAddTicketStatus() {
-    this.displayAddTicketStatus = true;
+      for(var i=0;i<this.ticketAttachments.length;i++){
+        formData.append('files',this.ticketAttachments[i]);
+      }
+      formData.append('ticket', new Blob([JSON.stringify(ticket)], {type:"application/json"}));
+      
+      this.ticketService.addTicket(formData).subscribe({
+        next: (result: any) => {
+          console.log(result);
+          this.isTicketFormSubmitted = true;
+          this.displayAddTicketModal = false;
+        },
+        error: (error: any) => {
+          console.log(error);
+          this.isTicketFormSubmitted = false;
+        }
+      });
+      this.displayAddTicketStatus = true;
+    } else{
+      return;
+    }
+    
   }
 
   refresh(){
@@ -80,7 +99,6 @@ export class TicketListComponent implements OnInit {
       applicationId: [null, [Validators.required]],
       title: [null, [Validators.required]],
       description: [null, [Validators.required]],
-      attachments: [null]
     });
     this.getAllApplications();
   }
@@ -97,36 +115,15 @@ export class TicketListComponent implements OnInit {
     return this.ticketForm.get('description');
   }
 
-  onSubmitTicket(){
-    this.isTicketFormSubmitted = false;
-    if(this.ticketForm.valid){
-      this.isTicketFormSubmitted = true;
-      this.displayAddTicketModal = false;
-    } 
-    else{
-      return;
+  onSelectFile(event:any){
+    for  (var i =  0; i <  event.target.files.length; i++)  {  
+      this.ticketAttachments.push(event.target.files[i]);
     }
-    
-    const formData = new FormData();
-    const ticket = this.ticketForm.value;
-    console.log(ticket);
-
-    formData.append('files', null);
-    formData.append('ticket', JSON.stringify(ticket));
-    this.ticketService.addTicket(formData).subscribe({
-      next: (data: any) => {
-        console.log(data.ticketId);
-      },
-      error: (error: any) => {
-        console.log(error);
-      }
-    });
-    this.displayAddTicketStatus = true;
-    this.resetForm(this.ticketForm);
   }
 
   resetForm(form: FormGroup){
     form.reset();
+    this.ticketAttachments = [];
   }
 
 }

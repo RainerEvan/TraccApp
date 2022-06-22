@@ -6,7 +6,7 @@ import { Ticket } from 'src/app/types/ticket';
 
 const apiServerUrl = 'http://localhost:8080/api/tickets';
 const headers = new HttpHeaders({
-  'Authorization': `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYW1hbiIsImlhdCI6MTY1NTgwODU0OSwiZXhwIjoxNjU1ODk0OTQ5fQ.P0Tln8xIVOrMt7ynRuy1xQLCC2m3WBA0I0x7uV7x2Hk5kEgwnrPqGEFH7ODW52kEUS-Nt0rS2toSM_K2Owc0wQ`
+  'Authorization': `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYW1hbiIsImlhdCI6MTY1NTg2ODQ5NSwiZXhwIjoxNjU1OTU0ODk1fQ.5DzXJUij-W2HcTFYkLGSdFKdEf2SDl4pVR5XIkUSDUHwTyY8h4plnXyXm-arjW3cxxiodhjbYOaF8N4EhiyzOA`
 });
 
 @Injectable({

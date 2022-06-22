@@ -15,7 +15,7 @@ td{
 }
 
 .form-value{
-    @apply text-left font-regular text-sm px-3 py-1.5 w-full outline-none rounded-md border-2 border-gray-400 focus:border-gray-500 placeholder:text-gray-400;
+    @apply text-left font-regular text-sm;
 }
 
 .rotate{
