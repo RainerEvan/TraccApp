@@ -11,6 +11,7 @@ import com.traccapp.demo.model.TicketAttachments;
 import com.traccapp.demo.model.Tickets;
 import com.traccapp.demo.payload.request.SupportRequest;
 import com.traccapp.demo.payload.request.TicketRequest;
+import com.traccapp.demo.payload.response.ResponseHandler;
 import com.traccapp.demo.service.SupportAttachmentService;
 import com.traccapp.demo.service.SupportService;
 import com.traccapp.demo.service.TicketAttachmentService;
@@ -45,78 +46,96 @@ public class TicketSupportController {
     private final SupportAttachmentService supportAttachmentService;
 
     @PostMapping(path = "/add")
-    public ResponseEntity<String> addTicket(@RequestPart(name="files", required = false) MultipartFile[] files, @RequestPart("ticket") TicketRequest ticketRequest){
-        Tickets ticket = ticketService.addTicket(ticketRequest);
+    public ResponseEntity<Object> addTicket(@RequestPart(name="files", required = false) MultipartFile[] files, @RequestPart("ticket") TicketRequest ticketRequest){
+        try{
+            Tickets ticket = ticketService.addTicket(ticketRequest);
 
-        if(files != null){
-            Arrays.asList(files).stream()
-                .map(file -> ticketAttachmentService.addFile(file, ticket))
-                .collect(Collectors.toList());
+            if(files != null){
+                Arrays.asList(files).stream()
+                    .map(file -> ticketAttachmentService.addFile(file, ticket))
+                    .collect(Collectors.toList());
+            }
+
+            return ResponseHandler.generateResponse("Ticket has been added successfully!", HttpStatus.OK, ticket.getTicketNo());
+
+        } catch (Exception e){
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.BAD_REQUEST, null);
         }
-
-        return new ResponseEntity<String>("Ticket has been created successfully: "+ticket.getTicketNo(), HttpStatus.CREATED);
     }
 
     @PutMapping(path = "/close")
-    public ResponseEntity<String> closeTicket(@RequestParam("ticketId") UUID ticketId){
-        updateTicketStatus(ticketId, EStatus.CLOSED);
+    public ResponseEntity<Object> closeTicket(@RequestParam("ticketId") UUID ticketId){
+        String status = updateTicketStatus(ticketId, EStatus.CLOSED);
 
-        return ResponseEntity.status(HttpStatus.OK).body("Ticket has been closed!");
+        return ResponseHandler.generateResponse("Ticket has been closed!", HttpStatus.OK, status);
     }
 
     @PutMapping(path = "/drop")
-    public ResponseEntity<String> dropTicket(@RequestParam("ticketId") UUID ticketId){
-        updateTicketStatus(ticketId, EStatus.DROPPED);
+    public ResponseEntity<Object> dropTicket(@RequestParam("ticketId") UUID ticketId){
+        String status = updateTicketStatus(ticketId, EStatus.DROPPED);
 
-        return ResponseEntity.status(HttpStatus.OK).body("Ticket has been dropped!");
+        return ResponseHandler.generateResponse("Ticket has been dropped!", HttpStatus.OK, status);
     }
 
     @DeleteMapping(path = "/delete")
-    public ResponseEntity<String> cancelTicket(@RequestParam("ticketId") UUID ticketId){
-        Tickets ticket = ticketService.getTicket(ticketId);
+    public ResponseEntity<Object> cancelTicket(@RequestParam("ticketId") UUID ticketId){
+        try {
+            Tickets ticket = ticketService.getTicket(ticketId);
 
-        List<TicketAttachments> files = ticketAttachmentService.getAllFilesForTicket(ticket);
+            List<TicketAttachments> files = ticketAttachmentService.getAllFilesForTicket(ticket);
 
-        for(TicketAttachments file:files){
-            ticketAttachmentService.deleteFile(file.getId());
+            for(TicketAttachments file:files){
+                ticketAttachmentService.deleteFile(file.getId());
+            }
+
+            ticketService.deleteTicket(ticketId);
+            return ResponseHandler.generateResponse("Ticket has been canceled!", HttpStatus.OK, null);
+
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.BAD_REQUEST, null);
         }
-
-        ticketService.deleteTicket(ticketId);
-
-        return ResponseEntity.status(HttpStatus.OK).body("Ticket has been canceled!");
     }
 
     @PostMapping(path = "/supports/add")
-    public ResponseEntity<String> addSupport(@RequestParam("ticketId") UUID ticketId){
-        Supports support = supportService.addSupport(ticketId);
+    public ResponseEntity<Object> addSupport(@RequestParam("ticketId") UUID ticketId){
+        try {
+            Supports support = supportService.addSupport(ticketId);
+            String status = updateTicketStatus(support.getTicket().getTicketId(), EStatus.IN_PROGRESS);
+            return ResponseHandler.generateResponse("Support has been added successfully!", HttpStatus.OK, status);
 
-        updateTicketStatus(support.getTicket().getTicketId(), EStatus.IN_PROGRESS);
-
-        return ResponseEntity.status(HttpStatus.OK).body("Support has been added successfully: "+support.getDateTaken());
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.BAD_REQUEST, null);
+        }
     }
 
     @PostMapping(path = "/supports/reassign")
-    public ResponseEntity<String> reassignSupport(@RequestParam("ticketId") UUID ticketId, @RequestParam("currSupportId") UUID currSupportId, @RequestParam("developerId") UUID developerId){
-        Supports support = supportService.reassignSupport(ticketId, currSupportId, developerId);
-
-        updateTicketStatus(support.getTicket().getTicketId(), EStatus.IN_PROGRESS);
-
-        return ResponseEntity.status(HttpStatus.OK).body("New support has been added successfully: "+support.getDateTaken());
+    public ResponseEntity<Object> reassignSupport(@RequestParam("ticketId") UUID ticketId, @RequestParam("currSupportId") UUID currSupportId, @RequestParam("developerId") UUID developerId){
+        try {
+            Supports support = supportService.reassignSupport(ticketId, currSupportId, developerId);
+            String status = updateTicketStatus(support.getTicket().getTicketId(), EStatus.IN_PROGRESS);
+            return ResponseHandler.generateResponse("New support has been added successfully!", HttpStatus.OK, status);
+    
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.BAD_REQUEST, null);
+        }
     }
 
     @PutMapping(path = "/supports/solve")
-    public ResponseEntity<String> solveSupport(@RequestPart("files") MultipartFile[] files, @RequestPart("support") SupportRequest supportRequest){
-        Supports support = supportService.solveSupport(supportRequest);
+    public ResponseEntity<Object> solveSupport(@RequestPart("files") MultipartFile[] files, @RequestPart("support") SupportRequest supportRequest){
+        try {
+            Supports support = supportService.solveSupport(supportRequest);
 
-        if(files != null){
-            Arrays.asList(files).stream()
-                .map(file -> supportAttachmentService.addFile(file, support))
-                .collect(Collectors.toList());
+            if(files != null){
+                Arrays.asList(files).stream()
+                    .map(file -> supportAttachmentService.addFile(file, support))
+                    .collect(Collectors.toList());
+            }
+
+            String status = updateTicketStatus(support.getTicket().getTicketId(), EStatus.RESOLVED);
+            return ResponseHandler.generateResponse("Support has been updated successfully!", HttpStatus.OK, status);
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.BAD_REQUEST, null);
         }
-
-        updateTicketStatus(support.getTicket().getTicketId(), EStatus.RESOLVED);
-
-        return ResponseEntity.status(HttpStatus.OK).body("Support has been updated succesfully!");
     }
 
     //withdraw Support
@@ -124,10 +143,10 @@ public class TicketSupportController {
     //     return supportService.withdrawSupport(supportId, result, description);
     // }
 
-    public ResponseEntity<String> updateTicketStatus(UUID ticketId, EStatus status){
+    public String updateTicketStatus(UUID ticketId, EStatus status){
         Tickets ticket = ticketService.updateTicketStatus(ticketId, status);
 
-        return ResponseEntity.status(HttpStatus.OK).body("Ticket status has been updated: "+ticket.getStatus().getName());
+        return "Ticket "+ticket.getStatus().getName().toString();
     }
     
 }

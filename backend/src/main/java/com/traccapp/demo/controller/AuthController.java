@@ -2,9 +2,11 @@ package com.traccapp.demo.controller;
 
 import com.traccapp.demo.payload.request.LoginRequest;
 import com.traccapp.demo.payload.response.JwtResponse;
+import com.traccapp.demo.payload.response.ResponseHandler;
 import com.traccapp.demo.service.AuthService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,9 +24,9 @@ public class AuthController {
     public AuthService authService;
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest){
+    public ResponseEntity<Object> login(@RequestBody LoginRequest loginRequest){
         JwtResponse response = authService.loginAccount(loginRequest);
 
-        return ResponseEntity.ok(response);
+        return ResponseHandler.generateResponse("Login Success!", HttpStatus.OK, response);
     }
 }

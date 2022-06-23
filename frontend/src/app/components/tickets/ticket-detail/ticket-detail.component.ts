@@ -46,4 +46,8 @@ export class TicketDetailComponent implements OnInit {
       }
     });
   }
+
+  refresh(){
+    window.location.reload();
+  }
 }

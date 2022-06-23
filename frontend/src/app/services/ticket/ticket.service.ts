@@ -100,12 +100,12 @@ export class TicketService {
   }
 
   public addTicket(formData: FormData): Observable<any>{
-    return this.http.post(API_URL+'/add',formData,{headers: headers, responseType:"text"});
+    return this.http.post(API_URL+'/add',formData,{headers: headers});
   }
 
   public addSupport(ticketId: string): Observable<any>{
-    
-    return this.http.post(API_URL+'/supports/add',{"ticketId":ticketId},{headers: headers, responseType:"text"});
+    const params = new HttpParams().set('ticketId',ticketId);
+    return this.http.post(API_URL+'/supports/add',null,{headers: headers, params:params});
   }
 
 }

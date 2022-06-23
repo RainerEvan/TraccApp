@@ -15,21 +15,11 @@ const routes: Routes = [
   {path:'', component: HomeComponent,
     children:[
       {path:'dashboard', component: DashboardComponent},
-      {path:'tickets', component: TicketListComponent,
-        children:[
-          {path:'ticket-detail/:id', component: TicketDetailComponent}
-        ]
-      },
-      {path:'accounts', component: AccountListComponent,
-        children:[
-          {path:'account-detail/:id', component: AccountDetailComponent}
-        ]
-      },
-      {path:'config', component: ConfigPageComponent,
-        children:[
-          {path:'', component: ConfigPageComponent},
-        ]
-      }
+      {path:'tickets', component: TicketListComponent},
+      {path:'ticket-detail/:id', component: TicketDetailComponent},
+      {path:'accounts', component: AccountListComponent},
+      {path:'account-detail/:id', component: AccountDetailComponent},
+      {path:'config', component: ConfigPageComponent},
     ]
   }
 ];

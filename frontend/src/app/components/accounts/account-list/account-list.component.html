@@ -4,8 +4,7 @@
             Account List
         </h1>
         <div class="bg-white border-2 border-gray-100 shadow-md p-8">
-            <p-table #accountTable [value]="accounts" [loading]="loading" [totalRecords]="totalRecords" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" selectionMode="single" responsiveLayout="scroll" [filterDelay]="0"
-                [globalFilterFields]="['username','email','fullname','roles[0].name','isActive']">
+            <p-table #accountTable [value]="accounts" [loading]="loading" [totalRecords]="totalRecords" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" selectionMode="single" responsiveLayout="scroll" [filterDelay]="0" [globalFilterFields]="['username','email','fullname','roles[0].name','isActive']">
                 <ng-template pTemplate="caption">
                     <div class="px-2 flex items-center place-content-between">
                         <span class="p-input-icon-left">
@@ -35,7 +34,7 @@
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-account let-i="rowIndex">
-                    <tr routerLink="account-detail/{{account.id}}">
+                    <tr routerLink="../account-detail/{{account.id}}">
                         <td>{{i+1}}</td>
                         <td>{{account.username}}</td>
                         <td>{{account.email}}</td>
