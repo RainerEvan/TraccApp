@@ -45,7 +45,7 @@ public class TicketSupportController {
     private final SupportAttachmentService supportAttachmentService;
 
     @PostMapping(path = "/add")
-    public ResponseEntity<?> addTicket(@RequestPart(name="files", required = false) MultipartFile[] files, @RequestPart("ticket") TicketRequest ticketRequest){
+    public ResponseEntity<String> addTicket(@RequestPart(name="files", required = false) MultipartFile[] files, @RequestPart("ticket") TicketRequest ticketRequest){
         Tickets ticket = ticketService.addTicket(ticketRequest);
 
         if(files != null){
@@ -54,7 +54,7 @@ public class TicketSupportController {
                 .collect(Collectors.toList());
         }
 
-        return ResponseEntity.status(HttpStatus.OK).body("Ticket has been created successfully: "+ticket.getTicketNo());
+        return new ResponseEntity<String>("Ticket has been created successfully: "+ticket.getTicketNo(), HttpStatus.CREATED);
     }
 
     @PutMapping(path = "/close")

@@ -1,6 +1,6 @@
 package com.traccapp.demo.model;
 
-import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -55,7 +55,7 @@ public class Tickets {
     @JoinColumn(name="application_id")
     private Applications application;
 
-    private LocalDate dateAdded;
+    private OffsetDateTime dateAdded;
 
     @ManyToOne
     @JoinColumn(name="reporter_id")
@@ -63,7 +63,7 @@ public class Tickets {
 
     private String title;
     private String description;
-    private LocalDate dateClosed;
+    private OffsetDateTime dateClosed;
 
     @ManyToOne
     @JoinColumn(name="status_id")

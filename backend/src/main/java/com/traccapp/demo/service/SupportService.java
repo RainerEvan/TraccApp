@@ -1,6 +1,6 @@
 package com.traccapp.demo.service;
 
-import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -66,7 +66,7 @@ public class SupportService {
 
         Supports support = new Supports();        
         support.setTicket(ticket);
-        support.setDateTaken(LocalDate.now());
+        support.setDateTaken(OffsetDateTime.now());
         support.setDeveloper(authService.getCurrentAccount());
         support.setIsActive(true);
 
@@ -127,7 +127,7 @@ public class SupportService {
 
         Supports newSupport = new Supports();          
         newSupport.setTicket(ticket);
-        newSupport.setDateTaken(LocalDate.now());
+        newSupport.setDateTaken(OffsetDateTime.now());
         newSupport.setDeveloper(developer);
         newSupport.setIsActive(true);
 

@@ -10,11 +10,6 @@ import graphql.schema.GraphQLScalarType;
 public class ScalarConfig {
     
     @Bean
-    public GraphQLScalarType date(){
-        return ExtendedScalars.Date;
-    }
-
-    @Bean
     public GraphQLScalarType dateTime(){
         return ExtendedScalars.DateTime;
     }

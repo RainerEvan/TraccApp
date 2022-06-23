@@ -20,12 +20,11 @@ import { ImageModule } from 'primeng/image';
 import { BadgeModule } from 'primeng/badge';
 import { ChipModule } from 'primeng/chip';
 import { DialogModule } from 'primeng/dialog';
-import { TicketPageComponent } from './components/tickets/ticket-page/ticket-page.component';
 import { AccountListComponent } from './components/accounts/account-list/account-list.component';
 import { AccountDetailComponent } from './components/accounts/account-detail/account-detail.component';
-import { AccountPageComponent } from './components/accounts/account-page/account-page.component';
 import { ConfigPageComponent } from './components/config/config-page/config-page.component';
 import { DropdownModule } from 'primeng/dropdown';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -35,11 +34,10 @@ import { DropdownModule } from 'primeng/dropdown';
     HeaderComponent,
     TicketListComponent,
     TicketDetailComponent,
-    TicketPageComponent,
     AccountListComponent,
     AccountDetailComponent,
-    AccountPageComponent,
-    ConfigPageComponent
+    ConfigPageComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,

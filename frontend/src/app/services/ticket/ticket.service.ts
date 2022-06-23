@@ -1,12 +1,13 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Apollo,gql } from 'apollo-angular';
 import { map, Observable } from 'rxjs';
 import { Ticket } from 'src/app/types/ticket';
+import { environment } from 'src/environments/environment';
 
-const apiServerUrl = 'http://localhost:8080/api/tickets';
+const API_URL = environment.apiUrl+'/tickets';
 const headers = new HttpHeaders({
-  'Authorization': `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYW1hbiIsImlhdCI6MTY1NTg2ODQ5NSwiZXhwIjoxNjU1OTU0ODk1fQ.5DzXJUij-W2HcTFYkLGSdFKdEf2SDl4pVR5XIkUSDUHwTyY8h4plnXyXm-arjW3cxxiodhjbYOaF8N4EhiyzOA`
+  'Authorization': `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYW1hbiIsImlhdCI6MTY1NTk2MDM0NiwiZXhwIjoxNjU2MDQ2NzQ2fQ.YlL_TAtK0ZgcxxdLnoIxDFBAkzA0WdCHyVnv-hCmKI6Q7rVUoKptxYpO1JLbOQRBuiX-T45joGCMKFm_AQbbCA`
 });
 
 @Injectable({
@@ -99,7 +100,12 @@ export class TicketService {
   }
 
   public addTicket(formData: FormData): Observable<any>{
-    return this.http.post<any>(apiServerUrl+'/add',formData,{headers: headers});
+    return this.http.post(API_URL+'/add',formData,{headers: headers, responseType:"text"});
+  }
+
+  public addSupport(ticketId: string): Observable<any>{
+    
+    return this.http.post(API_URL+'/supports/add',{"ticketId":ticketId},{headers: headers, responseType:"text"});
   }
 
 }

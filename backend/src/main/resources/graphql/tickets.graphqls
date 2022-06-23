@@ -2,11 +2,11 @@ type Tickets{
     ticketId:ID
     ticketNo:String
     application:Applications
-    dateAdded:Date
+    dateAdded:DateTime
     reporter:Accounts
     title:String
     description:String
-    dateClosed:Date
+    dateClosed:DateTime
     status:Status
     support:[Supports]
     attachments:[TicketAttachments]

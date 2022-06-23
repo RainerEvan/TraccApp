@@ -1,6 +1,6 @@
 package com.traccapp.demo.service;
 
-import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -65,7 +65,7 @@ public class TicketService {
         ticket.setTitle(ticketRequest.getTitle());
         ticket.setDescription(ticketRequest.getDescription());
         ticket.setReporter(authService.getCurrentAccount());
-        ticket.setDateAdded(LocalDate.now());
+        ticket.setDateAdded(OffsetDateTime.now());
 
         Status status = statusRepository.findByName(EStatus.PENDING)
             .orElseThrow(() -> new IllegalStateException("Status with current name cannot be found: "+EStatus.PENDING));
@@ -84,7 +84,7 @@ public class TicketService {
         ticket.setStatus(status);
 
         if(statusName.equals(EStatus.CLOSED) || statusName.equals(EStatus.DROPPED)){
-            ticket.setDateClosed(LocalDate.now());
+            ticket.setDateClosed(OffsetDateTime.now());
         }
 
         return ticketRepository.save(ticket);

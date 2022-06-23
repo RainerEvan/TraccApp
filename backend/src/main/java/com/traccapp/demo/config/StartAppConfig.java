@@ -1,6 +1,6 @@
 package com.traccapp.demo.config;
 
-import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import java.util.Set;
 
 import com.traccapp.demo.data.ERoles;
@@ -113,7 +113,7 @@ public class StartAppConfig {
             // }
 
             Tickets ticket = new Tickets();
-            ticket.setDateAdded(LocalDate.now());
+            ticket.setDateAdded(OffsetDateTime.now());
             ticket.setApplication(application);
             ticket.setReporter(account);
             ticket.setTitle("Aplikasi CAMS error");
@@ -122,7 +122,7 @@ public class StartAppConfig {
             ticketRepository.save(ticket);
 
             Tickets ticket2 = new Tickets();
-            ticket2.setDateAdded(LocalDate.now());
+            ticket2.setDateAdded(OffsetDateTime.now());
             ticket2.setApplication(application);
             ticket2.setReporter(account);
             ticket2.setTitle("Aplikasi CAMS error");
@@ -131,7 +131,7 @@ public class StartAppConfig {
             ticketRepository.save(ticket2);
 
             Tickets ticket3 = new Tickets();
-            ticket3.setDateAdded(LocalDate.now());
+            ticket3.setDateAdded(OffsetDateTime.now());
             ticket3.setApplication(application);
             ticket3.setReporter(account);
             ticket3.setTitle("Aplikasi CAMS error");
@@ -141,14 +141,14 @@ public class StartAppConfig {
 
             Supports support = new Supports();
             support.setTicket(ticket2);
-            support.setDateTaken(LocalDate.now());
+            support.setDateTaken(OffsetDateTime.now());
             support.setDeveloper(account2);
             support.setIsActive(true);
             supportRepository.save(support);
 
             Supports support2 = new Supports();
             support2.setTicket(ticket3);
-            support2.setDateTaken(LocalDate.now());
+            support2.setDateTaken(OffsetDateTime.now());
             support2.setDeveloper(account2);
             support2.setResult("Form sudah dibenerin");
             support2.setDescription("Formnya udah bisa dipake coba lagi bisa ga");

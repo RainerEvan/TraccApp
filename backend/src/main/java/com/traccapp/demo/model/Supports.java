@@ -1,6 +1,6 @@
 package com.traccapp.demo.model;
 
-import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -44,7 +44,7 @@ public class Supports {
     })
     private Tickets ticket;
 
-    private LocalDate dateTaken;
+    private OffsetDateTime dateTaken;
 
     @ManyToOne
     @JoinColumn(name="developer_id")

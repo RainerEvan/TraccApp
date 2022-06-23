@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { cloneDeep } from '@apollo/client/utilities';
 import { Table } from 'primeng/table';
 import { ApplicationService } from 'src/app/services/application/application.service';
 import { TicketService } from 'src/app/services/ticket/ticket.service';
@@ -37,7 +38,7 @@ export class TicketListComponent implements OnInit {
 
     this.ticketService.getAllTickets().subscribe({
       next: (tickets: Ticket[]) => {
-        this.tickets = tickets;
+        this.tickets = cloneDeep(tickets);
         this.loading = false;
         this.totalRecords = tickets.length;
       },

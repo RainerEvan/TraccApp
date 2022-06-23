@@ -7,11 +7,11 @@
 }
 
 .ticket-status-PENDING{
-    @apply px-6 py-0.5 w-24 bg-gray-300 font-medium text-xs text-center rounded-md !important;
+    @apply px-6 py-0.5 w-24 bg-gray-200 font-medium text-xs text-center rounded-md !important;
 }
 
 .ticket-status-IN_PROGRESS{
-    @apply px-6 py-0.5 w-24 bg-gray-400 font-medium text-xs text-center rounded-md !important;
+    @apply px-6 py-0.5 w-24 bg-gray-300 font-medium text-xs text-center rounded-md !important;
 }
 
 .ticket-status-RESOLVED{
