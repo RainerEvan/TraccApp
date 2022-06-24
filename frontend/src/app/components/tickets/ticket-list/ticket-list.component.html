@@ -78,13 +78,11 @@
                 <div class="flex flex-row items-start space-x-8">
                     <label for="application" class="w-1/4 form-field">Application</label>
                     <div class="w-3/4">
-                        <select class="form-value" formControlName="applicationId">
+                        <p-dropdown class="ng-invalid ng-dirty" [options]="applications" optionLabel="name" optionValue="id" placeholder="Choose application" formControlName="applicationId"></p-dropdown>
+                        <!-- <select class="form-value" formControlName="applicationId">
                             <option value="null" disabled>Select application</option>
                             <option *ngFor="let application of applications" [ngValue]="application.id">{{application.name}}</option>
-                        </select>
-                        <div *ngIf="applicationId.invalid && (applicationId.dirty || applicationId.touched)" class="font-regular text-sm text-red-400 pt-1">
-                            *Please select application
-                        </div>
+                        </select> -->
                     </div>
                 </div>
                 <div class="flex flex-row items-start space-x-8">
