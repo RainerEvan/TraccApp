@@ -1,12 +1,12 @@
-import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild, ɵɵsetComponentScope } from '@angular/core';
 import { cloneDeep } from '@apollo/client/utilities';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Table } from 'primeng/table';
-import { ApplicationService } from 'src/app/services/application/application.service';
+import { Subscription } from 'rxjs';
 import { TicketService } from 'src/app/services/ticket/ticket.service';
-import { Application } from 'src/app/types/application';
 import { Ticket } from 'src/app/types/ticket';
+import { ResultDialogComponent } from '../../modal/result-dialog/result-dialog.component';
+import { AddTicketComponent } from '../add-ticket/add-ticket.component';
 
 @Component({
   selector: 'app-ticket-list',
@@ -18,111 +18,73 @@ export class TicketListComponent implements OnInit {
   tickets: Ticket[];
   loading: boolean;
   totalRecords: number;
-  displayAddTicketModal: boolean = false;
-  displayAddTicketStatus: boolean = false;
-  ticketForm: FormGroup;
-  isTicketFormSubmitted: boolean = false;
-  applications: Application[];
-  ticketAttachments: File[]=[];
+  ref: DynamicDialogRef;
+  querySubscription: Subscription;
   @ViewChild('ticketTable') ticketTable: Table | undefined;
 
-  constructor(private formBuilder: FormBuilder, private ticketService: TicketService, private applicationService: ApplicationService) { }
+  constructor(public dialogService:DialogService, private ticketService: TicketService) { }
 
   ngOnInit() {
     this.getAllTickets();
-    this.generateTicketForm();
+  }
+
+  ngOnDestroy(): void {
+    if(this.ref){
+      this.ref.close();
+    }
   }
 
   public getAllTickets(): void{
+    console.log('triggered')
     this.loading = true;
 
-    this.ticketService.getAllTickets().subscribe({
+    this.querySubscription = this.ticketService.getAllTickets().subscribe({
       next: (tickets: Ticket[]) => {
         this.tickets = cloneDeep(tickets);
         this.loading = false;
         this.totalRecords = tickets.length;
       },
-      error: (err: HttpErrorResponse) => {
-        alert(err.message);
+      error: (error: any) => {
+        console.log(error);
       }
     });
-  }
-
-  public getAllApplications(): void{
-    this.applicationService.getAllApplications().subscribe({
-      next: (applications: Application[]) => {
-        this.applications = applications;
-      },
-      error: (err: HttpErrorResponse) => {
-        alert(err.message);
-      }
-    });
-  }
-
-  public addTicket(): void{
-    if(this.ticketForm.valid){
-      const formData = new FormData();
-      const ticket = this.ticketForm.value;
-
-      for(var i=0;i<this.ticketAttachments.length;i++){
-        formData.append('files',this.ticketAttachments[i]);
-      }
-      formData.append('ticket', new Blob([JSON.stringify(ticket)], {type:"application/json"}));
-      
-      this.ticketService.addTicket(formData).subscribe({
-        next: (result: any) => {
-          console.log(result);
-          this.isTicketFormSubmitted = true;
-          this.displayAddTicketModal = false;
-        },
-        error: (error: any) => {
-          console.log(error);
-          this.isTicketFormSubmitted = false;
-        }
-      });
-      this.displayAddTicketStatus = true;
-    } else{
-      return;
-    }
-    
   }
 
   applyFilterGlobal($event:any, stringVal:any) {
     this.ticketTable.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
   }
 
-  generateTicketForm(){
-    this.ticketForm = this.formBuilder.group({
-      applicationId: [null, [Validators.required]],
-      title: [null, [Validators.required]],
-      description: [null, [Validators.required]],
+  showAddTicketDialog(){
+    this.ref = this.dialogService.open(AddTicketComponent, {
+      header: "Add Ticket",
+      baseZIndex: 10000,
+      contentStyle: {"max-height": "500px", "overflow": "auto"},
+      width:'50vw',
     });
-    this.getAllApplications();
+
+    this.ref.onClose.subscribe((success:boolean) =>{
+      if (success) {
+        this.showResultDialog("Success","Ticket has been added successfully");
+        this.getAllTickets();
+      } else{
+        this.showResultDialog("Failed","There was a problem, try again later");
+        this.getAllTickets();
+      }
+    });
   }
 
-  get applicationId(){
-    return this.ticketForm.get('applicationId');
+  showResultDialog(title:string, message:string){
+    this.ref = this.dialogService.open(ResultDialogComponent, {
+      header: title,
+      data: {
+        message: message,
+      },
+      baseZIndex: 10000,
+      contentStyle: {"max-height": "500px", "overflow": "auto"},
+      width:'30vw'
+    });
   }
-
-  get title(){
-    return this.ticketForm.get('title');
-  }
-
-  get description(){
-    return this.ticketForm.get('description');
-  }
-
-  onSelectFile(event:any){
-    for  (var i =  0; i <  event.target.files.length; i++)  {  
-      this.ticketAttachments.push(event.target.files[i]);
-    }
-  }
-
-  resetForm(form: FormGroup){
-    form.reset();
-    this.ticketAttachments = [];
-  }
-
+  
   refresh(){
     window.location.reload();
   }

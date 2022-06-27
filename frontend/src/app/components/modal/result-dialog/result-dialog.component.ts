@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 @Component({
   selector: 'app-result-dialog',
@@ -7,17 +8,16 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class ResultDialogComponent implements OnInit {
 
-  @Input() display:boolean;
-  @Input() success:boolean;
-  @Input() message:string;
+  message:string;
 
-  constructor() { }
+  constructor(public ref: DynamicDialogRef, public config: DynamicDialogConfig) { }
 
   ngOnInit(): void {
+    this.message=this.config.data.message;
   }
 
-  close(){
-    this.display=false;
+  confirmAction(){
+    this.ref.close();
   }
 
 }

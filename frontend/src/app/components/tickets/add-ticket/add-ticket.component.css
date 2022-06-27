@@ -1,0 +1,7 @@
+.form-field{
+    @apply text-right font-semibold text-sm py-2;
+}
+
+.form-value{
+    @apply text-left font-regular text-sm;
+}

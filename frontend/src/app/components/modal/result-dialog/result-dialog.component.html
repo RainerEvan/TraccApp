@@ -1,12 +1,6 @@
-<p-dialog [(visible)]="display" [modal]="true" [breakpoints]="{'1280px': '40vw','1024px': '50vw', '768px': '60vw', '640px': '70vw'}" [style]="{width: '30vw'}" [draggable]="false" [resizable]="false">
-    <ng-template pTemplate="header">
-        <span *ngIf="success" class="font-semibold text-2xl">Success</span>
-        <span *ngIf="!success" class="font-semibold text-2xl">Failed</span>
-    </ng-template>
-    <ng-template pTemplate="content">
-        <span class="font-medium text-base">{{message}}</span>
-    </ng-template>
-    <ng-template pTemplate="footer">
-        <button (click)="close()" class="w-24 bg-gray-600 border-2 border-gray-600 rounded-md px-8 py-1.5 font-medium text-xs text-white hover:bg-gray-800 hover:border-gray-800">OK</button>
-    </ng-template>
-</p-dialog>
+<div class="mb-6">
+    <span class="font-medium text-base">{{message}}</span>
+</div>
+<div class="flex flex-row justify-end px-4 space-x-2">
+    <button (click)="confirmAction()" class="w-24 bg-gray-600 border-2 border-gray-600 rounded-md px-8 py-1.5 font-medium text-xs text-white hover:bg-gray-800 hover:border-gray-800">OK</button>
+</div>

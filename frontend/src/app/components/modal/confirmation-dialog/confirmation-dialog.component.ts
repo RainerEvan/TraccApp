@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 @Component({
   selector: 'app-confirmation-dialog',
@@ -7,24 +8,22 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class ConfirmationDialogComponent implements OnInit {
 
-  @Input() display:boolean;
-  @Input() title:string;
-  @Input() message:string;
-  @Output() confirm = new EventEmitter();
-  displayResultDialog
+  confirm:boolean;
+  message:string;
 
-  constructor() { }
+  constructor(public ref: DynamicDialogRef, public config: DynamicDialogConfig) { }
 
   ngOnInit(): void {
+    this.message=this.config.data.message;
   }
 
   confirmAction(){
-    this.close();
-    this.confirm.emit();
+    this.confirm=true;
+    this.ref.close(this.confirm);
   }
 
-  close(){
-    this.display= false;
+  cancelAction(){
+    this.confirm=false;
+    this.ref.close(this.confirm);
   }
-
 }
