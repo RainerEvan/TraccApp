@@ -5,8 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TableModule } from 'primeng/table';
-import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -15,20 +13,19 @@ import { HttpLink } from 'apollo-angular/http';
 import { InMemoryCache } from '@apollo/client/core';
 import { TicketListComponent } from './components/tickets/ticket-list/ticket-list.component';
 import { TicketDetailComponent } from './components/tickets/ticket-detail/ticket-detail.component';
-import { ButtonModule } from 'primeng/button';
-import { ImageModule } from 'primeng/image';
-import { BadgeModule } from 'primeng/badge';
-import { ChipModule } from 'primeng/chip';
-import { DialogModule } from 'primeng/dialog';
-import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { AccountListComponent } from './components/accounts/account-list/account-list.component';
 import { AccountDetailComponent } from './components/accounts/account-detail/account-detail.component';
 import { ConfigPageComponent } from './components/config/config-page/config-page.component';
-import { DropdownModule } from 'primeng/dropdown';
 import { HomeComponent } from './components/home/home.component';
 import { ConfirmationDialogComponent } from './components/modal/confirmation-dialog/confirmation-dialog.component';
 import { ResultDialogComponent } from './components/modal/result-dialog/result-dialog.component';
 import { AddTicketComponent } from './components/tickets/add-ticket/add-ticket.component';
+import { InputTextModule } from 'primeng/inputtext';
+import { DropdownModule } from 'primeng/dropdown';
+import { FileUploadModule } from 'primeng/fileupload';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { TableModule } from 'primeng/table';
+import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 
 @NgModule({
   declarations: [
@@ -54,14 +51,11 @@ import { AddTicketComponent } from './components/tickets/add-ticket/add-ticket.c
     FormsModule,
     ReactiveFormsModule,
     TableModule,
-    ButtonModule,
-    ChipModule,
-    DialogModule,
     DynamicDialogModule,
+    InputTextModule,
     DropdownModule,
+    FileUploadModule,
     OverlayPanelModule,
-    ImageModule,
-    BadgeModule,
     ApolloModule
   ],
   providers: [

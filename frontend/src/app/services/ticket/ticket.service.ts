@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
 
 const API_URL = environment.apiUrl+'/tickets';
 const headers = new HttpHeaders({
-  'Authorization': `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYW1hbiIsImlhdCI6MTY1NjI5NDk3MSwiZXhwIjoxNjU2MzgxMzcxfQ.LSZmIFbCjmIzpFaETMrIngCRu159HeiYMaVlrr00aTgc5TTREJJvIVUy5DMwfX7VN1rQBfpWVtgFDXUsjIApGg`
+  'Authorization': `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYW1hbiIsImlhdCI6MTY1NjM4MjgyMiwiZXhwIjoxNjU2NDY5MjIyfQ.iJX0OVBYJAIHpJqoEii7BtaqNe0I8t-DM9AJ9Z87SlZZM6SmPIj9Ong9iCFaJiDyTyT3TcYWiBhJcMFr7UcDvQ`
 });
 
 @Injectable({

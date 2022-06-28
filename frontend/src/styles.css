@@ -5,26 +5,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base{
-    [type='text'],
-    [type='email'],
-    [type='url'],
-    [type='password'],
-    [type='number'],
-    [type='date'],
-    [type='datetime-local'],
-    [type='month'],
-    [type='search'],
-    [type='tel'],
-    [type='time'],
-    [type='week'],
-    [multiple],
-    textarea,
-    select{
-        @apply w-full outline-none ring-0 rounded-md border-2 border-gray-400 focus:border-gray-500 focus:ring-0 placeholder:text-gray-400;
-    }
-}
-
 body{
     font-family: "Montserrat", sans-serif;
     background: rgb(233,233,233);
@@ -32,5 +12,5 @@ body{
 }
 
 body .p-component{
-    font-family: "Montserrat", sans-serif;
+    font-family: "Montserrat", sans-serif !important;
 }

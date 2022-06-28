@@ -19,7 +19,6 @@ export class TicketListComponent implements OnInit {
   loading: boolean;
   totalRecords: number;
   ref: DynamicDialogRef;
-  querySubscription: Subscription;
   @ViewChild('ticketTable') ticketTable: Table | undefined;
 
   constructor(public dialogService:DialogService, private ticketService: TicketService) { }
@@ -35,10 +34,9 @@ export class TicketListComponent implements OnInit {
   }
 
   public getAllTickets(): void{
-    console.log('triggered')
     this.loading = true;
 
-    this.querySubscription = this.ticketService.getAllTickets().subscribe({
+    this.ticketService.getAllTickets().subscribe({
       next: (tickets: Ticket[]) => {
         this.tickets = cloneDeep(tickets);
         this.loading = false;
@@ -57,35 +55,17 @@ export class TicketListComponent implements OnInit {
   showAddTicketDialog(){
     this.ref = this.dialogService.open(AddTicketComponent, {
       header: "Add Ticket",
+      footer: " ",
       baseZIndex: 10000,
       contentStyle: {"max-height": "500px", "overflow": "auto"},
-      width:'50vw',
+      width:'40vw',
     });
 
     this.ref.onClose.subscribe((success:boolean) =>{
       if (success) {
-        this.showResultDialog("Success","Ticket has been added successfully");
         this.getAllTickets();
-      } else{
-        this.showResultDialog("Failed","There was a problem, try again later");
-        this.getAllTickets();
-      }
-    });
-  }
-
-  showResultDialog(title:string, message:string){
-    this.ref = this.dialogService.open(ResultDialogComponent, {
-      header: title,
-      data: {
-        message: message,
-      },
-      baseZIndex: 10000,
-      contentStyle: {"max-height": "500px", "overflow": "auto"},
-      width:'30vw'
+      } 
     });
   }
   
-  refresh(){
-    window.location.reload();
-  }
 }

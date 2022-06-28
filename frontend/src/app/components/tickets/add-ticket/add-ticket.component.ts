@@ -82,8 +82,13 @@ export class AddTicketComponent implements OnInit {
 
   onSelectFile(event:any){
     for  (var i =  0; i <  event.target.files.length; i++)  {  
+      console.log(event.target.files[i])
       this.ticketAttachments.push(event.target.files[i]);
     }
+  }
+
+  removeFile(index:any){
+    this.ticketAttachments.splice(index,1);
   }
 
   resetForm(form: FormGroup){

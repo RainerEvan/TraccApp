@@ -1,7 +1,15 @@
-.form-field{
-    @apply text-right font-semibold text-sm py-2;
+.form-label{
+    @apply font-medium !important;
 }
 
-.form-value{
-    @apply text-left font-regular text-sm;
+.form-field{
+    @apply w-full ring-0 border-2 border-gray-300 text-base placeholder:text-gray-500 hover:border-gray-400 focus:border-gray-400 !important;
+}
+
+:host ::ng-deep .p-dropdown {
+    @apply w-full ring-0 border-2 border-gray-300 hover:border-gray-400 font-montserrat !important;
+}
+
+:host ::ng-deep .p-dropdown-label {
+    @apply p-3 font-montserrat !important;
 }

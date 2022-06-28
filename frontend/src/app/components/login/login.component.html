@@ -1,28 +1,21 @@
-<div class="max-w-md mx-auto mt-24 mb-12 p-2 flex">
-    <img src="assets/image/logo.png" alt="Tracc App Logo" class="ml-14 mr-4 h-10">
+<div class="mx-auto mt-36 max-w-md flex flex-row space-x-3 items-center justify-center py-10">
+    <img src="assets/image/logo.png" alt="Tracc App Logo" class="h-10">
     <h1 class="text-center font-medium text-4xl italic tracking-widest">TRACC APP</h1>
 </div>
 
-<div class="bg-white max-w-md mx-auto px-12 py-8 my-10 drop-shadow-md">
-
-    <div class="mx-auto mb-6">
-        <h3 class="font-semibold text-xl text-center">LOGIN</h3>
-    </div>
-
-    <div>
-        <form class="flex flex-col" method="post" action="#">
-            <div class="mb-4">
-                <label for="username" class="font-medium text-sm">Username</label>
-                <input type="text" name="username" placeholder="Enter your username" class="w-full mt-1 px-3 py-2 outline-none border-2 border-gray-300 focus:border-gray-500 text-sm">
-            </div>
-            <div class="mb-4">
-                <label for="password" class="font-medium text-sm">Password</label>
-                <input type="password" name="password" placeholder="Enter your password" class="w-full mt-1 px-3 py-2 outline-none border-2 border-gray-300 focus:border-gray-500 text-sm">
-                <p></p>
-            </div>
-            <div class="mt-6 mx-auto">
-                <button type="submit" class="px-6 py-1.5 bg-gray-800 rounded hover:bg-gray-600 text-white text-sm">Login</button>
-            </div>
-        </form>
-    </div>
+<div class="bg-white rounded-md mx-auto max-w-md px-12 py-8 drop-shadow-lg flex flex-col space-y-4">
+    <h3 class="font-semibold text-xl text-center">LOGIN</h3>
+    <form [formGroup]="loginForm" (ngSubmit)="login()" class="flex flex-col space-y-4">
+        <div class="flex flex-col space-y-2">
+            <label for="username" class="font-medium text-sm">Username</label>
+            <input pInputText type="text" placeholder="Enter your username" class="p-inputtext-sm form-field" formControlName="username" required>
+        </div>
+        <div class="flex flex-col space-y-2">
+            <label for="password" class="font-medium text-sm">Password</label>
+            <input pInputText type="password" placeholder="Enter your password" class="p-inputtext-sm form-field" formControlName="password" required>
+        </div>
+        <div class="flex items-center justify-center pt-4">
+            <button type="submit" class="px-6 py-1.5 bg-gray-800 rounded hover:bg-gray-600 text-white text-sm">Login</button>
+        </div>
+    </form>
 </div>

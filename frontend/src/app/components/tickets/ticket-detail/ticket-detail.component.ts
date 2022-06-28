@@ -84,8 +84,4 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       width:'30vw'
     });
   }
-
-  refresh(){
-    window.location.reload();
-  }
 }
