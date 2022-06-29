@@ -13,3 +13,19 @@
 :host ::ng-deep .p-dropdown-label {
     @apply p-3 font-montserrat !important;
 }
+
+:host ::ng-deep .p-editor-container {
+    @apply w-full ring-0 rounded-md border-2 border-gray-300 hover:border-gray-400 !important;
+}
+
+:host ::ng-deep .p-editor-toolbar {
+    @apply w-full ring-0 border-none font-montserrat !important;
+}
+
+:host ::ng-deep .p-editor-content {
+    @apply w-full ring-0 border-none font-montserrat !important;
+}
+
+.drag-area{
+    @apply w-full h-48 border-dashed text-sm text-gray-400 rounded-md border-2 border-gray-400 flex justify-center items-center bg-gray-100/60;
+}

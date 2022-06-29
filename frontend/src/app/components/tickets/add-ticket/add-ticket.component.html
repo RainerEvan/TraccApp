@@ -1,7 +1,7 @@
 <form [formGroup]="ticketForm" (ngSubmit)="addTicket()" class="flex flex-col space-y-6 py-4 text-black">
     <div class="w-full">
         <label for="application" class="form-label">Application*</label>
-        <p-dropdown class="" [options]="applications" optionLabel="name" optionValue="id" [showClear]="true" placeholder="Select application" formControlName="applicationId"></p-dropdown>
+        <p-dropdown [options]="applications" optionLabel="name" optionValue="id" [showClear]="true" placeholder="Select application" formControlName="applicationId"></p-dropdown>
         <div *ngIf="applicationId.invalid && applicationId.touched" class="font-regular text-sm text-red-400 pt-1">
             Please select application
         </div>
@@ -15,28 +15,41 @@
     </div>
     <div class="w-full">
         <label for="description" class="form-label">Description*</label>
-        <input type="text" pInputText placeholder="Enter description" class="form-field" formControlName="description">
+        <!-- <textarea pInputTextarea autoResize="autoResize" placeholder="Enter description" class="form-field" formControlName="description"></textarea> -->
+        <p-editor [style]="{'height':'10rem'}" placeholder="Enter description" formControlName="description"></p-editor>
         <div *ngIf="description.invalid && (description.dirty || description.touched)" class="font-regular text-sm text-red-400 pt-1">
             Please enter description
         </div>
     </div>
     <div class="w-full">
         <label for="attachments" class="form-label">Attachments</label>
-        <button type="button" (click)="fileInput.click()" class="w-full h-40 border-dashed text-sm text-gray-400 rounded-md border-2 border-gray-300 flex justify-center items-center hover:border-gray-400 hover:text-gray-500 hover:bg-gray-100/60">
+        <div draggable="true" [ngClass]="fileDropArea" (click)="fileInput.click()" class="w-full h-48 border-dashed text-sm text-gray-400/70 rounded-md border-2 border-gray-300 flex justify-center items-center hover:border-gray-400 hover:text-gray-400 hover:bg-gray-100/60 cursor-pointer">
             <div class="flex flex-col items-center space-y-1"> 
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
                 </svg>
-                <span class="font-medium">Browse files</span>
+                <div class="flex flex-col items-center justify-center">
+                    <span class="font-medium">Drop files to upload</span>
+                    <span class="font-medium">or</span>
+                    <span class="font-medium">Select files</span>
+                </div>
             </div>
-            <input #fileInput multiple type="file" class="hidden" (change)="onSelectFile($event)"/>
-        </button>
-        <span class="text-sm">{{ticketAttachments.length}} file(s) chosen</span>
+            <input #fileInput accept="image/*,text/*,application/pdf,application/msword" multiple type="file" class="hidden" (change)="onSelectFile($event)"/>
+        </div>
+        <span class="text-sm">{{ticketAttachments.length}} file(s) selected</span>
         <div *ngIf="ticketAttachments.length > 0" class="flex flex-col space-y-1 py-4">
             <div *ngFor="let file of ticketAttachments;let index = index" class="flex flex-row items-center justify-between rounded-md bg-gray-100 px-3 py-2">
-                <span>{{file.name}}</span>
+                <div class="flex flex-row items-center space-x-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 stroke-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                    </svg>
+                    <div class="flex flex-col py-1 justify-center">
+                        <span class="font-medium text-sm">{{file.name}}</span>
+                        <span class="text-xs">{{file.size/1024 | number:'1.0-0'}} KB</span>
+                    </div>
+                </div>
                 <button (click)="removeFile(index)" class="p-2 rounded-full hover:bg-gray-200">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                       </svg>
                 </button>

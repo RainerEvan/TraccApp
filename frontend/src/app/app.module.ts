@@ -21,10 +21,12 @@ import { ConfirmationDialogComponent } from './components/modal/confirmation-dia
 import { ResultDialogComponent } from './components/modal/result-dialog/result-dialog.component';
 import { AddTicketComponent } from './components/tickets/add-ticket/add-ticket.component';
 import { InputTextModule } from 'primeng/inputtext';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 import { DropdownModule } from 'primeng/dropdown';
 import { FileUploadModule } from 'primeng/fileupload';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { TableModule } from 'primeng/table';
+import { EditorModule } from 'primeng/editor';
 import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 
 @NgModule({
@@ -53,10 +55,12 @@ import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
     TableModule,
     DynamicDialogModule,
     InputTextModule,
+    InputTextareaModule,
     DropdownModule,
     FileUploadModule,
     OverlayPanelModule,
-    ApolloModule
+    ApolloModule,
+    EditorModule,
   ],
   providers: [
     {
