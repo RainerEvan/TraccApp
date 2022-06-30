@@ -22,12 +22,14 @@ import { ResultDialogComponent } from './components/modal/result-dialog/result-d
 import { AddTicketComponent } from './components/tickets/add-ticket/add-ticket.component';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import { AutoCompleteModule } from 'primeng/autocomplete';
 import { DropdownModule } from 'primeng/dropdown';
 import { FileUploadModule } from 'primeng/fileupload';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { TableModule } from 'primeng/table';
 import { EditorModule } from 'primeng/editor';
 import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
+import { SolveTicketComponent } from './components/tickets/solve-ticket/solve-ticket.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,7 @@ import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
     ConfirmationDialogComponent,
     ResultDialogComponent,
     AddTicketComponent,
+    SolveTicketComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,6 +57,7 @@ import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
     ReactiveFormsModule,
     TableModule,
     DynamicDialogModule,
+    AutoCompleteModule,
     InputTextModule,
     InputTextareaModule,
     DropdownModule,

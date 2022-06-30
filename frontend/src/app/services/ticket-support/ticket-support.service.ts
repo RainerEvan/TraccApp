@@ -6,7 +6,7 @@ import { Ticket } from 'src/app/types/ticket';
 import { environment } from 'src/environments/environment';
 
 const API_URL = environment.apiUrl+'/tickets';
-const token = `eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYW1hbiIsImlhdCI6MTY1NjQ3MjE5MiwiZXhwIjoxNjU2NTU4NTkyfQ.lUcbQtAU7_hlC9AWfBOs7ljTPnnKC4xLdd_YqlNMnkpDfGNZoJI_07dKYbLsKrAFDvpByrroLuyqzGKOsuIkLg`;
+const token = `eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYW1hbiIsImlhdCI6MTY1NjU4MDc2NywiZXhwIjoxNjU2NjY3MTY3fQ.GkN2Lx7yr1r5mmcTsGHY-g9mLxw6sJtGwnFAfVaug-kT8E-Qvrg-f_LRbGVj5mN6AJFD8ICkhDJGM-3BjFUdNg`;
 const headers = new HttpHeaders({
   'Authorization': `Bearer `+token
 });
@@ -14,7 +14,7 @@ const headers = new HttpHeaders({
 @Injectable({
   providedIn: 'root'
 })
-export class TicketService {
+export class TicketSupportService {
 
   constructor(private apollo: Apollo, private http: HttpClient) { }
 
@@ -70,6 +70,7 @@ export class TicketService {
               name
             }
             support{
+              id
               dateTaken
               developer{
                 fullname
@@ -107,6 +108,10 @@ export class TicketService {
   public addSupport(ticketId: string): Observable<any>{
     const params = new HttpParams().set('ticketId',ticketId);
     return this.http.post(API_URL+'/supports/add',null,{headers: headers, params:params});
+  }
+
+  public solveSupport(formData: FormData): Observable<any>{
+    return this.http.post(API_URL+'/supports/solve',formData,{headers: headers});
   }
 
 }

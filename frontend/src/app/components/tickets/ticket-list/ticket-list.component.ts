@@ -2,10 +2,8 @@ import { Component, OnInit, ViewChild, ɵɵsetComponentScope } from '@angular/co
 import { cloneDeep } from '@apollo/client/utilities';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Table } from 'primeng/table';
-import { Subscription } from 'rxjs';
-import { TicketService } from 'src/app/services/ticket/ticket.service';
+import { TicketSupportService } from 'src/app/services/ticket-support/ticket-support.service';
 import { Ticket } from 'src/app/types/ticket';
-import { ResultDialogComponent } from '../../modal/result-dialog/result-dialog.component';
 import { AddTicketComponent } from '../add-ticket/add-ticket.component';
 
 @Component({
@@ -21,7 +19,7 @@ export class TicketListComponent implements OnInit {
   ref: DynamicDialogRef;
   @ViewChild('ticketTable') ticketTable: Table | undefined;
 
-  constructor(public dialogService:DialogService, private ticketService: TicketService) { }
+  constructor(public dialogService:DialogService, private ticketSupportService: TicketSupportService) { }
 
   ngOnInit() {
     this.getAllTickets();
@@ -36,7 +34,7 @@ export class TicketListComponent implements OnInit {
   public getAllTickets(): void{
     this.loading = true;
 
-    this.ticketService.getAllTickets().subscribe({
+    this.ticketSupportService.getAllTickets().subscribe({
       next: (tickets: Ticket[]) => {
         this.tickets = cloneDeep(tickets);
         this.loading = false;

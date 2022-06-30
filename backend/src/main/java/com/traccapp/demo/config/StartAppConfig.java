@@ -11,6 +11,7 @@ import com.traccapp.demo.model.Divisions;
 import com.traccapp.demo.model.Roles;
 import com.traccapp.demo.model.Status;
 import com.traccapp.demo.model.Supports;
+import com.traccapp.demo.model.Tags;
 import com.traccapp.demo.model.Tickets;
 import com.traccapp.demo.payload.request.AccountRequest;
 import com.traccapp.demo.repository.RoleRepository;
@@ -20,6 +21,7 @@ import com.traccapp.demo.repository.TicketRepository;
 import com.traccapp.demo.service.AccountService;
 import com.traccapp.demo.service.ApplicationService;
 import com.traccapp.demo.service.DivisionService;
+import com.traccapp.demo.service.TagsService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -31,7 +33,7 @@ import org.springframework.context.annotation.Configuration;
 @Slf4j
 public class StartAppConfig {
     @Bean
-    CommandLineRunner commandLineRunner(AccountService accountService, ApplicationService applicationService, DivisionService divisionService, RoleRepository roleRepository, StatusRepository statusRepository, TicketRepository ticketRepository, SupportRepository supportRepository){
+    CommandLineRunner commandLineRunner(TagsService tagsService, AccountService accountService, ApplicationService applicationService, DivisionService divisionService, RoleRepository roleRepository, StatusRepository statusRepository, TicketRepository ticketRepository, SupportRepository supportRepository){
         return args -> {
 
             Roles role1 = new Roles();
@@ -69,6 +71,9 @@ public class StartAppConfig {
             Status status5 = new Status();
             status5.setName(EStatus.DROPPED);
             statusRepository.save(status5);
+
+            Tags tag = tagsService.addTag("Error");
+            Tags tag2 = tagsService.addTag("Bug");
 
             Applications application = applicationService.addApplication("CAMS");
             Applications application2 = applicationService.addApplication("SMILE");

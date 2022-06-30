@@ -120,10 +120,10 @@ public class TicketSupportController {
         }
     }
 
-    @PutMapping(path = "/supports/solve")
-    public ResponseEntity<Object> solveSupport(@RequestPart("files") MultipartFile[] files, @RequestPart("support") SupportRequest supportRequest){
+    @PostMapping(path = "/supports/solve")
+    public ResponseEntity<Object> solveSupport(@RequestPart(name="files", required = false) MultipartFile[] files, @RequestPart("supportId") UUID supportId, @RequestPart("support") SupportRequest supportRequest){
         try {
-            Supports support = supportService.solveSupport(supportRequest);
+            Supports support = supportService.solveSupport(supportId, supportRequest);
 
             if(files != null){
                 Arrays.asList(files).stream()

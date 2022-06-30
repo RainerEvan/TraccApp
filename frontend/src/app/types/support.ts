@@ -1,6 +1,6 @@
 import { Account } from "./account";
 import { SupportAttachment } from "./supportattachment";
-import { Tag } from "./tag";
+import { Tags } from "./tags";
 import { Ticket } from "./ticket";
 
 export type Support ={
@@ -10,7 +10,7 @@ export type Support ={
     developer: Account;
     result: string;
     description: string;
-    tags: Array<Tag>;
+    tags: Tags[];
     devNote: string;
     isActive: boolean;
     attachments: SupportAttachment[];

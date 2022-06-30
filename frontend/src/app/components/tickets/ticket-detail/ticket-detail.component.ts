@@ -1,10 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { TicketService } from 'src/app/services/ticket/ticket.service';
+import { TicketSupportService } from 'src/app/services/ticket-support/ticket-support.service';
 import { Ticket } from 'src/app/types/ticket';
 import { ConfirmationDialogComponent } from '../../modal/confirmation-dialog/confirmation-dialog.component';
 import { ResultDialogComponent } from '../../modal/result-dialog/result-dialog.component';
+import { SolveTicketComponent } from '../solve-ticket/solve-ticket.component';
 
 @Component({
   selector: 'app-ticket-detail',
@@ -16,7 +17,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
   ticket: Ticket;
   ref: DynamicDialogRef;
 
-  constructor(public dialogService:DialogService, private route:ActivatedRoute , private ticketService:TicketService) { }
+  constructor(public dialogService:DialogService, private route:ActivatedRoute , private ticketSupportService:TicketSupportService) { }
 
   ngOnInit(): void {
     this.getTicket();
@@ -31,7 +32,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
   public getTicket():void{
     const ticketId = this.route.snapshot.paramMap.get('id');
 
-    this.ticketService.getTicket(ticketId).subscribe({
+    this.ticketSupportService.getTicket(ticketId).subscribe({
       next: (ticket: Ticket) => {
         this.ticket = ticket;
       },
@@ -42,7 +43,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
   }
   
   public takeTicket():void{
-    this.ticketService.addSupport(this.ticket.ticketId).subscribe({
+    this.ticketSupportService.addSupport(this.ticket.ticketId).subscribe({
       next: (result: any) => {
         console.log(result);
         this.getTicket();
@@ -52,6 +53,27 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
         console.log(error);
         this.showResultDialog("Failed","There was a problem, try again later");
       }
+    });
+  }
+
+  showSolveTicketDialog(){
+    const supportId = this.ticket.support[0].id;
+
+    this.ref = this.dialogService.open(SolveTicketComponent, {
+      header: "Solve Ticket",
+      footer: " ",
+      data: {
+        supportId: supportId,
+      },
+      baseZIndex: 10000,
+      contentStyle: {"max-height": "500px", "overflow": "auto"},
+      width:'40vw',
+    });
+
+    this.ref.onClose.subscribe((success:boolean) =>{
+      if (success) {
+        this.getTicket();
+      } 
     });
   }
 

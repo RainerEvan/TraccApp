@@ -2,7 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ApplicationService } from 'src/app/services/application/application.service';
-import { TicketService } from 'src/app/services/ticket/ticket.service';
+import { TicketSupportService } from 'src/app/services/ticket-support/ticket-support.service';
 import { Application } from 'src/app/types/application';
 import { ResultDialogComponent } from '../../modal/result-dialog/result-dialog.component';
 
@@ -19,7 +19,7 @@ export class AddTicketComponent implements OnInit {
   ticketAttachments: File[]=[];
   fileDropArea:string;
   
-  constructor(public dialogService:DialogService, public ref: DynamicDialogRef, public config: DynamicDialogConfig, private ticketService: TicketService, private applicationService: ApplicationService, private formBuilder: FormBuilder) { }
+  constructor(public dialogService:DialogService, public ref: DynamicDialogRef, public config: DynamicDialogConfig, private ticketSupportService: TicketSupportService, private applicationService: ApplicationService, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.generateTicketForm();
@@ -36,15 +36,6 @@ export class AddTicketComponent implements OnInit {
     });
   }
 
-  generateTicketForm(){
-    this.ticketForm = this.formBuilder.group({
-      applicationId: [null, [Validators.required]],
-      title: [null, [Validators.required]],
-      description: [null, [Validators.required]],
-    });
-    this.getAllApplications();
-  }
-
   public addTicket(): void{
     if(this.ticketForm.valid){
       const formData = new FormData();
@@ -55,7 +46,7 @@ export class AddTicketComponent implements OnInit {
       }
       formData.append('ticket', new Blob([JSON.stringify(ticket)], {type:"application/json"}));
       
-      this.ticketService.addTicket(formData).subscribe({
+      this.ticketSupportService.addTicket(formData).subscribe({
         next: (result: any) => {
           console.log(result);
           this.isTicketFormSubmitted = true;
@@ -70,6 +61,15 @@ export class AddTicketComponent implements OnInit {
         }
       });
     } 
+  }
+
+  generateTicketForm(){
+    this.ticketForm = this.formBuilder.group({
+      applicationId: [null, [Validators.required]],
+      title: [null, [Validators.required]],
+      description: [null, [Validators.required]],
+    });
+    this.getAllApplications();
   }
 
   get applicationId(){

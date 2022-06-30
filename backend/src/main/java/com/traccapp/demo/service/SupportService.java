@@ -73,16 +73,16 @@ public class SupportService {
         return supportRepository.save(support);
     }
 
-    public Supports solveSupport(SupportRequest supportRequest) {
+    public Supports solveSupport(UUID supportId, SupportRequest supportRequest) {
         
-        Supports support = supportRepository.findById(supportRequest.getSupportId())
-            .orElseThrow(() -> new IllegalStateException("Support with current id cannot be found: "+supportRequest.getSupportId()));
+        Supports support = supportRepository.findById(supportId)
+            .orElseThrow(() -> new IllegalStateException("Support with current id cannot be found: "+supportId));
 
         support.setResult(supportRequest.getResult());
         support.setDescription(supportRequest.getDescription());
         support.setDevNote(supportRequest.getDevNote());
 
-        Set<String> tags = supportRequest.getTags();
+        Set<String> tags = supportRequest.getTagsName();
         
         Set<Tags> tagSet = new HashSet<>();
         
@@ -92,8 +92,6 @@ public class SupportService {
             if(tagsRepository.existsByName(tag)){
                 currTag = tagsService.getTag(tag);
             }
-
-            currTag = tagsService.addTag(tag);
             
             tagSet.add(currTag);
         }

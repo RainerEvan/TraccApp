@@ -12,9 +12,8 @@
                         <span [class]="'ticket-status-'+ticket.status.name">{{ticket.status.name}}</span>
                     </div>
                     <div class="w-full flex-1 flex flex-row items-center justify-end space-x-6">
-                        <button class="w-24 bg-white border-2 border-gray-400 rounded-md px-4 py-1.5 font-medium text-xs text-gray-600 hover:bg-gray-400 hover:text-white">Solve</button>
+                        <button (click)="showSolveTicketDialog()" class="w-24 bg-white border-2 border-gray-400 rounded-md px-4 py-1.5 font-medium text-xs text-gray-600 hover:bg-gray-400 hover:text-white">Solve</button>
                         <button class="w-24 bg-gray-600 border-2 border-gray-600 rounded-md px-4 py-1.5 font-medium text-xs text-white hover:bg-gray-800 hover:border-gray-800">Withdraw</button>
-
                         <button (click)="showConfirmationDialog('Take Ticket','Do you want to take this ticket?')" class="w-24 bg-gray-600 border-2 border-gray-600 rounded-md px-4 py-1.5 font-medium text-xs text-white hover:bg-gray-800 hover:border-gray-800">Take</button>
                     </div>
                 </div>
@@ -108,7 +107,7 @@
                                 <div class="w-2/3 ticket-value">
                                     <div *ngIf="ticket.support[0]">
                                         <div *ngFor="let tag of ticket.support[0].tags">
-                                            <span *ngIf="tags">{{tags.name}}</span>
+                                            <span *ngIf="tag">{{tag.name}}</span>
                                         </div>
                                     </div>
                                     <div *ngIf="!ticket.support[0] || !ticket.support[0].tags[0]">No tags yet</div>
