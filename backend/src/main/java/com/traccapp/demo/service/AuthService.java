@@ -1,6 +1,8 @@
 package com.traccapp.demo.service;
 
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import com.traccapp.demo.model.Accounts;
 import com.traccapp.demo.payload.request.LoginRequest;
@@ -50,13 +52,19 @@ public class AuthService {
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         String token = jwtUtils.generateJwtToken(authentication);
-
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+        List<String> roles = userDetails.getAuthorities().stream()
+            .map(item -> item.getAuthority())
+            .collect(Collectors.toList());
 
         return new JwtResponse(
             token, 
             new Date((new Date()).getTime() + jwtUtils.getJwtExpirationMs()), 
-            userDetails.getUsername()
+            userDetails.getId(),
+            userDetails.getUsername(),
+            userDetails.getEmail(),
+            userDetails.getIsActive(),
+            roles
         );
     }
     

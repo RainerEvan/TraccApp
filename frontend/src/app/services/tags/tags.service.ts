@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 import { map, Observable } from 'rxjs';
 import { Tags } from 'src/app/types/tags';
+import { environment } from 'src/environments/environment';
+
+const API_URL = environment.apiUrl+'/tags';
 
 @Injectable({
   providedIn: 'root'

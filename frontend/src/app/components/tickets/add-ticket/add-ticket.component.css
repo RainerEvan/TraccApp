@@ -23,7 +23,11 @@
 }
 
 :host ::ng-deep .p-editor-content {
-    @apply w-full ring-0 border-none font-montserrat !important;
+    @apply w-full ring-0 bg-transparent outline-none border-none font-montserrat !important;
+}
+
+:host ::ng-deep .p-editor-container .p-editor-content .ql-editor{
+    @apply bg-transparent border-none !important;
 }
 
 .drag-area{

@@ -43,7 +43,6 @@ export class SolveTicketComponent implements OnInit {
     if(this.solveForm.valid){
       const formData = new FormData();
       const support = this.solveForm.value;
-      console.log(JSON.stringify(support));
 
       for(var i=0;i<this.supportAttachments.length;i++){
         formData.append('files',this.supportAttachments[i]);

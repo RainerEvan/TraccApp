@@ -7,19 +7,19 @@
 }
 
 :host ::ng-deep .p-autocomplete {
-    @apply w-full ring-0 rounded-md border-2 border-gray-300 hover:border-gray-400 font-montserrat !important;
+    @apply w-full ring-0 outline-none rounded-md border-2 border-gray-300 hover:border-gray-400 font-montserrat !important;
 }
 
 :host ::ng-deep .p-autocomplete-dropdown {
-    @apply bg-transparent text-gray-500 ring-0 outline-none border-0 !important;
+    @apply bg-transparent text-gray-500 ring-0 outline-none border-none !important;
 }
 
 :host ::ng-deep .p-autocomplete .p-autocomplete-multiple-container {
-    @apply w-full ring-0 border-0 outline-none flex-nowrap !important;
+    @apply w-full ring-0 border-none bg-transparent flex-nowrap !important;
 }
 
 :host ::ng-deep .p-autocomplete .p-autocomplete-multiple-container .p-autocomplete-input-token input {
-    @apply w-full ring-0 border-0 outline-none font-montserrat placeholder:text-gray-500 !important;
+    @apply w-full ring-0 border-none outline-none font-montserrat placeholder:text-gray-500 !important;
 }
 
 :host ::ng-deep .p-autocomplete-token {
@@ -39,7 +39,11 @@
 }
 
 :host ::ng-deep .p-editor-content {
-    @apply w-full ring-0 border-none font-montserrat !important;
+    @apply w-full ring-0 bg-transparent outline-none border-none font-montserrat !important;
+}
+
+:host ::ng-deep .p-editor-container .p-editor-content .ql-editor{
+    @apply bg-transparent border-none !important;
 }
 
 .drag-area{

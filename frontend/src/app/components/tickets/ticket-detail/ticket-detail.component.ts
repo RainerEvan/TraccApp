@@ -43,11 +43,29 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
   }
   
   public takeTicket():void{
-    this.ticketSupportService.addSupport(this.ticket.ticketId).subscribe({
+    const ticketId = this.ticket.ticketId;
+
+    this.ticketSupportService.addSupport(ticketId).subscribe({
       next: (result: any) => {
         console.log(result);
         this.getTicket();
         this.showResultDialog("Success","Ticket has been added to your task list");
+      },
+      error: (error: any) => {
+        console.log(error);
+        this.showResultDialog("Failed","There was a problem, try again later");
+      }
+    });
+  }
+
+  public closeTicket():void{
+    const ticketId = this.ticket.ticketId;
+
+    this.ticketSupportService.closeTicket(ticketId).subscribe({
+      next: (result: any) => {
+        console.log(result);
+        this.getTicket();
+        this.showResultDialog("Success","Ticket has been closed successfully");
       },
       error: (error: any) => {
         console.log(error);
@@ -77,7 +95,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     });
   }
 
-  showConfirmationDialog(title:string, message:string){
+  showConfirmationDialog(title:string, message:string, action:string){
     this.ref = this.dialogService.open(ConfirmationDialogComponent, {
       header: title,
       data: {
@@ -90,7 +108,12 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
 
     this.ref.onClose.subscribe((confirm:boolean) =>{
         if (confirm) {
+          if(action == 'take'){
             this.takeTicket();
+          }
+          else if(action == 'close'){
+            this.closeTicket();
+          }
         }
     });
   }

@@ -25,8 +25,11 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<Object> login(@RequestBody LoginRequest loginRequest){
-        JwtResponse response = authService.loginAccount(loginRequest);
-
-        return ResponseHandler.generateResponse("Login Success!", HttpStatus.OK, response);
+        try {
+            JwtResponse response = authService.loginAccount(loginRequest);
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.BAD_REQUEST, null);
+        }
     }
 }
