@@ -8,6 +8,7 @@ type Query{
     getAllApplications:[Applications]
     getAllDivisions:[Divisions]
     getAllTags:[Tags]
+    getAllRoles:[Roles]
 }
 
 type Applications{

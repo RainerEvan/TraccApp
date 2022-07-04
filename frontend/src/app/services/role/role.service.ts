@@ -1,26 +1,26 @@
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 import { map, Observable } from 'rxjs';
-import { Tags } from 'src/app/models/tags';
+import { Role } from 'src/app/models/role';
 
 @Injectable({
   providedIn: 'root'
 })
-export class TagsService {
+export class RoleService {
 
   constructor(private apollo: Apollo) { }
 
-  public getAllTags(): Observable<Tags[]>{
+  public getAllRoles(): Observable<Role[]>{
     return this.apollo.watchQuery<any>({
       query:gql`
-        query getAllTags{
-          getAllTags{
+        query getAllRoles{
+          getAllRoles{
             id
             name
           }
         }
       `,
     })
-      .valueChanges.pipe(map((result)=>result.data.getAllTags));
+      .valueChanges.pipe(map((result)=>result.data.getAllRoles));
   }
 }

@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -22,6 +22,7 @@ import { ResultDialogComponent } from './components/modal/result-dialog/result-d
 import { AddTicketComponent } from './components/tickets/add-ticket/add-ticket.component';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import { InputSwitchModule } from 'primeng/inputswitch';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { DropdownModule } from 'primeng/dropdown';
 import { FileUploadModule } from 'primeng/fileupload';
@@ -30,6 +31,10 @@ import { TableModule } from 'primeng/table';
 import { EditorModule } from 'primeng/editor';
 import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { SolveTicketComponent } from './components/tickets/solve-ticket/solve-ticket.component';
+import { JwtInterceptor } from './helpers/jwt-interceptor';
+import { ErrorInterceptor } from './helpers/error-interceptor';
+import { ProfileComponent } from './components/profile/profile.component';
+import { AddAccountComponent } from './components/accounts/add-account/add-account.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +52,8 @@ import { SolveTicketComponent } from './components/tickets/solve-ticket/solve-ti
     ResultDialogComponent,
     AddTicketComponent,
     SolveTicketComponent,
+    ProfileComponent,
+    AddAccountComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,6 +67,7 @@ import { SolveTicketComponent } from './components/tickets/solve-ticket/solve-ti
     AutoCompleteModule,
     InputTextModule,
     InputTextareaModule,
+    InputSwitchModule,
     DropdownModule,
     FileUploadModule,
     OverlayPanelModule,
@@ -91,6 +99,12 @@ import { SolveTicketComponent } from './components/tickets/solve-ticket/solve-ti
         };
       },
       deps: [HttpLink],
+    },
+    { 
+      provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true 
+    },
+    { 
+      provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true 
     },
     DialogService
   ],

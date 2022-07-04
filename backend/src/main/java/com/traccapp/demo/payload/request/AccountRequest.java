@@ -20,5 +20,5 @@ public class AccountRequest {
     private String contactNo;
     private UUID divisionId;
     private Boolean isActive;
-    private Set<ERoles> roles;
+    private ERoles rolesName;
 }

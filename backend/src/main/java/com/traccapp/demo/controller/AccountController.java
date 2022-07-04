@@ -2,7 +2,9 @@ package com.traccapp.demo.controller;
 
 import java.util.UUID;
 
+import com.traccapp.demo.model.Accounts;
 import com.traccapp.demo.payload.request.AccountRequest;
+import com.traccapp.demo.payload.response.ResponseHandler;
 import com.traccapp.demo.service.AccountService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,24 +31,39 @@ public class AccountController {
     private final AccountService accountService;
 
     @PostMapping(path = "/add")
-    public ResponseEntity<String> addAccount(@RequestPart("image") MultipartFile image, @RequestPart("account") AccountRequest accountRequest){
-        accountService.addAccount(image, accountRequest);
+    public ResponseEntity<Object> addAccount(@RequestPart(name="image", required = false) MultipartFile image, @RequestPart("account") AccountRequest accountRequest){
+        try{
+            Accounts account = accountService.addAccount(image, accountRequest);
 
-        return ResponseEntity.status(HttpStatus.OK).body("Account has been created successfully!");
+            return ResponseHandler.generateResponse("Account has been created successfully!", HttpStatus.OK, account.getUsername());
+
+        } catch (Exception e){
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.BAD_REQUEST, null);
+        }
     }
 
     @PutMapping(path = "/edit")
-    public ResponseEntity<String> editAccount(@RequestPart("image") MultipartFile image, @RequestPart("accountId") UUID accountId, @RequestPart("account") AccountRequest accountRequest){
-        accountService.editAccount(image, accountId, accountRequest);
+    public ResponseEntity<Object> editAccount(@RequestPart(name="image", required = false) MultipartFile image, @RequestPart("accountId") UUID accountId, @RequestPart("account") AccountRequest accountRequest){
+        try{
+            Accounts account = accountService.editAccount(image, accountId, accountRequest);
 
-        return ResponseEntity.status(HttpStatus.OK).body("Account has been updated successfully!");
+            return ResponseHandler.generateResponse("Account has been updated successfully!", HttpStatus.OK, account.getUsername());
+
+        } catch (Exception e){
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.BAD_REQUEST, null);
+        }
     }
 
     @PutMapping(path = "/changePassword")
-    public ResponseEntity<String> changePassword(@RequestParam("currentPassword") String currentPassword, @RequestParam("newPassword") String newPassword){
-        accountService.changePassword(currentPassword, newPassword);
+    public ResponseEntity<Object> changePassword(@RequestParam("currentPassword") String currentPassword, @RequestParam("newPassword") String newPassword){
+        try{
+            accountService.changePassword(currentPassword, newPassword);
 
-        return ResponseEntity.status(HttpStatus.OK).body("Password has been updated successfully");
+            return ResponseHandler.generateResponse("Password has been updated successfully", HttpStatus.OK, null);
+
+        } catch (Exception e){
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.BAD_REQUEST, null);
+        }
     }
 
     @GetMapping(path = "/profileImg/{accountId}")

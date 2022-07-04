@@ -6,13 +6,15 @@ import { ConfigPageComponent } from './components/config/config-page/config-page
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
+import { ProfileComponent } from './components/profile/profile.component';
 import { TicketDetailComponent } from './components/tickets/ticket-detail/ticket-detail.component';
 import { TicketListComponent } from './components/tickets/ticket-list/ticket-list.component';
+import { AuthGuard } from './helpers/auth-guard';
 
 const routes: Routes = [
   {path:'', redirectTo: 'dashboard',pathMatch: 'full'},
   {path:'login', component: LoginComponent},
-  {path:'', component: HomeComponent,
+  {path:'', component: HomeComponent, canActivate:[AuthGuard],
     children:[
       {path:'dashboard', component: DashboardComponent},
       {path:'tickets', component: TicketListComponent},
@@ -20,6 +22,7 @@ const routes: Routes = [
       {path:'accounts', component: AccountListComponent},
       {path:'account-detail/:id', component: AccountDetailComponent},
       {path:'config', component: ConfigPageComponent},
+      {path:'profile', component: ProfileComponent},
     ]
   }
 ];

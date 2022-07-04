@@ -89,7 +89,7 @@ public class StartAppConfig {
             accountRequest.setContactNo("092039031");
             accountRequest.setDivisionId(division.getId());
             accountRequest.setIsActive(true);
-            accountRequest.setRoles(Set.of(ERoles.USER));
+            accountRequest.setRolesName(ERoles.USER);
             
             Accounts account = accountService.addAccount(null,accountRequest);
 
@@ -101,7 +101,7 @@ public class StartAppConfig {
             accountRequest2.setContactNo("092039031");
             accountRequest2.setDivisionId(division.getId());
             accountRequest2.setIsActive(true);
-            accountRequest2.setRoles(Set.of(ERoles.DEVELOPER));
+            accountRequest2.setRolesName(ERoles.DEVELOPER);
             
             Accounts account2 = accountService.addAccount(null,accountRequest2);
 

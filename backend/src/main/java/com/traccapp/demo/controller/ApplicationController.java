@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.traccapp.demo.model.Applications;
+import com.traccapp.demo.payload.response.ResponseHandler;
 import com.traccapp.demo.service.ApplicationService;
 
 import lombok.AllArgsConstructor;
@@ -25,16 +26,24 @@ public class ApplicationController {
     private final ApplicationService applicationService;
 
     @PostMapping(path = "/add")
-    public ResponseEntity<String> addApplication(@RequestParam("application") String name){
-        Applications application = applicationService.addApplication(name);
-        
-        return ResponseEntity.status(HttpStatus.OK).body("Application has been added successfully: "+application.getName());
+    public ResponseEntity<Object> addApplication(@RequestParam("application") String name){
+        try {
+            Applications application = applicationService.addApplication(name);
+            
+            return ResponseHandler.generateResponse("Application has been added successfully!", HttpStatus.OK, application.getName());
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.BAD_REQUEST, null);
+        }
     }
 
     @DeleteMapping(path = "/delete")
-    public ResponseEntity<String> deleteApplication(@RequestParam("applicationId") UUID applicationId){
-        applicationService.deleteApplication(applicationId);
-
-        return ResponseEntity.status(HttpStatus.OK).body("Application has been deleted!");
+    public ResponseEntity<Object> deleteApplication(@RequestParam("applicationId") UUID applicationId){
+        try {
+            applicationService.deleteApplication(applicationId);
+            
+            return ResponseHandler.generateResponse("Application has been deleted successfully!", HttpStatus.OK, null);
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.BAD_REQUEST, null);
+        }
     }
 }

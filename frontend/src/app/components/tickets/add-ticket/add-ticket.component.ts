@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ApplicationService } from 'src/app/services/application/application.service';
 import { TicketSupportService } from 'src/app/services/ticket-support/ticket-support.service';
-import { Application } from 'src/app/types/application';
+import { Application } from 'src/app/models/application';
 import { ResultDialogComponent } from '../../modal/result-dialog/result-dialog.component';
 
 @Component({

@@ -8,7 +8,9 @@ import org.springframework.stereotype.Component;
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import com.traccapp.demo.model.Applications;
 import com.traccapp.demo.model.Divisions;
+import com.traccapp.demo.model.Roles;
 import com.traccapp.demo.model.Tags;
+import com.traccapp.demo.repository.RoleRepository;
 import com.traccapp.demo.service.ApplicationService;
 import com.traccapp.demo.service.DivisionService;
 import com.traccapp.demo.service.TagsService;
@@ -24,6 +26,8 @@ public class MainQueryResolver implements GraphQLQueryResolver{
     private final DivisionService divisionService;
     @Autowired
     private final TagsService tagsService;
+    @Autowired
+    private final RoleRepository roleRepository;
 
     public List<Applications> getAllApplications(){
         return applicationService.getAllApplications();
@@ -35,5 +39,9 @@ public class MainQueryResolver implements GraphQLQueryResolver{
 
     public List<Tags> getAllTags(){
         return tagsService.getAllTags();
+    }
+
+    public List<Roles> getAllRoles(){
+        return roleRepository.findAll();
     }
 }

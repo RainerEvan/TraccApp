@@ -12,7 +12,7 @@ import lombok.Data;
 public class JwtResponse {
     private String token;
     private Date expirationDate;
-    private UUID id;
+    private UUID accountId;
     private String username;
     private String email;
     private boolean isActive;

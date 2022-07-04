@@ -2,14 +2,10 @@ import { HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Apollo,gql } from 'apollo-angular';
 import { map, Observable } from 'rxjs';
-import { Ticket } from 'src/app/types/ticket';
+import { Ticket } from 'src/app/models/ticket';
 import { environment } from 'src/environments/environment';
 
 const API_URL = environment.apiUrl+'/tickets';
-const token = `eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYW1hbiIsImlhdCI6MTY1NjY0MzcyMSwiZXhwIjoxNjU2NzMwMTIxfQ.DX3QxBk0oN_aRUtbqKkYuBjpC7MBSnkB1N9gN_4VZRvVRWG8incUoFGl2Q7HVSI8Rktsk3V7N4m8E3aEz9JN9w`;
-const headers = new HttpHeaders({
-  'Authorization': `Bearer `+token,
-});
 
 @Injectable({
   providedIn: 'root'
@@ -102,21 +98,21 @@ export class TicketSupportService {
   }
 
   public addTicket(formData: FormData): Observable<any>{
-    return this.http.post(API_URL+'/add',formData,{headers: headers});
+    return this.http.post(API_URL+'/add',formData);
   }
 
   public closeTicket(ticketId: string): Observable<any>{
     const params = new HttpParams().set('ticketId',ticketId);
-    return this.http.put(API_URL+'/close',null,{headers: headers, params:params});
+    return this.http.put(API_URL+'/close',null,{params:params});
   }
 
   public addSupport(ticketId: string): Observable<any>{
     const params = new HttpParams().set('ticketId',ticketId);
-    return this.http.post(API_URL+'/supports/add',null,{headers: headers, params:params});
+    return this.http.post(API_URL+'/supports/add',null,{params:params});
   }
 
   public solveSupport(formData: FormData): Observable<any>{
-    return this.http.put(API_URL+'/supports/solve',formData,{headers: headers});
+    return this.http.put(API_URL+'/supports/solve',formData);
   }
 
 }

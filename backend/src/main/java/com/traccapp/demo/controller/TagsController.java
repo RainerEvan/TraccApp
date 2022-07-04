@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.traccapp.demo.model.Tags;
+import com.traccapp.demo.payload.response.ResponseHandler;
 import com.traccapp.demo.service.TagsService;
 
 import lombok.AllArgsConstructor;
@@ -25,16 +26,24 @@ public class TagsController {
     private final TagsService tagsService;
 
     @PostMapping(path = "/add")
-    public ResponseEntity<String> addTag(@RequestParam("tag") String name){
-        Tags tag = tagsService.addTag(name);
+    public ResponseEntity<Object> addTag(@RequestParam("tag") String name){
+        try {
+            Tags tag = tagsService.addTag(name);
         
-        return ResponseEntity.status(HttpStatus.OK).body("Tag has been added successfully: "+tag.getName());
+            return ResponseHandler.generateResponse("Tag has been added successfully!", HttpStatus.OK, tag.getName());
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.BAD_REQUEST, null);
+        }
     }
 
     @DeleteMapping(path = "/delete")
-    public ResponseEntity<String> deleteTag(@RequestParam("tagId") UUID tagId){
-        tagsService.deleteTags(tagId);
-
-        return ResponseEntity.status(HttpStatus.OK).body("Tag has been deleted!");
+    public ResponseEntity<Object> deleteTag(@RequestParam("tagId") UUID tagId){
+        try {
+            tagsService.deleteTags(tagId);
+            
+            return ResponseHandler.generateResponse("Tag has been deleted successfully!", HttpStatus.OK, null);
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.BAD_REQUEST, null);
+        }
     }
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.traccapp.demo.model.Divisions;
+import com.traccapp.demo.payload.response.ResponseHandler;
 import com.traccapp.demo.service.DivisionService;
 
 import lombok.AllArgsConstructor;
@@ -25,16 +26,24 @@ public class DivisionController {
     private final DivisionService divisionService;
 
     @PostMapping(path = "/add")
-    public ResponseEntity<String> addDivision(@RequestParam("division") String name){
-        Divisions division = divisionService.addDivision(name);
-        
-        return ResponseEntity.status(HttpStatus.OK).body("Division has been added successfully: "+division.getName());
+    public ResponseEntity<Object> addDivision(@RequestParam("division") String name){
+        try {
+            Divisions division = divisionService.addDivision(name);
+            
+            return ResponseHandler.generateResponse("Division has been added successfully!", HttpStatus.OK, division.getName());
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.BAD_REQUEST, null);
+        }
     }
 
     @DeleteMapping(path = "/delete")
-    public ResponseEntity<String> deleteDivision(@RequestParam("divisionId") UUID divisionId){
-        divisionService.deleteDivision(divisionId);
-
-        return ResponseEntity.status(HttpStatus.OK).body("Division has been deleted!");
+    public ResponseEntity<Object> deleteDivision(@RequestParam("divisionId") UUID divisionId){
+        try {
+            divisionService.deleteDivision(divisionId);
+            
+            return ResponseHandler.generateResponse("Division has been deleted successfully!", HttpStatus.OK, null);
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.BAD_REQUEST, null);
+        }
     }
 }

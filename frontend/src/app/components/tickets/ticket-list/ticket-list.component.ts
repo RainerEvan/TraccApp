@@ -3,7 +3,7 @@ import { cloneDeep } from '@apollo/client/utilities';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Table } from 'primeng/table';
 import { TicketSupportService } from 'src/app/services/ticket-support/ticket-support.service';
-import { Ticket } from 'src/app/types/ticket';
+import { Ticket } from 'src/app/models/ticket';
 import { AddTicketComponent } from '../add-ticket/add-ticket.component';
 
 @Component({

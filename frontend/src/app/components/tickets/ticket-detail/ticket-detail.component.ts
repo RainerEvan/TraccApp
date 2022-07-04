@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { TicketSupportService } from 'src/app/services/ticket-support/ticket-support.service';
-import { Ticket } from 'src/app/types/ticket';
+import { Ticket } from 'src/app/models/ticket';
 import { ConfirmationDialogComponent } from '../../modal/confirmation-dialog/confirmation-dialog.component';
 import { ResultDialogComponent } from '../../modal/result-dialog/result-dialog.component';
 import { SolveTicketComponent } from '../solve-ticket/solve-ticket.component';

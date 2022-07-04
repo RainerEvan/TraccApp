@@ -2,11 +2,11 @@ package com.traccapp.demo.service;
 
 import java.io.IOException;
 import java.util.Base64;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import com.traccapp.demo.data.ERoles;
 import com.traccapp.demo.exception.AbstractGraphQLException;
@@ -81,9 +81,11 @@ public class AccountService {
             account.setProfileImg(addImage(file));
         }
 
-        Set<Roles> roleSet = accountRequest.getRoles().stream()
-            .map(role -> roleRepository.findByName(role).orElseThrow(() -> new IllegalStateException("Role with current name cannot be found"+role)))
-            .collect(Collectors.toSet());
+        Roles role = roleRepository.findByName(accountRequest.getRolesName())
+            .orElseThrow(() -> new IllegalStateException("Role with current name cannot be found "+accountRequest.getRolesName()));
+
+        Set<Roles> roleSet = new HashSet<>();
+        roleSet.add(role);
 
         account.setRoles(roleSet);
 

@@ -9,13 +9,13 @@
     <div class="w-full">
         <label for="description" class="form-label">Description*</label>
         <!-- <textarea pInputTextarea autoResize="autoResize" placeholder="Enter description" class="form-field" formControlName="description"></textarea> -->
-        <p-editor [style]="{'height':'10rem'}" placeholder="Enter description" formControlName="description"></p-editor>
+        <p-editor [style]="{'height':'10rem'}" placeholder="Enter description" formControlName="description" required></p-editor>
         <div *ngIf="description.invalid && (description.dirty || description.touched)" class="font-regular text-sm text-red-400 pt-1">
             Please enter description
         </div>
     </div>
     <div class="w-full">
-        <label for="application" class="form-label">Tags*</label>
+        <label for="tags" class="form-label">Tags*</label>
         <p-autoComplete showEmptyMessage="true" [suggestions]="filteredTags" [forceSelection]="false" (completeMethod)="filterTags($event)" [dropdown]="true" [multiple]="true" placeholder="Select tags" formControlName="tagsName" required></p-autoComplete>
         <div *ngIf="tagsName.invalid && tagsName.touched" class="font-regular text-sm text-red-400 pt-1">
             Please select tags
@@ -24,7 +24,7 @@
     <div class="w-full">
         <label for="devNote" class="form-label">Developer Note*</label>
         <!-- <textarea pInputTextarea autoResize="autoResize" placeholder="Enter developer note" class="form-field" formControlName="devNote"></textarea> -->
-        <p-editor [style]="{'height':'10rem'}" placeholder="Enter developer note" formControlName="devNote"></p-editor>
+        <p-editor [style]="{'height':'10rem'}" placeholder="Enter developer note" formControlName="devNote" required></p-editor>
         <div *ngIf="devNote.invalid && (devNote.dirty || devNote.touched)" class="font-regular text-sm text-red-400 pt-1">
             Please enter developer note
         </div>

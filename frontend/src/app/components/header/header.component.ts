@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { AuthDetails } from 'src/app/models/authdetails';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { ConfirmationDialogComponent } from '../modal/confirmation-dialog/confirmation-dialog.component';
 
@@ -9,12 +10,14 @@ import { ConfirmationDialogComponent } from '../modal/confirmation-dialog/confir
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  account: AuthDetails;
   show = false;
   ref: DynamicDialogRef;
 
   constructor(public dialogService:DialogService, private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.account = this.authService.accountValue;
   }
 
   ngOnDestroy(): void {

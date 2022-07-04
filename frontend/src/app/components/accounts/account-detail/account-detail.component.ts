@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { AccountService } from 'src/app/services/account/account.service';
-import { Account } from 'src/app/types/account';
+import { Account } from 'src/app/models/account';
 
 @Component({
   selector: 'app-account-detail',

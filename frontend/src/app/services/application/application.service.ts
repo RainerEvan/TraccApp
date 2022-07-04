@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 import { map, Observable } from 'rxjs';
-import { Application } from 'src/app/types/application';
+import { Application } from 'src/app/models/application';
 
 @Injectable({
   providedIn: 'root'
