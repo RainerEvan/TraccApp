@@ -1,20 +1,21 @@
 <div class="bg-white drop-shadow-lg max-w-7xl mx-auto mb-8 px-10 py-4">
-    <div *ngIf="ticket" class="py-6">
+    <div class="py-6">
         <h1 class="font-bold text-lg text-center mb-4">
             Ticket Details
         </h1>
         <div class="bg-white border-2 border-gray-100 shadow-md py-8 px-16">
             <!-- Header -->
             <div class="py-4 px-10 border-b-2 border-gray-400">
-                <div class="flex flex-row px-4">
-                    <div class="w-full flex-1 space-x-6">
+                <div class="flex flex-row px-4 justify-between">
+                    <div class="flex flex-row items-center space-x-6">
                         <span class="font-semibold text-sm">Status</span>
-                        <span [class]="'ticket-status-'+ticket.status.name">{{ticket.status.name}}</span>
+                        <span *ngIf="ticket" [class]="'ticket-status-'+ticket.status.name">{{ticket.status.name}}</span>
+                        <p-skeleton *ngIf="loading" width="8rem"></p-skeleton>
                     </div>
-                    <div class="w-full flex-1 flex flex-row items-center justify-end space-x-6">
-                        <button (click)="showSolveTicketDialog()" class="w-24 bg-white border-2 border-gray-400 rounded-md px-4 py-1.5 font-medium text-xs text-gray-600 hover:bg-gray-400 hover:text-white">Solve</button>
-                        <button (click)="showConfirmationDialog('Close Ticket','Do you want to close this ticket?','close')" class="w-28 bg-gray-600 border-2 border-gray-600 rounded-md px-4 py-1.5 font-medium text-xs text-white hover:bg-gray-800 hover:border-gray-800">Close Ticket</button>
-                        <button (click)="showConfirmationDialog('Take Ticket','Do you want to take this ticket?','take')" class="w-24 bg-gray-600 border-2 border-gray-600 rounded-md px-4 py-1.5 font-medium text-xs text-white hover:bg-gray-800 hover:border-gray-800">Take</button>
+                    <div class="flex flex-row items-center space-x-6">
+                        <button [disabled]="loading" (click)="showSolveTicketDialog()" class="button-secondary">Solve Ticket</button>
+                        <button [disabled]="loading" (click)="showConfirmationDialog('Close Ticket','Do you want to close this ticket?','close')" class="button-primary">Close Ticket</button>
+                        <button [disabled]="loading" (click)="showConfirmationDialog('Take Ticket','Do you want to take this ticket?','take')" class="button-primary">Take Ticket</button>
                     </div>
                 </div>
             </div>
@@ -26,27 +27,39 @@
                     <div class="bg-gray-400/70 px-4 py-2">
                         <span class="font-bold text-base">REPORT</span>
                     </div>
-                    <div class="flex flex-row p-4 space-x-8">
-                        <div class="w-full flex-1">
+                    <div class="flex flex-row p-4 justify-between space-x-8">
+                        <div class="w-full">
                             <div class="flex flex-row items-start space-x-8 my-6">
                                 <span class="w-1/3 ticket-field">Ticket No</span>
-                                <span class="w-2/3 ticket-value">{{ticket.ticketNo}}</span>
+                                <span *ngIf="ticket" class="w-2/3 ticket-value">{{ticket.ticketNo}}</span>
+                                <div *ngIf="loading" class="w-2/3">
+                                    <p-skeleton width="50%"></p-skeleton>
+                                </div>
                             </div>
                             <div class="flex flex-row items-start space-x-8 my-6">
                                 <span class="w-1/3 ticket-field">Application</span>
-                                <span class="w-2/3 ticket-value">{{ticket.application.name}}</span>
+                                <span *ngIf="ticket" class="w-2/3 ticket-value">{{ticket.application.name}}</span>
+                                <div *ngIf="loading" class="w-2/3">
+                                    <p-skeleton width="50%"></p-skeleton>
+                                </div>
                             </div>
                             <div class="flex flex-row items-start space-x-8 my-6">
                                 <span class="w-1/3 ticket-field">Title</span>
-                                <span class="w-2/3 ticket-value">{{ticket.title}}</span>
+                                <span *ngIf="ticket" class="w-2/3 ticket-value">{{ticket.title}}</span>
+                                <div *ngIf="loading" class="w-2/3">
+                                    <p-skeleton width="50%"></p-skeleton>
+                                </div>
                             </div>
                             <div class="flex flex-row items-start space-x-8 my-6">
                                 <span class="w-1/3 ticket-field">Description</span>
-                                <span class="w-2/3 ticket-value" [innerHTML]="ticket.description"></span>
+                                <span *ngIf="ticket" class="w-2/3 ticket-value" [innerHTML]="ticket.description"></span>
+                                <div *ngIf="loading" class="w-2/3">
+                                    <p-skeleton width="50%"></p-skeleton>
+                                </div>
                             </div>
                             <div class="flex flex-row items-start space-x-8 my-6">
                                 <span class="w-1/3 ticket-field">Attachment</span>
-                                <div class="w-2/3 ticket-value">
+                                <div *ngIf="ticket" class="w-2/3 ticket-value">
                                     <div *ngIf="ticket.attachments">
                                         <div *ngFor="let ticketattachment of ticket.attachments">
                                             <span *ngIf="ticketattachment">{{ticketattachment.fileName}}</span>
@@ -54,17 +67,26 @@
                                     </div>
                                     <div *ngIf="!ticket.attachments[0]">No attachment yet</div>
                                 </div>
+                                <div *ngIf="loading" class="w-2/3">
+                                    <p-skeleton width="50%"></p-skeleton>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="w-full flex-1">
+                        <div class="w-full">
                             <div class="flex flex-row items-start space-x-8 my-6">
                                 <span class="w-1/3 ticket-field">Date Added</span>
-                                <span class="w-2/3 ticket-value">{{ticket.dateAdded | date:'dd/MM/yyyy'}}</span>
+                                <span *ngIf="ticket" class="w-2/3 ticket-value">{{ticket.dateAdded | date:'dd/MM/yyyy'}}</span>
+                                <div *ngIf="loading" class="w-2/3">
+                                    <p-skeleton width="50%"></p-skeleton>
+                                </div>
                             </div>
                             <div class="flex flex-row items-start space-x-8 my-6">
                                 <span class="w-1/3 ticket-field">Reporter</span>
-                                <span class="w-2/3 ticket-value">{{ticket.reporter.fullname}}</span>
+                                <span *ngIf="ticket" class="w-2/3 ticket-value">{{ticket.reporter.fullname}}</span>
+                                <div *ngIf="loading" class="w-2/3">
+                                    <p-skeleton width="50%"></p-skeleton>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -75,25 +97,31 @@
                     <div class="bg-gray-400/70 px-4 py-2">
                         <span class="font-bold text-base">SUPPORT</span>
                     </div>
-                    <div class="flex flex-row p-4 space-x-8">
-                        <div class="w-full flex-1">
+                    <div class="flex flex-row p-4 justify-between space-x-8">
+                        <div class="w-full">
                             <div class="flex flex-row items-start space-x-8 my-6">
                                 <span class="w-1/3 ticket-field">Result</span>
-                                <div class="w-2/3 ticket-value">
+                                <div *ngIf="ticket" class="w-2/3 ticket-value">
                                     <span *ngIf="ticket.support[0]">{{ticket.support[0].result}}</span>
                                     <span *ngIf="!ticket.support[0] || !ticket.support[0].result">No result yet</span>
+                                </div>
+                                <div *ngIf="loading" class="w-2/3">
+                                    <p-skeleton width="50%"></p-skeleton>
                                 </div>
                             </div>
                             <div class="flex flex-row items-start space-x-8 my-6">
                                 <span class="w-1/3 ticket-field">Description</span>
-                                <div class="w-2/3 ticket-value">
+                                <div *ngIf="ticket" class="w-2/3 ticket-value">
                                     <span *ngIf="ticket.support[0]">{{ticket.support[0].description}}</span>
                                     <span *ngIf="!ticket.support[0] || !ticket.support[0].description">No result yet</span>
+                                </div>
+                                <div *ngIf="loading" class="w-2/3">
+                                    <p-skeleton width="50%"></p-skeleton>
                                 </div>
                             </div>
                             <div class="flex flex-row items-start space-x-8 my-6">
                                 <span class="w-1/3 ticket-field">Attachment</span>
-                                <div class="w-2/3 ticket-value">
+                                <div *ngIf="ticket" class="w-2/3 ticket-value">
                                     <div *ngIf="ticket.support[0]">
                                         <div *ngFor="let supportattachment of ticket.support[0].attachments">
                                             <span *ngIf="supportattachment">{{supportattachment.fileName}}</span>
@@ -101,10 +129,13 @@
                                     </div>
                                     <div *ngIf="!ticket.support[0] || !ticket.support[0].attachments[0]">No attachment yet</div>
                                 </div>
+                                <div *ngIf="loading" class="w-2/3">
+                                    <p-skeleton width="50%"></p-skeleton>
+                                </div>
                             </div>
                             <div class="flex flex-row items-start space-x-8 my-6">
                                 <span class="w-1/3 ticket-field">Tags</span>
-                                <div class="w-2/3 ticket-value">
+                                <div *ngIf="ticket" class="w-2/3 ticket-value">
                                     <div *ngIf="ticket.support[0]" class="flex flex-row items-center space-x-2">
                                         <div *ngFor="let tag of ticket.support[0].tags">
                                             <span *ngIf="tag" class="px-3 py-1.5 rounded-full bg-gray-500 text-white text-xs">{{tag.name}}</span>
@@ -112,22 +143,31 @@
                                     </div>
                                     <div *ngIf="!ticket.support[0] || !ticket.support[0].tags[0]">No tags yet</div>
                                 </div>
+                                <div *ngIf="loading" class="w-2/3">
+                                    <p-skeleton width="50%"></p-skeleton>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="w-full flex-1">
+                        <div class="w-full">
                             <div class="flex flex-row items-start space-x-8 my-6">
                                 <span class="w-1/3 ticket-field">Date Taken</span>
-                                <div class="w-2/3 ticket-value">
+                                <div *ngIf="ticket" class="w-2/3 ticket-value">
                                     <span *ngIf="ticket.support[0]">{{ticket.support[0].dateTaken | date:'dd/MM/yyyy'}}</span>
                                     <span *ngIf="!ticket.support[0]">Not yet taken</span>
+                                </div>
+                                <div *ngIf="loading" class="w-2/3">
+                                    <p-skeleton width="50%"></p-skeleton>
                                 </div>
                             </div>
                             <div class="flex flex-row items-start space-x-8 my-6">
                                 <span class="w-1/3 ticket-field">Developer</span>
-                                <div class="w-2/3 ticket-value">
+                                <div *ngIf="ticket" class="w-2/3 ticket-value">
                                     <span *ngIf="ticket.support[0]">{{ticket.support[0].developer.fullname}}</span>
                                     <span *ngIf="!ticket.support[0]">Not yet assigned</span>
+                                </div>
+                                <div *ngIf="loading" class="w-2/3">
+                                    <p-skeleton width="50%"></p-skeleton>
                                 </div>
                             </div>
                         </div>

@@ -65,16 +65,24 @@ public class TicketSupportController {
 
     @PutMapping(path = "/close")
     public ResponseEntity<Object> closeTicket(@RequestParam("ticketId") UUID ticketId){
-        String status = updateTicketStatus(ticketId, EStatus.CLOSED);
+        try {
+            String status = updateTicketStatus(ticketId, EStatus.CLOSED);
 
-        return ResponseHandler.generateResponse("Ticket has been closed!", HttpStatus.OK, status);
+            return ResponseHandler.generateResponse("Ticket has been closed!", HttpStatus.OK, status);
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.BAD_REQUEST, null);
+        }
     }
 
     @PutMapping(path = "/drop")
     public ResponseEntity<Object> dropTicket(@RequestParam("ticketId") UUID ticketId){
-        String status = updateTicketStatus(ticketId, EStatus.DROPPED);
+        try {
+            String status = updateTicketStatus(ticketId, EStatus.DROPPED);
 
-        return ResponseHandler.generateResponse("Ticket has been dropped!", HttpStatus.OK, status);
+            return ResponseHandler.generateResponse("Ticket has been dropped!", HttpStatus.OK, status);
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.BAD_REQUEST, null);
+        }
     }
 
     @DeleteMapping(path = "/delete")

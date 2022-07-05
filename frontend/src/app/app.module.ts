@@ -29,12 +29,14 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { TableModule } from 'primeng/table';
 import { EditorModule } from 'primeng/editor';
+import { SkeletonModule } from 'primeng/skeleton';
 import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { SolveTicketComponent } from './components/tickets/solve-ticket/solve-ticket.component';
 import { JwtInterceptor } from './helpers/jwt-interceptor';
 import { ErrorInterceptor } from './helpers/error-interceptor';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AddAccountComponent } from './components/accounts/add-account/add-account.component';
+import { EditAccountComponent } from './components/accounts/edit-account/edit-account.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +56,7 @@ import { AddAccountComponent } from './components/accounts/add-account/add-accou
     SolveTicketComponent,
     ProfileComponent,
     AddAccountComponent,
+    EditAccountComponent,
   ],
   imports: [
     BrowserModule,
@@ -71,6 +74,7 @@ import { AddAccountComponent } from './components/accounts/add-account/add-accou
     DropdownModule,
     FileUploadModule,
     OverlayPanelModule,
+    SkeletonModule,
     ApolloModule,
     EditorModule,
   ],

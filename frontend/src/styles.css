@@ -14,3 +14,15 @@ body{
 body .p-component{
     font-family: "Montserrat", sans-serif !important;
 }
+
+body .p-skeleton {
+    @apply bg-gray-200 !important;
+}
+
+.button-primary{
+    @apply w-auto bg-gray-600 border-2 border-gray-600 rounded-md px-4 py-1.5 font-medium text-xs text-white hover:bg-gray-800 hover:border-gray-800 disabled:text-gray-600 disabled:bg-gray-300 disabled:border-gray-300;
+}
+
+.button-secondary{
+    @apply w-auto bg-white border-2 border-gray-400 rounded-md px-4 py-1.5 font-medium text-xs text-gray-600 hover:bg-gray-400 hover:text-white disabled:text-gray-300 disabled:bg-white disabled:border-gray-300;
+}

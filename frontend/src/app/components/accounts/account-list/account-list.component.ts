@@ -1,4 +1,3 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Table } from 'primeng/table';
 import { AccountService } from 'src/app/services/account/account.service';
@@ -40,8 +39,8 @@ export class AccountListComponent implements OnInit {
         this.loading = false;
         this.totalRecords = accounts.length;
       },
-      error: (err: HttpErrorResponse) => {
-        alert(err.message);
+      error: (error: any) => {
+        console.log(error);
       }
     });
   }
@@ -52,7 +51,7 @@ export class AccountListComponent implements OnInit {
 
   showAddAccountDialog(){
     this.ref = this.dialogService.open(AddAccountComponent, {
-      header: "Add Ticket",
+      header: "Add Account",
       footer: " ",
       baseZIndex: 10000,
       contentStyle: {"max-height": "500px", "overflow": "auto"},

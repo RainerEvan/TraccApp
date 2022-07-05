@@ -15,7 +15,11 @@
         </div>
         <div class="flex flex-col space-y-1">
             <label for="password" class="form-label">Password</label>
-            <input pInputText type="password" placeholder="Enter your password" class="p-inputtext-sm form-field" formControlName="password" required>
+            <span class="p-input-icon-right">
+                <i *ngIf="show" (click)="show=false" class="pi pi-eye cursor-pointer"></i>
+                <i *ngIf="!show" (click)="show=true" class="pi pi-eye-slash cursor-pointer"></i>
+                <input pInputText [type]="show ? 'text' : 'password'" placeholder="Enter your password" class="p-inputtext-sm form-field" formControlName="password" required>
+            </span>
             <div *ngIf="password.invalid && (password.dirty || password.touched)" class="font-regular text-xs text-red-400">
                 Password is required
             </div>

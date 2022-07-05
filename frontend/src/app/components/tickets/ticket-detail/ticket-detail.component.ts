@@ -14,6 +14,7 @@ import { SolveTicketComponent } from '../solve-ticket/solve-ticket.component';
 })
 export class TicketDetailComponent implements OnInit, OnDestroy {
 
+  loading: boolean;
   ticket: Ticket;
   ref: DynamicDialogRef;
 
@@ -32,8 +33,10 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
   public getTicket():void{
     const ticketId = this.route.snapshot.paramMap.get('id');
 
+    this.loading = true;
     this.ticketSupportService.getTicket(ticketId).subscribe({
       next: (ticket: Ticket) => {
+        this.loading = false;
         this.ticket = ticket;
       },
       error: (error: any) => {

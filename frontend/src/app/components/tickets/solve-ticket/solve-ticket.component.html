@@ -66,7 +66,7 @@
     </div>
     
     <div class="w-full flex flex-row items-center justify-center space-x-4">
-        <button type="submit" [disabled]="solveForm.invalid" class="w-24 bg-gray-600 border-2 border-gray-600 rounded-md px-6 py-1.5 font-medium text-xs text-white hover:bg-gray-800 hover:border-gray-800 disabled:text-gray-600 disabled:bg-gray-300 disabled:border-gray-300">Submit</button>
-        <button type="button" (click)="resetForm(solveForm)" class="w-24 bg-white border-2 border-gray-400 rounded-md px-6 py-1.5 font-medium text-xs text-gray-600 hover:bg-gray-400 hover:text-white">Reset</button>
+        <button type="submit" [disabled]="solveForm.invalid" class="button-primary">Submit</button>
+        <button type="button" (click)="resetForm(solveForm)" class="button-secondary">Reset</button>
     </div>
 </form>

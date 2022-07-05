@@ -1,56 +1,31 @@
-<form [formGroup]="accountForm" (ngSubmit)="addAccount()" class="flex flex-col space-y-6 py-4 text-black">
+<form [formGroup]="accountForm" (ngSubmit)="editAccount()" class="flex flex-col space-y-6 py-4 text-black">
     
     <div class="w-full">
-        <label for="username" class="form-label">Username*</label>
-        <input type="text" pInputText placeholder="Enter username" class="form-field" formControlName="username" required>
-        <div *ngIf="username.invalid && (username.dirty || username.touched)" class="font-regular text-sm text-red-400 pt-1">
-            Please enter username
-        </div>
+        <label for="username" class="form-label">Username</label>
+        <input type="text" pInputText placeholder="Enter username" class="form-field" formControlName="username">
     </div>
     <div class="w-full">
-        <label for="password" class="form-label">Password*</label>
-        <input type="password" pInputText placeholder="Enter password" class="form-field" formControlName="password" required>
-        <div *ngIf="password.invalid && (password.dirty || password.touched)" class="font-regular text-sm text-red-400 pt-1">
-            Please enter password
-        </div>
+        <label for="fullname" class="form-label">Full Name</label>
+        <input type="text" pInputText placeholder="Enter fullname" class="form-field" formControlName="fullname">
     </div>
     <div class="w-full">
-        <label for="fullname" class="form-label">Full Name*</label>
-        <input type="text" pInputText placeholder="Enter fullname" class="form-field" formControlName="fullname" required>
-        <div *ngIf="fullname.invalid && (fullname.dirty || fullname.touched)" class="font-regular text-sm text-red-400 pt-1">
-            Please enter full name
-        </div>
+        <label for="email" class="form-label">Email</label>
+        <input type="text" pInputText placeholder="Enter email" class="form-field" formControlName="email">
     </div>
     <div class="w-full">
-        <label for="email" class="form-label">Email*</label>
-        <input type="text" pInputText placeholder="Enter email" class="form-field" formControlName="email" required>
-        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="font-regular text-sm text-red-400 pt-1">
-            Please enter email
-        </div>
+        <label for="contactNo" class="form-label">Contact No</label>
+        <input type="text" pInputText placeholder="Enter contact no" class="form-field" formControlName="contactNo">
     </div>
     <div class="w-full">
-        <label for="contactNo" class="form-label">Contact No*</label>
-        <input type="text" pInputText placeholder="Enter contact no" class="form-field" formControlName="contactNo" required>
-        <div *ngIf="contactNo.invalid && (contactNo.dirty || contactNo.touched)" class="font-regular text-sm text-red-400 pt-1">
-            Please enter contact no
-        </div>
+        <label for="division" class="form-label">Division</label>
+        <p-dropdown [options]="divisions" optionLabel="name" optionValue="id" [showClear]="true" [autoDisplayFirst]="false" placeholder="Select division" formControlName="divisionId"></p-dropdown>
     </div>
     <div class="w-full">
-        <label for="division" class="form-label">Division*</label>
-        <p-dropdown [options]="divisions" optionLabel="name" optionValue="id" [showClear]="true" placeholder="Select division" formControlName="divisionId" required></p-dropdown>
-        <div *ngIf="divisionId.invalid && divisionId.touched" class="font-regular text-sm text-red-400 pt-1">
-            Please select division
-        </div>
+        <label for="rolesName" class="form-label">Role</label>
+        <p-dropdown [options]="roles" optionLabel="name" optionValue="name" [autoDisplayFirst]="false" readonly="true" formControlName="rolesName"></p-dropdown>
     </div>
     <div class="w-full">
-        <label for="rolesName" class="form-label">Role*</label>
-        <p-dropdown [options]="roles" optionLabel="name" optionValue="name" [showClear]="true" placeholder="Select role" formControlName="rolesName" required></p-dropdown>
-        <div *ngIf="rolesName.invalid && rolesName.touched" class="font-regular text-sm text-red-400 pt-1">
-            Please select role
-        </div>
-    </div>
-    <div class="w-full">
-        <label for="isActive" class="form-label">Status*</label>
+        <label for="isActive" class="form-label">Status</label>
         <div class="py-2 flex flex-row items-center space-x-3">
             <p-inputSwitch formControlName="isActive"></p-inputSwitch>
             <span class="text-xs">{{isActive.value ? 'ACTIVE':'DISABLED'}}</span>
@@ -90,7 +65,7 @@
     </div>
     
     <div class="w-full flex flex-row items-center justify-center space-x-4">
-        <button type="submit" [disabled]="accountForm.invalid" class="button-primary">Submit</button>
+        <button type="submit" class="button-primary">Submit</button>
         <button type="button" (click)="resetForm(accountForm)" class="button-secondary">Reset</button>
     </div>
 </form>

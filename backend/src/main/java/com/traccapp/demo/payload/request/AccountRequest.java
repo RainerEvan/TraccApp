@@ -1,10 +1,7 @@
 package com.traccapp.demo.payload.request;
 
-import java.util.Set;
 import java.util.UUID;
-
 import com.traccapp.demo.data.ERoles;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

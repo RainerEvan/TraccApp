@@ -1,6 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { Account } from 'src/app/models/account';
 import { Division } from 'src/app/models/division';
 import { Role } from 'src/app/models/role';
 import { AccountService } from 'src/app/services/account/account.service';
@@ -9,12 +10,13 @@ import { RoleService } from 'src/app/services/role/role.service';
 import { ResultDialogComponent } from '../../modal/result-dialog/result-dialog.component';
 
 @Component({
-  selector: 'app-add-account',
-  templateUrl: './add-account.component.html',
-  styleUrls: ['./add-account.component.css']
+  selector: 'app-edit-account',
+  templateUrl: './edit-account.component.html',
+  styleUrls: ['./edit-account.component.css']
 })
-export class AddAccountComponent implements OnInit {
+export class EditAccountComponent implements OnInit {
 
+  accountData:Account;
   accountForm: FormGroup;
   isAccountFormSubmitted: boolean = false;
   divisions: Division[];
@@ -26,6 +28,7 @@ export class AddAccountComponent implements OnInit {
   constructor(public dialogService:DialogService, public ref: DynamicDialogRef, public config: DynamicDialogConfig, private accountService: AccountService, private divisionService: DivisionService, private roleService: RoleService, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
+    this.accountData=this.config.data.accountData;
     this.generateAccountForm();
   }
 
@@ -51,7 +54,7 @@ export class AddAccountComponent implements OnInit {
     });
   }
 
-  public addAccount(): void{
+  public editAccount(): void{
     if(this.accountForm.valid){
       const formData = new FormData();
       const account = this.accountForm.value;
@@ -78,14 +81,13 @@ export class AddAccountComponent implements OnInit {
 
   generateAccountForm(){
     this.accountForm = this.formBuilder.group({
-      username: [null, [Validators.required]],
-      password: [null, [Validators.required,Validators.minLength(6)]],
-      fullname: [null, [Validators.required]],
-      email: [null, [Validators.required,Validators.email]],
-      contactNo: [null, [Validators.required]],
-      divisionId: [null, [Validators.required]],
-      isActive: [null, [Validators.required]],
-      rolesName: [null, [Validators.required]],
+      username: [{value:this.accountData.username, disabled:true}],
+      fullname: [this.accountData.fullname],
+      email: [this.accountData.email],
+      contactNo: [this.accountData.contactNo],
+      divisionId: [this.accountData.division.id],
+      isActive: [this.accountData.isActive],
+      rolesName: [{value:this.accountData.roles[0].name, disabled:true}],
     });
     this.getAllDivisions();
     this.getAllRoles();
@@ -93,9 +95,6 @@ export class AddAccountComponent implements OnInit {
 
   get username(){
     return this.accountForm.get('username');
-  }
-  get password(){
-    return this.accountForm.get('password');
   }
   get fullname(){
     return this.accountForm.get('fullname');
@@ -154,7 +153,7 @@ export class AddAccountComponent implements OnInit {
   }
 
   resetForm(form: FormGroup){
-    form.reset();
+    this.generateAccountForm();
     this.profileImg = null;
   }
 

@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   error: string;
+  show: boolean = false;
 
   constructor(private route: ActivatedRoute, private router: Router, private authService: AuthService, private formBuilder: FormBuilder) {
     if(this.authService.accountValue){
