@@ -34,7 +34,6 @@ export class AccountDetailComponent implements OnInit {
 
   getAccount():void{
     const accountId = this.route.snapshot.paramMap.get('id');
-
     this.loading = true;
     this.accountService.getAccount(accountId).subscribe({
       next: (account: Account) => {

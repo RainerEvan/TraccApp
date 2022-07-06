@@ -23,11 +23,13 @@ import { AddTicketComponent } from './components/tickets/add-ticket/add-ticket.c
 import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { InputSwitchModule } from 'primeng/inputswitch';
+import { ImageModule } from 'primeng/image';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { DropdownModule } from 'primeng/dropdown';
 import { FileUploadModule } from 'primeng/fileupload';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { TableModule } from 'primeng/table';
+import { DataViewModule } from 'primeng/dataview';
 import { EditorModule } from 'primeng/editor';
 import { SkeletonModule } from 'primeng/skeleton';
 import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
@@ -37,6 +39,8 @@ import { ErrorInterceptor } from './helpers/error-interceptor';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AddAccountComponent } from './components/accounts/add-account/add-account.component';
 import { EditAccountComponent } from './components/accounts/edit-account/edit-account.component';
+import { MyTicketListComponent } from './components/my-tickets/my-ticket-list/my-ticket-list.component';
+import { MyTaskListComponent } from './components/my-tasks/my-task-list/my-task-list.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +61,8 @@ import { EditAccountComponent } from './components/accounts/edit-account/edit-ac
     ProfileComponent,
     AddAccountComponent,
     EditAccountComponent,
+    MyTicketListComponent,
+    MyTaskListComponent,
   ],
   imports: [
     BrowserModule,
@@ -66,11 +72,13 @@ import { EditAccountComponent } from './components/accounts/edit-account/edit-ac
     FormsModule,
     ReactiveFormsModule,
     TableModule,
+    DataViewModule,
     DynamicDialogModule,
     AutoCompleteModule,
     InputTextModule,
     InputTextareaModule,
     InputSwitchModule,
+    ImageModule,
     DropdownModule,
     FileUploadModule,
     OverlayPanelModule,

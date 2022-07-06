@@ -6,6 +6,8 @@ import { ConfigPageComponent } from './components/config/config-page/config-page
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
+import { MyTaskListComponent } from './components/my-tasks/my-task-list/my-task-list.component';
+import { MyTicketListComponent } from './components/my-tickets/my-ticket-list/my-ticket-list.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { TicketDetailComponent } from './components/tickets/ticket-detail/ticket-detail.component';
 import { TicketListComponent } from './components/tickets/ticket-list/ticket-list.component';
@@ -23,6 +25,8 @@ const routes: Routes = [
       {path:'account-detail/:id', component: AccountDetailComponent},
       {path:'config', component: ConfigPageComponent},
       {path:'profile', component: ProfileComponent},
+      {path:'my-ticket', component: MyTicketListComponent},
+      {path:'my-task', component: MyTaskListComponent},
     ]
   }
 ];

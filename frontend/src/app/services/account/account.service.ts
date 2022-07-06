@@ -51,7 +51,6 @@ export class AccountService {
               id
               name
             }
-            profileImg
             isActive
             roles{
               id
@@ -69,5 +68,9 @@ export class AccountService {
 
   public addAccount(formData: FormData): Observable<any>{
     return this.http.post(API_URL+'/add',formData);
+  }
+
+  public editAccount(formData: FormData): Observable<any>{
+    return this.http.put(API_URL+'/edit',formData);
   }
 }

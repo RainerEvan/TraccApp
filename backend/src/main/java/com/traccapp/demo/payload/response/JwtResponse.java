@@ -14,7 +14,6 @@ public class JwtResponse {
     private Date expirationDate;
     private UUID accountId;
     private String username;
-    private String email;
     private boolean isActive;
     private List<String> roles;
 }

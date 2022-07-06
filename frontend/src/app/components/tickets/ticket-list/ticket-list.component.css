@@ -14,22 +14,38 @@ td{
     @apply animate-spin;
 }
 
+:host ::ng-deep .p-inputtext {
+    @apply w-full h-10 ring-0 border-2 border-gray-300 text-sm placeholder:text-gray-500 hover:border-gray-400 focus:border-gray-400 !important;
+}
+
+:host ::ng-deep .p-paginator {
+    @apply text-sm !important;
+}
+
+:host ::ng-deep .p-paginator .p-paginator-page{
+    @apply font-medium text-sm text-gray-500 ring-0 hover:bg-gray-100/80 !important;
+}
+
+:host ::ng-deep .p-paginator .p-highlight{
+    @apply border-gray-400 bg-gray-100 hover:bg-gray-100 text-inherit !important;
+}
+
 .ticket-status-PENDING{
-    @apply px-1 w-20 bg-gray-200 font-medium text-[10px] text-center rounded-full !important;
+    @apply bg-gray-200 !important;
 }
 
 .ticket-status-IN_PROGRESS{
-    @apply px-1 w-20 bg-gray-300 font-medium text-[10px] text-center rounded-full !important;
+    @apply bg-gray-300 !important;
 }
 
 .ticket-status-RESOLVED{
-    @apply px-1 w-20 bg-gray-400 font-medium text-white text-[10px] text-center rounded-full !important;
+    @apply bg-gray-400 text-white  !important;
 }
 
 .ticket-status-CLOSED{
-    @apply px-1 w-20 bg-gray-500 font-medium text-white text-[10px] text-center rounded-full !important;
+    @apply bg-gray-500 text-white  !important;
 }
 
 .ticket-status-DROPPED{
-    @apply px-1 w-20 bg-gray-600 font-medium text-white text-[10px] text-center rounded-full !important;
+    @apply bg-gray-600 text-white  !important;
 }

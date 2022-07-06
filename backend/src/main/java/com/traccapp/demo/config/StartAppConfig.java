@@ -78,7 +78,6 @@ public class StartAppConfig {
             Applications application = applicationService.addApplication("CAMS");
             Applications application2 = applicationService.addApplication("SMILE");
             Applications application3 = applicationService.addApplication("GEOSPACIAL");
-            Applications application4 = applicationService.addApplication("UIDM");
             Divisions division = divisionService.addDivision("ITXB");
 
             AccountRequest accountRequest = new AccountRequest();
@@ -128,21 +127,32 @@ public class StartAppConfig {
 
             Tickets ticket2 = new Tickets();
             ticket2.setDateAdded(OffsetDateTime.now());
-            ticket2.setApplication(application);
+            ticket2.setApplication(application2);
             ticket2.setReporter(account);
-            ticket2.setTitle("Aplikasi CAMS error");
+            ticket2.setTitle("Gespacial Bug pada Form");
             ticket2.setDescription("Form gabisa diisi lagi gimana dong");
             ticket2.setStatus(status1);
             ticketRepository.save(ticket2);
 
             Tickets ticket3 = new Tickets();
             ticket3.setDateAdded(OffsetDateTime.now());
-            ticket3.setApplication(application);
+            ticket3.setApplication(application3);
             ticket3.setReporter(account);
-            ticket3.setTitle("Aplikasi CAMS error");
+            ticket3.setTitle("App Smile Tidak bisa Input");
             ticket3.setDescription("Form gabisa diisi lagi gimana dong");
             ticket3.setStatus(status1);
             ticketRepository.save(ticket3);
+
+            for(int i=0;i<5;i++){
+                Tickets ticket4 = new Tickets();
+                ticket4.setDateAdded(OffsetDateTime.now());
+                ticket4.setApplication(application);
+                ticket4.setReporter(account);
+                ticket4.setTitle("Aplikasi CAMS error");
+                ticket4.setDescription("Form gabisa diisi lagi gimana dong");
+                ticket4.setStatus(status1);
+                ticketRepository.save(ticket4);
+            }
 
             Supports support = new Supports();
             support.setTicket(ticket2);

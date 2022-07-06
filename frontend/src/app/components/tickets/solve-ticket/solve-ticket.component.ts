@@ -24,8 +24,8 @@ export class SolveTicketComponent implements OnInit {
   constructor(public dialogService:DialogService, public ref: DynamicDialogRef, public config: DynamicDialogConfig, private ticketSupportService: TicketSupportService, private tagsService:TagsService, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
-    this.generateSolveForm();
     this.supportId=this.config.data.supportId;
+    this.generateSolveForm();
   }
 
   public getAllTags():void{

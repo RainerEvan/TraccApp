@@ -62,7 +62,6 @@ public class AuthService {
             new Date((new Date()).getTime() + jwtUtils.getJwtExpirationMs()), 
             userDetails.getId(),
             userDetails.getUsername(),
-            userDetails.getEmail(),
             userDetails.getIsActive(),
             roles
         );

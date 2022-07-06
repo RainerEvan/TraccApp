@@ -60,14 +60,15 @@ export class EditAccountComponent implements OnInit {
       const account = this.accountForm.value;
 
       formData.append('image',this.profileImg);
+      formData.append('accountId', new Blob([JSON.stringify(this.accountData.id)], {type:"application/json"}));
       formData.append('account', new Blob([JSON.stringify(account)], {type:"application/json"}));
 
-      this.accountService.addAccount(formData).subscribe({
+      this.accountService.editAccount(formData).subscribe({
         next: (result: any) => {
           console.log(result);
           this.isAccountFormSubmitted = true;
           this.ref.close(this.isAccountFormSubmitted);
-          this.showResultDialog("Success","Account has been created successfully");
+          this.showResultDialog("Success","Account has been updated successfully");
         },
         error: (error: any) => {
           console.log(error);
