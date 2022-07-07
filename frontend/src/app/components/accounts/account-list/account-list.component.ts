@@ -54,7 +54,7 @@ export class AccountListComponent implements OnInit {
       header: "Add Account",
       footer: " ",
       baseZIndex: 10000,
-      contentStyle: {"max-height": "500px", "overflow": "auto"},
+      contentStyle: {"max-height": "650px", "overflow": "auto"},
       width:'40vw',
     });
 

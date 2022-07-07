@@ -26,3 +26,15 @@ body .p-skeleton {
 .button-secondary{
     @apply w-auto bg-white border-2 border-gray-400 rounded-md px-4 py-1.5 font-medium text-xs text-gray-600 hover:bg-gray-400 hover:text-white disabled:text-gray-300 disabled:bg-white disabled:border-gray-300;
 }
+
+tr{
+    @apply focus:outline-gray-300 !important;
+}
+
+th{
+    @apply font-semibold text-sm text-black bg-white focus:ring-0 !important;
+}
+
+td{
+    @apply font-regular text-sm text-black cursor-pointer !important;
+}

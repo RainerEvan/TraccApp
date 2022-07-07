@@ -1,4 +1,4 @@
-<form [formGroup]="accountForm" (ngSubmit)="editAccount()" class="flex flex-col space-y-6 py-4 text-black">
+<form [formGroup]="accountForm" (ngSubmit)="editAccount()" class="flex flex-col space-y-6 py-4 px-6 text-black">
     
     <div class="w-full">
         <label for="username" class="form-label">Username</label>
@@ -18,11 +18,11 @@
     </div>
     <div class="w-full">
         <label for="division" class="form-label">Division</label>
-        <p-dropdown [options]="divisions" optionLabel="name" optionValue="id" [showClear]="true" [autoDisplayFirst]="false" placeholder="Select division" formControlName="divisionId"></p-dropdown>
+        <p-dropdown [options]="divisions" optionLabel="name" optionValue="id" [autoDisplayFirst]="false" placeholder="Select division" formControlName="divisionId"></p-dropdown>
     </div>
     <div class="w-full">
         <label for="rolesName" class="form-label">Role</label>
-        <p-dropdown [options]="roles" optionLabel="name" optionValue="name" [autoDisplayFirst]="false" readonly="true" formControlName="rolesName"></p-dropdown>
+        <p-dropdown [options]="roles" optionLabel="name" optionValue="name" [autoDisplayFirst]="false" formControlName="rolesName"></p-dropdown>
     </div>
     <div class="w-full">
         <label for="isActive" class="form-label">Status</label>
@@ -64,8 +64,8 @@
         </div>
     </div>
     
-    <div class="w-full flex flex-row items-center justify-center space-x-4">
-        <button type="submit" class="button-primary">Submit</button>
-        <button type="button" (click)="resetForm(accountForm)" class="button-secondary">Reset</button>
+    <div class="w-full flex flex-row items-center justify-center space-x-6">
+        <button type="submit" class="button-primary scale-110">Submit</button>
+        <button type="button" (click)="resetForm(accountForm)" class="button-secondary scale-110">Reset</button>
     </div>
 </form>

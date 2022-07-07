@@ -1,4 +1,4 @@
-<form [formGroup]="accountForm" (ngSubmit)="addAccount()" class="flex flex-col space-y-6 py-4 text-black">
+<form [formGroup]="accountForm" (ngSubmit)="addAccount()" class="flex flex-col space-y-6 py-4 px-6 text-black">
     
     <div class="w-full">
         <label for="username" class="form-label">Username*</label>
@@ -89,8 +89,8 @@
         </div>
     </div>
     
-    <div class="w-full flex flex-row items-center justify-center space-x-4">
-        <button type="submit" [disabled]="accountForm.invalid" class="button-primary">Submit</button>
-        <button type="button" (click)="resetForm(accountForm)" class="button-secondary">Reset</button>
+    <div class="w-full flex flex-row items-center justify-center space-x-6">
+        <button type="submit" [disabled]="accountForm.invalid" class="button-primary scale-110">Submit</button>
+        <button type="button" (click)="resetForm(accountForm)" class="button-secondary scale-110">Reset</button>
     </div>
 </form>

@@ -88,7 +88,7 @@ export class EditAccountComponent implements OnInit {
       contactNo: [this.accountData.contactNo],
       divisionId: [this.accountData.division.id],
       isActive: [this.accountData.isActive],
-      rolesName: [{value:this.accountData.roles[0].name, disabled:true}],
+      rolesName: [this.accountData.roles[0].name],
     });
     this.getAllDivisions();
     this.getAllRoles();

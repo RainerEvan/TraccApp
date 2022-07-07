@@ -16,7 +16,6 @@ import com.traccapp.demo.model.Tickets;
 import com.traccapp.demo.payload.request.SupportRequest;
 import com.traccapp.demo.repository.AccountRepository;
 import com.traccapp.demo.repository.SupportRepository;
-import com.traccapp.demo.repository.TagsRepository;
 import com.traccapp.demo.repository.TicketRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +33,6 @@ public class SupportService {
     private final TicketRepository ticketRepository;
     @Autowired
     private final AccountRepository accountRepository;
-    @Autowired
-    private final TagsRepository tagsRepository;
     @Autowired
     private final TagsService tagsService;
     @Autowired
@@ -87,11 +84,7 @@ public class SupportService {
         Set<Tags> tagSet = new HashSet<>();
         
         for(String tag: tags){
-            Tags currTag = new Tags();
-
-            if(tagsRepository.existsByName(tag)){
-                currTag = tagsService.getTag(tag);
-            }
+            Tags currTag = tagsService.getTag(tag);
             
             tagSet.add(currTag);
         }
