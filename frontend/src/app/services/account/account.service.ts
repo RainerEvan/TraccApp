@@ -51,6 +51,7 @@ export class AccountService {
               id
               name
             }
+            profileImg
             isActive
             roles{
               id

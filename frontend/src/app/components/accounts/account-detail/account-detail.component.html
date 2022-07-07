@@ -29,7 +29,7 @@
                         <div class="w-full">
                             <div class="flex items-center justify-center mx-auto my-14">
                                 <div *ngIf="account" class="bg-gray-300 border-2 border-gray-400">
-                                    <img class="object-fill w-44 h-44" src="{{imageUrl}}" alt="Profile Image">
+                                    <img class="object-fill w-44 h-44" [src]="imageUrl" alt="Profile Image">
                                 </div>
                                 <p-skeleton *ngIf="loading" width="11rem" height="11rem"></p-skeleton>
                             </div>

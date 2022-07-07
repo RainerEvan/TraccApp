@@ -8,8 +8,8 @@
     </div>
     <div class="w-full">
         <label for="description" class="form-label">Description*</label>
-        <!-- <textarea pInputTextarea autoResize="autoResize" placeholder="Enter description" class="form-field" formControlName="description"></textarea> -->
-        <p-editor [style]="{'height':'10rem'}" placeholder="Enter description" formControlName="description" required></p-editor>
+        <textarea pInputTextarea rows="5" placeholder="Enter description" class="form-field" formControlName="description"></textarea>
+        <!-- <p-editor [style]="{'height':'10rem'}" placeholder="Enter description" formControlName="description" required></p-editor> -->
         <div *ngIf="description.invalid && (description.dirty || description.touched)" class="font-regular text-sm text-red-400 pt-1">
             Please enter description
         </div>

@@ -26,9 +26,9 @@
                     </div>
                 </ng-template>
                 <ng-template let-ticket pTemplate="listItem">
-                    <div routerLink="/ticket-detail/{{ticket.ticketId}}" class="grid grid-cols-6 auto-cols-auto gap-4 py-4 px-6 text-black drop-shadow-sm hover:bg-gray-100/40 cursor-pointer">
+                    <div routerLink="/ticket-detail/{{ticket.ticketId}}" class="grid grid-cols-6 auto-cols-auto gap-6 py-4 px-6 text-black drop-shadow-sm hover:bg-gray-100/40 cursor-pointer">
                         <div class="col-span-1">
-                            <div [class]="'ticket-status-'+ticket.status.name" class="w-full h-full flex flex-col items-center justify-center space-y-2 rounded-sm shadow-md px-4 py-6">
+                            <div [class]="'ticket-status-'+ticket.status.name" class="w-full h-full flex flex-col items-center justify-center space-y-2 rounded-sm shadow-md px-4 py-10">
                                 <i class="pi pi-ticket" style="font-size: 20px;"></i>
                                 <span class="font-semibold text-xs">{{ticket.ticketNo}}</span>
                             </div>
@@ -36,7 +36,7 @@
                         <div class="col-span-2">
                             <div class="w-full h-full flex flex-col justify-between py-2">
                                 <div class="flex flex-col">
-                                    <span class="font-semibold text-sm uppercase">{{ticket.title}}</span>
+                                    <span class="font-semibold text-base uppercase break-words">{{ticket.title}}</span>
                                     <span class="font-regular text-sm">{{ticket.application.name}}</span>
                                 </div>
                                 <div class="flex flex-row items-center space-x-2">
@@ -48,12 +48,12 @@
                         <div class="col-span-1">
                             <div class="w-full h-full flex flex-col justify-between py-2">
                                 <div class="flex flex-col justify-center">
-                                    <span class="font-medium text-xs">Date added</span>
-                                    <span class="font-regular text-xs text-gray-500">{{ticket.dateAdded | date:'dd/MM/yyyy'}}</span>
+                                    <span class="font-medium text-xs">Date Added</span>
+                                    <span class="font-regular text-sm text-gray-500">{{ticket.dateAdded | date:'dd/MM/yyyy'}}</span>
                                 </div>
                                 <div class="flex flex-col justify-center">
                                     <span class="font-medium text-xs">Report</span>
-                                    <span class="font-regular text-xs text-gray-500">{{ticket.reporter.fullname}}</span>
+                                    <span class="font-regular text-sm text-gray-500">{{ticket.reporter.fullname}}</span>
                                 </div>
                             </div>
                         </div>
@@ -61,13 +61,13 @@
                             <div class="w-full h-full flex flex-col justify-between py-2">
                                 <div class="flex flex-col justify-center">
                                     <span class="font-medium text-xs">Date Taken</span>
-                                    <span *ngIf="ticket.support[0]" class="font-regular text-xs text-gray-500">{{ticket.support[0].dateTaken | date:'dd/MM/yyyy'}}</span>
-                                    <span *ngIf="!ticket.support[0]" class="font-regular text-xs text-gray-500">-</span>
+                                    <span *ngIf="ticket.support[0]" class="font-regular text-sm text-gray-500">{{ticket.support[0].dateTaken | date:'dd/MM/yyyy'}}</span>
+                                    <span *ngIf="!ticket.support[0]" class="font-regular text-sm text-gray-500">-</span>
                                 </div>
                                 <div class="flex flex-col justify-center">
                                     <span class="font-medium text-xs">Support</span>
-                                    <span *ngIf="ticket.support[0]" class="font-regular text-xs text-gray-500">{{ticket.support[0].developer.fullname}}</span>
-                                    <span *ngIf="!ticket.support[0]" class="font-regular text-xs text-gray-500">-</span>
+                                    <span *ngIf="ticket.support[0]" class="font-regular text-sm text-gray-500">{{ticket.support[0].developer.fullname}}</span>
+                                    <span *ngIf="!ticket.support[0]" class="font-regular text-sm text-gray-500">-</span>
                                 </div>
                             </div>
                         </div>

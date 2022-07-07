@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -42,6 +43,7 @@ public class Comments {
     
     private OffsetDateTime createdAt;
     private OffsetDateTime updatedAt;
+    @Lob
     private String body;
     private Boolean isActive;
 

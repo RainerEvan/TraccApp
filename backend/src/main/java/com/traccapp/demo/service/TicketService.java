@@ -38,10 +38,12 @@ public class TicketService {
     @Autowired
     private final AuthService authService;
 
+    @Transactional
     public List<Tickets> getAllTickets(){
         return ticketRepository.findAll();
     }
 
+    @Transactional
     public Tickets getTicket(UUID ticketId){
         return ticketRepository.findByTicketId(ticketId)
             .orElseThrow(() -> new AbstractGraphQLException("Ticket with current id cannot be found: "+ticketId, "ticketId"));
@@ -55,6 +57,7 @@ public class TicketService {
         return ticketRepository.findAllByReporter(user);
     }
 
+    @Transactional
     public Tickets addTicket(TicketRequest ticketRequest){
 
         Applications application = applicationRepository.findById(ticketRequest.getApplicationId())
@@ -75,6 +78,7 @@ public class TicketService {
         return ticketRepository.save(ticket);
     }
 
+    @Transactional
     public Tickets updateTicketStatus(UUID ticketId, EStatus statusName){
         Tickets ticket = ticketRepository.findByTicketId(ticketId).orElseThrow(() -> new IllegalStateException("Ticket with current id cannot be found: "+ticketId));
 
@@ -90,6 +94,7 @@ public class TicketService {
         return ticketRepository.save(ticket);
     }
 
+    @Transactional
     public void deleteTicket(UUID ticketId){
         Tickets ticket = ticketRepository.findByTicketId(ticketId)
             .orElseThrow(() -> new IllegalStateException("Ticket with current id cannot be found: "+ticketId));

@@ -38,11 +38,13 @@ public class SupportService {
     @Autowired
     private final AuthService authService;
 
+    @Transactional
     public Supports getSupport(UUID supportId){
         return supportRepository.findById(supportId)
             .orElseThrow(() -> new AbstractGraphQLException("Support with current id cannot be found: "+supportId, "supportId"));
     }
     
+    @Transactional
     public List<Supports> getSupportForTicket(Tickets ticket){
         return supportRepository.findAllByTicketAndIsActive(ticket, true);
     }
@@ -56,6 +58,7 @@ public class SupportService {
         return supportRepository.findAllByDeveloper(developer);
     }
 
+    @Transactional
     public Supports addSupport(UUID ticketId) {
 
         Tickets ticket = ticketRepository.findByTicketId(ticketId)
@@ -70,6 +73,7 @@ public class SupportService {
         return supportRepository.save(support);
     }
 
+    @Transactional
     public Supports solveSupport(UUID supportId, SupportRequest supportRequest) {
         
         Supports support = supportRepository.findById(supportId)
@@ -94,6 +98,7 @@ public class SupportService {
         return supportRepository.save(support);
     }
 
+    @Transactional
     public Supports withdrawSupport(UUID supportId, String result, String description) {
         Supports support = supportRepository
             .findById(supportId).orElseThrow(() -> new IllegalStateException("Support with current id cannot be found: "+supportId));
@@ -104,6 +109,7 @@ public class SupportService {
         return supportRepository.save(support);
     }
 
+    @Transactional
     public Supports reassignSupport(UUID ticketId, UUID currSupportId, UUID developerId){
         Supports currSupport = supportRepository.findById(currSupportId)
             .orElseThrow(() -> new IllegalStateException("Support with current id cannot be found: "+currSupportId));

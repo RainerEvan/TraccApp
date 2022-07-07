@@ -66,7 +66,7 @@ export class AddTicketComponent implements OnInit {
   generateTicketForm(){
     this.ticketForm = this.formBuilder.group({
       applicationId: [null, [Validators.required]],
-      title: [null, [Validators.required]],
+      title: [null, [Validators.required,Validators.maxLength(255)]],
       description: [null, [Validators.required]],
     });
     this.getAllApplications();

@@ -69,7 +69,7 @@ export class SolveTicketComponent implements OnInit {
 
   generateSolveForm(){
     this.solveForm = this.formBuilder.group({
-      result: [null, [Validators.required]],
+      result: [null, [Validators.required,Validators.maxLength(255)]],
       description: [null, [Validators.required]],
       tagsName: [null, [Validators.required]],
       devNote: [null, [Validators.required]],
