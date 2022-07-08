@@ -1,7 +1,6 @@
 package com.traccapp.demo.config;
 
 import java.time.OffsetDateTime;
-import java.util.Set;
 
 import com.traccapp.demo.data.ERoles;
 import com.traccapp.demo.data.EStatus;
@@ -23,14 +22,11 @@ import com.traccapp.demo.service.ApplicationService;
 import com.traccapp.demo.service.DivisionService;
 import com.traccapp.demo.service.TagsService;
 
-import lombok.extern.slf4j.Slf4j;
-
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@Slf4j
 public class StartAppConfig {
     @Bean
     CommandLineRunner commandLineRunner(TagsService tagsService, AccountService accountService, ApplicationService applicationService, DivisionService divisionService, RoleRepository roleRepository, StatusRepository statusRepository, TicketRepository ticketRepository, SupportRepository supportRepository){

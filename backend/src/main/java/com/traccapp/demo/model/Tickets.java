@@ -18,10 +18,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.traccapp.demo.config.TicketNoGenerator;
-
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
+
+import com.traccapp.demo.utils.TicketNoGenerator;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -46,7 +46,7 @@ public class Tickets {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ticket_seq")
     @GenericGenerator(
         name = "ticket_seq",
-        strategy = "com.traccapp.demo.config.TicketNoGenerator",
+        strategy = "com.traccapp.demo.utils.TicketNoGenerator",
         parameters = {@Parameter(name = TicketNoGenerator.INCREMENT_PARAM, value = "50")}
     )
     @Column(name = "ticket_no")

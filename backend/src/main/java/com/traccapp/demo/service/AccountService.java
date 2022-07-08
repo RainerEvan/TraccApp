@@ -17,6 +17,7 @@ import com.traccapp.demo.payload.request.AccountRequest;
 import com.traccapp.demo.repository.AccountRepository;
 import com.traccapp.demo.repository.DivisionRepository;
 import com.traccapp.demo.repository.RoleRepository;
+import com.traccapp.demo.utils.ProfileImageUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -158,7 +159,9 @@ public class AccountService {
 
     public String addImage(MultipartFile file){
         try{
-            String encodedString = Base64.getEncoder().encodeToString(file.getBytes());
+            byte[] image = ProfileImageUtils.cropImageSquare(file);
+
+            String encodedString = Base64.getEncoder().encodeToString(image);
 
             return encodedString;
             

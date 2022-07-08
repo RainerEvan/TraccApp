@@ -1,4 +1,4 @@
-package com.traccapp.demo.config;
+package com.traccapp.demo.utils;
 
 import java.io.Serializable;
 import java.time.LocalDate;

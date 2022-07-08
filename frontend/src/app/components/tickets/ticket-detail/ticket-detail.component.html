@@ -120,20 +120,6 @@
                                 </div>
                             </div>
                             <div class="flex flex-row items-start space-x-8 my-6">
-                                <span class="w-1/3 ticket-field">Attachment</span>
-                                <div *ngIf="ticket" class="w-2/3 ticket-value">
-                                    <div *ngIf="ticket.support[0]">
-                                        <div *ngFor="let supportattachment of ticket.support[0].attachments">
-                                            <span *ngIf="supportattachment">{{supportattachment.fileName}}</span>
-                                        </div>
-                                    </div>
-                                    <div *ngIf="!ticket.support[0] || !ticket.support[0].attachments[0]">No attachment yet</div>
-                                </div>
-                                <div *ngIf="loading" class="w-2/3">
-                                    <p-skeleton width="50%"></p-skeleton>
-                                </div>
-                            </div>
-                            <div class="flex flex-row items-start space-x-8 my-6">
                                 <span class="w-1/3 ticket-field">Tags</span>
                                 <div *ngIf="ticket" class="w-2/3 ticket-value">
                                     <div *ngIf="ticket.support[0]" class="flex flex-row items-center space-x-2">
@@ -142,6 +128,20 @@
                                         </div>
                                     </div>
                                     <div *ngIf="!ticket.support[0] || !ticket.support[0].tags[0]">No tags yet</div>
+                                </div>
+                                <div *ngIf="loading" class="w-2/3">
+                                    <p-skeleton width="50%"></p-skeleton>
+                                </div>
+                            </div>
+                            <div class="flex flex-row items-start space-x-8 my-6">
+                                <span class="w-1/3 ticket-field">Attachment</span>
+                                <div *ngIf="ticket" class="w-2/3 ticket-value">
+                                    <div *ngIf="ticket.support[0]">
+                                        <div *ngFor="let supportattachment of ticket.support[0].attachments">
+                                            <span *ngIf="supportattachment">{{supportattachment.fileName}}</span>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="!ticket.support[0] || !ticket.support[0].attachments[0]">No attachment yet</div>
                                 </div>
                                 <div *ngIf="loading" class="w-2/3">
                                     <p-skeleton width="50%"></p-skeleton>

@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Apollo,gql } from 'apollo-angular';
 import { map, Observable } from 'rxjs';
+import { Support } from 'src/app/models/support';
 import { Ticket } from 'src/app/models/ticket';
 import { environment } from 'src/environments/environment';
 
@@ -95,6 +96,74 @@ export class TicketSupportService {
       },
     })
       .valueChanges.pipe(map((result)=>result.data.getTicket));
+  }
+
+  public getAllTicketsForUser(accountId:string): Observable<Ticket[]>{
+    return this.apollo.watchQuery<any>({
+      query:gql`
+        query getAllTicketsForUser($accountId:ID!){
+          getAllTicketsForUser(accountId: $accountId){
+            ticketId
+            ticketNo
+            application{
+              name
+            }
+            title
+            reporter{
+              fullname
+            }
+            dateAdded
+            support{
+              dateTaken
+              developer{
+                fullname
+              }
+            }
+            status{
+              name
+            }
+          }
+        }
+      `,
+      variables: {
+        accountId: accountId,
+      },
+    })
+      .valueChanges.pipe(map((result)=>result.data.getAllTicketsForUser));
+  }
+
+  public getAllSupportsForDeveloper(accountId:string): Observable<Support[]>{
+    return this.apollo.watchQuery<any>({
+      query:gql`
+        query getAllSupportsForDeveloper($accountId:ID!){
+          getAllSupportsForDeveloper(accountId: $accountId){
+            dateTaken
+            developer{
+              fullname
+            }
+            ticket{
+              ticketId
+              ticketNo
+              application{
+                name
+              }
+              title
+              reporter{
+                fullname
+              }
+              dateAdded
+              status{
+                name
+              }
+            }
+          }
+        }
+      `,
+      variables: {
+        accountId: accountId,
+      },
+    })
+      .valueChanges.pipe(map((result)=>result.data.getAllSupportsForDeveloper));
   }
 
   public addTicket(formData: FormData): Observable<any>{

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ɵɵsetComponentScope } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { cloneDeep } from '@apollo/client/utilities';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Table } from 'primeng/table';
@@ -17,7 +17,7 @@ export class TicketListComponent implements OnInit {
   loading: boolean;
   totalRecords: number;
   ref: DynamicDialogRef;
-  // @ViewChild('ticketTable') ticketTable: Table | undefined;
+  @ViewChild('ticketTable') ticketTable: Table | undefined;
 
   constructor(public dialogService:DialogService, private ticketSupportService: TicketSupportService) { }
 
@@ -46,9 +46,9 @@ export class TicketListComponent implements OnInit {
     });
   }
 
-  // applyFilterGlobal($event:any, stringVal:any) {
-  //   this.ticketTable.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
-  // }
+  applyFilterGlobal($event:any, stringVal:any) {
+    this.ticketTable.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
+  }
 
   showAddTicketDialog(){
     this.ref = this.dialogService.open(AddTicketComponent, {

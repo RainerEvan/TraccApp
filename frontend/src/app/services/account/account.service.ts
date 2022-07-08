@@ -26,7 +26,9 @@ export class AccountService {
             division{
               name
             }
+            profileImg
             isActive
+            contactNo
             roles{
               name
             }           

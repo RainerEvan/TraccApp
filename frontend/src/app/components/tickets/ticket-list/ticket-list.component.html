@@ -4,17 +4,15 @@
             Ticket List
         </h1>
         <div class="bg-white border-2 border-gray-100 shadow-md p-8">
-            <p-dataView #ticketDv [value]="tickets" [totalRecords]="totalRecords" [paginator]="true" [rows]="5" [loading]="loading" filterBy="ticketNo,application.name,title,reporter.fullname,dateAdded,support[0].developer.fullname,support[0].dateTaken,status.name" [showCurrentPageReport]="true"
-                sortField="dateAdded" [sortOrder]="-1" layout="list">
-                <ng-template pTemplate="header">
-                    <div class="flex flex-row items-center place-content-between px-2">
-                        <div class="flex flex-row items-center space-x-4">
-                            <span class="p-input-icon-left">
-                                <i class="pi pi-search pl-1 opacity-60"></i>
-                                <input pInputText type="text" (input)="ticketDv.filter($event.target.value, 'contains')" placeholder="Search Tickets" />
-                            </span>
-                        </div>
-                        <div class="flex flex-row items-center space-x-4">
+            <p-table #ticketTable [value]="tickets" [loading]="loading" [totalRecords]="totalRecords" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" selectionMode="single" responsiveLayout="scroll" [filterDelay]="0" sortField="dateAdded" [sortOrder]="-1"
+                [globalFilterFields]="['ticketNo','application.name','title','reporter.fullname','dateAdded','support[0].developer.fullname','support[0].dateTaken','status.name']">
+                <ng-template pTemplate="caption">
+                    <div class="px-2 flex items-center place-content-between">
+                        <span class="p-input-icon-left">
+                            <i class="pi pi-search pl-1 opacity-60"></i>
+                            <input class="pl-10 py-2 border-2 border-gray-300 outline-none rounded-md text-sm hover:border-gray-400 focus:border-gray-500 focus:ring-0" type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Search Tickets" />
+                        </span>
+                        <div class="flex flex-row space-x-4">
                             <button (click)="getAllTickets()" class="py-2 px-3 flex flex-row items-center space-x-2 rounded-md stroke-gray-500 text-gray-500 hover:bg-gray-300/60">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 stroke-inherit" [class.rotate]="loading" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
@@ -25,7 +23,7 @@
                         </div>
                     </div>
                 </ng-template>
-                <ng-template let-ticket pTemplate="listItem">
+                <ng-template pTemplate="body" let-ticket>
                     <div routerLink="/ticket-detail/{{ticket.ticketId}}" class="grid grid-cols-6 auto-cols-auto gap-6 py-4 px-6 text-black drop-shadow-sm hover:bg-gray-100/40 cursor-pointer">
                         <div class="col-span-1">
                             <div [class]="'ticket-status-'+ticket.status.name" class="w-full h-full flex flex-col items-center justify-center space-y-2 rounded-sm shadow-md px-4 py-10">
@@ -81,79 +79,8 @@
                         </div>
                     </div>
                 </ng-template>
-                <ng-template pTemplate="empty">
-                    <div class="px-4">
-                        <span class="text-center">NO TICKETS FOUND</span>
-                    </div>
-                </ng-template>
-            </p-dataView>
-        </div>
-    </div>
-</div>
-
-<div class="bg-white drop-shadow-lg max-w-7xl mx-auto mb-8 px-10 py-4">
-    <div class="py-6">
-        <h1 class="font-bold text-lg text-center mb-4">
-            Ticket List
-        </h1>
-        <div class="bg-white border-2 border-gray-100 shadow-md p-8">
-            <p-table #ticketTable [value]="tickets" [loading]="loading" [totalRecords]="totalRecords" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" selectionMode="single" responsiveLayout="scroll" [filterDelay]="0" sortField="dateAdded" [sortOrder]="-1"
-                [globalFilterFields]="['ticketNo','application.name','title','reporter.username','dateAdded','support[0].developer.username','support[0].dateTaken','status.name']">
-                <ng-template pTemplate="caption">
-                    <div class="px-2 flex items-center place-content-between">
-                        <span class="p-input-icon-left">
-                            <i class="pi pi-search pl-1 opacity-60"></i>
-                            <input class="pl-10 py-2 border-2 border-gray-300 outline-none rounded-md text-sm hover:border-gray-400 focus:border-gray-500 focus:ring-0" type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Search Tickets" />
-                        </span>
-                        <div class="flex flex-row space-x-4">
-                            <button (click)="getAllTickets()" class="py-2 px-3 flex flex-row items-center space-x-2 rounded-md stroke-gray-500 text-gray-500 hover:bg-gray-300/60">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 stroke-inherit" [class.rotate]="loading" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                                </svg>
-                                <span class="font-medium text-sm text-inherit">Refresh</span>
-                            </button>
-                            <button (click)="showAddTicketDialog()" class="button-primary">Add Ticket</button>
-                        </div>
-                    </div>
-                </ng-template>
-                <ng-template pTemplate="header">
-                    <tr class="border-b-2">
-                        <th>Ticket No</th>
-                        <th>App</th>
-                        <th>Title</th>
-                        <th>Reporter</th>
-                        <th pSortableColumn="dateAdded">Date Added</th>
-                        <th>Developer</th>
-                        <th>Date Taken</th>
-                        <th>Status</th>
-                    </tr>
-                </ng-template>
-                <ng-template pTemplate="body" let-ticket>
-                    <tr routerLink="/ticket-detail/{{ticket.ticketId}}">
-                        <td>{{ticket.ticketNo}}</td>
-                        <td>{{ticket.application.name}}</td>
-                        <td>{{ticket.title}}</td>
-                        <td>{{ticket.reporter.fullname}}</td>
-                        <td>{{ticket.dateAdded | date:'dd/MM/yyyy'}}</td>
-                        <td>
-                            <span *ngIf="ticket.support[0]">{{ticket.support[0].developer.fullname}}</span>
-                            <span *ngIf="!ticket.support[0]">-</span>
-                        </td>
-                        <td>
-                            <span *ngIf="ticket.support[0]">{{ticket.support[0].dateTaken | date:'dd/MM/yyyy'}}</span>
-                            <span *ngIf="!ticket.support[0]">-</span>
-                        </td>
-                        <td>
-                            <div [class]="'ticket-status-'+ticket.status.name">{{ticket.status.name}}</div>
-                        </td>
-                    </tr>
-                </ng-template>
                 <ng-template pTemplate="emptymessage">
-                    <tr>
-                        <td colspan="8">
-                            <div class="font-medium text-gray-400 text-center my-2">NO TICKETS FOUND</div>
-                        </td>
-                    </tr>
+                    <div class="font-medium text-sm text-gray-400 text-center my-10">NO TICKETS FOUND</div>
                 </ng-template>
             </p-table>
         </div>

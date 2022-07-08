@@ -25,11 +25,11 @@
                     <div class="bg-gray-400/70 px-4 py-2">
                         <span class="font-bold text-base">DETAILS</span>
                     </div>
-                    <div class="flex flex-row p-4 justify-between space-x-2">
+                    <div class="flex flex-row p-4 justify-between">
                         <div class="w-full">
                             <div class="flex items-center justify-center mx-auto my-14">
-                                <div *ngIf="account" class="bg-gray-300 border-2 border-gray-400">
-                                    <img class="object-fill w-44 h-44" [src]="imageUrl" alt="Profile Image">
+                                <div *ngIf="account" class="bg-gray-100 shadow-md">
+                                    <img class="object-fill h-44 w-44" [src]="imageUrl" alt="Profile Image">
                                 </div>
                                 <p-skeleton *ngIf="loading" width="11rem" height="11rem"></p-skeleton>
                             </div>
