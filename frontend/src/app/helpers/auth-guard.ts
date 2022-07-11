@@ -13,10 +13,10 @@ export class AuthGuard implements CanActivate {
     const account = this.authService.accountValue;
 
     if(account){
-        // if (route.data.roles && route.data.roles.indexOf(account.roles) === -1) {
-        //     this.router.navigate(['/']);
-        //     return false;
-        // }
+        if (route.data['roles'] && route.data['roles'].indexOf(account.roles) === -1) {
+            this.router.navigate(['/']);
+            return false;
+        }
 
         return true;
     }

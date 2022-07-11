@@ -40,31 +40,29 @@ public class AuthService {
     }
 
     public JwtResponse loginAccount(LoginRequest loginRequest){
+        try {
+            Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword())
+            );
 
-        if(!accountRepository.existsByUsername(loginRequest.getUsername())){
-            throw new IllegalStateException("Invalid credentials");
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+
+            String token = jwtUtils.generateJwtToken(authentication);
+            UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+            List<String> roles = userDetails.getAuthorities().stream()
+                .map(item -> item.getAuthority())
+                .collect(Collectors.toList());
+
+            return new JwtResponse(
+                token, 
+                new Date((new Date()).getTime() + jwtUtils.getJwtExpirationMs()), 
+                userDetails.getId(),
+                userDetails.getUsername(),
+                userDetails.getIsActive(),
+                roles
+            );
+        } catch (Exception e) {
+            throw new RuntimeException("Invalid username or password!");
         }
-
-        Authentication authentication = authenticationManager.authenticate(
-            new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword())
-        );
-
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-
-        String token = jwtUtils.generateJwtToken(authentication);
-        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-        List<String> roles = userDetails.getAuthorities().stream()
-            .map(item -> item.getAuthority())
-            .collect(Collectors.toList());
-
-        return new JwtResponse(
-            token, 
-            new Date((new Date()).getTime() + jwtUtils.getJwtExpirationMs()), 
-            userDetails.getId(),
-            userDetails.getUsername(),
-            userDetails.getIsActive(),
-            roles
-        );
     }
-    
 }

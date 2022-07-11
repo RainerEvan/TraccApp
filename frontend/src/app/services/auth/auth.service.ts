@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { AuthDetails } from 'src/app/models/authdetails';
+import { Role } from 'src/app/models/role';
 import { environment } from 'src/environments/environment';
 
 const API_URL = environment.apiUrl+'/auth';
@@ -21,7 +22,7 @@ export class AuthService {
 
   public get accountValue(): AuthDetails {
     return this.accountSubject.value;
-}
+  }
 
   public login(username:string,password:string): Observable<any>{
     return this.http.post(API_URL+'/login',{username,password}).pipe(

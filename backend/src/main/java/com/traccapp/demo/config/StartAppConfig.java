@@ -100,6 +100,17 @@ public class StartAppConfig {
             
             Accounts account2 = accountService.addAccount(null,accountRequest2);
 
+            AccountRequest accountRequest3 = new AccountRequest();
+            accountRequest3.setUsername("admin");
+            accountRequest3.setFullname("Admin 1");
+            accountRequest3.setPassword("pass123");
+            accountRequest3.setEmail("admin@gmail.com");
+            accountRequest3.setContactNo("092039031");
+            accountRequest3.setDivisionId(division.getId());
+            accountRequest3.setIsActive(true);
+            accountRequest3.setRolesName(ERoles.ADMIN);
+            
+            Accounts account3 = accountService.addAccount(null,accountRequest3);
             // for(int i=0;i<2;i++){
                 
             //     Tickets ticket = new Tickets();

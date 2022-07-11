@@ -14,19 +14,67 @@ import { TicketListComponent } from './components/tickets/ticket-list/ticket-lis
 import { AuthGuard } from './helpers/auth-guard';
 
 const routes: Routes = [
-  {path:'', redirectTo: 'dashboard',pathMatch: 'full'},
-  {path:'login', component: LoginComponent},
-  {path:'', component: HomeComponent, canActivate:[AuthGuard],
+  {
+    path:'', redirectTo: 'dashboard',pathMatch: 'full'
+  },
+  {
+    path:'login', 
+    component: LoginComponent
+  },
+  {
+    path:'', 
+    component: HomeComponent, 
+    canActivate:[AuthGuard],
     children:[
-      {path:'dashboard', component: DashboardComponent},
-      {path:'tickets', component: TicketListComponent},
-      {path:'ticket-detail/:id', component: TicketDetailComponent},
-      {path:'accounts', component: AccountListComponent},
-      {path:'account-detail/:id', component: AccountDetailComponent},
-      {path:'config', component: ConfigPageComponent},
-      {path:'profile', component: ProfileComponent},
-      {path:'my-ticket', component: MyTicketListComponent},
-      {path:'my-task', component: MyTaskListComponent},
+      {
+        path:'dashboard', 
+        component: DashboardComponent,
+        canActivate:[AuthGuard]
+      },
+      {
+        path:'tickets', 
+        component: TicketListComponent,
+        canActivate:[AuthGuard]
+      },
+      {
+        path:'ticket-detail/:id', 
+        component: TicketDetailComponent,
+        canActivate:[AuthGuard]
+      },
+      {
+        path:'accounts', 
+        component: AccountListComponent,
+        canActivate:[AuthGuard],
+        data:{roles:'ADMIN'},
+      },
+      {
+        path:'account-detail/:id', 
+        component: AccountDetailComponent,
+        canActivate:[AuthGuard]
+      },
+      {
+        path:'config', 
+        component: ConfigPageComponent,
+        canActivate:[AuthGuard],
+        data:{roles:'ADMIN'},
+      },
+      {
+        path:'profile', 
+        component: ProfileComponent,
+        canActivate:[AuthGuard]
+      },
+      {
+        path:'my-ticket',
+        component: MyTicketListComponent,
+        canActivate:[AuthGuard],
+        data:{roles:'USER'},
+      },
+      {
+        path:'my-task', 
+        component: MyTaskListComponent,
+        canActivate:[AuthGuard],
+        data:{roles:'DEVELOPER'},
+      },
     ]
   }
 ];

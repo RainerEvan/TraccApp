@@ -41,6 +41,9 @@ import { AddAccountComponent } from './components/accounts/add-account/add-accou
 import { EditAccountComponent } from './components/accounts/edit-account/edit-account.component';
 import { MyTicketListComponent } from './components/my-tickets/my-ticket-list/my-ticket-list.component';
 import { MyTaskListComponent } from './components/my-tasks/my-task-list/my-task-list.component';
+import { MessageService } from 'primeng/api';
+import { MessagesModule } from 'primeng/messages';
+import { HasRoleDirective } from './directives/has-role.directive';
 
 @NgModule({
   declarations: [
@@ -63,6 +66,7 @@ import { MyTaskListComponent } from './components/my-tasks/my-task-list/my-task-
     EditAccountComponent,
     MyTicketListComponent,
     MyTaskListComponent,
+    HasRoleDirective,
   ],
   imports: [
     BrowserModule,
@@ -82,6 +86,7 @@ import { MyTaskListComponent } from './components/my-tasks/my-task-list/my-task-
     DropdownModule,
     FileUploadModule,
     OverlayPanelModule,
+    MessagesModule,
     SkeletonModule,
     ApolloModule,
     EditorModule,
@@ -118,7 +123,8 @@ import { MyTaskListComponent } from './components/my-tasks/my-task-list/my-task-
     { 
       provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true 
     },
-    DialogService
+    DialogService,
+    MessageService
   ],
   bootstrap: [AppComponent]
 })
