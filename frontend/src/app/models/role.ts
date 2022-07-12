@@ -1,8 +1,8 @@
 export enum ERole{
-    ADMIN,
-    SUPERVISOR,
-    DEVELOPER,
-    USER
+    ADMIN = 'ADMIN',
+    SUPERVISOR = 'SUPERVISOR',
+    DEVELOPER = 'DEVELOPER',
+    USER = 'USER'
 }
 
 export type Role ={

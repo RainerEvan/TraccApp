@@ -100,7 +100,7 @@ public class TicketService {
             .orElseThrow(() -> new IllegalStateException("Ticket with current id cannot be found: "+ticketId));
 
         if(!ticket.getStatus().getName().equals(EStatus.PENDING)){
-            throw new IllegalStateException("Ticket cannot be canceled, because it has already been taken to be resolved: "+ticket.getTicketNo());
+            throw new IllegalStateException("Ticket cannot be canceled, because it has already been taken to be resolved: "+ticket.getStatus().getName());
         }
 
         ticketRepository.delete(getTicket(ticketId));

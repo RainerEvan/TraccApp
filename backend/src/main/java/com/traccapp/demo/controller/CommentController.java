@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.traccapp.demo.model.Comments;
+import com.traccapp.demo.payload.response.ResponseHandler;
 import com.traccapp.demo.service.CommentService;
 
 import lombok.AllArgsConstructor;
@@ -24,23 +26,35 @@ public class CommentController {
     private final CommentService commentService;
 
     @PostMapping(path = "/add")
-    public ResponseEntity<String> addComment(@RequestParam("ticketId") UUID ticketId, @RequestParam("body") String body){
-        commentService.addComment(ticketId,body);
-
-        return ResponseEntity.status(HttpStatus.OK).body("Comment has been added successfully!");
+    public ResponseEntity<Object> addComment(@RequestParam("ticketId") UUID ticketId, @RequestParam("body") String body){
+        try {
+            Comments comment = commentService.addComment(ticketId,body);
+        
+            return ResponseHandler.generateResponse("Comment has been added successfully!", HttpStatus.OK, comment.getCreatedAt());
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.BAD_REQUEST, null);
+        }
     }
 
     @PutMapping(path = "/edit")
-    public ResponseEntity<String> editComment(@RequestParam("commentId") UUID commentId, @RequestParam("body") String body){
-        commentService.editComment(commentId, body);
-
-        return ResponseEntity.status(HttpStatus.OK).body("Comment has been updated successfully!");
+    public ResponseEntity<Object> editComment(@RequestParam("commentId") UUID commentId, @RequestParam("body") String body){
+        try {
+            Comments comment = commentService.editComment(commentId, body);
+        
+            return ResponseHandler.generateResponse("Comment has been updated successfully!", HttpStatus.OK, comment.getUpdatedAt());
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.BAD_REQUEST, null);
+        }
     }
 
     @PutMapping(path = "/delete")
-    public ResponseEntity<String> editComment(@RequestParam("commentId") UUID commentId){
-        commentService.deleteComment(commentId);
-
-        return ResponseEntity.status(HttpStatus.OK).body("Comment has been deleted successfully!");
+    public ResponseEntity<Object> editComment(@RequestParam("commentId") UUID commentId){
+        try {
+            commentService.deleteComment(commentId);
+        
+            return ResponseHandler.generateResponse("Comment has been deleted successfully!", HttpStatus.OK, null);
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.BAD_REQUEST, null);
+        }
     }
 }

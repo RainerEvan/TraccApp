@@ -18,7 +18,7 @@
                                 </svg>
                                 <span class="font-medium text-sm text-inherit">Refresh</span>
                             </button>
-                            <button (click)="showAddAccountDialog()" class="button-primary">Add Account</button>
+                            <button *appHasRole="['ADMIN']" (click)="showAddAccountDialog()" class="button-primary">Add Account</button>
                         </div>
                     </div>
                 </ng-template>

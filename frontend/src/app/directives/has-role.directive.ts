@@ -1,43 +1,32 @@
-import { Directive, Input, OnDestroy, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Directive, Input, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
 import { AuthService } from '../services/auth/auth.service';
 
 @Directive({
   selector: '[appHasRole]'
 })
-export class HasRoleDirective implements OnInit, OnDestroy {
-  private subscription: Subscription[] = [];
-  @Input() public appHasRole: Array<string>;
+export class HasRoleDirective implements OnInit {
+  @Input('appHasRole') appHasRole: string[];
 
- /**
-   * @param {ViewContainerRef} viewContainerRef 
-   * 	-- the location where we need to render the templateRef
-   * @param {TemplateRef<any>} templateRef 
-   *   -- the templateRef to be potentially rendered
-   * @param {AuthService} authService 
-   *   -- will give us access to the roles a user has
-   */
+  isVisible = false;
 
   constructor(private viewContainerRef: ViewContainerRef, private templateRef: TemplateRef<any>, private authService: AuthService) {}
 
   ngOnInit():void {
-    // this.subscription.push(
-    //   this.authService.account.subscribe(acc => {
-    //     if (!acc.roles) {
-    //       this.viewContainerRef.clear();
-    //     }
-    //     const idx = acc.roles.findIndex((role) => this.appHasRole.indexOf(role.name) !== -1);
-    //     if (idx < 0) {
-    //       this.viewContainerRef.clear();
-    //     } else {
-    //       this.viewContainerRef.createEmbeddedView(this.templateRef);
-    //     }
-    //   })
-    // );
-  }
-  
-  ngOnDestroy():void {
-    this.subscription.forEach((subscription: Subscription) => subscription.unsubscribe());
+    const roles: any[]= this.authService.accountValue.roles;
+
+    if (!roles) {
+      this.viewContainerRef.clear();
+    }
+    
+    if (roles.some(role => this.appHasRole.includes(role))) {
+      if (!this.isVisible) {
+        this.isVisible = true;
+        this.viewContainerRef.createEmbeddedView(this.templateRef);
+      }
+    } else {
+      this.isVisible = false;
+      this.viewContainerRef.clear();
+    }
   }
 
 }

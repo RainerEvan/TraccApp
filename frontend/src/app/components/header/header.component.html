@@ -65,19 +65,19 @@
                 <li>
                     <a routerLink="/dashboard" routerLinkActive="active" class="nav-button">Dashboard</a>
                 </li>
-                <li>
+                <li *appHasRole="['ADMIN','SUPERVISOR','DEVELOPER']">
                     <a routerLink="/tickets" routerLinkActive="active" class="nav-button">Tickets</a>
                 </li>
-                <li>
+                <li *appHasRole="['ADMIN']">
                     <a routerLink="/config" routerLinkActive="active" class="nav-button">Config</a>
                 </li>
-                <li>
+                <li *appHasRole="['ADMIN']">
                     <a routerLink="/accounts" routerLinkActive="active" class="nav-button">Accounts</a>
                 </li>
-                <li>
+                <li *appHasRole="['USER']">
                     <a routerLink="/my-ticket" routerLinkActive="active" class="nav-button">My Tickets</a>
                 </li>
-                <li>
+                <li *appHasRole="['DEVELOPER']">
                     <a routerLink="/my-task" routerLinkActive="active" class="nav-button">My Tasks</a>
                 </li>
             </ul>

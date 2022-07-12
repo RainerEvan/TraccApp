@@ -12,10 +12,22 @@
                         <span *ngIf="ticket" [class]="'ticket-status-'+ticket.status.name">{{ticket.status.name}}</span>
                         <p-skeleton *ngIf="loading" width="8rem"></p-skeleton>
                     </div>
-                    <div class="flex flex-row items-center space-x-6">
-                        <button [disabled]="loading" (click)="showSolveTicketDialog()" class="button-secondary">Solve Ticket</button>
-                        <button [disabled]="loading" (click)="showConfirmationDialog('Close Ticket','Do you want to close this ticket?','close')" class="button-primary">Close Ticket</button>
-                        <button [disabled]="loading" (click)="showConfirmationDialog('Take Ticket','Do you want to take this ticket?','take')" class="button-primary">Take Ticket</button>
+                    <div class="flex flex-row items-center space-x-4">
+                        <div *appHasRole="['DEVELOPER']">
+                            <button *appTicketStatus="'IN_PROGRESS';now:status" [disabled]="loading" (click)="showSolveTicketDialog()" class="button-secondary">Solve Ticket</button>
+                        </div>
+                        <div *appHasRole="['DEVELOPER']">
+                            <button [disabled]="loading" (click)="showConfirmationDialog('Take Ticket','Do you want to take this ticket?','take')" class="button-primary">Take Ticket</button>
+                        </div>
+                        <div *appHasRole="['DEVELOPER']">
+                            <button [disabled]="loading" (click)="showConfirmationDialog('Drop Ticket','Do you want to drop this ticket?','drop')" class="button-primary">Drop Ticket</button>
+                        </div>
+                        <div *appHasRole="['USER']">
+                            <button [disabled]="loading" (click)="showConfirmationDialog('Close Ticket','Do you want to close this ticket?','close')" class="button-primary">Close Ticket</button>
+                        </div>
+                        <div *appHasRole="['USER']">
+                            <button [disabled]="loading" (click)="showConfirmationDialog('Cancel Ticket','Do you want to cancel this ticket?','cancel')" class="button-primary">Cancel Ticket</button>
+                        </div>
                     </div>
                 </div>
             </div>

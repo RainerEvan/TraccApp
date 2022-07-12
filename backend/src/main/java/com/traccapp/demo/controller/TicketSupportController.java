@@ -89,6 +89,7 @@ public class TicketSupportController {
     public ResponseEntity<Object> cancelTicket(@RequestParam("ticketId") UUID ticketId){
         try {
             Tickets ticket = ticketService.getTicket(ticketId);
+            ticketService.deleteTicket(ticketId);
 
             List<TicketAttachments> files = ticketAttachmentService.getAllFilesForTicket(ticket);
 
@@ -96,7 +97,6 @@ public class TicketSupportController {
                 ticketAttachmentService.deleteFile(file.getId());
             }
 
-            ticketService.deleteTicket(ticketId);
             return ResponseHandler.generateResponse("Ticket has been canceled!", HttpStatus.OK, null);
 
         } catch (Exception e) {

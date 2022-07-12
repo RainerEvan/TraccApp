@@ -19,7 +19,7 @@
                                 </svg>
                                 <span class="font-medium text-sm text-inherit">Refresh</span>
                             </button>
-                            <button (click)="showAddTicketDialog()" class="button-primary">Add Ticket</button>
+                            <button *appHasRole="['USER']" (click)="showAddTicketDialog()" class="button-primary">Add Ticket</button>
                         </div>
                     </div>
                 </ng-template>

@@ -44,6 +44,7 @@ import { MyTaskListComponent } from './components/my-tasks/my-task-list/my-task-
 import { MessageService } from 'primeng/api';
 import { MessagesModule } from 'primeng/messages';
 import { HasRoleDirective } from './directives/has-role.directive';
+import { TicketStatusDirective } from './directives/ticket-status.directive';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import { HasRoleDirective } from './directives/has-role.directive';
     MyTicketListComponent,
     MyTaskListComponent,
     HasRoleDirective,
+    TicketStatusDirective,
   ],
   imports: [
     BrowserModule,

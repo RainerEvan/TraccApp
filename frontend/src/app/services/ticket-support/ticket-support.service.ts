@@ -58,6 +58,7 @@ export class TicketSupportService {
             }
             dateAdded
             reporter{
+              id
               fullname
             }
             title
@@ -70,6 +71,7 @@ export class TicketSupportService {
               id
               dateTaken
               developer{
+                id
                 fullname
               }
               result
@@ -173,6 +175,11 @@ export class TicketSupportService {
   public closeTicket(ticketId: string): Observable<any>{
     const params = new HttpParams().set('ticketId',ticketId);
     return this.http.put(API_URL+'/close',null,{params:params});
+  }
+
+  public cancelTicket(ticketId: string): Observable<any>{
+    const params = new HttpParams().set('ticketId',ticketId);
+    return this.http.delete(API_URL+'/delete',{params:params});
   }
 
   public addSupport(ticketId: string): Observable<any>{

@@ -138,7 +138,7 @@ public class StartAppConfig {
             ticket2.setReporter(account);
             ticket2.setTitle("Smile Bug pada Form Tidak ada alamat");
             ticket2.setDescription("Form gabisa diisi lagi gimana dong");
-            ticket2.setStatus(status1);
+            ticket2.setStatus(status2);
             ticketRepository.save(ticket2);
 
             Tickets ticket3 = new Tickets();
@@ -147,7 +147,7 @@ public class StartAppConfig {
             ticket3.setReporter(account);
             ticket3.setTitle("App Geospacial Tidak bisa Input Data Perumahan");
             ticket3.setDescription("Form gabisa diisi lagi gimana dong");
-            ticket3.setStatus(status1);
+            ticket3.setStatus(status3);
             ticketRepository.save(ticket3);
 
             Supports support = new Supports();

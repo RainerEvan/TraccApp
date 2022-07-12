@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { TicketSupportService } from 'src/app/services/ticket-support/ticket-support.service';
 import { Ticket } from 'src/app/models/ticket';
@@ -18,7 +18,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
   ticket: Ticket;
   ref: DynamicDialogRef;
 
-  constructor(public dialogService:DialogService, private route:ActivatedRoute , private ticketSupportService:TicketSupportService) { }
+  constructor(private router: Router, public dialogService:DialogService, private route:ActivatedRoute, private ticketSupportService:TicketSupportService) { }
 
   ngOnInit(): void {
     this.getTicket();
@@ -51,12 +51,11 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     this.ticketSupportService.addSupport(ticketId).subscribe({
       next: (result: any) => {
         console.log(result);
-        this.getTicket();
-        this.showResultDialog("Success","Ticket has been added to your task list");
+        this.showResultDialog("Success","Ticket has been added to your task list",null);
       },
       error: (error: any) => {
         console.log(error);
-        this.showResultDialog("Failed","There was a problem, try again later");
+        this.showResultDialog("Failed","There was a problem, try again later",null);
       }
     });
   }
@@ -67,12 +66,26 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     this.ticketSupportService.closeTicket(ticketId).subscribe({
       next: (result: any) => {
         console.log(result);
-        this.getTicket();
-        this.showResultDialog("Success","Ticket has been closed successfully");
+        this.showResultDialog("Success","Ticket has been closed successfully",null);
       },
       error: (error: any) => {
         console.log(error);
-        this.showResultDialog("Failed","There was a problem, try again later");
+        this.showResultDialog("Failed","There was a problem, try again later",null);
+      }
+    });
+  }
+
+  public cancelTicket():void{
+    const ticketId = this.ticket.ticketId;
+
+    this.ticketSupportService.cancelTicket(ticketId).subscribe({
+      next: (result: any) => {
+        console.log(result);
+        this.showResultDialog("Success","Ticket has been canceled successfully","cancel");
+      },
+      error: (error: any) => {
+        console.log(error);
+        this.showResultDialog("Failed",error,null);
       }
     });
   }
@@ -117,11 +130,14 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
           else if(action == 'close'){
             this.closeTicket();
           }
+          else if(action == 'cancel'){
+            this.cancelTicket();
+          }
         }
     });
   }
 
-  showResultDialog(title:string, message:string){
+  showResultDialog(title:string, message:string, action:string){
     this.ref = this.dialogService.open(ResultDialogComponent, {
       header: title,
       data: {
@@ -130,6 +146,15 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       baseZIndex: 10000,
       contentStyle: {"max-height": "500px", "overflow": "auto"},
       width:'30vw'
+    });
+
+    this.ref.onClose.subscribe(() =>{
+      if (action == 'cancel') {
+        this.router.navigate(['/my-ticket']);
+      }
+      else{
+        this.getTicket();
+      }
     });
   }
 }
