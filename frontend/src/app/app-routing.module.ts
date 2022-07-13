@@ -2,7 +2,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AccountDetailComponent } from './components/accounts/account-detail/account-detail.component';
 import { AccountListComponent } from './components/accounts/account-list/account-list.component';
+import { ConfigApplicationComponent } from './components/config/config-application/config-application.component';
+import { ConfigDivisionComponent } from './components/config/config-division/config-division.component';
 import { ConfigPageComponent } from './components/config/config-page/config-page.component';
+import { ConfigScoringComponent } from './components/config/config-scoring/config-scoring.component';
+import { ConfigTagComponent } from './components/config/config-tag/config-tag.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
@@ -57,6 +61,35 @@ const routes: Routes = [
         component: ConfigPageComponent,
         canActivate:[AuthGuard],
         data:{roles:'ADMIN'},
+        children:[
+          {
+            path:'',redirectTo: 'division',pathMatch: 'full'
+          },
+          {
+            path:'division',
+            component: ConfigDivisionComponent,
+            canActivate:[AuthGuard],
+            data:{roles:'ADMIN'},
+          },
+          {
+            path:'application',
+            component: ConfigApplicationComponent,
+            canActivate:[AuthGuard],
+            data:{roles:'ADMIN'},
+          },
+          {
+            path:'tag',
+            component: ConfigTagComponent,
+            canActivate:[AuthGuard],
+            data:{roles:'ADMIN'},
+          },
+          {
+            path:'scoring',
+            component: ConfigScoringComponent,
+            canActivate:[AuthGuard],
+            data:{roles:'ADMIN'},
+          },
+        ]
       },
       {
         path:'profile', 

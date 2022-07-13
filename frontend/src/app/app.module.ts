@@ -23,13 +23,10 @@ import { AddTicketComponent } from './components/tickets/add-ticket/add-ticket.c
 import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { InputSwitchModule } from 'primeng/inputswitch';
-import { ImageModule } from 'primeng/image';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { DropdownModule } from 'primeng/dropdown';
-import { FileUploadModule } from 'primeng/fileupload';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { TableModule } from 'primeng/table';
-import { DataViewModule } from 'primeng/dataview';
 import { EditorModule } from 'primeng/editor';
 import { SkeletonModule } from 'primeng/skeleton';
 import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
@@ -44,7 +41,10 @@ import { MyTaskListComponent } from './components/my-tasks/my-task-list/my-task-
 import { MessageService } from 'primeng/api';
 import { MessagesModule } from 'primeng/messages';
 import { HasRoleDirective } from './directives/has-role.directive';
-import { TicketStatusDirective } from './directives/ticket-status.directive';
+import { ConfigDivisionComponent } from './components/config/config-division/config-division.component';
+import { ConfigApplicationComponent } from './components/config/config-application/config-application.component';
+import { ConfigTagComponent } from './components/config/config-tag/config-tag.component';
+import { ConfigScoringComponent } from './components/config/config-scoring/config-scoring.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +68,10 @@ import { TicketStatusDirective } from './directives/ticket-status.directive';
     MyTicketListComponent,
     MyTaskListComponent,
     HasRoleDirective,
-    TicketStatusDirective,
+    ConfigDivisionComponent,
+    ConfigApplicationComponent,
+    ConfigTagComponent,
+    ConfigScoringComponent,
   ],
   imports: [
     BrowserModule,
@@ -78,20 +81,17 @@ import { TicketStatusDirective } from './directives/ticket-status.directive';
     FormsModule,
     ReactiveFormsModule,
     TableModule,
-    DataViewModule,
     DynamicDialogModule,
     AutoCompleteModule,
     InputTextModule,
     InputTextareaModule,
     InputSwitchModule,
-    ImageModule,
     DropdownModule,
-    FileUploadModule,
     OverlayPanelModule,
     MessagesModule,
     SkeletonModule,
-    ApolloModule,
     EditorModule,
+    ApolloModule,
   ],
   providers: [
     {

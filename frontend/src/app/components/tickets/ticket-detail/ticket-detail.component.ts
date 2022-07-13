@@ -6,6 +6,7 @@ import { Ticket } from 'src/app/models/ticket';
 import { ConfirmationDialogComponent } from '../../modal/confirmation-dialog/confirmation-dialog.component';
 import { ResultDialogComponent } from '../../modal/result-dialog/result-dialog.component';
 import { SolveTicketComponent } from '../solve-ticket/solve-ticket.component';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-ticket-detail',
@@ -16,9 +17,11 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
 
   loading: boolean;
   ticket: Ticket;
+  isCurrDeveloper: boolean;
+  isCurrUser: boolean;
   ref: DynamicDialogRef;
 
-  constructor(private router: Router, public dialogService:DialogService, private route:ActivatedRoute, private ticketSupportService:TicketSupportService) { }
+  constructor(private router: Router, public dialogService:DialogService, private route:ActivatedRoute, private ticketSupportService:TicketSupportService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.getTicket();
@@ -38,6 +41,8 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       next: (ticket: Ticket) => {
         this.loading = false;
         this.ticket = ticket;
+        this.checkDeveloper();
+        this.checkUser();
       },
       error: (error: any) => {
         console.log(error);
@@ -88,6 +93,28 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
         this.showResultDialog("Failed",error,null);
       }
     });
+  }
+
+  checkDeveloper(){
+    this.isCurrDeveloper = false;
+
+    const accountId = this.authService.accountValue.accountId;
+    const developerId = this.ticket.support[0].developer.id;
+
+    if(accountId == developerId){
+      this.isCurrDeveloper = true;
+    }
+  }
+
+  checkUser(){
+    this.isCurrUser = false;
+
+    const accountId = this.authService.accountValue.accountId;
+    const userId = this.ticket.reporter.id;
+
+    if(accountId == userId){
+      this.isCurrUser = true;
+    }
   }
 
   showSolveTicketDialog(){

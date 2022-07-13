@@ -74,7 +74,14 @@ public class StartAppConfig {
             Applications application = applicationService.addApplication("CAMS");
             Applications application2 = applicationService.addApplication("SMILE");
             Applications application3 = applicationService.addApplication("GEOSPACIAL");
-            Divisions division = divisionService.addDivision("ITXB");
+            Divisions division = divisionService.addDivision("ITX A");
+            Divisions division2 = divisionService.addDivision("ITX B");
+            Divisions division3 = divisionService.addDivision("ITX C");
+            Divisions division4 = divisionService.addDivision("ITX D");
+            Divisions division5 = divisionService.addDivision("ITX E");
+            Divisions division6 = divisionService.addDivision("ITX F");
+            Divisions division7 = divisionService.addDivision("CTS A");
+            Divisions division8 = divisionService.addDivision("CTS B");
 
             AccountRequest accountRequest = new AccountRequest();
             accountRequest.setUsername("maman");
@@ -111,6 +118,18 @@ public class StartAppConfig {
             accountRequest3.setRolesName(ERoles.ADMIN);
             
             Accounts account3 = accountService.addAccount(null,accountRequest3);
+
+            AccountRequest accountRequest4 = new AccountRequest();
+            accountRequest4.setUsername("bob");
+            accountRequest4.setFullname("Bob");
+            accountRequest4.setPassword("pass123");
+            accountRequest4.setEmail("bob@gmail.com");
+            accountRequest4.setContactNo("092002031");
+            accountRequest4.setDivisionId(division.getId());
+            accountRequest4.setIsActive(true);
+            accountRequest4.setRolesName(ERoles.DEVELOPER);
+            
+            Accounts account4 = accountService.addAccount(null,accountRequest4);
             // for(int i=0;i<2;i++){
                 
             //     Tickets ticket = new Tickets();
