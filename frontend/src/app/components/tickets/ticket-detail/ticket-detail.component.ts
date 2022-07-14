@@ -99,7 +99,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     this.isCurrDeveloper = false;
 
     const accountId = this.authService.accountValue.accountId;
-    const developerId = this.ticket.support[0].developer.id;
+    const developerId = this.ticket.support[0]?.developer.id;
 
     if(accountId == developerId){
       this.isCurrDeveloper = true;

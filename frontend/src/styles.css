@@ -36,5 +36,5 @@ th{
 }
 
 td{
-    @apply font-regular text-sm text-black cursor-pointer !important;
+    @apply font-regular text-sm text-black !important;
 }

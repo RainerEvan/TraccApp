@@ -15,7 +15,7 @@
 }
 
 :host ::ng-deep .p-autocomplete .p-autocomplete-multiple-container {
-    @apply w-full ring-0 border-none bg-transparent flex-nowrap !important;
+    @apply w-full ring-0 border-none bg-transparent flex-nowrap overflow-auto !important;
 }
 
 :host ::ng-deep .p-autocomplete .p-autocomplete-multiple-container .p-autocomplete-input-token input {

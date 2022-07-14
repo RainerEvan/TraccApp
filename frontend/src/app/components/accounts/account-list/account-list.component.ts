@@ -4,6 +4,8 @@ import { AccountService } from 'src/app/services/account/account.service';
 import { Account } from 'src/app/models/account';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { AddAccountComponent } from '../add-account/add-account.component';
+import { environment } from 'src/environments/environment';
+import { cloneDeep } from '@apollo/client/utilities';
 
 @Component({
   selector: 'app-account-list',
@@ -13,6 +15,7 @@ import { AddAccountComponent } from '../add-account/add-account.component';
 export class AccountListComponent implements OnInit {
 
   accounts: Account[];
+  imageUrl = environment.apiUrl+'/accounts/profileImg/';
   loading: boolean;
   totalRecords: number;
   ref: DynamicDialogRef;
@@ -35,7 +38,7 @@ export class AccountListComponent implements OnInit {
 
     this.accountService.getAllAccounts().subscribe({
       next: (accounts: Account[]) => {
-        this.accounts = accounts;
+        this.accounts = cloneDeep(accounts);
         this.loading = false;
         this.totalRecords = accounts.length;
       },

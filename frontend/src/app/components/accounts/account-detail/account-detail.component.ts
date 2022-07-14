@@ -40,7 +40,7 @@ export class AccountDetailComponent implements OnInit {
       next: (account: Account) => {
         this.loading = false;
         this.account = account;
-        this.imageUrl = this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64,${account.profileImg}`);
+        this.imageUrl = this.sanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64,'+account.profileImg);
       },
       error: (error: any) => {
         console.log(error);

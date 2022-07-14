@@ -77,11 +77,6 @@ public class StartAppConfig {
             Divisions division = divisionService.addDivision("ITX A");
             Divisions division2 = divisionService.addDivision("ITX B");
             Divisions division3 = divisionService.addDivision("ITX C");
-            Divisions division4 = divisionService.addDivision("ITX D");
-            Divisions division5 = divisionService.addDivision("ITX E");
-            Divisions division6 = divisionService.addDivision("ITX F");
-            Divisions division7 = divisionService.addDivision("CTS A");
-            Divisions division8 = divisionService.addDivision("CTS B");
 
             AccountRequest accountRequest = new AccountRequest();
             accountRequest.setUsername("maman");

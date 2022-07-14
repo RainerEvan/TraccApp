@@ -45,6 +45,9 @@ import { ConfigDivisionComponent } from './components/config/config-division/con
 import { ConfigApplicationComponent } from './components/config/config-application/config-application.component';
 import { ConfigTagComponent } from './components/config/config-tag/config-tag.component';
 import { ConfigScoringComponent } from './components/config/config-scoring/config-scoring.component';
+import { AddDivisionComponent } from './components/config/add-division/add-division.component';
+import { AddTagComponent } from './components/config/add-tag/add-tag.component';
+import { AddApplicationComponent } from './components/config/add-application/add-application.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +75,9 @@ import { ConfigScoringComponent } from './components/config/config-scoring/confi
     ConfigApplicationComponent,
     ConfigTagComponent,
     ConfigScoringComponent,
+    AddDivisionComponent,
+    AddTagComponent,
+    AddApplicationComponent,
   ],
   imports: [
     BrowserModule,

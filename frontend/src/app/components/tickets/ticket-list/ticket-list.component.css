@@ -1,5 +1,5 @@
 :host ::ng-deep .p-inputtext {
-    @apply w-full h-10 ring-0 border-2 border-gray-300 text-sm placeholder:text-gray-500 hover:border-gray-400 focus:border-gray-400 !important;
+    @apply w-full h-10 ring-0 border-2 border-gray-300 text-sm placeholder:text-gray-400 hover:border-gray-400 focus:border-gray-400 !important;
 }
 
 :host ::ng-deep .p-paginator {

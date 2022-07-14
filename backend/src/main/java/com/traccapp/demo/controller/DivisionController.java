@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,7 +27,7 @@ public class DivisionController {
     private final DivisionService divisionService;
 
     @PostMapping(path = "/add")
-    public ResponseEntity<Object> addDivision(@RequestParam("division") String name){
+    public ResponseEntity<Object> addDivision(@RequestBody String name){
         try {
             Divisions division = divisionService.addDivision(name);
             

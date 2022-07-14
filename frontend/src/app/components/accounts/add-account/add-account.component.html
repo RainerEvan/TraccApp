@@ -22,18 +22,12 @@
         </div>
     </div>
     <div class="w-full">
-        <label for="email" class="form-label">Email*</label>
+        <label for="email" class="form-label">Email</label>
         <input type="text" pInputText placeholder="Enter email" class="form-field" formControlName="email" required>
-        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="font-regular text-sm text-red-400 pt-1">
-            Please enter email
-        </div>
     </div>
     <div class="w-full">
-        <label for="contactNo" class="form-label">Contact No*</label>
+        <label for="contactNo" class="form-label">Contact No</label>
         <input type="text" pInputText placeholder="Enter contact no" class="form-field" formControlName="contactNo" required>
-        <div *ngIf="contactNo.invalid && (contactNo.dirty || contactNo.touched)" class="font-regular text-sm text-red-400 pt-1">
-            Please enter contact no
-        </div>
     </div>
     <div class="w-full">
         <label for="division" class="form-label">Division*</label>

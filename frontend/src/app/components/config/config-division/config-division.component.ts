@@ -1,9 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Table } from 'primeng/table';
-import { AddTicketComponent } from '../../tickets/add-ticket/add-ticket.component';
 import { Division } from 'src/app/models/division';
 import { DivisionService } from 'src/app/services/division/division.service';
+import { AddDivisionComponent } from '../add-division/add-division.component';
+import { ConfirmationDialogComponent } from '../../modal/confirmation-dialog/confirmation-dialog.component';
+import { ResultDialogComponent } from '../../modal/result-dialog/result-dialog.component';
+import { cloneDeep } from '@apollo/client/utilities';
 
 @Component({
   selector: 'app-config-division',
@@ -31,9 +34,12 @@ export class ConfigDivisionComponent implements OnInit {
   }
 
   public getAllDivisions(): void{
+    this.loading = true;
+
     this.divisionService.getAllDivisions().subscribe({
       next: (divisions: Division[]) => {
-        this.divisions = divisions;
+        this.divisions = cloneDeep(divisions);
+        this.loading = false;
       },
       error: (error: any) => {
         console.log(error);
@@ -45,10 +51,23 @@ export class ConfigDivisionComponent implements OnInit {
     this.divisionTable.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
   }
 
-  showAddTicketDialog(){
-    this.ref = this.dialogService.open(AddTicketComponent, {
-      header: "Add Ticket",
-      footer: " ",
+  public deleteDivision(divisionId: string):void{
+    this.divisionService.deleteDivision(divisionId).subscribe({
+      next: (result: any) => {
+        console.log(result);
+        this.showResultDialog("Success","Division has been deleted successfully");
+        this.getAllDivisions();
+      },
+      error: (error: any) => {
+        console.log(error);
+        this.showResultDialog("Failed","There was a problem, try again later");
+      }
+    });
+  }
+
+  showAddDivisionDialog(){
+    this.ref = this.dialogService.open(AddDivisionComponent, {
+      header: "Add Division",
       baseZIndex: 10000,
       contentStyle: {"max-height": "650px", "overflow": "auto"},
       width:'40vw',
@@ -61,4 +80,35 @@ export class ConfigDivisionComponent implements OnInit {
     });
   }
 
+  showConfirmationDialog(title:string, message:string, action:string, divisionId:string){
+    this.ref = this.dialogService.open(ConfirmationDialogComponent, {
+      header: title,
+      data: {
+        message: message,
+      },
+      baseZIndex: 10000,
+      contentStyle: {"max-height": "500px", "overflow": "auto"},
+      width:'30vw',
+    });
+
+    this.ref.onClose.subscribe((confirm:boolean) =>{
+        if (confirm) {
+          if(action == 'delete'){
+            this.deleteDivision(divisionId);
+          }
+        }
+    });
+  }
+
+  showResultDialog(title:string, message:string){
+    this.ref = this.dialogService.open(ResultDialogComponent, {
+      header: title,
+      data: {
+        message: message,
+      },
+      baseZIndex: 10000,
+      contentStyle: {"max-height": "500px", "overflow": "auto"},
+      width:'30vw'
+    });
+  }
 }
