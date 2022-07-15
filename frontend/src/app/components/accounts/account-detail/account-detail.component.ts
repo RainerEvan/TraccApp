@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AccountService } from 'src/app/services/account/account.service';
-import { Account } from 'src/app/models/account';
+import { Accounts } from 'src/app/models/accounts';
 import { environment } from 'src/environments/environment';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { EditAccountComponent } from '../edit-account/edit-account.component';
@@ -17,7 +17,7 @@ const API_URL = environment.apiUrl+'/accounts';
 export class AccountDetailComponent implements OnInit {
 
   loading: boolean;
-  account: Account;
+  account: Accounts;
   imageUrl: any;
   ref: DynamicDialogRef;
 
@@ -37,7 +37,7 @@ export class AccountDetailComponent implements OnInit {
     const accountId = this.route.snapshot.paramMap.get('id');
     this.loading = true;
     this.accountService.getAccount(accountId).subscribe({
-      next: (account: Account) => {
+      next: (account: Accounts) => {
         this.loading = false;
         this.account = account;
         this.imageUrl = this.sanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64,'+account.profileImg);

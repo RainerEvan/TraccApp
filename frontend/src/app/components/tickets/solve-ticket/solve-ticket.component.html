@@ -22,7 +22,6 @@
     </div>
     <div class="w-full">
         <label for="devNote" class="form-label">Developer Note*</label>
-        <!-- <textarea pInputTextarea autoResize="autoResize" placeholder="Enter developer note" class="form-field" formControlName="devNote"></textarea> -->
         <p-editor [style]="{'height':'10rem'}" placeholder="Enter developer note" formControlName="devNote" required></p-editor>
         <div *ngIf="devNote.invalid && (devNote.dirty || devNote.touched)" class="font-regular text-sm text-red-400 pt-1">
             Please enter developer note

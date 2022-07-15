@@ -4,6 +4,8 @@ import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.UUID;
 
+import javax.transaction.Transactional;
+
 import com.traccapp.demo.exception.AbstractGraphQLException;
 import com.traccapp.demo.model.Comments;
 import com.traccapp.demo.model.Tickets;
@@ -26,6 +28,7 @@ public class CommentService {
     @Autowired
     private final AuthService authService;
 
+    @Transactional
     public List<Comments> getAllCommentsForTicket(UUID ticketId){
 
         Tickets ticket = ticketRepository.findByTicketId(ticketId)
@@ -34,6 +37,7 @@ public class CommentService {
         return commentRepository.findAllByTicketAndIsActive(ticket, true);
     }
 
+    @Transactional
     public Comments addComment(UUID ticketId, String body) {
 
         Tickets ticket = ticketRepository.findByTicketId(ticketId)
@@ -49,6 +53,7 @@ public class CommentService {
         return commentRepository.save(comment);
     }
 
+    @Transactional
     public Comments editComment(UUID commentId, String body){
 
         Comments comment = commentRepository.findById(commentId).orElseThrow(() -> new AbstractGraphQLException("Comment with current id cannot be found"+commentId,"commentId"));

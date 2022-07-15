@@ -48,6 +48,7 @@ import { ConfigScoringComponent } from './components/config/config-scoring/confi
 import { AddDivisionComponent } from './components/config/add-division/add-division.component';
 import { AddTagComponent } from './components/config/add-tag/add-tag.component';
 import { AddApplicationComponent } from './components/config/add-application/add-application.component';
+import { CommentsComponent } from './components/comments/comments.component';
 
 @NgModule({
   declarations: [
@@ -78,6 +79,7 @@ import { AddApplicationComponent } from './components/config/add-application/add
     AddDivisionComponent,
     AddTagComponent,
     AddApplicationComponent,
+    CommentsComponent,
   ],
   imports: [
     BrowserModule,

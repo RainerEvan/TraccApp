@@ -1,9 +1,9 @@
-import { HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import { HttpClient, HttpParams} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Apollo,gql } from 'apollo-angular';
 import { map, Observable } from 'rxjs';
-import { Support } from 'src/app/models/support';
-import { Ticket } from 'src/app/models/ticket';
+import { Supports } from 'src/app/models/supports';
+import { Tickets } from 'src/app/models/tickets';
 import { environment } from 'src/environments/environment';
 
 const API_URL = environment.apiUrl+'/tickets';
@@ -15,7 +15,7 @@ export class TicketSupportService {
 
   constructor(private apollo: Apollo, private http: HttpClient) { }
 
-  public getAllTickets(): Observable<Ticket[]>{
+  public getAllTickets(): Observable<Tickets[]>{
     return this.apollo.watchQuery<any>({
       query:gql`
         query getAllTickets{
@@ -46,7 +46,7 @@ export class TicketSupportService {
       .valueChanges.pipe(map((result)=>result.data.getAllTickets));
   }
 
-  public getTicket(ticketId: string): Observable<Ticket>{
+  public getTicket(ticketId: string): Observable<Tickets>{
     return this.apollo.watchQuery<any>({
       query: gql`
         query getTicket($ticketId:ID!){
@@ -100,7 +100,7 @@ export class TicketSupportService {
       .valueChanges.pipe(map((result)=>result.data.getTicket));
   }
 
-  public getAllTicketsForUser(accountId:string): Observable<Ticket[]>{
+  public getAllTicketsForUser(accountId:string): Observable<Tickets[]>{
     return this.apollo.watchQuery<any>({
       query:gql`
         query getAllTicketsForUser($accountId:ID!){
@@ -134,7 +134,7 @@ export class TicketSupportService {
       .valueChanges.pipe(map((result)=>result.data.getAllTicketsForUser));
   }
 
-  public getAllSupportsForDeveloper(accountId:string): Observable<Support[]>{
+  public getAllSupportsForDeveloper(accountId:string): Observable<Supports[]>{
     return this.apollo.watchQuery<any>({
       query:gql`
         query getAllSupportsForDeveloper($accountId:ID!){

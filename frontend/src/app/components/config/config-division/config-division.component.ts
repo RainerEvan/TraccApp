@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Table } from 'primeng/table';
-import { Division } from 'src/app/models/division';
+import { Divisions } from 'src/app/models/divisions';
 import { DivisionService } from 'src/app/services/division/division.service';
 import { AddDivisionComponent } from '../add-division/add-division.component';
 import { ConfirmationDialogComponent } from '../../modal/confirmation-dialog/confirmation-dialog.component';
@@ -15,7 +15,7 @@ import { cloneDeep } from '@apollo/client/utilities';
 })
 export class ConfigDivisionComponent implements OnInit {
 
-  divisions: Division[];
+  divisions: Divisions[];
   loading: boolean;
   totalRecords: number;
   ref: DynamicDialogRef;
@@ -37,7 +37,7 @@ export class ConfigDivisionComponent implements OnInit {
     this.loading = true;
 
     this.divisionService.getAllDivisions().subscribe({
-      next: (divisions: Division[]) => {
+      next: (divisions: Divisions[]) => {
         this.divisions = cloneDeep(divisions);
         this.loading = false;
       },

@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ApplicationService } from 'src/app/services/application/application.service';
 import { TicketSupportService } from 'src/app/services/ticket-support/ticket-support.service';
-import { Application } from 'src/app/models/application';
+import { Applications } from 'src/app/models/applications';
 import { ResultDialogComponent } from '../../modal/result-dialog/result-dialog.component';
 
 @Component({
@@ -15,7 +15,7 @@ export class AddTicketComponent implements OnInit {
 
   ticketForm: FormGroup;
   isTicketFormSubmitted: boolean = false;
-  applications: Application[];
+  applications: Applications[];
   ticketAttachments: File[]=[];
   fileDropArea:string;
   
@@ -27,7 +27,7 @@ export class AddTicketComponent implements OnInit {
 
   public getAllApplications(): void{
     this.applicationService.getAllApplications().subscribe({
-      next: (applications: Application[]) => {
+      next: (applications: Applications[]) => {
         this.applications = applications;
       },
       error: (error: any) => {

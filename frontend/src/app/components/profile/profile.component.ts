@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Account } from 'src/app/models/account';
+import { Accounts } from 'src/app/models/accounts';
 import { AccountService } from 'src/app/services/account/account.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { environment } from 'src/environments/environment';
@@ -12,7 +12,7 @@ const API_URL = environment.apiUrl+'/accounts';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  account: Account;
+  account: Accounts;
   loading: boolean = false;
   imageUrl: string;
 
@@ -27,7 +27,7 @@ export class ProfileComponent implements OnInit {
 
     this.loading = true;
     this.accountService.getAccount(accountId).subscribe({
-      next: (account: Account) => {
+      next: (account: Accounts) => {
         this.loading = false;
         this.account = account;
         this.imageUrl = API_URL + '/profileImg/' + this.account.id;

@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { TicketSupportService } from 'src/app/services/ticket-support/ticket-support.service';
-import { Ticket } from 'src/app/models/ticket';
+import { Tickets } from 'src/app/models/tickets';
 import { ConfirmationDialogComponent } from '../../modal/confirmation-dialog/confirmation-dialog.component';
 import { ResultDialogComponent } from '../../modal/result-dialog/result-dialog.component';
 import { SolveTicketComponent } from '../solve-ticket/solve-ticket.component';
@@ -16,7 +16,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 export class TicketDetailComponent implements OnInit, OnDestroy {
 
   loading: boolean;
-  ticket: Ticket;
+  ticket: Tickets;
   isCurrDeveloper: boolean;
   isCurrUser: boolean;
   ref: DynamicDialogRef;
@@ -38,7 +38,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
 
     this.loading = true;
     this.ticketSupportService.getTicket(ticketId).subscribe({
-      next: (ticket: Ticket) => {
+      next: (ticket: Tickets) => {
         this.loading = false;
         this.ticket = ticket;
         this.checkDeveloper();

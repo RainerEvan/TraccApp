@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { cloneDeep } from '@apollo/client/utilities';
-import { Ticket } from 'src/app/models/ticket';
+import { Tickets } from 'src/app/models/tickets';
 import { TicketSupportService } from 'src/app/services/ticket-support/ticket-support.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { TicketSupportService } from 'src/app/services/ticket-support/ticket-sup
 })
 export class DashboardComponent implements OnInit {
   
-  tickets: Ticket[];
+  tickets: Tickets[];
   loading: boolean;
   
   constructor(private ticketSupportService: TicketSupportService) { }
@@ -23,8 +23,8 @@ export class DashboardComponent implements OnInit {
     this.loading = true;
 
     this.ticketSupportService.getAllTickets().subscribe({
-      next: (tickets: Ticket[]) => {
-        this.tickets = cloneDeep(tickets);
+      next: (tickets: Tickets[]) => {
+        this.tickets = tickets;
         this.loading = false;
       },
       error: (error: any) => {

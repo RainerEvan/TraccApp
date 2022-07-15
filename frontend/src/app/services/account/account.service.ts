@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Apollo,gql } from 'apollo-angular';
 import { map, Observable } from 'rxjs';
-import { Account } from 'src/app/models/account';
+import { Accounts } from 'src/app/models/accounts';
 import { environment } from 'src/environments/environment';
 
 const API_URL = environment.apiUrl+'/accounts';
@@ -14,7 +14,7 @@ export class AccountService {
 
   constructor(private apollo: Apollo, private http: HttpClient) { }
 
-  public getAllAccounts(): Observable<Account[]>{
+  public getAllAccounts(): Observable<Accounts[]>{
     return this.apollo.watchQuery<any>({
       query:gql`
         query getAllAccounts{
@@ -39,7 +39,7 @@ export class AccountService {
       .valueChanges.pipe(map((result)=>result.data.getAllAccounts));
   }
 
-  public getAccount(accountId: string): Observable<Account>{
+  public getAccount(accountId: string): Observable<Accounts>{
     return this.apollo.watchQuery<any>({
       query: gql`
         query getAccount($accountId:ID!){

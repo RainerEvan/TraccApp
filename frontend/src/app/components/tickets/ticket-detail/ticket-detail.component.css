@@ -3,7 +3,7 @@
 }
 
 .ticket-value{
-    @apply text-left font-regular text-sm text-gray-600 !important;
+    @apply text-justify font-regular text-sm text-gray-600 !important;
 }
 
 .ticket-status-PENDING{

@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { cloneDeep } from '@apollo/client/utilities';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Table } from 'primeng/table';
-import { Application } from 'src/app/models/application';
+import { Applications } from 'src/app/models/applications';
 import { ApplicationService } from 'src/app/services/application/application.service';
 import { ConfirmationDialogComponent } from '../../modal/confirmation-dialog/confirmation-dialog.component';
 import { ResultDialogComponent } from '../../modal/result-dialog/result-dialog.component';
@@ -15,7 +15,7 @@ import { AddApplicationComponent } from '../add-application/add-application.comp
 })
 export class ConfigApplicationComponent implements OnInit {
 
-  applications: Application[];
+  applications: Applications[];
   loading: boolean;
   totalRecords: number;
   ref: DynamicDialogRef;
@@ -37,7 +37,7 @@ export class ConfigApplicationComponent implements OnInit {
     this.loading = true;
 
     this.applicationService.getAllApplications().subscribe({
-      next: (applications: Application[]) => {
+      next: (applications: Applications[]) => {
         this.applications = cloneDeep(applications);
         this.loading = false;
       },

@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,7 +27,7 @@ public class CommentController {
     private final CommentService commentService;
 
     @PostMapping(path = "/add")
-    public ResponseEntity<Object> addComment(@RequestParam("ticketId") UUID ticketId, @RequestParam("body") String body){
+    public ResponseEntity<Object> addComment(@RequestParam("ticketId") UUID ticketId, @RequestBody String body){
         try {
             Comments comment = commentService.addComment(ticketId,body);
         
@@ -37,7 +38,7 @@ public class CommentController {
     }
 
     @PutMapping(path = "/edit")
-    public ResponseEntity<Object> editComment(@RequestParam("commentId") UUID commentId, @RequestParam("body") String body){
+    public ResponseEntity<Object> editComment(@RequestParam("commentId") UUID commentId, @RequestBody String body){
         try {
             Comments comment = commentService.editComment(commentId, body);
         
@@ -48,7 +49,7 @@ public class CommentController {
     }
 
     @PutMapping(path = "/delete")
-    public ResponseEntity<Object> editComment(@RequestParam("commentId") UUID commentId){
+    public ResponseEntity<Object> deleteComment(@RequestParam("commentId") UUID commentId){
         try {
             commentService.deleteComment(commentId);
         

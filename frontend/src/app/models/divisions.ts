@@ -1,4 +1,4 @@
-export type Application ={
+export type Divisions ={
     id:string;
     name:string;
 }

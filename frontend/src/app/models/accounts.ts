@@ -1,14 +1,14 @@
-import { Division } from "./division";
-import { Role } from "./role";
+import { Divisions } from "./divisions";
+import { Roles } from "./roles";
 
-export type Account ={
+export type Accounts ={
     id: string;
     username: string;
     fullname: string;
     email: string;
     contactNo: string;
-    division: Division;
+    division: Divisions;
     profileImg: any;
     isActive: boolean;
-    roles: Role[];
+    roles: Roles[];
 }

@@ -1,9 +1,9 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { Account } from 'src/app/models/account';
-import { Division } from 'src/app/models/division';
-import { Role } from 'src/app/models/role';
+import { Accounts } from 'src/app/models/accounts';
+import { Divisions } from 'src/app/models/divisions';
+import { Roles } from 'src/app/models/roles';
 import { AccountService } from 'src/app/services/account/account.service';
 import { DivisionService } from 'src/app/services/division/division.service';
 import { RoleService } from 'src/app/services/role/role.service';
@@ -16,11 +16,11 @@ import { ResultDialogComponent } from '../../modal/result-dialog/result-dialog.c
 })
 export class EditAccountComponent implements OnInit {
 
-  accountData:Account;
+  accountData:Accounts;
   accountForm: FormGroup;
   isAccountFormSubmitted: boolean = false;
-  divisions: Division[];
-  roles: Role[];
+  divisions: Divisions[];
+  roles: Roles[];
   profileImg: File;
   imageUrl:any;
   fileDropArea:string;
@@ -34,7 +34,7 @@ export class EditAccountComponent implements OnInit {
 
   public getAllDivisions(): void{
     this.divisionService.getAllDivisions().subscribe({
-      next: (divisions: Division[]) => {
+      next: (divisions: Divisions[]) => {
         this.divisions = divisions;
       },
       error: (error: any) => {
@@ -45,7 +45,7 @@ export class EditAccountComponent implements OnInit {
 
   public getAllRoles(): void{
     this.roleService.getAllRoles().subscribe({
-      next: (roles: Role[]) => {
+      next: (roles: Roles[]) => {
         this.roles = roles;
       },
       error: (error: any) => {

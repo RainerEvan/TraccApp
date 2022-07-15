@@ -1,4 +1,4 @@
-import { Role } from "./role";
+import { Roles } from "./roles";
 
 export class AuthDetails{
     token: string;
@@ -7,5 +7,5 @@ export class AuthDetails{
     username: string;
     email: string;
     isActive: boolean;
-    roles: Role[];
+    roles: Roles[];
 } 

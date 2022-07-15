@@ -1,11 +1,11 @@
-export enum ERole{
+export enum ERoles{
     ADMIN = 'ADMIN',
     SUPERVISOR = 'SUPERVISOR',
     DEVELOPER = 'DEVELOPER',
     USER = 'USER'
 }
 
-export type Role ={
+export type Roles ={
     id:string;
-    name:ERole;
+    name:ERoles;
 }

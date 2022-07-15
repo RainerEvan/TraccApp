@@ -29,7 +29,8 @@
                         <div class="w-full">
                             <div class="flex items-center justify-center mx-auto my-14">
                                 <div *ngIf="account" class="bg-gray-100 shadow-md">
-                                    <img class="object-fill w-44" [src]="imageUrl" alt="Profile Image">
+                                    <img *ngIf="account.profileImg" class="object-fill w-44" [src]="imageUrl" alt="Profile Image">
+                                    <img *ngIf="!account.profileImg" class="object-fill w-44" src="https://t4.ftcdn.net/jpg/02/15/84/43/360_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg" alt="Profile Image">
                                 </div>
                                 <p-skeleton *ngIf="loading" width="11rem" height="11rem"></p-skeleton>
                             </div>

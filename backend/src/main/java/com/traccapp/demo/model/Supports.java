@@ -62,6 +62,7 @@ public class Supports {
                 inverseJoinColumns = @JoinColumn(name = "tags_id"))
     private Set<Tags> tags = new HashSet<>();
     
+    @Lob
     private String devNote;
     private Boolean isActive;
     

@@ -1,8 +1,8 @@
-import { Ticket } from "./ticket";
+import { Supports } from "./supports";
 
-export type TicketAttachment ={
+export type SupportAttachments ={
     id: string;
-    ticket: Ticket;
+    support: Supports;
     fileBase64: string;
     fileName: string;
     fileType: string;

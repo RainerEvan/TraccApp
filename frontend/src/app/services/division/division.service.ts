@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 import { map, Observable } from 'rxjs';
-import { Division } from 'src/app/models/division';
+import { Divisions } from 'src/app/models/divisions';
 import { environment } from 'src/environments/environment';
 
 const API_URL = environment.apiUrl+'/divisions';
@@ -14,7 +14,7 @@ export class DivisionService {
 
   constructor(private apollo: Apollo, private http: HttpClient) { }
 
-  public getAllDivisions(): Observable<Division[]>{
+  public getAllDivisions(): Observable<Divisions[]>{
     return this.apollo.watchQuery<any>({
       query:gql`
         query getAllDivisions{

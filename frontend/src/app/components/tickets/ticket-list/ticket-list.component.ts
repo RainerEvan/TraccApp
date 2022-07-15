@@ -3,7 +3,7 @@ import { cloneDeep } from '@apollo/client/utilities';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Table } from 'primeng/table';
 import { TicketSupportService } from 'src/app/services/ticket-support/ticket-support.service';
-import { Ticket } from 'src/app/models/ticket';
+import { Tickets } from 'src/app/models/tickets';
 import { AddTicketComponent } from '../add-ticket/add-ticket.component';
 
 @Component({
@@ -13,7 +13,7 @@ import { AddTicketComponent } from '../add-ticket/add-ticket.component';
 })
 export class TicketListComponent implements OnInit {
 
-  tickets: Ticket[];
+  tickets: Tickets[];
   loading: boolean;
   totalRecords: number;
   ref: DynamicDialogRef;
@@ -35,7 +35,7 @@ export class TicketListComponent implements OnInit {
     this.loading = true;
 
     this.ticketSupportService.getAllTickets().subscribe({
-      next: (tickets: Ticket[]) => {
+      next: (tickets: Tickets[]) => {
         this.tickets = cloneDeep(tickets);
         this.loading = false;
         this.totalRecords = tickets.length;

@@ -1,0 +1,15 @@
+:host ::ng-deep .p-editor-container {
+    @apply w-full ring-0 !important;
+}
+
+:host ::ng-deep .p-editor-toolbar {
+    @apply w-full ring-0 border-none font-montserrat !important;
+}
+
+:host ::ng-deep .p-editor-content {
+    @apply w-full ring-0 bg-white outline-none border-none font-montserrat !important;
+}
+
+:host ::ng-deep .p-editor-container .p-editor-content .ql-editor{
+    @apply bg-white border-none !important;
+}

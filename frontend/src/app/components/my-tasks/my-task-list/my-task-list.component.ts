@@ -4,7 +4,7 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Table } from 'primeng/table';
 import { TicketSupportService } from 'src/app/services/ticket-support/ticket-support.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { Support } from 'src/app/models/support';
+import { Supports } from 'src/app/models/supports';
 
 @Component({
   selector: 'app-my-task-list',
@@ -14,7 +14,7 @@ import { Support } from 'src/app/models/support';
 export class MyTaskListComponent implements OnInit {
 
   accountId: string;
-  myTasks: Support[];
+  myTasks: Supports[];
   loading: boolean;
   totalRecords: number;
   ref: DynamicDialogRef;
@@ -36,7 +36,7 @@ export class MyTaskListComponent implements OnInit {
   public getAllTickets(): void{
     this.loading = true;
     this.ticketSupportService.getAllSupportsForDeveloper(this.accountId).subscribe({
-      next: (supports: Support[]) => {
+      next: (supports: Supports[]) => {
         this.myTasks = cloneDeep(supports);
         this.loading = false;
         this.totalRecords = supports.length;

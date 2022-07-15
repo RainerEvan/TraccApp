@@ -6,6 +6,7 @@ import com.traccapp.demo.data.ERoles;
 import com.traccapp.demo.data.EStatus;
 import com.traccapp.demo.model.Accounts;
 import com.traccapp.demo.model.Applications;
+import com.traccapp.demo.model.Comments;
 import com.traccapp.demo.model.Divisions;
 import com.traccapp.demo.model.Roles;
 import com.traccapp.demo.model.Status;
@@ -13,6 +14,7 @@ import com.traccapp.demo.model.Supports;
 import com.traccapp.demo.model.Tags;
 import com.traccapp.demo.model.Tickets;
 import com.traccapp.demo.payload.request.AccountRequest;
+import com.traccapp.demo.repository.CommentRepository;
 import com.traccapp.demo.repository.RoleRepository;
 import com.traccapp.demo.repository.StatusRepository;
 import com.traccapp.demo.repository.SupportRepository;
@@ -29,7 +31,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class StartAppConfig {
     @Bean
-    CommandLineRunner commandLineRunner(TagsService tagsService, AccountService accountService, ApplicationService applicationService, DivisionService divisionService, RoleRepository roleRepository, StatusRepository statusRepository, TicketRepository ticketRepository, SupportRepository supportRepository){
+    CommandLineRunner commandLineRunner(TagsService tagsService, AccountService accountService, ApplicationService applicationService, DivisionService divisionService, RoleRepository roleRepository, StatusRepository statusRepository, TicketRepository ticketRepository, SupportRepository supportRepository, CommentRepository commentRepository){
         return args -> {
 
             Roles role1 = new Roles();
@@ -179,6 +181,14 @@ public class StartAppConfig {
             support2.setDescription("Formnya udah bisa dipake coba lagi bisa ga");
             support2.setIsActive(true);
             supportRepository.save(support2);
+
+            Comments comment = new Comments();
+            comment.setTicket(ticket3);
+            comment.setAuthor(account);
+            comment.setBody("Tolong ini gimana caranya saya bener-bener bingung gatau harus gimana lagi");
+            comment.setCreatedAt(OffsetDateTime.now());
+            comment.setIsActive(true);
+            commentRepository.save(comment);
 
             // Supports support2 = new Supports();
             // support2.setTicket(ticket);
