@@ -13,3 +13,31 @@
 :host ::ng-deep .p-editor-container .p-editor-content .ql-editor{
     @apply bg-white border-none !important;
 }
+
+:host ::ng-deep .p-datatable-header{
+    @apply bg-gray-200 py-2 px-8 border-2 border-gray-200 rounded-t-md !important;
+}
+
+:host ::ng-deep .p-datatable-wrapper{
+    @apply border-2 border-gray-200 pb-4 px-8 rounded-b-md !important;
+}
+
+:host ::ng-deep .p-datatable-tbody{
+    @apply divide-y-2 !important;
+}
+
+:host ::ng-deep .p-paginator {
+    @apply text-sm scale-90 !important;
+}
+
+:host ::ng-deep .p-paginator .p-paginator-page{
+    @apply font-medium text-sm text-gray-500 ring-0 hover:bg-gray-100/80 !important;
+}
+
+:host ::ng-deep .p-paginator .p-link{
+    @apply font-medium text-sm text-gray-500 ring-0 hover:bg-gray-100/80 !important;
+}
+
+:host ::ng-deep .p-paginator .p-highlight{
+    @apply border-gray-400 bg-gray-100 hover:bg-gray-100 text-inherit !important;
+}

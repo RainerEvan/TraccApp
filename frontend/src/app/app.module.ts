@@ -49,6 +49,7 @@ import { AddDivisionComponent } from './components/config/add-division/add-divis
 import { AddTagComponent } from './components/config/add-tag/add-tag.component';
 import { AddApplicationComponent } from './components/config/add-application/add-application.component';
 import { CommentsComponent } from './components/comments/comments.component';
+import { EditCommentComponent } from './components/comments/edit-comment/edit-comment.component';
 
 @NgModule({
   declarations: [
@@ -80,6 +81,7 @@ import { CommentsComponent } from './components/comments/comments.component';
     AddTagComponent,
     AddApplicationComponent,
     CommentsComponent,
+    EditCommentComponent,
   ],
   imports: [
     BrowserModule,

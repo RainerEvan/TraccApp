@@ -23,6 +23,7 @@ export class CommentService {
             author{
               id
               fullname
+              profileImg
             }
             createdAt
             updatedAt
@@ -49,6 +50,6 @@ export class CommentService {
 
   public deleteComment(commentId: string): Observable<any>{
     const params = new HttpParams().set('commentId',commentId);
-    return this.http.delete(API_URL+'/delete',{params:params});
+    return this.http.put(API_URL+'/delete',null,{params:params});
   }
 }
