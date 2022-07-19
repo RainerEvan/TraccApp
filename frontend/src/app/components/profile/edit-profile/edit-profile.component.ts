@@ -10,11 +10,11 @@ import { RoleService } from 'src/app/services/role/role.service';
 import { ResultDialogComponent } from '../../modal/result-dialog/result-dialog.component';
 
 @Component({
-  selector: 'app-edit-account',
-  templateUrl: './edit-account.component.html',
-  styleUrls: ['./edit-account.component.css']
+  selector: 'app-edit-profile',
+  templateUrl: './edit-profile.component.html',
+  styleUrls: ['./edit-profile.component.css']
 })
-export class EditAccountComponent implements OnInit {
+export class EditProfileComponent implements OnInit {
 
   accountData:Accounts;
   accountForm: FormGroup;
@@ -87,8 +87,8 @@ export class EditAccountComponent implements OnInit {
       email: [this.accountData.email],
       contactNo: [this.accountData.contactNo],
       divisionId: [this.accountData.division.id],
-      isActive: [this.accountData.isActive],
-      rolesName: [this.accountData.roles[0].name],
+      isActive: [{value:this.accountData.isActive, disabled:true}],
+      rolesName: [{value:this.accountData.roles[0].name, disabled:true}],
     });
     this.getAllDivisions();
     this.getAllRoles();
@@ -153,7 +153,7 @@ export class EditAccountComponent implements OnInit {
     this.profileImg = null;
   }
 
-  resetForm(form: FormGroup){
+  resetForm(){
     this.generateAccountForm();
     this.profileImg = null;
   }

@@ -76,4 +76,8 @@ export class AccountService {
   public editAccount(formData: FormData): Observable<any>{
     return this.http.put(API_URL+'/edit',formData);
   }
+
+  public changePassword(formData: FormData): Observable<any>{
+    return this.http.put(API_URL+'/changePassword',formData);
+  }
 }

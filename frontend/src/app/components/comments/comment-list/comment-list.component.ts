@@ -7,16 +7,16 @@ import { Comments } from 'src/app/models/comments';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { CommentService } from 'src/app/services/comment/comment.service';
 import { environment } from 'src/environments/environment';
-import { ConfirmationDialogComponent } from '../modal/confirmation-dialog/confirmation-dialog.component';
-import { ResultDialogComponent } from '../modal/result-dialog/result-dialog.component';
-import { EditCommentComponent } from './edit-comment/edit-comment.component';
+import { ConfirmationDialogComponent } from '../../modal/confirmation-dialog/confirmation-dialog.component';
+import { ResultDialogComponent } from '../../modal/result-dialog/result-dialog.component';
+import { EditCommentComponent } from '../edit-comment/edit-comment.component';
 
 @Component({
-  selector: 'app-comments',
-  templateUrl: './comments.component.html',
-  styleUrls: ['./comments.component.css']
+  selector: 'app-comment-list',
+  templateUrl: './comment-list.component.html',
+  styleUrls: ['./comment-list.component.css']
 })
-export class CommentsComponent implements OnInit {
+export class CommentListComponent implements OnInit {
 
   ticketId = this.route.snapshot.paramMap.get('id');
   imageUrl = environment.apiUrl+'/accounts/profileImg/';
@@ -147,4 +147,5 @@ export class CommentsComponent implements OnInit {
       width:'30vw'
     });
   }
+
 }

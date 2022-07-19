@@ -12,7 +12,7 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { MyTaskListComponent } from './components/my-tasks/my-task-list/my-task-list.component';
 import { MyTicketListComponent } from './components/my-tickets/my-ticket-list/my-ticket-list.component';
-import { ProfileComponent } from './components/profile/profile.component';
+import { ProfileDetailComponent } from './components/profile/profile-detail/profile-detail.component';
 import { TicketDetailComponent } from './components/tickets/ticket-detail/ticket-detail.component';
 import { TicketListComponent } from './components/tickets/ticket-list/ticket-list.component';
 import { AuthGuard } from './helpers/auth-guard';
@@ -93,7 +93,7 @@ const routes: Routes = [
       },
       {
         path:'profile', 
-        component: ProfileComponent,
+        component: ProfileDetailComponent,
         canActivate:[AuthGuard]
       },
       {

@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { AuthDetails } from 'src/app/models/authdetails';
-import { Roles } from 'src/app/models/roles';
 import { environment } from 'src/environments/environment';
 
 const API_URL = environment.apiUrl+'/auth';

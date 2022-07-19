@@ -102,6 +102,8 @@ public class AccountService {
         String email = accountRequest.getEmail();
         String contactNo = accountRequest.getContactNo();
         UUID divisionId = accountRequest.getDivisionId();
+        Roles rolesName = roleRepository.findByName(accountRequest.getRolesName())
+            .orElseThrow(() -> new IllegalStateException("Role with current name cannot be found "+accountRequest.getRolesName()));
         Boolean isActive = accountRequest.getIsActive();
 
         if(accountRepository.existsByUsername(username)){
@@ -135,6 +137,13 @@ public class AccountService {
             account.setDivision(division);
         }
 
+        if(rolesName != null && !account.getRoles().contains(rolesName)){
+            Set<Roles> roleSet = new HashSet<>();
+            roleSet.add(rolesName);
+
+            account.setRoles(roleSet);
+        }
+
         if(isActive != null && !Objects.equals(account.getIsActive(), isActive)){
             account.setIsActive(isActive);
         }
@@ -146,7 +155,7 @@ public class AccountService {
         
         Accounts account = authService.getCurrentAccount();
 
-        if(!Objects.equals(account.getPassword(), currentPassword)){
+        if(!passwordEncoder.matches(currentPassword, account.getPassword())){
             throw new IllegalStateException("The current password is not correct");
         }
 

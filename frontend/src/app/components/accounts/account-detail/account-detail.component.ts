@@ -2,12 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AccountService } from 'src/app/services/account/account.service';
 import { Accounts } from 'src/app/models/accounts';
-import { environment } from 'src/environments/environment';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { EditAccountComponent } from '../edit-account/edit-account.component';
 import { DomSanitizer } from '@angular/platform-browser';
-
-const API_URL = environment.apiUrl+'/accounts';
 
 @Component({
   selector: 'app-account-detail',
@@ -35,6 +32,7 @@ export class AccountDetailComponent implements OnInit {
 
   getAccount():void{
     const accountId = this.route.snapshot.paramMap.get('id');
+
     this.loading = true;
     this.accountService.getAccount(accountId).subscribe({
       next: (account: Accounts) => {

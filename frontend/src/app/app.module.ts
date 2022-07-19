@@ -33,7 +33,6 @@ import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { SolveTicketComponent } from './components/tickets/solve-ticket/solve-ticket.component';
 import { JwtInterceptor } from './helpers/jwt-interceptor';
 import { ErrorInterceptor } from './helpers/error-interceptor';
-import { ProfileComponent } from './components/profile/profile.component';
 import { AddAccountComponent } from './components/accounts/add-account/add-account.component';
 import { EditAccountComponent } from './components/accounts/edit-account/edit-account.component';
 import { MyTicketListComponent } from './components/my-tickets/my-ticket-list/my-ticket-list.component';
@@ -48,8 +47,11 @@ import { ConfigScoringComponent } from './components/config/config-scoring/confi
 import { AddDivisionComponent } from './components/config/add-division/add-division.component';
 import { AddTagComponent } from './components/config/add-tag/add-tag.component';
 import { AddApplicationComponent } from './components/config/add-application/add-application.component';
-import { CommentsComponent } from './components/comments/comments.component';
 import { EditCommentComponent } from './components/comments/edit-comment/edit-comment.component';
+import { ProfileDetailComponent } from './components/profile/profile-detail/profile-detail.component';
+import { EditProfileComponent } from './components/profile/edit-profile/edit-profile.component';
+import { ChangePasswordComponent } from './components/profile/change-password/change-password.component';
+import { CommentListComponent } from './components/comments/comment-list/comment-list.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +69,6 @@ import { EditCommentComponent } from './components/comments/edit-comment/edit-co
     ResultDialogComponent,
     AddTicketComponent,
     SolveTicketComponent,
-    ProfileComponent,
     AddAccountComponent,
     EditAccountComponent,
     MyTicketListComponent,
@@ -80,8 +81,11 @@ import { EditCommentComponent } from './components/comments/edit-comment/edit-co
     AddDivisionComponent,
     AddTagComponent,
     AddApplicationComponent,
-    CommentsComponent,
+    CommentListComponent,
     EditCommentComponent,
+    ProfileDetailComponent,
+    EditProfileComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     BrowserModule,
