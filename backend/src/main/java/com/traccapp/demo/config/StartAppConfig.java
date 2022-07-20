@@ -8,6 +8,7 @@ import com.traccapp.demo.model.Accounts;
 import com.traccapp.demo.model.Applications;
 import com.traccapp.demo.model.Comments;
 import com.traccapp.demo.model.Divisions;
+import com.traccapp.demo.model.Notifications;
 import com.traccapp.demo.model.Roles;
 import com.traccapp.demo.model.Status;
 import com.traccapp.demo.model.Supports;
@@ -15,6 +16,7 @@ import com.traccapp.demo.model.Tags;
 import com.traccapp.demo.model.Tickets;
 import com.traccapp.demo.payload.request.AccountRequest;
 import com.traccapp.demo.repository.CommentRepository;
+import com.traccapp.demo.repository.NotificationRepository;
 import com.traccapp.demo.repository.RoleRepository;
 import com.traccapp.demo.repository.StatusRepository;
 import com.traccapp.demo.repository.SupportRepository;
@@ -31,7 +33,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class StartAppConfig {
     @Bean
-    CommandLineRunner commandLineRunner(TagsService tagsService, AccountService accountService, ApplicationService applicationService, DivisionService divisionService, RoleRepository roleRepository, StatusRepository statusRepository, TicketRepository ticketRepository, SupportRepository supportRepository, CommentRepository commentRepository){
+    CommandLineRunner commandLineRunner(TagsService tagsService, AccountService accountService, ApplicationService applicationService, DivisionService divisionService, RoleRepository roleRepository, StatusRepository statusRepository, TicketRepository ticketRepository, SupportRepository supportRepository, CommentRepository commentRepository, NotificationRepository notificationRepository){
         return args -> {
 
             Roles role1 = new Roles();
@@ -127,6 +129,32 @@ public class StartAppConfig {
             accountRequest4.setRolesName(ERoles.DEVELOPER);
             
             Accounts account4 = accountService.addAccount(null,accountRequest4);
+
+            for(int i=0;i<3;i++){
+                Notifications notification = new Notifications();
+                notification.setReceiver(account);
+                notification.setCreatedAt(OffsetDateTime.now());
+                notification.setTitle("Ticket Taken By Developer");
+                notification.setBody("Your ticket has been taken by a developer, check it out right here");
+                notificationRepository.save(notification);
+            }
+
+            Notifications notification2 = new Notifications();
+            notification2.setReceiver(account);
+            notification2.setCreatedAt(OffsetDateTime.now());
+            notification2.setReadAt(OffsetDateTime.now());
+            notification2.setTitle("Ticket Reassigned to New Developer");
+            notification2.setBody("Your ticket has been taken by a developer, check it out right here");
+            notificationRepository.save(notification2);
+
+            Notifications notification3 = new Notifications();
+            notification3.setReceiver(account);
+            notification3.setCreatedAt(OffsetDateTime.now());
+            notification3.setReadAt(OffsetDateTime.now());
+            notification3.setTitle("Ticket Reassigned to New Developer");
+            notification3.setBody("Your ticket has been taken by a developer, check it out right here");
+            notificationRepository.save(notification3);
+
             // for(int i=0;i<2;i++){
                 
             //     Tickets ticket = new Tickets();

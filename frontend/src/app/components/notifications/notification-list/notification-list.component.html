@@ -1,0 +1,28 @@
+<div class="w-full">
+    <div class="flex flex-row justify-between py-2 px-6 border-b-2 border-gray-300">
+        <span class="font-medium text-sm">{{totalRecords}} Notification(s)</span>
+        <span class="font-medium text-sm">{{totalUnread}} Unread</span>
+    </div>
+    <p-table #notificationTable [value]="notifications" [loading]="loading" [totalRecords]="totalRecords" [scrollable]="true" scrollHeight="30rem" selectionMode="single" responsiveLayout="scroll" [filterDelay]="0" sortField="createdAt" [sortOrder]="1"
+        [globalFilterFields]="['name']">
+        <ng-template pTemplate="body" let-notification>
+            <div routerLink="./notification-detail/{{notification.id}}" routerLinkActive="active" class="flex flex-row space-x-4 items-center text-black shadow-sm hover:bg-gray-100/60 cursor-pointer py-4 px-6">
+                <div class="w-auto">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-14 w-14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                </div>
+                <div class="w-full flex flex-col justify-center">
+                    <span class="font-medium text-sm">{{notification.title}}</span>
+                    <span class="text-xs">{{notification.createdAt | date:'d MMM y, h:mm a'}}</span>
+                </div>
+                <div class="w-auto">
+                    <span *ngIf="!notification.readAt" class="font-medium text-sm text-gray-400">NEW</span>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+            <div class="font-medium text-sm text-gray-400 text-center my-6">No notifications yet</div>
+        </ng-template>
+    </p-table>
+</div>

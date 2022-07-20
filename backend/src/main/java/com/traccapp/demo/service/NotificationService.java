@@ -4,6 +4,8 @@ import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.UUID;
 
+import javax.transaction.Transactional;
+
 import com.traccapp.demo.exception.AbstractGraphQLException;
 import com.traccapp.demo.model.Accounts;
 import com.traccapp.demo.model.Notifications;
@@ -25,6 +27,7 @@ public class NotificationService {
     @Autowired
     private final AccountRepository accountRepository;
 
+    @Transactional
     public List<Notifications> getAllNotificationsForAccount(UUID accountId){
         Accounts account = accountRepository.findById(accountId)
             .orElseThrow(() -> new AbstractGraphQLException("Account with current id cannot be found: "+accountId,"accountId"));
@@ -32,11 +35,13 @@ public class NotificationService {
         return notificationRepository.findAllByReceiver(account);
     }
 
+    @Transactional
     public Notifications getNotification(UUID notificationId){
         return notificationRepository.findById(notificationId)
             .orElseThrow(() -> new IllegalStateException("Notification with current id cannot be found: "+notificationId));
     }
 
+    @Transactional
     public Notifications addNotification(NotificationRequest notificationRequest){
         Accounts account = accountRepository.findById(notificationRequest.getReceiverId())
             .orElseThrow(() -> new AbstractGraphQLException("Account with current id cannot be found: "+notificationRequest.getReceiverId(),"accountId"));

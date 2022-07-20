@@ -12,6 +12,8 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { MyTaskListComponent } from './components/my-tasks/my-task-list/my-task-list.component';
 import { MyTicketListComponent } from './components/my-tickets/my-ticket-list/my-ticket-list.component';
+import { NotificationDetailComponent } from './components/notifications/notification-detail/notification-detail.component';
+import { NotificationPageComponent } from './components/notifications/notification-page/notification-page.component';
 import { ProfileDetailComponent } from './components/profile/profile-detail/profile-detail.component';
 import { TicketDetailComponent } from './components/tickets/ticket-detail/ticket-detail.component';
 import { TicketListComponent } from './components/tickets/ticket-list/ticket-list.component';
@@ -19,7 +21,9 @@ import { AuthGuard } from './helpers/auth-guard';
 
 const routes: Routes = [
   {
-    path:'', redirectTo: 'dashboard',pathMatch: 'full'
+    path:'',
+    redirectTo: 'dashboard',
+    pathMatch: 'full'
   },
   {
     path:'login', 
@@ -63,7 +67,9 @@ const routes: Routes = [
         data:{roles:'ADMIN'},
         children:[
           {
-            path:'',redirectTo: 'division',pathMatch: 'full'
+            path:'',
+            redirectTo: 'division',
+            pathMatch: 'full'
           },
           {
             path:'division',
@@ -95,6 +101,24 @@ const routes: Routes = [
         path:'profile', 
         component: ProfileDetailComponent,
         canActivate:[AuthGuard]
+      },
+      {
+        path:'notifications', 
+        component: NotificationPageComponent,
+        canActivate:[AuthGuard],
+        children:[
+          {
+            path:'',
+            redirectTo: '',
+            component: NotificationDetailComponent,
+            pathMatch: 'full'
+          },
+          {
+            path:'notification-detail/:id',
+            component: NotificationDetailComponent,
+            canActivate:[AuthGuard],
+          },
+        ]
       },
       {
         path:'my-ticket',

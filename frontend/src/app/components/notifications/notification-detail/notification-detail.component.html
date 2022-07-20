@@ -1,0 +1,16 @@
+<div *ngIf="notification" class="space-y-8 p-8">
+    <div class="flex flex-row items-start justify-between">
+        <span class="font-semibold text-2xl">{{notification.title}}</span>
+        <div class="flex flex-col items-end">
+            <span class="font-semibold text-xs">{{notification.createdAt | date:'d MMMM y'}}</span>
+            <span class="font-medium text-xs">{{notification.createdAt | date:'h:mm a'}}</span>
+        </div>
+    </div>
+    <div>
+        <p class="text-sm text-justify">{{notification.body}}</p>
+    </div>
+</div>
+
+<div *ngIf="!notification" class="h-full w-full flex justify-center items-center">
+    <span class="text-gray-400">Click to preview notification</span>
+</div>

@@ -52,6 +52,9 @@ import { ProfileDetailComponent } from './components/profile/profile-detail/prof
 import { EditProfileComponent } from './components/profile/edit-profile/edit-profile.component';
 import { ChangePasswordComponent } from './components/profile/change-password/change-password.component';
 import { CommentListComponent } from './components/comments/comment-list/comment-list.component';
+import { NotificationPageComponent } from './components/notifications/notification-page/notification-page.component';
+import { NotificationListComponent } from './components/notifications/notification-list/notification-list.component';
+import { NotificationDetailComponent } from './components/notifications/notification-detail/notification-detail.component';
 
 @NgModule({
   declarations: [
@@ -86,6 +89,9 @@ import { CommentListComponent } from './components/comments/comment-list/comment
     ProfileDetailComponent,
     EditProfileComponent,
     ChangePasswordComponent,
+    NotificationPageComponent,
+    NotificationListComponent,
+    NotificationDetailComponent,
   ],
   imports: [
     BrowserModule,
