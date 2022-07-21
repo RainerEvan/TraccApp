@@ -13,4 +13,5 @@ import org.springframework.stereotype.Repository;
 public interface NotificationRepository extends JpaRepository<Notifications,UUID>{
     
     List<Notifications> findAllByReceiver(Accounts receiver);
+    List<Notifications> findFirst3ByReceiverOrderByCreatedAtDesc(Accounts receiver);
 }

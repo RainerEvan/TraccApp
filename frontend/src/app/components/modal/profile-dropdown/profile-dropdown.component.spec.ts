@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NotificationListComponent } from './notification-list.component';
+import { ProfileDropdownComponent } from './profile-dropdown.component';
 
-describe('NotificationListComponent', () => {
-  let component: NotificationListComponent;
-  let fixture: ComponentFixture<NotificationListComponent>;
+describe('ProfileDropdownComponent', () => {
+  let component: ProfileDropdownComponent;
+  let fixture: ComponentFixture<ProfileDropdownComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NotificationListComponent ]
+      declarations: [ ProfileDropdownComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NotificationListComponent);
+    fixture = TestBed.createComponent(ProfileDropdownComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

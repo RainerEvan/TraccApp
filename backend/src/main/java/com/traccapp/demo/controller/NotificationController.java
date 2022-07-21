@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.traccapp.demo.model.Notifications;
 import com.traccapp.demo.payload.request.NotificationRequest;
+import com.traccapp.demo.payload.response.ResponseHandler;
 import com.traccapp.demo.service.NotificationService;
 
 import lombok.AllArgsConstructor;
@@ -27,10 +28,14 @@ public class NotificationController {
     private final NotificationService notificationService;
 
     @PostMapping(path = "/add")
-    public ResponseEntity<String> addNotification(@RequestBody NotificationRequest notificationRequest){
-        Notifications notification = notificationService.addNotification(notificationRequest);
-
-        return ResponseEntity.status(HttpStatus.OK).body("New notification has been sent: "+notification.getCreatedAt());
+    public ResponseEntity<Object> addNotification(@RequestBody NotificationRequest notificationRequest){
+        try {
+            Notifications notification = notificationService.addNotification(notificationRequest);
+        
+            return ResponseHandler.generateResponse("Notification has been sent successfully!", HttpStatus.OK, notification.getCreatedAt());
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.BAD_REQUEST, null);
+        }
     }
 
     @PutMapping(path = "/{notificationId}")

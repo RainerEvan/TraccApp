@@ -23,6 +23,10 @@ public class NotificationsQueryResolver implements GraphQLQueryResolver{
         return notificationService.getAllNotificationsForAccount(accountId);
     }
 
+    public List<Notifications> getTopNotificationsForAccount(UUID accountId){
+        return notificationService.getTopNotificationsForAccount(accountId);
+    }
+
     public Notifications getNotification(UUID notificationId){
         return notificationService.getNotification(notificationId);
     }

@@ -9,5 +9,6 @@ type Notifications{
 
 extend type Query{
     getAllNotificationsForAccount(accountId:ID!):[Notifications]
+    getTopNotificationsForAccount(accountId:ID!):[Notifications]
     getNotification(notificationId:ID!):Notifications
 }

@@ -36,6 +36,14 @@ public class NotificationService {
     }
 
     @Transactional
+    public List<Notifications> getTopNotificationsForAccount(UUID accountId){
+        Accounts account = accountRepository.findById(accountId)
+            .orElseThrow(() -> new AbstractGraphQLException("Account with current id cannot be found: "+accountId,"accountId"));
+
+        return notificationRepository.findFirst3ByReceiverOrderByCreatedAtDesc(account);
+    }
+
+    @Transactional
     public Notifications getNotification(UUID notificationId){
         return notificationRepository.findById(notificationId)
             .orElseThrow(() -> new IllegalStateException("Notification with current id cannot be found: "+notificationId));

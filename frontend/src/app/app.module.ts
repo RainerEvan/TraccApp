@@ -53,8 +53,8 @@ import { EditProfileComponent } from './components/profile/edit-profile/edit-pro
 import { ChangePasswordComponent } from './components/profile/change-password/change-password.component';
 import { CommentListComponent } from './components/comments/comment-list/comment-list.component';
 import { NotificationPageComponent } from './components/notifications/notification-page/notification-page.component';
-import { NotificationListComponent } from './components/notifications/notification-list/notification-list.component';
-import { NotificationDetailComponent } from './components/notifications/notification-detail/notification-detail.component';
+import { ProfileDropdownComponent } from './components/modal/profile-dropdown/profile-dropdown.component';
+import { NotificationDropdownComponent } from './components/modal/notification-dropdown/notification-dropdown.component';
 
 @NgModule({
   declarations: [
@@ -90,8 +90,8 @@ import { NotificationDetailComponent } from './components/notifications/notifica
     EditProfileComponent,
     ChangePasswordComponent,
     NotificationPageComponent,
-    NotificationListComponent,
-    NotificationDetailComponent,
+    ProfileDropdownComponent,
+    NotificationDropdownComponent,
   ],
   imports: [
     BrowserModule,

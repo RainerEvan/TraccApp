@@ -12,7 +12,6 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { MyTaskListComponent } from './components/my-tasks/my-task-list/my-task-list.component';
 import { MyTicketListComponent } from './components/my-tickets/my-ticket-list/my-ticket-list.component';
-import { NotificationDetailComponent } from './components/notifications/notification-detail/notification-detail.component';
 import { NotificationPageComponent } from './components/notifications/notification-page/notification-page.component';
 import { ProfileDetailComponent } from './components/profile/profile-detail/profile-detail.component';
 import { TicketDetailComponent } from './components/tickets/ticket-detail/ticket-detail.component';
@@ -106,19 +105,6 @@ const routes: Routes = [
         path:'notifications', 
         component: NotificationPageComponent,
         canActivate:[AuthGuard],
-        children:[
-          {
-            path:'',
-            redirectTo: '',
-            component: NotificationDetailComponent,
-            pathMatch: 'full'
-          },
-          {
-            path:'notification-detail/:id',
-            component: NotificationDetailComponent,
-            canActivate:[AuthGuard],
-          },
-        ]
       },
       {
         path:'my-ticket',
