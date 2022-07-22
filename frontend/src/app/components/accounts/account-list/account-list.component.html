@@ -4,7 +4,7 @@
             Account List
         </h1>
         <div class="bg-white border-2 border-gray-100 shadow-md p-8">
-            <p-table #accountTable [value]="accounts" [loading]="loading" [totalRecords]="totalRecords" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" selectionMode="single" responsiveLayout="scroll" [filterDelay]="0" sortField="fullname" [sortOrder]="1"
+            <p-table #accountTable [value]="accounts" [loading]="loading" [totalRecords]="totalRecords" [paginator]="true" [rows]="8" [showCurrentPageReport]="true" selectionMode="single" responsiveLayout="scroll" [filterDelay]="0" sortField="fullname" [sortOrder]="1"
                 [globalFilterFields]="['username','email','fullname','roles[0].name','division.name','isActive']">
                 <ng-template pTemplate="caption">
                     <div class="px-2 flex items-center place-content-between">

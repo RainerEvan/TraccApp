@@ -18,10 +18,10 @@ export class NotificationDropdownComponent implements OnInit {
 
   ngOnInit(): void {
     this.accountId = this.authService.accountValue.accountId;
-    this.getAllNotifications();
+    this.getTopNotifications();
   }
 
-  public getAllNotifications(): void{
+  public getTopNotifications(): void{
     this.loading = true;
     this.notificationService.getTopNotificationsForAccount(this.accountId).subscribe({
       next: (notifications: Notifications[]) => {

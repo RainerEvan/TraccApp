@@ -4,7 +4,7 @@
             Task List
         </h1>
         <div class="bg-white border-2 border-gray-100 shadow-md p-8">
-            <p-table #ticketTable [value]="myTasks" [loading]="loading" [totalRecords]="totalRecords" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" selectionMode="single" responsiveLayout="scroll" [filterDelay]="0" sortField="dateTaken" [sortOrder]="-1"
+            <p-table #ticketTable [value]="myTasks" [loading]="loading" [totalRecords]="totalRecords" [paginator]="true" [rows]="8" [showCurrentPageReport]="true" selectionMode="single" responsiveLayout="scroll" [filterDelay]="0" sortField="dateTaken" [sortOrder]="-1"
                 [globalFilterFields]="['ticket.ticketNo','ticket.application.name','ticket.title','ticket.reporter.fullname','ticket.dateAdded','developer.fullname','dateTaken','ticket.status.name']">
                 <ng-template pTemplate="caption">
                     <div class="px-2 flex items-center place-content-between">

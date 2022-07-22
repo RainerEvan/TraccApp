@@ -28,6 +28,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { TableModule } from 'primeng/table';
 import { EditorModule } from 'primeng/editor';
+import { ChartModule } from 'primeng/chart';
 import { SkeletonModule } from 'primeng/skeleton';
 import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { SolveTicketComponent } from './components/tickets/solve-ticket/solve-ticket.component';
@@ -111,6 +112,7 @@ import { NotificationDropdownComponent } from './components/modal/notification-d
     MessagesModule,
     SkeletonModule,
     EditorModule,
+    ChartModule,
     ApolloModule,
   ],
   providers: [

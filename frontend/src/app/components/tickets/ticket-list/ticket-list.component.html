@@ -4,7 +4,7 @@
             Ticket List
         </h1>
         <div class="bg-white border-2 border-gray-100 shadow-md p-8">
-            <p-table #ticketTable [value]="tickets" [loading]="loading" [totalRecords]="totalRecords" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" selectionMode="single" responsiveLayout="scroll" [filterDelay]="0" sortField="dateAdded" [sortOrder]="-1"
+            <p-table #ticketTable [value]="tickets" [loading]="loading" [totalRecords]="totalRecords" [paginator]="true" [rows]="8" [showCurrentPageReport]="true" selectionMode="single" responsiveLayout="scroll" [filterDelay]="0" sortField="dateAdded" [sortOrder]="-1"
                 [globalFilterFields]="['ticketNo','application.name','title','reporter.fullname','dateAdded','support[0].developer.fullname','support[0].dateTaken','status.name']">
                 <ng-template pTemplate="caption">
                     <div class="px-2 flex items-center place-content-between">

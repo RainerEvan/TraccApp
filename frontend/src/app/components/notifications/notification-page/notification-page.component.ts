@@ -47,7 +47,7 @@ export class NotificationPageComponent implements OnInit {
         next: (notification: Notifications) => {
           this.loading = false;
           this.notification = notification;
-          if(notification.readAt == null){
+          if(!notification.readAt){
             this.notificationService.readNotification(notification.id).subscribe({
               next: () => {
                 this.getAllNotifications();
