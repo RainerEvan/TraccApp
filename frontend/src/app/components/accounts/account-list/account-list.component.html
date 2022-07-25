@@ -26,7 +26,7 @@
                 <ng-template pTemplate="body" let-account>
                     <div routerLink="/account-detail/{{account.id}}" class="grid grid-cols-8 auto-cols-auto gap-6 py-4 px-6 text-black drop-shadow-sm hover:bg-gray-100/40 cursor-pointer">
                         <div class="col-span-1">
-                            <div class="flex items-center justify-center py-2 shadow-md">
+                            <div class="flex items-center justify-center py-2 bg-white shadow-md">
                                 <img *ngIf="account.profileImg" [(src)]="imageUrl+account.id" alt="Profile" class="rounded-full w-20">
                                 <img *ngIf="!account.profileImg" src="https://t4.ftcdn.net/jpg/02/15/84/43/360_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg" alt="Profile" class="rounded-full w-20">
                             </div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Tickets } from 'src/app/models/tickets';
+import { AuthService } from 'src/app/services/auth/auth.service';
 import { TicketSupportService } from 'src/app/services/ticket-support/ticket-support.service';
 
 @Component({
@@ -15,7 +16,7 @@ export class DashboardComponent implements OnInit {
   basicData: any;
   basicOption: any;
   
-  constructor(private ticketSupportService: TicketSupportService) { }
+  constructor(private ticketSupportService: TicketSupportService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.getAllTickets();
@@ -36,6 +37,22 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  public getAllTicketsForUser(): void{
+    const accountId = this.authService.accountValue.accountId;
+
+    this.loading = true;
+    this.ticketSupportService.getAllTicketsForUser(accountId).subscribe({
+      next: (tickets: Tickets[]) => {
+        this.tickets = tickets;
+        this.loading = false;
+        this.generateChart(tickets);
+      },
+      error: (error: any) => {
+        console.log(error);
+      }
+    });
+  }
+
   generateChart(data:any){
     let appName = data.map((ticket:any) => ticket.application.name);
 
@@ -45,7 +62,7 @@ export class DashboardComponent implements OnInit {
           {
               label: 'My First dataset',
               backgroundColor: '#808080',
-              data: [65, 59, 80, 81, 56, 55, 40]
+              data: [65, 59, 80]
           },
       ]
     };

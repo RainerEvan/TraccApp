@@ -1,57 +1,36 @@
 <div class="bg-white drop-shadow-lg max-w-7xl mx-auto mb-8 px-10 py-4">
     <div class="py-6">
         <h1 class="font-bold text-lg text-center mb-4">
-            Chart
-        </h1>
-        <div class="flex flex-row justify-center bg-white border-2 border-gray-100 shadow-md p-8">
-            <p-chart type="bar" [data]="basicData" [options]="basicOption" width="40vw" height="80vh"></p-chart>
-        </div>
-    </div>
-
-    <div class="py-6">
-        <h1 class="font-bold text-lg text-center mb-4">
             Ticket Activity
         </h1>
         <div class="bg-white flex flex-row border-2 border-gray-100 shadow-md p-8">
-            <div class="w-7/12 flex flex-row items-center">
-                <div class="w-1/3 flex flex-col items-center">
-                    <div class="w-[11rem] h-[11rem] border-8 border-gray-300 rounded-full font-semibold text-6xl justify-center flex items-center">
-                        4
+            <div class="w-3/5 flex flex-row items-center justify-center space-x-8">
+                <div class="flex flex-col items-center">
+                    <div class="w-44 h-44 flex justify-center items-center border-8 border-gray-300 rounded-full">
+                        <span class="font-semibold text-6xl">4</span>
                     </div>
-                    <span class="font-semibold text-sm my-2">
-                        PENDING
-                    </span>
+                    <span class="font-semibold text-sm my-2">PENDING</span>
                 </div>
-                <div class="w-1/3 flex flex-col items-center">
-                    <div class="w-[11rem] h-[11rem] border-8 border-gray-400 rounded-full font-semibold text-6xl justify-center flex items-center">
-                        4
+                <div class="flex flex-col items-center">
+                    <div class="w-44 h-44 flex justify-center items-center border-8 border-gray-400 rounded-full">
+                        <span class="font-semibold text-6xl">2</span>
                     </div>
-                    <span class="font-semibold text-sm my-2">
-                        ONGOING
-                    </span>
+                    <span class="font-semibold text-sm my-2">ONGOING</span>
                 </div>
-                <div class="w-1/3 flex flex-col items-center">
-                    <div class="w-[11rem] h-[11rem] border-8 border-gray-500 rounded-full font-semibold text-6xl justify-center flex items-center">
-                        4
+                <div class="flex flex-col items-center">
+                    <div class="w-44 h-44 flex justify-center items-center border-8 border-gray-500 rounded-full">
+                        <span class="font-semibold text-6xl">1</span>
                     </div>
-                    <span class="font-semibold text-sm my-2">
-                        CLOSED
-                    </span>
+                    <span class="font-semibold text-sm my-2">CLOSED</span>
                 </div>
             </div> 
-            <div class="w-5/12 flex flex-col px-8">
-                <ul class="h-1/3 flex flex-row items-center justify-center px-4 pb-4 border-b-2 border-gray-400">
-                    <li>
-                        <button class="px-4 py-2 mx-2 rounded-lg font-medium text-sm focus:bg-gray-300 hover:bg-gray-200">This Week</button>
-                    </li>
-                    <li>
-                        <button class="px-4 py-2 mx-2 rounded-lg font-medium text-sm focus:bg-gray-300 hover:bg-gray-200">This Month</button>
-                    </li>
-                    <li>
-                        <button class="px-4 py-2 mx-2 rounded-lg font-medium text-sm focus:bg-gray-300 hover:bg-gray-200">This Year</button>
-                    </li>
-                </ul>
-                <div class="h-2/3 flex flex-col justify-end px-4 pb-4">
+            <div class="w-2/5 flex flex-col justify-between px-6">
+                <div class="flex flex-row items-center justify-center space-x-4 py-4 border-b-2 border-gray-400">
+                    <button class="px-4 py-2 rounded-lg font-medium text-sm focus:bg-gray-300 hover:bg-gray-200">This Week</button>
+                    <button class="px-4 py-2 rounded-lg font-medium text-sm focus:bg-gray-300 hover:bg-gray-200">This Month</button>
+                    <button class="px-4 py-2 rounded-lg font-medium text-sm focus:bg-gray-300 hover:bg-gray-200">This Year</button>
+                </div>
+                <div class="flex flex-col py-2 px-8">
                     <span class="font-semibold text-sm">Total Tickets</span>
                     <span class="font-regular text-4xl">7</span>
                 </div>
@@ -64,82 +43,71 @@
             Ticket Analytics
         </h1>
         <div class="bg-white flex flex-row border-2 border-gray-100 shadow-md p-8">
-            <div class="w-5/12 flex flex-col px-8 ">
-                <ul class="h-1/3 flex flex-row items-center justify-center px-4 pb-4 border-b-2 border-gray-400">
-                    <li>
-                        <button class="px-6 py-2 mx-2 rounded-lg font-medium text-sm bg-gray-300 hover:bg-gray-200">Weekly</button>
-                    </li>
-                    <li>
-                        <button class="px-6 py-2 mx-2 rounded-lg font-medium text-sm hover:bg-gray-200">Monthly</button>
-                    </li>
-                    <li>
-                        <button class="px-6 py-2 mx-2 rounded-lg font-medium text-sm hover:bg-gray-200">Yearly</button>
-                    </li>
-                </ul>
-                <div class="h-2/3 grid grid-cols-2 justify-end px-4 py-4">
-                    <div class="flex flex-col m-2">
+            <div class="w-2/5 flex flex-col justify-between px-8 ">
+                <div class="flex flex-row items-center justify-center space-x-4 py-4 border-b-2 border-gray-400">
+                    <button class="px-6 py-2 rounded-lg font-medium text-sm focus:bg-gray-300 hover:bg-gray-200">Weekly</button>
+                    <button class="px-6 py-2 rounded-lg font-medium text-sm focus:bg-gray-300 hover:bg-gray-200">Monthly</button>
+                    <button class="px-6 py-2 rounded-lg font-medium text-sm focus:bg-gray-300 hover:bg-gray-200">Yearly</button>
+                </div>
+                <div class="grid grid-cols-2 gap-4 justify-end p-8">
+                    <div class="flex flex-col">
                         <span class="font-semibold text-sm">Avg Tickets</span>
                         <span class="font-regular text-4xl">1</span>
                     </div>
-                    <div class="flex flex-col m-2">
+                    <div class="flex flex-col">
                         <span class="font-semibold text-sm">Min Tickets</span>
                         <span class="font-regular text-4xl">1</span>
                     </div>
-                    <div class="flex flex-col m-2">
+                    <div class="flex flex-col">
                         <span class="font-semibold text-sm">Total Tickets</span>
                         <span class="font-regular text-4xl">7</span>
                     </div>
-                    <div class="flex flex-col m-2">
+                    <div class="flex flex-col">
                         <span class="font-semibold text-sm">Max Tickets</span>
                         <span class="font-regular text-4xl">3</span>
                     </div>
                 </div>
             </div>
-            <div class="w-7/12 flex flex-row items-center justify-center">
-                <p-chart type="bar" [data]="basicData" [options]="basicOption" width="40vw" height="70vh"></p-chart>
+            <div class="w-3/5 flex flex-row items-center justify-center">
+                <p-chart type="bar" [data]="basicData" [options]="basicOption" width="30vw" height="20rem"></p-chart>
             </div>
         </div>
     </div>
 
     <div class="flex flex-row space-x-10">
-        <div class="w-4/12 flex-auto py-6">
+        <div class="w-4/12 py-6">
             <h1 class="font-bold text-lg text-center mb-4">
                 Top Applications
             </h1>
-            <div class="bg-white h-56 flex flex-row items-center space-x-4 border-2 border-gray-100 shadow-md p-8">
-                <div class="flex-1">
-                    <div class="w-[8rem] h-[8rem] bg-gray-800 rounded-full font-semibold text-6xl justify-center flex items-center">
-                        
-                    </div>
+            <div class="bg-white h-56 flex flex-row items-center justify-around space-x-4 border-2 border-gray-100 shadow-md p-8">
+                <div class="">
+                    <div class="w-36 h-36 bg-gray-800 rounded-full"></div>
                 </div>
-                <div class="flex-1">
+                <div class="">
                     <ul class="flex flex-col space-y-1">
                         <li>
-                            <span class="text-xs">CAMS</span>
+                            <span class="text-sm">CAMS</span>
                         </li>
                         <li>
-                            <span class="text-xs">SMILE</span>
+                            <span class="text-sm">SMILE</span>
                         </li>
                         <li>
-                            <span class="text-xs">GEOSPAC</span>
+                            <span class="text-sm">GEOSPAC</span>
                         </li>
                         <li>
-                            <span class="text-xs">UIDM</span>
-                        </li>
-                        <li>
-                            <span class="text-xs">OTHER</span>
+                            <span class="text-sm">OTHER</span>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
           
-        <div class="w-5/12 flex-auto py-6">
+        <div class="w-5/12 py-6">
             <h1 class="font-bold text-lg text-center mb-4">
                 Top Tags
             </h1>
             <div class="bg-white h-56 flex items-center justify-center border-2 border-gray-100 shadow-md p-8">
-                <table class="table-auto bg-white h-full w-full">
+                <table class="table-auto bg-white w-full">
                     <tr>
                       <th class="border-b-2 text-left text-sm px-4 py-2">Rank</th>
                       <th class="border-b-2 text-left text-sm px-4 py-2">Tags</th>
@@ -164,20 +132,14 @@
             </div>
         </div>
 
-        <div class="w-3/12 flex-auto py-6">
+        <div class="w-3/12 py-6">
             <h1 class="font-bold text-lg text-center mb-4">
                 Ticket Rate
             </h1>
             <div class="bg-white h-56 flex flex-col space-y-2 justify-center border-2 border-gray-100 shadow-md py-8 px-16">
-                <div class="font-semibold text-sm">
-                    <span>Resolved</span>
-                </div>
-                <div class="font-regular text-6xl">
-                    <span>100%</span>
-                </div>
-                <div class="font-semibold text-xs text-gray-400 border-t-2 border-gray-400 pt-2">
-                    <span>PERFECT</span>
-                </div>
+                <span class="font-semibold text-sm">Resolved</span>
+                <span class="font-regular text-6xl">100%</span>
+                <span class="font-semibold text-xs text-gray-400 border-t-2 border-gray-400 py-2">PERFECT</span>
             </div>
         </div>
     </div>

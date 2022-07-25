@@ -31,9 +31,9 @@ export class CommentListComponent implements OnInit {
   constructor(public dialogService:DialogService, private route:ActivatedRoute, private commentService:CommentService, private authService: AuthService, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
+    this.currAuthorId = this.authService.accountValue.accountId;
     this.getAllComments();
     this.generateCommentForm();
-    this.currAuthorId = this.authService.accountValue.accountId;
   }
 
   ngOnDestroy(): void {

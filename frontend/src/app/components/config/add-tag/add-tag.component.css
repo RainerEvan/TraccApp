@@ -1,7 +1,0 @@
-.form-label{
-    @apply font-medium !important;
-}
-
-.form-field{
-    @apply w-full ring-0 border-2 border-gray-300 text-sm placeholder:text-gray-500 hover:border-gray-400 focus:border-gray-400 !important;
-}
