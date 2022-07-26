@@ -144,9 +144,9 @@ body{
 }
 
 .account-status-true{
-    @apply bg-gray-300 !important;
+    @apply bg-gray-500 text-white !important;
 }
 
 .account-status-false{
-    @apply bg-gray-500 text-white !important;
+    @apply bg-gray-300 !important;
 }

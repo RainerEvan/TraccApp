@@ -6,8 +6,7 @@
         <div class="bg-white border-2 border-gray-100 shadow-md py-10 px-20">
             <div class="grid grid-cols-9 gap-6 items-start bg-gray-200 rounded-md py-8 px-12 mb-8">
                 <div class="col-span-1 w-full flex justify-center">
-                    <img *ngIf="currAuthorId" [(src)]="imageUrl+currAuthorId" alt="Profile" class="rounded-full w-20">
-                    <img *ngIf="!currAuthorId" src="https://t4.ftcdn.net/jpg/02/15/84/43/360_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg" alt="Profile" class="rounded-full w-20">
+                    <img src="https://t4.ftcdn.net/jpg/02/15/84/43/360_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg" alt="Profile" class="rounded-full w-20">
                 </div>
                 <div class="col-span-8 w-full">
                     <form [formGroup]="commentForm" (ngSubmit)="addComment()" class="flex flex-col space-y-4">

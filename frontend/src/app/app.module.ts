@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ApolloModule, APOLLO_OPTIONS } from 'apollo-angular';
 import { HttpLink } from 'apollo-angular/http';
@@ -56,12 +55,14 @@ import { CommentListComponent } from './components/comments/comment-list/comment
 import { NotificationPageComponent } from './components/notifications/notification-page/notification-page.component';
 import { ProfileDropdownComponent } from './components/modal/profile-dropdown/profile-dropdown.component';
 import { NotificationDropdownComponent } from './components/modal/notification-dropdown/notification-dropdown.component';
+import { DashboardPageComponent } from './components/dashboard/dashboard-page/dashboard-page.component';
+import { DashboardActivityComponent } from './components/dashboard/dashboard-activity/dashboard-activity.component';
+import { DashboardAnalyticsComponent } from './components/dashboard/dashboard-analytics/dashboard-analytics.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    DashboardComponent,
     HeaderComponent,
     TicketListComponent,
     TicketDetailComponent,
@@ -93,6 +94,9 @@ import { NotificationDropdownComponent } from './components/modal/notification-d
     NotificationPageComponent,
     ProfileDropdownComponent,
     NotificationDropdownComponent,
+    DashboardPageComponent,
+    DashboardActivityComponent,
+    DashboardAnalyticsComponent,
   ],
   imports: [
     BrowserModule,

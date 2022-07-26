@@ -4,12 +4,12 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { TicketSupportService } from 'src/app/services/ticket-support/ticket-support.service';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  selector: 'app-dashboard-page',
+  templateUrl: './dashboard-page.component.html',
+  styleUrls: ['./dashboard-page.component.css']
 })
-export class DashboardComponent implements OnInit {
-  
+export class DashboardPageComponent implements OnInit {
+
   tickets: Tickets[];
   loading: boolean;
 
@@ -62,7 +62,7 @@ export class DashboardComponent implements OnInit {
           {
               label: 'My First dataset',
               backgroundColor: '#808080',
-              data: [65, 59, 80]
+              data: [65, 59, 42, 70, 52, 78]
           },
       ]
     };

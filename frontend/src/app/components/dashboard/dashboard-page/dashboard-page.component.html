@@ -1,42 +1,5 @@
 <div class="bg-white drop-shadow-lg max-w-7xl mx-auto mb-8 px-10 py-4">
-    <div class="py-6">
-        <h1 class="font-bold text-lg text-center mb-4">
-            Ticket Activity
-        </h1>
-        <div class="bg-white flex flex-row border-2 border-gray-100 shadow-md p-8">
-            <div class="w-3/5 flex flex-row items-center justify-center space-x-8">
-                <div class="flex flex-col items-center">
-                    <div class="w-44 h-44 flex justify-center items-center border-8 border-gray-300 rounded-full">
-                        <span class="font-semibold text-6xl">4</span>
-                    </div>
-                    <span class="font-semibold text-sm my-2">PENDING</span>
-                </div>
-                <div class="flex flex-col items-center">
-                    <div class="w-44 h-44 flex justify-center items-center border-8 border-gray-400 rounded-full">
-                        <span class="font-semibold text-6xl">2</span>
-                    </div>
-                    <span class="font-semibold text-sm my-2">ONGOING</span>
-                </div>
-                <div class="flex flex-col items-center">
-                    <div class="w-44 h-44 flex justify-center items-center border-8 border-gray-500 rounded-full">
-                        <span class="font-semibold text-6xl">1</span>
-                    </div>
-                    <span class="font-semibold text-sm my-2">CLOSED</span>
-                </div>
-            </div> 
-            <div class="w-2/5 flex flex-col justify-between px-6">
-                <div class="flex flex-row items-center justify-center space-x-4 py-4 border-b-2 border-gray-400">
-                    <button class="px-4 py-2 rounded-lg font-medium text-sm focus:bg-gray-300 hover:bg-gray-200">This Week</button>
-                    <button class="px-4 py-2 rounded-lg font-medium text-sm focus:bg-gray-300 hover:bg-gray-200">This Month</button>
-                    <button class="px-4 py-2 rounded-lg font-medium text-sm focus:bg-gray-300 hover:bg-gray-200">This Year</button>
-                </div>
-                <div class="flex flex-col py-2 px-8">
-                    <span class="font-semibold text-sm">Total Tickets</span>
-                    <span class="font-regular text-4xl">7</span>
-                </div>
-            </div>
-        </div>
-    </div>
+    <app-dashboard-activity></app-dashboard-activity>
 
     <div class="py-6">
         <h1 class="font-bold text-lg text-center mb-4">
@@ -44,32 +7,41 @@
         </h1>
         <div class="bg-white flex flex-row border-2 border-gray-100 shadow-md p-8">
             <div class="w-2/5 flex flex-col justify-between px-8 ">
-                <div class="flex flex-row items-center justify-center space-x-4 py-4 border-b-2 border-gray-400">
-                    <button class="px-6 py-2 rounded-lg font-medium text-sm focus:bg-gray-300 hover:bg-gray-200">Weekly</button>
-                    <button class="px-6 py-2 rounded-lg font-medium text-sm focus:bg-gray-300 hover:bg-gray-200">Monthly</button>
-                    <button class="px-6 py-2 rounded-lg font-medium text-sm focus:bg-gray-300 hover:bg-gray-200">Yearly</button>
-                </div>
+                <ul class="flex flex-row items-center justify-center space-x-4 py-6 border-b-2 border-gray-400">
+                    <li>
+                        <input type="radio" id="weekly" name="ticket-analytics" class="hidden peer" checked>
+                        <label (click)="getAllTickets()" for="weekly" class="px-6 py-2 rounded-lg font-medium text-sm peer-checked:bg-gray-300 hover:bg-gray-200 cursor-pointer">Weekly</label>
+                    </li>
+                    <li>
+                        <input type="radio" id="monthly" name="ticket-analytics" class="hidden peer">
+                        <label (click)="getAllTickets()" for="monthly" class="px-6 py-2 rounded-lg font-medium text-sm peer-checked:bg-gray-300 hover:bg-gray-200 cursor-pointer">Monthly</label>
+                    </li>
+                    <li>
+                        <input type="radio" id="yearly" name="ticket-analytics" class="hidden peer">
+                        <label (click)="getAllTickets()" for="yearly" class="px-6 py-2 rounded-lg font-medium text-sm peer-checked:bg-gray-300 hover:bg-gray-200 cursor-pointer">Yearly</label>
+                    </li>
+                </ul>
                 <div class="grid grid-cols-2 gap-4 justify-end p-8">
                     <div class="flex flex-col">
                         <span class="font-semibold text-sm">Avg Tickets</span>
-                        <span class="font-regular text-4xl">1</span>
+                        <span class="font-regular text-3xl">1</span>
                     </div>
                     <div class="flex flex-col">
                         <span class="font-semibold text-sm">Min Tickets</span>
-                        <span class="font-regular text-4xl">1</span>
+                        <span class="font-regular text-3xl">1</span>
                     </div>
                     <div class="flex flex-col">
                         <span class="font-semibold text-sm">Total Tickets</span>
-                        <span class="font-regular text-4xl">7</span>
+                        <span class="font-regular text-3xl">7</span>
                     </div>
                     <div class="flex flex-col">
                         <span class="font-semibold text-sm">Max Tickets</span>
-                        <span class="font-regular text-4xl">3</span>
+                        <span class="font-regular text-3xl">3</span>
                     </div>
                 </div>
             </div>
             <div class="w-3/5 flex flex-row items-center justify-center">
-                <p-chart type="bar" [data]="basicData" [options]="basicOption" width="30vw" height="20rem"></p-chart>
+                <p-chart type="bar" [data]="basicData" [options]="basicOption" width="30vw" height="18rem"></p-chart>
             </div>
         </div>
     </div>

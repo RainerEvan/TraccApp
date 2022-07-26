@@ -7,7 +7,7 @@ import { ConfigDivisionComponent } from './components/config/config-division/con
 import { ConfigPageComponent } from './components/config/config-page/config-page.component';
 import { ConfigScoringComponent } from './components/config/config-scoring/config-scoring.component';
 import { ConfigTagComponent } from './components/config/config-tag/config-tag.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { DashboardPageComponent } from './components/dashboard/dashboard-page/dashboard-page.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { MyTaskListComponent } from './components/my-tasks/my-task-list/my-task-list.component';
@@ -35,7 +35,7 @@ const routes: Routes = [
     children:[
       {
         path:'dashboard', 
-        component: DashboardComponent,
+        component: DashboardPageComponent,
         canActivate:[AuthGuard]
       },
       {
