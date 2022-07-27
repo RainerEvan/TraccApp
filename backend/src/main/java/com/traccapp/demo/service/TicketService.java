@@ -1,5 +1,6 @@
 package com.traccapp.demo.service;
 
+import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.UUID;
@@ -104,5 +105,17 @@ public class TicketService {
         }
 
         ticketRepository.delete(getTicket(ticketId));
+    }
+
+    public long count(){
+        Status status = statusRepository.findByName(EStatus.PENDING)
+            .orElseThrow(() -> new IllegalStateException("Status with current name cannot be found"));
+
+        OffsetDateTime startDate = OffsetDateTime.now().withDayOfMonth(1);
+        OffsetDateTime endDate = OffsetDateTime.now().withDayOfMonth(OffsetDateTime.now().getMonth().length(LocalDate.now().plusMonths(1).isLeapYear()));
+
+        // return ticketRepository.countByStatusAndDateAddedBetween(status, OffsetDateTime.now().minusDays(2), OffsetDateTime.now().plusDays(7));
+        // return ticketRepository.countByStatusAndDateAddedLike(status, OffsetDateTime.now().get(WeekFields.of(Locale.getDefault()).weekOfMonth()));
+        return 1;
     }
 }

@@ -165,17 +165,16 @@ public class StartAppConfig {
             notification5.setBody("Your ticket has been taken by a developer, check it out right here");
             notificationRepository.save(notification5);
 
-            // for(int i=0;i<2;i++){
-                
-            //     Tickets ticket = new Tickets();
-            //     ticket.setDateAdded(LocalDate.now());
-            //     ticket.setApplication(application);
-            //     ticket.setReporter(account);
-            //     ticket.setTitle("Aplikasi CAMS error");
-            //     ticket.setDescription("Form gabisa diisi lagi gimana dong");
-            //     ticket.setStatus(status1);
-            //     ticketRepository.save(ticket);
-            // }
+            for(int i=0;i<2;i++){
+                Tickets ticket = new Tickets();
+                ticket.setDateAdded(OffsetDateTime.now().plusDays(7));
+                ticket.setApplication(application);
+                ticket.setReporter(account);
+                ticket.setTitle("Aplikasi CAMS error");
+                ticket.setDescription("Form gabisa diisi lagi gimana dong");
+                ticket.setStatus(status1);
+                ticketRepository.save(ticket);
+            }
 
             Tickets ticket = new Tickets();
             ticket.setDateAdded(OffsetDateTime.now());

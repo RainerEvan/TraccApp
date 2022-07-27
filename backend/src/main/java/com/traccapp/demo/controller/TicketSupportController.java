@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,6 +45,12 @@ public class TicketSupportController {
     private final SupportService supportService;
     @Autowired
     private final SupportAttachmentService supportAttachmentService;
+
+    @GetMapping(path = "/count")
+    public ResponseEntity<String> countTicket(){
+        long total = ticketService.count();
+        return ResponseEntity.status(HttpStatus.OK).body("Total count = "+total);
+    }
 
     @PostMapping(path = "/add")
     public ResponseEntity<Object> addTicket(@RequestPart(name="files", required = false) MultipartFile[] files, @RequestPart("ticket") TicketRequest ticketRequest){
