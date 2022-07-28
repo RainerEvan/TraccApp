@@ -1,4 +1,4 @@
-package com.traccapp.demo.payload.response;
+package com.traccapp.demo.utils;
 
 import java.util.HashMap;
 import java.util.Map;

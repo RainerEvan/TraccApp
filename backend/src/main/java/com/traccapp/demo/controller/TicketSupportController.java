@@ -1,5 +1,10 @@
 package com.traccapp.demo.controller;
 
+import java.time.DayOfWeek;
+import java.time.OffsetDateTime;
+import java.time.temporal.IsoFields;
+import java.time.temporal.TemporalAdjusters;
+import java.time.temporal.WeekFields;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
@@ -11,11 +16,13 @@ import com.traccapp.demo.model.TicketAttachments;
 import com.traccapp.demo.model.Tickets;
 import com.traccapp.demo.payload.request.SupportRequest;
 import com.traccapp.demo.payload.request.TicketRequest;
-import com.traccapp.demo.payload.response.ResponseHandler;
+import com.traccapp.demo.payload.response.DashboardActivityResponse;
+import com.traccapp.demo.service.DashboardService;
 import com.traccapp.demo.service.SupportAttachmentService;
 import com.traccapp.demo.service.SupportService;
 import com.traccapp.demo.service.TicketAttachmentService;
 import com.traccapp.demo.service.TicketService;
+import com.traccapp.demo.utils.ResponseHandler;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -45,11 +52,20 @@ public class TicketSupportController {
     private final SupportService supportService;
     @Autowired
     private final SupportAttachmentService supportAttachmentService;
+    @Autowired
+    private final DashboardService dashboardService;
 
     @GetMapping(path = "/count")
-    public ResponseEntity<String> countTicket(){
-        long total = ticketService.count();
-        return ResponseEntity.status(HttpStatus.OK).body("Total count = "+total);
+    public DashboardActivityResponse count(){
+        DashboardActivityResponse response = dashboardService.calculateActivityThisYear();
+
+        return response;
+    }
+
+    @GetMapping(path = "/test")
+    public ResponseEntity<String> test(){
+        OffsetDateTime now = OffsetDateTime.now().minusMonths(5).plusYears(2);
+        return ResponseEntity.ok().body("Date: "+now.with(TemporalAdjusters.lastDayOfMonth()));
     }
 
     @PostMapping(path = "/add")

@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.traccapp.demo.model.Notifications;
 import com.traccapp.demo.payload.request.NotificationRequest;
-import com.traccapp.demo.payload.response.ResponseHandler;
 import com.traccapp.demo.service.NotificationService;
+import com.traccapp.demo.utils.ResponseHandler;
 
 import lombok.AllArgsConstructor;
 

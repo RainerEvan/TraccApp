@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.traccapp.demo.model.Divisions;
-import com.traccapp.demo.payload.response.ResponseHandler;
 import com.traccapp.demo.service.DivisionService;
+import com.traccapp.demo.utils.ResponseHandler;
 
 import lombok.AllArgsConstructor;
 

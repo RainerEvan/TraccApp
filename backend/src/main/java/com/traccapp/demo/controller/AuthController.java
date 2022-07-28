@@ -2,8 +2,8 @@ package com.traccapp.demo.controller;
 
 import com.traccapp.demo.payload.request.LoginRequest;
 import com.traccapp.demo.payload.response.JwtResponse;
-import com.traccapp.demo.payload.response.ResponseHandler;
 import com.traccapp.demo.service.AuthService;
+import com.traccapp.demo.utils.ResponseHandler;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

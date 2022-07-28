@@ -1,0 +1,14 @@
+type DashboardActivity{
+    timeframe:String
+    totalPending:Int
+    totalInProgress:Int
+    totalResolved:Int
+    totalDropped:Int
+    totalTickets:Int
+    label:[String]
+    data:[Int]
+}
+
+extend type Query{
+    getDashboardActivity:[DashboardActivity]
+}

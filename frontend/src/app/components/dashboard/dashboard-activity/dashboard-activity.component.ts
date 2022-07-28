@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Tickets } from 'src/app/models/tickets';
 import { TicketSupportService } from 'src/app/services/ticket-support/ticket-support.service';
 
 @Component({
@@ -9,10 +8,10 @@ import { TicketSupportService } from 'src/app/services/ticket-support/ticket-sup
 })
 export class DashboardActivityComponent implements OnInit {
   
-  tickets: Tickets[];
-  loading: boolean;
   basicData: any;
   basicOption: any;
+  timeframe: string[];
+  totalData: number[];
 
   totalRecords: number;
   totalPending: number;
@@ -24,30 +23,17 @@ export class DashboardActivityComponent implements OnInit {
 
   ngOnInit(): void {
     this.getThisWeek();
-    this.getAllTickets();
-  }
-
-  public getAllTickets(): void{
-    this.loading = true;
-
-    this.ticketSupportService.getAllTickets().subscribe({
-      next: (tickets: Tickets[]) => {
-        this.tickets = tickets;
-        this.loading = false;
-        this.generateChart(tickets);
-      },
-      error: (error: any) => {
-        console.log(error);
-      }
-    });
   }
 
   getThisWeek(){
-    this.totalRecords = 7;
+    this.totalRecords = 9;
     this.totalPending = 4;
     this.totalOngoing = 2;
-    this.totalClosed = 1;
+    this.totalClosed = 2;
     this.totalDropped = 1;
+    this.timeframe = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    this.totalData = [0,1,4,2,1,1,0];
+    this.generateChart();
   }
 
   getThisMonth(){
@@ -56,6 +42,9 @@ export class DashboardActivityComponent implements OnInit {
     this.totalOngoing = 2;
     this.totalClosed = 33;
     this.totalDropped = 2;
+    this.timeframe = ['Week 1','Week 2','Week 3','Week 4'];
+    this.totalData = [7,12,9,11];
+    this.generateChart();
   }
 
   getThisYear(){
@@ -64,13 +53,14 @@ export class DashboardActivityComponent implements OnInit {
     this.totalOngoing = 2;
     this.totalClosed = 429;
     this.totalDropped = 3;
+    this.timeframe = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    this.totalData = [32,20,18,25,38,23,19,27,21,29,17,21];
+    this.generateChart();
   }
 
-  generateChart(data:any){
-    let appName = data.map((ticket:any) => ticket.application.name);
-
+  generateChart(){
     this.basicData = {
-      labels: appName,
+      labels: this.timeframe,
       datasets: [
           {
               label: 'My First dataset',
@@ -78,7 +68,7 @@ export class DashboardActivityComponent implements OnInit {
               borderColor: '#808080',
               backgroundColor: '#808080',
               tension: .4,
-              data: [65, 59, 42, 70, 52, 78]
+              data: this.totalData
           },
       ]
     };

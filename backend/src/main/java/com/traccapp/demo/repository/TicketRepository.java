@@ -18,6 +18,7 @@ public interface TicketRepository extends JpaRepository<Tickets, TicketPK> {
     Optional<Tickets> findByTicketId(UUID id);
     Optional<Tickets> findByTicketNo(String ticketNo);
     List<Tickets> findAllByReporter(Accounts reporter);
-    long countByStatusAndDateAddedBetween(Status status, OffsetDateTime dateAddedStart, OffsetDateTime dateAddedEnd);
-    long countByStatusAndDateAddedContaining(Status status, String month);
+
+    int countByDateAddedBetween(OffsetDateTime dateAddedStart, OffsetDateTime dateAddedEnd);
+    int countByStatusAndDateAddedBetween(Status status, OffsetDateTime dateAddedStart, OffsetDateTime dateAddedEnd);
 }
