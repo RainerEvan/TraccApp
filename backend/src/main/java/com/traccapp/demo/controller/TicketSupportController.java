@@ -2,9 +2,9 @@ package com.traccapp.demo.controller;
 
 import java.time.DayOfWeek;
 import java.time.OffsetDateTime;
-import java.time.temporal.IsoFields;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
-import java.time.temporal.WeekFields;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
@@ -25,6 +25,7 @@ import com.traccapp.demo.service.TicketService;
 import com.traccapp.demo.utils.ResponseHandler;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -56,16 +57,26 @@ public class TicketSupportController {
     private final DashboardService dashboardService;
 
     @GetMapping(path = "/count")
-    public DashboardActivityResponse count(){
-        DashboardActivityResponse response = dashboardService.calculateActivityThisYear();
+    public List<DashboardActivityResponse> count(){
+        List<DashboardActivityResponse> response = dashboardService.getDashboardActivity();
 
         return response;
     }
 
     @GetMapping(path = "/test")
     public ResponseEntity<String> test(){
-        OffsetDateTime now = OffsetDateTime.now().minusMonths(5).plusYears(2);
-        return ResponseEntity.ok().body("Date: "+now.with(TemporalAdjusters.lastDayOfMonth()));
+        OffsetDateTime now = OffsetDateTime.now();
+
+        OffsetDateTime startDate = now.withHour(0).with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
+        OffsetDateTime endDate = now.with(TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY));
+
+        List<OffsetDateTime> label = new ArrayList<>();
+
+        for(OffsetDateTime date = startDate; date.isBefore(endDate.plusDays(1)); date = date.plusDays(1)){
+            label.add(date);
+        }
+
+        return ResponseEntity.ok().body(label.toString());
     }
 
     @PostMapping(path = "/add")

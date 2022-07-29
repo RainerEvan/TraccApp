@@ -32,7 +32,7 @@
                 </div>
                 <div>
                     <div class="w-24 h-24 flex justify-center items-center border-4 border-gray-400 rounded-full">
-                        <span class="font-medium text-4xl">{{totalOngoing}}</span>
+                        <span class="font-medium text-4xl">{{totalInProgress}}</span>
                     </div>
                 </div>
             </div>
@@ -48,7 +48,7 @@
                 </div>
                 <div>
                     <div class="w-24 h-24 flex justify-center items-center border-4 border-gray-500 rounded-full">
-                        <span class="font-medium text-4xl">{{totalClosed}}</span>
+                        <span class="font-medium text-4xl">{{totalResolved}}</span>
                     </div>
                 </div>
             </div>
@@ -71,26 +71,26 @@
         </div>
         <div class="bg-white flex flex-row border-2 border-gray-100 shadow-md p-8">
             <div class="w-3/5 flex flex-row items-center justify-center">
-                <p-chart type="line" [data]="basicData" [options]="basicOption" width="30vw" height="18rem"></p-chart>
+                <p-chart type="line" [data]="basicData" [options]="basicOption" width="35rem" height="18rem"></p-chart>
             </div>
             <div class="w-2/5 flex flex-col justify-between pr-8">
                 <ul class="flex flex-row items-center justify-center space-x-4 py-6 border-b-2 border-gray-400">
-                    <li>
-                        <input type="radio" id="weekly" name="ticket-activity" class="hidden peer" checked>
-                        <label (click)="getThisWeek()" for="weekly" class="px-4 py-2 rounded-lg font-medium text-sm peer-checked:bg-gray-300 hover:bg-gray-200 cursor-pointer">This Week</label>
+                    <li *ngFor="let activity of dashboardActivity">
+                        <input type="radio" [id]="activity.menu" name="ticket-activity" [checked]="(activity.menu === 'This Week')" class="hidden peer">
+                        <label (click)="getActivityData(activity)" [for]="activity.menu" class="px-4 py-2 rounded-lg font-medium text-sm peer-checked:bg-gray-300 hover:bg-gray-200 cursor-pointer">{{activity.menu}}</label>
                     </li>
-                    <li>
+                    <!-- <li>
                         <input type="radio" id="monthly" name="ticket-activity" class="hidden peer">
                         <label (click)="getThisMonth()" for="monthly" class="px-4 py-2 rounded-lg font-medium text-sm peer-checked:bg-gray-300 hover:bg-gray-200 cursor-pointer">This Month</label>
                     </li>
                     <li>
                         <input type="radio" id="yearly" name="ticket-activity" class="hidden peer">
                         <label (click)="getThisYear()" for="yearly" class="px-4 py-2 rounded-lg font-medium text-sm peer-checked:bg-gray-300 hover:bg-gray-200 cursor-pointer">This Year</label>
-                    </li>
+                    </li> -->
                 </ul>
                 <div class="flex flex-col p-8">
                     <span class="font-semibold text-sm">Total Tickets</span>
-                    <span class="font-regular text-3xl">7</span>
+                    <span class="font-regular text-3xl">{{totalTickets}}</span>
                 </div>
             </div>
         </div>

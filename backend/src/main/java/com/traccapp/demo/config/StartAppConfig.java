@@ -167,28 +167,28 @@ public class StartAppConfig {
 
             for(int i=0;i<2;i++){
                 Tickets ticket = new Tickets();
-                ticket.setDateAdded(OffsetDateTime.now().plusDays(4));
+                ticket.setDateAdded(OffsetDateTime.now().minusMonths(1));
                 ticket.setApplication(application);
                 ticket.setReporter(account);
                 ticket.setTitle("Aplikasi CAMS error");
                 ticket.setDescription("Form gabisa diisi lagi gimana dong");
-                ticket.setStatus(status1);
+                ticket.setStatus(status5);
                 ticketRepository.save(ticket);
             }
 
             for(int i=0;i<2;i++){
                 Tickets ticket = new Tickets();
-                ticket.setDateAdded(OffsetDateTime.now().minusDays(4));
+                ticket.setDateAdded(OffsetDateTime.now().minusDays(7));
                 ticket.setApplication(application);
                 ticket.setReporter(account);
                 ticket.setTitle("Aplikasi CAMS error");
                 ticket.setDescription("Form gabisa diisi lagi gimana dong");
-                ticket.setStatus(status1);
+                ticket.setStatus(status4);
                 ticketRepository.save(ticket);
             }
 
             Tickets ticket = new Tickets();
-            ticket.setDateAdded(OffsetDateTime.now());
+            ticket.setDateAdded(OffsetDateTime.now().minusDays(1));
             ticket.setApplication(application);
             ticket.setReporter(account);
             ticket.setTitle("Aplikasi CAMS error");
@@ -206,7 +206,7 @@ public class StartAppConfig {
             ticketRepository.save(ticket2);
 
             Tickets ticket3 = new Tickets();
-            ticket3.setDateAdded(OffsetDateTime.now());
+            ticket3.setDateAdded(OffsetDateTime.now().plusDays(1));
             ticket3.setApplication(application3);
             ticket3.setReporter(account);
             ticket3.setTitle("App Geospacial Tidak bisa Input Data Perumahan");

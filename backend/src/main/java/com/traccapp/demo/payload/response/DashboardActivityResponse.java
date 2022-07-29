@@ -8,6 +8,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class DashboardActivityResponse {
+    private String menu;
     private String timeframe;
     private int totalPending;
     private int totalInProgress;
