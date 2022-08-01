@@ -1,6 +1,5 @@
 package com.traccapp.demo.controller;
 
-import java.time.DayOfWeek;
 import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
@@ -17,6 +16,7 @@ import com.traccapp.demo.model.Tickets;
 import com.traccapp.demo.payload.request.SupportRequest;
 import com.traccapp.demo.payload.request.TicketRequest;
 import com.traccapp.demo.payload.response.DashboardActivityResponse;
+import com.traccapp.demo.payload.response.DashboardAnalyticsResponse;
 import com.traccapp.demo.service.DashboardService;
 import com.traccapp.demo.service.SupportAttachmentService;
 import com.traccapp.demo.service.SupportService;
@@ -25,7 +25,6 @@ import com.traccapp.demo.service.TicketService;
 import com.traccapp.demo.utils.ResponseHandler;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -57,26 +56,27 @@ public class TicketSupportController {
     private final DashboardService dashboardService;
 
     @GetMapping(path = "/count")
-    public List<DashboardActivityResponse> count(){
-        List<DashboardActivityResponse> response = dashboardService.getDashboardActivity();
+    public DashboardAnalyticsResponse count(){
+        DashboardAnalyticsResponse response = dashboardService.calculateAnalytics();
 
         return response;
     }
 
     @GetMapping(path = "/test")
     public ResponseEntity<String> test(){
-        OffsetDateTime now = OffsetDateTime.now();
+        OffsetDateTime startDate = OffsetDateTime.now().withHour(0).with(TemporalAdjusters.firstDayOfYear());
+        OffsetDateTime endDate = OffsetDateTime.now().withHour(23).withMinute(59).with(TemporalAdjusters.lastDayOfYear());
+        List<String> label = new ArrayList<>();
+        List<String> label2 = new ArrayList<>();
 
-        OffsetDateTime startDate = now.withHour(0).with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
-        OffsetDateTime endDate = now.with(TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY));
-
-        List<OffsetDateTime> label = new ArrayList<>();
-
-        for(OffsetDateTime date = startDate; date.isBefore(endDate.plusDays(1)); date = date.plusDays(1)){
-            label.add(date);
+        for(OffsetDateTime date = startDate; date.isBefore(endDate); date = date.plusMonths(1)){
+            String res = date.format(DateTimeFormatter.ofPattern("dd-MMM-yy"));
+            label.add(res);
+            String res2 = date.withHour(23).withMinute(59).with(TemporalAdjusters.lastDayOfMonth()).format(DateTimeFormatter.ofPattern("dd-MMM-yy"));
+            label2.add(res2);
         }
 
-        return ResponseEntity.ok().body(label.toString());
+        return ResponseEntity.ok().body(label.toString()+"\n"+label2.toString());
     }
 
     @PostMapping(path = "/add")

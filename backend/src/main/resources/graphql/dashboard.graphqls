@@ -1,6 +1,6 @@
 type DashboardActivity{
     menu:String
-    timeframe:String
+    period:String
     totalPending:Int
     totalInProgress:Int
     totalResolved:Int

@@ -1,6 +1,6 @@
 export type DashBoardActivity ={
     menu:string;
-    timeframe:string;
+    period:string;
     totalPending:number;
     totalInProgress:number;
     totalResolved:number;

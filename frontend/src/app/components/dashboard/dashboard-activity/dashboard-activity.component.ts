@@ -14,7 +14,7 @@ export class DashboardActivityComponent implements OnInit {
   loading: boolean;
   
   dashboardActivity: DashBoardActivity[];
-  timeframe: string;
+  period: string;
   totalPending: number;
   totalInProgress: number;
   totalResolved: number;
@@ -45,7 +45,7 @@ export class DashboardActivityComponent implements OnInit {
   }
 
   getActivityData(activity:DashBoardActivity){
-    this.timeframe = activity.timeframe
+    this.period = activity.period;
     this.totalPending = activity.totalPending;
     this.totalInProgress = activity.totalInProgress;
     this.totalResolved = activity.totalResolved;
@@ -119,7 +119,7 @@ export class DashboardActivityComponent implements OnInit {
         x: {
           title: {
             display: true,
-            text: this.timeframe,
+            text: this.period,
             font:{
               family:"'Montserrat', sans-serif",
               weight:500,

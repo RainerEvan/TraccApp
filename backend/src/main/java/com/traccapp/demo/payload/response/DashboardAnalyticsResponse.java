@@ -7,13 +7,11 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class DashboardActivityResponse {
-    private String menu;
+public class DashboardAnalyticsResponse {
     private String period;
-    private int totalPending;
-    private int totalInProgress;
-    private int totalResolved;
-    private int totalDropped;
+    private int minTickets;
+    private int maxTickets;
+    private int avgTickets;
     private int totalTickets;
     private List<String> label;
     private List<Integer> data;

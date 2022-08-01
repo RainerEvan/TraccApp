@@ -16,7 +16,7 @@ export class DashboardService {
         query getDashboardActivity{
           getDashboardActivity{
             menu
-            timeframe
+            period
             totalPending
             totalInProgress
             totalResolved

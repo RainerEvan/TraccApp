@@ -5,7 +5,9 @@ import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 import com.traccapp.demo.data.EStatus;
 import com.traccapp.demo.model.Status;
 import com.traccapp.demo.payload.response.DashboardActivityResponse;
+import com.traccapp.demo.payload.response.DashboardAnalyticsResponse;
 import com.traccapp.demo.repository.StatusRepository;
 import com.traccapp.demo.repository.TicketRepository;
 
@@ -48,7 +51,7 @@ public class DashboardService {
 
         OffsetDateTime startDate = OffsetDateTime.now();
         OffsetDateTime endDate = OffsetDateTime.now();
-        String timeframe = "";
+        String period = "";
 
         if(menu == "This Week"){
             startDate = OffsetDateTime.now().withHour(0).with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
@@ -65,7 +68,7 @@ public class DashboardService {
         else if(menu == "This Month"){
             startDate = OffsetDateTime.now().withHour(0).with(TemporalAdjusters.firstDayOfMonth());
             endDate = OffsetDateTime.now().withHour(23).withMinute(59).with(TemporalAdjusters.lastDayOfMonth());
-            timeframe = startDate.getMonth().toString();
+            period = startDate.getMonth().toString();
 
             for(OffsetDateTime date = startDate; date.isBefore(endDate); date = date.plusDays(1)){
                 String day = date.format(DateTimeFormatter.ofPattern("dd"));
@@ -78,7 +81,7 @@ public class DashboardService {
         else if(menu == "This Year"){
             startDate = OffsetDateTime.now().withHour(0).with(TemporalAdjusters.firstDayOfYear());
             endDate = OffsetDateTime.now().withHour(23).withMinute(59).with(TemporalAdjusters.lastDayOfYear());
-            timeframe = String.valueOf(startDate.getYear());
+            period = String.valueOf(startDate.getYear());
 
             for(OffsetDateTime date = startDate; date.isBefore(endDate); date = date.plusMonths(1)){
                 String month = date.format(DateTimeFormatter.ofPattern("MMM"));
@@ -101,7 +104,34 @@ public class DashboardService {
         int totalDropped = ticketRepository.countByStatusAndDateAddedBetween(dropped, startDate, endDate);
         int totalTickets = ticketRepository.countByDateAddedBetween(startDate, endDate);
 
-        return new DashboardActivityResponse(menu, timeframe, totalPending, totalInProgress, totalResolved, totalDropped, totalTickets, label, data);
+        return new DashboardActivityResponse(menu, period, totalPending, totalInProgress, totalResolved, totalDropped, totalTickets, label, data);
+    }
+
+    public DashboardAnalyticsResponse calculateAnalytics(){
+        List<String> label = new ArrayList<>();
+        List<Integer> data = new ArrayList<>();
+
+        OffsetDateTime startDate = OffsetDateTime.now().withHour(0).with(TemporalAdjusters.firstDayOfYear());
+        OffsetDateTime endDate = OffsetDateTime.now().withHour(23).withMinute(59).with(TemporalAdjusters.lastDayOfYear());
+
+        for(OffsetDateTime date = startDate; date.isBefore(endDate); date = date.plusMonths(1)){
+            String month = date.format(DateTimeFormatter.ofPattern("MMM"));
+            label.add(month);
+
+            int total = ticketRepository.countByDateAddedBetween(date,date.withHour(23).withMinute(59).with(TemporalAdjusters.lastDayOfMonth()));
+            data.add(total);
+        }
+
+        List<Integer> sample = data;
+        sample.removeIf(n -> Objects.equals(n, 0));
+
+        int minTickets = Collections.min(sample);
+        int maxTickets = Collections.max(sample);
+        int avgTickets = (data.stream().reduce(0, Integer::sum)/data.size());
+        int totalTickets = ticketRepository.countByDateAddedBetween(startDate, endDate);
+
+
+        return new DashboardAnalyticsResponse("2022", minTickets, maxTickets, avgTickets, totalTickets, label, data);
     }
 
     // public DashboardActivityResponse calculateActivityThisWeek(){
@@ -110,7 +140,7 @@ public class DashboardService {
     //     OffsetDateTime startDate = now.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
     //     OffsetDateTime endDate = now.with(TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY));
 
-    //     String timeframe = "";
+    //     String period = "";
 
     //     Status pending = statusRepository.findByName(EStatus.PENDING).get();
     //     Status inProgress = statusRepository.findByName(EStatus.IN_PROGRESS).get();
@@ -135,7 +165,7 @@ public class DashboardService {
     //         data.add(total);
     //     }
 
-    //     return new DashboardActivityResponse("This Week", timeframe, totalPending, totalInProgress, totalResolved, totalDropped, totalTickets, label, data);
+    //     return new DashboardActivityResponse("This Week", period, totalPending, totalInProgress, totalResolved, totalDropped, totalTickets, label, data);
     // }
 
     // public DashboardActivityResponse calculateActivityThisMonth(){
@@ -144,7 +174,7 @@ public class DashboardService {
     //     OffsetDateTime startDate = now.with(TemporalAdjusters.firstDayOfMonth());
     //     OffsetDateTime endDate = now.with(TemporalAdjusters.lastDayOfMonth());
 
-    //     String timeframe = startDate.getMonth().toString();
+    //     String period = startDate.getMonth().toString();
 
     //     Status pending = statusRepository.findByName(EStatus.PENDING).get();
     //     Status inProgress = statusRepository.findByName(EStatus.IN_PROGRESS).get();
@@ -169,7 +199,7 @@ public class DashboardService {
     //         data.add(total);
     //     }
 
-    //     return new DashboardActivityResponse("This Month", timeframe, totalPending, totalInProgress, totalResolved, totalDropped, totalTickets, label, data);
+    //     return new DashboardActivityResponse("This Month", period, totalPending, totalInProgress, totalResolved, totalDropped, totalTickets, label, data);
     // }
 
     // public DashboardActivityResponse calculateActivityThisYear(){
@@ -178,7 +208,7 @@ public class DashboardService {
     //     OffsetDateTime startDate = now.with(TemporalAdjusters.firstDayOfYear());
     //     OffsetDateTime endDate = now.with(TemporalAdjusters.lastDayOfYear());
 
-    //     String timeframe = String.valueOf(startDate.getYear());
+    //     String period = String.valueOf(startDate.getYear());
 
     //     Status pending = statusRepository.findByName(EStatus.PENDING).get();
     //     Status inProgress = statusRepository.findByName(EStatus.IN_PROGRESS).get();
@@ -203,6 +233,6 @@ public class DashboardService {
     //         data.add(total);
     //     }
 
-    //     return new DashboardActivityResponse("This Year", timeframe, totalPending, totalInProgress, totalResolved, totalDropped, totalTickets, label, data);
+    //     return new DashboardActivityResponse("This Year", period, totalPending, totalInProgress, totalResolved, totalDropped, totalTickets, label, data);
     // }
 }
