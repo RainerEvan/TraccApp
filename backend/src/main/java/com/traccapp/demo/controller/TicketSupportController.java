@@ -15,8 +15,8 @@ import com.traccapp.demo.model.TicketAttachments;
 import com.traccapp.demo.model.Tickets;
 import com.traccapp.demo.payload.request.SupportRequest;
 import com.traccapp.demo.payload.request.TicketRequest;
-import com.traccapp.demo.payload.response.DashboardActivityResponse;
 import com.traccapp.demo.payload.response.DashboardAnalyticsResponse;
+import com.traccapp.demo.repository.TicketRepository;
 import com.traccapp.demo.service.DashboardService;
 import com.traccapp.demo.service.SupportAttachmentService;
 import com.traccapp.demo.service.SupportService;
@@ -47,6 +47,8 @@ public class TicketSupportController {
     @Autowired
     private final TicketService ticketService;
     @Autowired
+    private final TicketRepository ticketRepository;
+    @Autowired
     private final TicketAttachmentService ticketAttachmentService;
     @Autowired
     private final SupportService supportService;
@@ -56,27 +58,35 @@ public class TicketSupportController {
     private final DashboardService dashboardService;
 
     @GetMapping(path = "/count")
-    public DashboardAnalyticsResponse count(){
-        DashboardAnalyticsResponse response = dashboardService.calculateAnalytics();
+    public List<DashboardAnalyticsResponse> count(){
+        List<DashboardAnalyticsResponse> response = dashboardService.getDashboardAnalytics();
 
         return response;
     }
 
     @GetMapping(path = "/test")
     public ResponseEntity<String> test(){
-        OffsetDateTime startDate = OffsetDateTime.now().withHour(0).with(TemporalAdjusters.firstDayOfYear());
-        OffsetDateTime endDate = OffsetDateTime.now().withHour(23).withMinute(59).with(TemporalAdjusters.lastDayOfYear());
-        List<String> label = new ArrayList<>();
-        List<String> label2 = new ArrayList<>();
+        boolean isExist = false;
+        List<String> year = new ArrayList<>();
+        List<String> exist = new ArrayList<>();
+        OffsetDateTime now = OffsetDateTime.now();
 
-        for(OffsetDateTime date = startDate; date.isBefore(endDate); date = date.plusMonths(1)){
-            String res = date.format(DateTimeFormatter.ofPattern("dd-MMM-yy"));
-            label.add(res);
-            String res2 = date.withHour(23).withMinute(59).with(TemporalAdjusters.lastDayOfMonth()).format(DateTimeFormatter.ofPattern("dd-MMM-yy"));
-            label2.add(res2);
-        }
+        do{
+            OffsetDateTime startDate = now.withHour(0).with(TemporalAdjusters.firstDayOfYear());
+            OffsetDateTime endDate = now.withHour(23).withMinute(59).with(TemporalAdjusters.lastDayOfYear());
 
-        return ResponseEntity.ok().body(label.toString()+"\n"+label2.toString());
+            isExist = ticketRepository.existsByDateAddedBetween(startDate, endDate);
+
+            if(isExist){
+                year.add(String.valueOf(now.getYear()));
+                exist.add(String.valueOf(isExist));
+            }
+
+            now = now.minusYears(1);
+
+        } while(isExist);
+
+        return ResponseEntity.ok().body(year.toString() + exist.toString());
     }
 
     @PostMapping(path = "/add")

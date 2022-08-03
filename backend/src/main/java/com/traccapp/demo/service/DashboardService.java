@@ -7,7 +7,6 @@ import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,6 +42,29 @@ public class DashboardService {
         dashboardActivity.add(thisYear);
 
         return dashboardActivity;
+    }
+
+    public List<DashboardAnalyticsResponse> getDashboardAnalytics(){
+        List<DashboardAnalyticsResponse> dashboardAnalytics = new ArrayList<>();
+        boolean isExist = false;
+        OffsetDateTime now = OffsetDateTime.now();
+
+        do{
+            OffsetDateTime startDate = now.withHour(0).with(TemporalAdjusters.firstDayOfYear());
+            OffsetDateTime endDate = now.withHour(23).withMinute(59).with(TemporalAdjusters.lastDayOfYear());
+
+            isExist = ticketRepository.existsByDateAddedBetween(startDate, endDate);
+
+            if(isExist){
+                DashboardAnalyticsResponse analytics = calculateAnalytics(now);
+                dashboardAnalytics.add(analytics);
+            }
+
+            now = now.minusYears(1);
+
+        } while(isExist);
+
+        return dashboardAnalytics;
     }
 
     public DashboardActivityResponse calculateActivity(String menu){
@@ -107,12 +129,12 @@ public class DashboardService {
         return new DashboardActivityResponse(menu, period, totalPending, totalInProgress, totalResolved, totalDropped, totalTickets, label, data);
     }
 
-    public DashboardAnalyticsResponse calculateAnalytics(){
+    public DashboardAnalyticsResponse calculateAnalytics(OffsetDateTime now){
         List<String> label = new ArrayList<>();
         List<Integer> data = new ArrayList<>();
 
-        OffsetDateTime startDate = OffsetDateTime.now().withHour(0).with(TemporalAdjusters.firstDayOfYear());
-        OffsetDateTime endDate = OffsetDateTime.now().withHour(23).withMinute(59).with(TemporalAdjusters.lastDayOfYear());
+        OffsetDateTime startDate = now.withHour(0).with(TemporalAdjusters.firstDayOfYear());
+        OffsetDateTime endDate = now.withHour(23).withMinute(59).with(TemporalAdjusters.lastDayOfYear());
 
         for(OffsetDateTime date = startDate; date.isBefore(endDate); date = date.plusMonths(1)){
             String month = date.format(DateTimeFormatter.ofPattern("MMM"));
@@ -122,16 +144,16 @@ public class DashboardService {
             data.add(total);
         }
 
-        List<Integer> sample = data;
-        sample.removeIf(n -> Objects.equals(n, 0));
+        // List<Integer> sample = data;
+        // sample.removeIf(n -> Objects.equals(n, 0));
 
-        int minTickets = Collections.min(sample);
-        int maxTickets = Collections.max(sample);
+        String period = String.valueOf(now.getYear());
+        int minTickets = Collections.min(data);
+        int maxTickets = Collections.max(data);
         int avgTickets = (data.stream().reduce(0, Integer::sum)/data.size());
         int totalTickets = ticketRepository.countByDateAddedBetween(startDate, endDate);
 
-
-        return new DashboardAnalyticsResponse("2022", minTickets, maxTickets, avgTickets, totalTickets, label, data);
+        return new DashboardAnalyticsResponse(period, minTickets, maxTickets, avgTickets, totalTickets, label, data);
     }
 
     // public DashboardActivityResponse calculateActivityThisWeek(){

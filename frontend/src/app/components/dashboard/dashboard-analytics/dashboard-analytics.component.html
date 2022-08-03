@@ -4,41 +4,43 @@
     </h1>
     <div class="bg-white flex flex-row border-2 border-gray-100 shadow-md p-8">
         <div class="w-2/5 flex flex-col justify-between px-8">
-            <ul class="flex flex-row items-center justify-center space-x-4 py-6 border-b-2 border-gray-400">
-                <li>
+            <div class="flex flex-row items-center justify-around py-6 border-b-2 border-gray-400">
+                <span class="font-medium text-lg">Timeframe</span>
+                <p-dropdown [options]="dashboardAnalytics" optionLabel="period" (onChange)="getAnalyticsData($event.value)" emptyMessage="Year"></p-dropdown>
+                <!-- <li>
                     <input type="radio" id="weekly" name="ticket-analytics" class="hidden peer" checked>
-                    <label (click)="getDashboardActivity()" for="weekly" class="px-6 py-2 rounded-lg font-medium text-sm peer-checked:bg-gray-300 hover:bg-gray-200 cursor-pointer">Weekly</label>
+                    <label (click)="getDashboardAnalytics()" for="weekly" class="px-6 py-2 rounded-lg font-medium text-sm peer-checked:bg-gray-300 hover:bg-gray-200 cursor-pointer">Weekly</label>
                 </li>
                 <li>
                     <input type="radio" id="monthly" name="ticket-analytics" class="hidden peer">
-                    <label (click)="getDashboardActivity()" for="monthly" class="px-6 py-2 rounded-lg font-medium text-sm peer-checked:bg-gray-300 hover:bg-gray-200 cursor-pointer">Monthly</label>
+                    <label (click)="getDashboardAnalytics()" for="monthly" class="px-6 py-2 rounded-lg font-medium text-sm peer-checked:bg-gray-300 hover:bg-gray-200 cursor-pointer">Monthly</label>
                 </li>
                 <li>
                     <input type="radio" id="yearly" name="ticket-analytics" class="hidden peer">
-                    <label (click)="getDashboardActivity()" for="yearly" class="px-6 py-2 rounded-lg font-medium text-sm peer-checked:bg-gray-300 hover:bg-gray-200 cursor-pointer">Yearly</label>
-                </li>
-            </ul>
+                    <label (click)="getDashboardAnalytics()" for="yearly" class="px-6 py-2 rounded-lg font-medium text-sm peer-checked:bg-gray-300 hover:bg-gray-200 cursor-pointer">Yearly</label>
+                </li> -->
+            </div>
             <div class="grid grid-cols-2 gap-4 justify-end p-8">
                 <div class="flex flex-col">
-                    <span class="font-semibold text-sm">Avg Tickets</span>
-                    <span class="font-regular text-3xl">1</span>
-                </div>
-                <div class="flex flex-col">
                     <span class="font-semibold text-sm">Min Tickets</span>
-                    <span class="font-regular text-3xl">1</span>
-                </div>
-                <div class="flex flex-col">
-                    <span class="font-semibold text-sm">Total Tickets</span>
-                    <span class="font-regular text-3xl">7</span>
+                    <span class="font-regular text-3xl">{{minTickets}}</span>
                 </div>
                 <div class="flex flex-col">
                     <span class="font-semibold text-sm">Max Tickets</span>
-                    <span class="font-regular text-3xl">3</span>
+                    <span class="font-regular text-3xl">{{maxTickets}}</span>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-semibold text-sm">Avg Tickets</span>
+                    <span class="font-regular text-3xl">{{avgTickets}}</span>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-semibold text-sm">Total Tickets</span>
+                    <span class="font-regular text-3xl">{{totalTickets}}</span>
                 </div>
             </div>
         </div>
         <div class="w-3/5 flex flex-row items-center justify-center">
-            <p-chart type="bar" [data]="basicData" [options]="basicOption" width="35rem" height="18rem"></p-chart>
+            <p-chart type="bar" [data]="barChartData" [options]="barChartOption" width="35rem" height="18rem"></p-chart>
         </div>
     </div>
 </div>
@@ -50,7 +52,7 @@
         </h1>
         <div class="bg-white h-56 flex flex-row items-center justify-around space-x-4 border-2 border-gray-100 shadow-md p-8">
             <div class="">
-                <div class="w-36 h-36 bg-gray-800 rounded-full"></div>
+                <p-chart type="pie" [data]="pieChartData" [options]="pieChartOption" width="10rem" height="10rem"></p-chart>
             </div>
             <div class="">
                 <ul class="flex flex-col space-y-1">
@@ -70,7 +72,7 @@
             </div>
         </div>
     </div>
-      
+
     <div class="w-5/12 py-6">
         <h1 class="font-bold text-lg text-center mb-4">
             Top Tags
@@ -78,26 +80,26 @@
         <div class="bg-white h-56 flex items-center justify-center border-2 border-gray-100 shadow-md p-8">
             <table class="table-auto bg-white w-full">
                 <tr>
-                  <th class="border-b-2 text-left text-sm px-4 py-2">Rank</th>
-                  <th class="border-b-2 text-left text-sm px-4 py-2">Tags</th>
-                  <th class="border-b-2 text-left text-sm px-4 py-2">Tickets Reported</th>
+                    <th class="border-b-2 text-left text-sm px-4 py-2">Rank</th>
+                    <th class="border-b-2 text-left text-sm px-4 py-2">Tags</th>
+                    <th class="border-b-2 text-left text-sm px-4 py-2">Tickets Reported</th>
                 </tr>
                 <tr>
-                  <td class="text-xs px-4 py-4">1</td>
-                  <td class="text-xs px-4 py-4">Error</td>
-                  <td class="text-xs px-4 py-4">4</td>
+                    <td class="text-xs px-4 py-4">1</td>
+                    <td class="text-xs px-4 py-4">Error</td>
+                    <td class="text-xs px-4 py-4">4</td>
                 </tr>
                 <tr>
-                  <td class="text-xs px-4 py-4">2</td>
-                  <td class="text-xs px-4 py-4">Bug</td>
-                  <td class="text-xs px-4 py-4">2</td>
+                    <td class="text-xs px-4 py-4">2</td>
+                    <td class="text-xs px-4 py-4">Bug</td>
+                    <td class="text-xs px-4 py-4">2</td>
                 </tr>
                 <tr>
-                  <td class="text-xs px-4 py-4">3</td>
-                  <td class="text-xs px-4 py-4">Data Output</td>
-                  <td class="text-xs px-4 py-4">1</td>
+                    <td class="text-xs px-4 py-4">3</td>
+                    <td class="text-xs px-4 py-4">Data Output</td>
+                    <td class="text-xs px-4 py-4">1</td>
                 </tr>
-              </table>
+            </table>
         </div>
     </div>
 

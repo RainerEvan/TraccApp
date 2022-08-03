@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import com.traccapp.demo.payload.response.DashboardActivityResponse;
+import com.traccapp.demo.payload.response.DashboardAnalyticsResponse;
 import com.traccapp.demo.service.DashboardService;
 
 import lombok.AllArgsConstructor;
@@ -20,5 +21,9 @@ public class DashboardQueryResolver implements GraphQLQueryResolver{
 
     public List<DashboardActivityResponse> getDashboardActivity(){
         return dashboardService.getDashboardActivity();
+    }
+
+    public List<DashboardAnalyticsResponse> getDashboardAnalytics(){
+        return dashboardService.getDashboardAnalytics();
     }
 }

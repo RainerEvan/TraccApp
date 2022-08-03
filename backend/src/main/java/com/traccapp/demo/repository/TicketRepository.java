@@ -19,6 +19,7 @@ public interface TicketRepository extends JpaRepository<Tickets, TicketPK> {
     Optional<Tickets> findByTicketNo(String ticketNo);
     List<Tickets> findAllByReporter(Accounts reporter);
 
+    boolean existsByDateAddedBetween(OffsetDateTime dateAddedStart, OffsetDateTime dateAddedEnd);
     int countByDateAddedBetween(OffsetDateTime dateAddedStart, OffsetDateTime dateAddedEnd);
     int countByStatusAndDateAddedBetween(Status status, OffsetDateTime dateAddedStart, OffsetDateTime dateAddedEnd);
 }

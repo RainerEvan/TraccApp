@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DashBoardActivity } from 'src/app/models/dashboard';
+import { DashboardActivity } from 'src/app/models/dashboard';
 import { DashboardService } from 'src/app/services/dashboard/dashboard.service';
 
 @Component({
@@ -13,7 +13,7 @@ export class DashboardActivityComponent implements OnInit {
   basicOption: any;
   loading: boolean;
   
-  dashboardActivity: DashBoardActivity[];
+  dashboardActivity: DashboardActivity[];
   period: string;
   totalPending: number;
   totalInProgress: number;
@@ -33,7 +33,7 @@ export class DashboardActivityComponent implements OnInit {
     this.loading = true;
 
     this.dashboardService.getDashboardActivity().subscribe({
-      next: (activity: DashBoardActivity[]) => {
+      next: (activity: DashboardActivity[]) => {
         this.dashboardActivity = activity;
         this.getActivityData(activity[0]);
         this.loading = false;
@@ -44,7 +44,7 @@ export class DashboardActivityComponent implements OnInit {
     });
   }
 
-  getActivityData(activity:DashBoardActivity){
+  getActivityData(activity:DashboardActivity){
     this.period = activity.period;
     this.totalPending = activity.totalPending;
     this.totalInProgress = activity.totalInProgress;

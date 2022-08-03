@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 import { map, Observable } from 'rxjs';
-import { DashBoardActivity } from 'src/app/models/dashboard';
+import { DashboardActivity, DashboardAnalytics } from 'src/app/models/dashboard';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,7 @@ export class DashboardService {
 
   constructor(private apollo: Apollo) { }
 
-  public getDashboardActivity(): Observable<DashBoardActivity[]>{
+  public getDashboardActivity(): Observable<DashboardActivity[]>{
     return this.apollo.watchQuery<any>({
       query:gql`
         query getDashboardActivity{
@@ -29,5 +29,24 @@ export class DashboardService {
       `,
     })
       .valueChanges.pipe(map((result)=>result.data.getDashboardActivity));
+  }
+
+  public getDashboardAnalytics(): Observable<DashboardAnalytics[]>{
+    return this.apollo.watchQuery<any>({
+      query:gql`
+        query getDashboardAnalytics{
+          getDashboardAnalytics{
+            period
+            minTickets
+            maxTickets
+            avgTickets
+            totalTickets
+            label
+            data
+          }
+        }
+      `,
+    })
+      .valueChanges.pipe(map((result)=>result.data.getDashboardAnalytics));
   }
 }

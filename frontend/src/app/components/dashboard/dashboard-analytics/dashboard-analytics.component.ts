@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DashBoardActivity } from 'src/app/models/dashboard';
+import { DashboardActivity, DashboardAnalytics } from 'src/app/models/dashboard';
 import { DashboardService } from 'src/app/services/dashboard/dashboard.service';
 
 @Component({
@@ -9,33 +9,36 @@ import { DashboardService } from 'src/app/services/dashboard/dashboard.service';
 })
 export class DashboardAnalyticsComponent implements OnInit {
 
-  basicData: any;
-  basicOption: any;
+  barChartData: any;
+  barChartOption: any;
   loading: boolean;
   
-  dashboardActivity: DashBoardActivity[];
+  dashboardAnalytics: DashboardAnalytics[];
   period: string;
-  totalPending: number;
-  totalInProgress: number;
-  totalResolved: number;
-  totalDropped: number;
+  minTickets: number;
+  maxTickets: number;
+  avgTickets: number;
   totalTickets: number;
   label: string[];
   data: number[];
+
+  pieChartData: any;
+  pieChartOption: any;
   
   constructor(private dashboardService:DashboardService) { }
 
   ngOnInit(): void {
-    this.getDashboardActivity();
+    this.getDashboardAnalytics();
+    this.generatePieChart()
   }
 
-  public getDashboardActivity(){
+  public getDashboardAnalytics(){
     this.loading = true;
 
-    this.dashboardService.getDashboardActivity().subscribe({
-      next: (activity: DashBoardActivity[]) => {
-        this.dashboardActivity = activity;
-        this.getActivityData(activity[0]);
+    this.dashboardService.getDashboardAnalytics().subscribe({
+      next: (analytics: DashboardAnalytics[]) => {
+        this.dashboardAnalytics = analytics;
+        this.getAnalyticsData(analytics[0]);
         this.loading = false;
       },
       error: (error: any) => {
@@ -44,20 +47,19 @@ export class DashboardAnalyticsComponent implements OnInit {
     });
   }
 
-  getActivityData(activity:DashBoardActivity){
-    this.period = activity.period;
-    this.totalPending = activity.totalPending;
-    this.totalInProgress = activity.totalInProgress;
-    this.totalResolved = activity.totalResolved;
-    this.totalDropped = activity.totalDropped;
-    this.totalTickets = activity.totalTickets;
-    this.label = activity.label;
-    this.data = activity.data
-    this.generateChart();
+  getAnalyticsData(analtyics:DashboardAnalytics){
+    this.period = analtyics.period;
+    this.minTickets = analtyics.minTickets;
+    this.maxTickets = analtyics.maxTickets;
+    this.avgTickets = analtyics.avgTickets;
+    this.totalTickets = analtyics.totalTickets;
+    this.label = analtyics.label;
+    this.data = analtyics.data
+    this.generateBarChart();
   }
 
-  generateChart(){
-    this.basicData = {
+  generateBarChart(){
+    this.barChartData = {
       labels: this.label,
       datasets: [
           {
@@ -68,7 +70,7 @@ export class DashboardAnalyticsComponent implements OnInit {
       ]
     };
 
-    this.basicOption = {
+    this.barChartOption = {
       plugins: {
         legend: {
             labels: {
@@ -114,6 +116,35 @@ export class DashboardAnalyticsComponent implements OnInit {
           }
         }
       }
+    };
+  }
+
+  generatePieChart(){
+    this.pieChartData = {
+      datasets: [
+          {
+              backgroundColor: [
+                "#D3D3D3",
+                "#A9A9A9",
+                "#808080",
+                "#555555"
+              ],
+              data: [20,15,25,40],
+          },
+      ]
+    };
+
+    this.pieChartOption = {
+      plugins: {
+        legend: {
+          labels: {
+            font:{
+              family:"'Montserrat', sans-serif",
+            },
+            color: '#000000'
+          }
+        }
+      },
     };
   }
 }

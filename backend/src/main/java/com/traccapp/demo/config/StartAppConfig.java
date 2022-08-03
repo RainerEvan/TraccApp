@@ -167,7 +167,7 @@ public class StartAppConfig {
 
             for(int i=0;i<2;i++){
                 Tickets ticket = new Tickets();
-                ticket.setDateAdded(OffsetDateTime.now().minusMonths(1));
+                ticket.setDateAdded(OffsetDateTime.now().withMonth(11).minusYears(3));
                 ticket.setApplication(application);
                 ticket.setReporter(account);
                 ticket.setTitle("Aplikasi CAMS error");
@@ -178,7 +178,95 @@ public class StartAppConfig {
 
             for(int i=0;i<2;i++){
                 Tickets ticket = new Tickets();
-                ticket.setDateAdded(OffsetDateTime.now().minusDays(7));
+                ticket.setDateAdded(OffsetDateTime.now().withMonth(5).minusYears(2));
+                ticket.setApplication(application);
+                ticket.setReporter(account);
+                ticket.setTitle("Aplikasi CAMS error");
+                ticket.setDescription("Form gabisa diisi lagi gimana dong");
+                ticket.setStatus(status5);
+                ticketRepository.save(ticket);
+            }
+
+            for(int i=0;i<2;i++){
+                Tickets ticket = new Tickets();
+                ticket.setDateAdded(OffsetDateTime.now().withMonth(12).minusYears(1));
+                ticket.setApplication(application);
+                ticket.setReporter(account);
+                ticket.setTitle("Aplikasi CAMS error");
+                ticket.setDescription("Form gabisa diisi lagi gimana dong");
+                ticket.setStatus(status5);
+                ticketRepository.save(ticket);
+            }
+
+            for(int i=0;i<2;i++){
+                Tickets ticket = new Tickets();
+                ticket.setDateAdded(OffsetDateTime.now().withMonth(1));
+                ticket.setApplication(application);
+                ticket.setReporter(account);
+                ticket.setTitle("Aplikasi CAMS error");
+                ticket.setDescription("Form gabisa diisi lagi gimana dong");
+                ticket.setStatus(status5);
+                ticketRepository.save(ticket);
+            }
+
+            for(int i=0;i<5;i++){
+                Tickets ticket = new Tickets();
+                ticket.setDateAdded(OffsetDateTime.now().withMonth(2));
+                ticket.setApplication(application);
+                ticket.setReporter(account);
+                ticket.setTitle("Aplikasi CAMS error");
+                ticket.setDescription("Form gabisa diisi lagi gimana dong");
+                ticket.setStatus(status4);
+                ticketRepository.save(ticket);
+            }
+
+            for(int i=0;i<4;i++){
+                Tickets ticket = new Tickets();
+                ticket.setDateAdded(OffsetDateTime.now().withMonth(3));
+                ticket.setApplication(application);
+                ticket.setReporter(account);
+                ticket.setTitle("Aplikasi CAMS error");
+                ticket.setDescription("Form gabisa diisi lagi gimana dong");
+                ticket.setStatus(status4);
+                ticketRepository.save(ticket);
+            }
+
+            for(int i=0;i<5;i++){
+                Tickets ticket = new Tickets();
+                ticket.setDateAdded(OffsetDateTime.now().withMonth(4));
+                ticket.setApplication(application);
+                ticket.setReporter(account);
+                ticket.setTitle("Aplikasi CAMS error");
+                ticket.setDescription("Form gabisa diisi lagi gimana dong");
+                ticket.setStatus(status4);
+                ticketRepository.save(ticket);
+            }
+
+            for(int i=0;i<3;i++){
+                Tickets ticket = new Tickets();
+                ticket.setDateAdded(OffsetDateTime.now().withMonth(5));
+                ticket.setApplication(application);
+                ticket.setReporter(account);
+                ticket.setTitle("Aplikasi CAMS error");
+                ticket.setDescription("Form gabisa diisi lagi gimana dong");
+                ticket.setStatus(status4);
+                ticketRepository.save(ticket);
+            }
+
+            for(int i=0;i<2;i++){
+                Tickets ticket = new Tickets();
+                ticket.setDateAdded(OffsetDateTime.now().withMonth(6));
+                ticket.setApplication(application);
+                ticket.setReporter(account);
+                ticket.setTitle("Aplikasi CAMS error");
+                ticket.setDescription("Form gabisa diisi lagi gimana dong");
+                ticket.setStatus(status4);
+                ticketRepository.save(ticket);
+            }
+
+            for(int i=0;i<5;i++){
+                Tickets ticket = new Tickets();
+                ticket.setDateAdded(OffsetDateTime.now().withMonth(7));
                 ticket.setApplication(application);
                 ticket.setReporter(account);
                 ticket.setTitle("Aplikasi CAMS error");
@@ -193,7 +281,7 @@ public class StartAppConfig {
             ticket.setReporter(account);
             ticket.setTitle("Aplikasi CAMS error");
             ticket.setDescription("Form gabisa diisi lagi gimana dong");
-            ticket.setStatus(status1);
+            ticket.setStatus(status2);
             ticketRepository.save(ticket);
 
             Tickets ticket2 = new Tickets();
@@ -202,11 +290,11 @@ public class StartAppConfig {
             ticket2.setReporter(account);
             ticket2.setTitle("Smile Bug pada Form Tidak ada alamat");
             ticket2.setDescription("Form gabisa diisi lagi gimana dong");
-            ticket2.setStatus(status2);
+            ticket2.setStatus(status1);
             ticketRepository.save(ticket2);
 
             Tickets ticket3 = new Tickets();
-            ticket3.setDateAdded(OffsetDateTime.now().plusDays(1));
+            ticket3.setDateAdded(OffsetDateTime.now().minusDays(1));
             ticket3.setApplication(application3);
             ticket3.setReporter(account);
             ticket3.setTitle("App Geospacial Tidak bisa Input Data Perumahan");
@@ -215,7 +303,7 @@ public class StartAppConfig {
             ticketRepository.save(ticket3);
 
             Supports support = new Supports();
-            support.setTicket(ticket2);
+            support.setTicket(ticket);
             support.setDateTaken(OffsetDateTime.now());
             support.setDeveloper(account2);
             support.setIsActive(true);

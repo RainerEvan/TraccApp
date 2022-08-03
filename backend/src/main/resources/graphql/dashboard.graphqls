@@ -10,6 +10,17 @@ type DashboardActivity{
     data:[Int]
 }
 
+type DashboardAnalytics{
+    period:String
+    minTickets:Int
+    maxTickets:Int
+    avgTickets:Int
+    totalTickets:Int
+    label:[String]
+    data:[Int]
+}
+
 extend type Query{
     getDashboardActivity:[DashboardActivity]
+    getDashboardAnalytics:[DashboardAnalytics]
 }
