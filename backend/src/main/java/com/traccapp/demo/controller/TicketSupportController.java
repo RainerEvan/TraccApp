@@ -1,7 +1,6 @@
 package com.traccapp.demo.controller;
 
 import java.time.OffsetDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,12 +9,16 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 import com.traccapp.demo.data.EStatus;
+import com.traccapp.demo.model.Applications;
 import com.traccapp.demo.model.Supports;
 import com.traccapp.demo.model.TicketAttachments;
 import com.traccapp.demo.model.Tickets;
 import com.traccapp.demo.payload.request.SupportRequest;
 import com.traccapp.demo.payload.request.TicketRequest;
 import com.traccapp.demo.payload.response.DashboardAnalyticsResponse;
+import com.traccapp.demo.payload.response.TopApplicationsResponse;
+import com.traccapp.demo.payload.response.TopTagsResponse;
+import com.traccapp.demo.repository.ApplicationRepository;
 import com.traccapp.demo.repository.TicketRepository;
 import com.traccapp.demo.service.DashboardService;
 import com.traccapp.demo.service.SupportAttachmentService;
@@ -49,6 +52,8 @@ public class TicketSupportController {
     @Autowired
     private final TicketRepository ticketRepository;
     @Autowired
+    private final ApplicationRepository applicationRepository;
+    @Autowired
     private final TicketAttachmentService ticketAttachmentService;
     @Autowired
     private final SupportService supportService;
@@ -58,35 +63,34 @@ public class TicketSupportController {
     private final DashboardService dashboardService;
 
     @GetMapping(path = "/count")
-    public List<DashboardAnalyticsResponse> count(){
-        List<DashboardAnalyticsResponse> response = dashboardService.getDashboardAnalytics();
+    public List<TopApplicationsResponse> count(){
+        OffsetDateTime now = OffsetDateTime.now();
+        OffsetDateTime startDate = now.withHour(0).with(TemporalAdjusters.firstDayOfYear());
+        OffsetDateTime endDate = now.withHour(23).withMinute(59).with(TemporalAdjusters.lastDayOfYear());
+        List<TopApplicationsResponse> applicationCounts = new ArrayList<>();
 
-        return response;
+        List<Applications> applications = applicationRepository.findAll();
+        
+        for(Applications application: applications){
+            String applicationName = application.getName();
+            int count = ticketRepository.countByApplicationAndDateAddedBetween(application, startDate, endDate);
+            
+            TopApplicationsResponse appCount = new TopApplicationsResponse(applicationName, count);
+            applicationCounts.add(appCount);
+        }
+
+        return applicationCounts;
     }
 
     @GetMapping(path = "/test")
     public ResponseEntity<String> test(){
-        boolean isExist = false;
-        List<String> year = new ArrayList<>();
-        List<String> exist = new ArrayList<>();
         OffsetDateTime now = OffsetDateTime.now();
+        OffsetDateTime startDate = now.withHour(0).with(TemporalAdjusters.firstDayOfYear());
+        OffsetDateTime endDate = now.withHour(23).withMinute(59).with(TemporalAdjusters.lastDayOfYear());
 
-        do{
-            OffsetDateTime startDate = now.withHour(0).with(TemporalAdjusters.firstDayOfYear());
-            OffsetDateTime endDate = now.withHour(23).withMinute(59).with(TemporalAdjusters.lastDayOfYear());
+        List<TopTagsResponse> topApp = dashboardService.calculateTopTags(startDate, endDate);
 
-            isExist = ticketRepository.existsByDateAddedBetween(startDate, endDate);
-
-            if(isExist){
-                year.add(String.valueOf(now.getYear()));
-                exist.add(String.valueOf(isExist));
-            }
-
-            now = now.minusYears(1);
-
-        } while(isExist);
-
-        return ResponseEntity.ok().body(year.toString() + exist.toString());
+        return ResponseEntity.ok().body(now.getYear() + topApp.toString());
     }
 
     @PostMapping(path = "/add")

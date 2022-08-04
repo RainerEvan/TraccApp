@@ -78,6 +78,8 @@ public class StartAppConfig {
             Applications application = applicationService.addApplication("CAMS");
             Applications application2 = applicationService.addApplication("SMILE");
             Applications application3 = applicationService.addApplication("GEOSPACIAL");
+            Applications application4 = applicationService.addApplication("UIDM");
+            Applications application5 = applicationService.addApplication("CCOS");
             Divisions division = divisionService.addDivision("ITX A");
             Divisions division2 = divisionService.addDivision("ITX B");
             Divisions division3 = divisionService.addDivision("ITX C");
@@ -179,7 +181,7 @@ public class StartAppConfig {
             for(int i=0;i<2;i++){
                 Tickets ticket = new Tickets();
                 ticket.setDateAdded(OffsetDateTime.now().withMonth(5).minusYears(2));
-                ticket.setApplication(application);
+                ticket.setApplication(application2);
                 ticket.setReporter(account);
                 ticket.setTitle("Aplikasi CAMS error");
                 ticket.setDescription("Form gabisa diisi lagi gimana dong");
@@ -190,7 +192,7 @@ public class StartAppConfig {
             for(int i=0;i<2;i++){
                 Tickets ticket = new Tickets();
                 ticket.setDateAdded(OffsetDateTime.now().withMonth(12).minusYears(1));
-                ticket.setApplication(application);
+                ticket.setApplication(application3);
                 ticket.setReporter(account);
                 ticket.setTitle("Aplikasi CAMS error");
                 ticket.setDescription("Form gabisa diisi lagi gimana dong");
@@ -201,7 +203,7 @@ public class StartAppConfig {
             for(int i=0;i<2;i++){
                 Tickets ticket = new Tickets();
                 ticket.setDateAdded(OffsetDateTime.now().withMonth(1));
-                ticket.setApplication(application);
+                ticket.setApplication(application5);
                 ticket.setReporter(account);
                 ticket.setTitle("Aplikasi CAMS error");
                 ticket.setDescription("Form gabisa diisi lagi gimana dong");
@@ -223,7 +225,7 @@ public class StartAppConfig {
             for(int i=0;i<4;i++){
                 Tickets ticket = new Tickets();
                 ticket.setDateAdded(OffsetDateTime.now().withMonth(3));
-                ticket.setApplication(application);
+                ticket.setApplication(application2);
                 ticket.setReporter(account);
                 ticket.setTitle("Aplikasi CAMS error");
                 ticket.setDescription("Form gabisa diisi lagi gimana dong");
@@ -234,7 +236,7 @@ public class StartAppConfig {
             for(int i=0;i<5;i++){
                 Tickets ticket = new Tickets();
                 ticket.setDateAdded(OffsetDateTime.now().withMonth(4));
-                ticket.setApplication(application);
+                ticket.setApplication(application3);
                 ticket.setReporter(account);
                 ticket.setTitle("Aplikasi CAMS error");
                 ticket.setDescription("Form gabisa diisi lagi gimana dong");
@@ -245,7 +247,7 @@ public class StartAppConfig {
             for(int i=0;i<3;i++){
                 Tickets ticket = new Tickets();
                 ticket.setDateAdded(OffsetDateTime.now().withMonth(5));
-                ticket.setApplication(application);
+                ticket.setApplication(application2);
                 ticket.setReporter(account);
                 ticket.setTitle("Aplikasi CAMS error");
                 ticket.setDescription("Form gabisa diisi lagi gimana dong");
@@ -256,7 +258,7 @@ public class StartAppConfig {
             for(int i=0;i<2;i++){
                 Tickets ticket = new Tickets();
                 ticket.setDateAdded(OffsetDateTime.now().withMonth(6));
-                ticket.setApplication(application);
+                ticket.setApplication(application4);
                 ticket.setReporter(account);
                 ticket.setTitle("Aplikasi CAMS error");
                 ticket.setDescription("Form gabisa diisi lagi gimana dong");

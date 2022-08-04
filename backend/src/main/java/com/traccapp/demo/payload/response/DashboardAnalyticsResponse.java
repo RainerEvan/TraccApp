@@ -15,4 +15,7 @@ public class DashboardAnalyticsResponse {
     private int totalTickets;
     private List<String> label;
     private List<Integer> data;
+    private List<TopApplicationsResponse> topApplications;
+    private List<TopTagsResponse> topTags;
+    private TicketRateResponse ticketRate;
 }

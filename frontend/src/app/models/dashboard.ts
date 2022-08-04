@@ -18,4 +18,23 @@ export type DashboardAnalytics ={
     totalTickets:number;
     label:string[];
     data:number[];
+    topApplications:TopApplications[];
+    topTags:TopTags[];
+    ticketRate:TicketRate;
+}
+
+export type TopApplications ={
+    application:string;
+    count:number;
+}
+
+
+export type TopTags ={
+    tag:string;
+    count:number;
+}
+
+export type TicketRate ={
+    label:string;
+    rate:number;
 }

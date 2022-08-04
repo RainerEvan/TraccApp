@@ -43,6 +43,18 @@ export class DashboardService {
             totalTickets
             label
             data
+            topApplications{
+              application
+              count
+            }
+            topTags{
+              tag
+              count
+            }
+            ticketRate{
+              label
+              rate
+            }
           }
         }
       `,

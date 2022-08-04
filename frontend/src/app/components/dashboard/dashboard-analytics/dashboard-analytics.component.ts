@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DashboardActivity, DashboardAnalytics } from 'src/app/models/dashboard';
+import { DashboardActivity, DashboardAnalytics, TicketRate, TopApplications, TopTags } from 'src/app/models/dashboard';
 import { DashboardService } from 'src/app/services/dashboard/dashboard.service';
 
 @Component({
@@ -21,6 +21,10 @@ export class DashboardAnalyticsComponent implements OnInit {
   totalTickets: number;
   label: string[];
   data: number[];
+  applications: string[];
+  count: number[];
+  topTags: TopTags[];
+  ticketRate: TicketRate;
 
   pieChartData: any;
   pieChartOption: any;
@@ -29,7 +33,6 @@ export class DashboardAnalyticsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getDashboardAnalytics();
-    this.generatePieChart()
   }
 
   public getDashboardAnalytics(){
@@ -47,15 +50,18 @@ export class DashboardAnalyticsComponent implements OnInit {
     });
   }
 
-  getAnalyticsData(analtyics:DashboardAnalytics){
-    this.period = analtyics.period;
-    this.minTickets = analtyics.minTickets;
-    this.maxTickets = analtyics.maxTickets;
-    this.avgTickets = analtyics.avgTickets;
-    this.totalTickets = analtyics.totalTickets;
-    this.label = analtyics.label;
-    this.data = analtyics.data
+  getAnalyticsData(analytics:DashboardAnalytics){
+    this.period = analytics.period;
+    this.minTickets = analytics.minTickets;
+    this.maxTickets = analytics.maxTickets;
+    this.avgTickets = analytics.avgTickets;
+    this.totalTickets = analytics.totalTickets;
+    this.label = analytics.label;
+    this.data = analytics.data;
+    this.applications = analytics.topApplications.map(topApplication => topApplication.application);
+    this.count = analytics.topApplications.map(topApplication => topApplication.count);
     this.generateBarChart();
+    this.generatePieChart();
   }
 
   generateBarChart(){
@@ -121,27 +127,34 @@ export class DashboardAnalyticsComponent implements OnInit {
 
   generatePieChart(){
     this.pieChartData = {
+      labels: this.applications,
       datasets: [
-          {
-              backgroundColor: [
-                "#D3D3D3",
-                "#A9A9A9",
-                "#808080",
-                "#555555"
-              ],
-              data: [20,15,25,40],
-          },
+        {
+          backgroundColor: [
+            "#555555",
+            "#808080",
+            "#A9A9A9",
+            "#D3D3D3",
+          ],
+          data: this.count,
+        },
       ]
     };
 
     this.pieChartOption = {
       plugins: {
         legend: {
+          position: 'right',
           labels: {
             font:{
               family:"'Montserrat', sans-serif",
+              size: 14,
             },
-            color: '#000000'
+            color: '#000000',
+            usePointStyle: true,
+            padding: 16,
+            boxWidth: 10,
+            boxHeight: 10,
           }
         }
       },

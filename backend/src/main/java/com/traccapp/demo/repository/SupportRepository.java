@@ -1,10 +1,12 @@
 package com.traccapp.demo.repository;
 
+import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.UUID;
 
 import com.traccapp.demo.model.Accounts;
 import com.traccapp.demo.model.Supports;
+import com.traccapp.demo.model.Tags;
 import com.traccapp.demo.model.Tickets;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,4 +16,7 @@ import org.springframework.stereotype.Repository;
 public interface SupportRepository extends JpaRepository<Supports, UUID>{
     List<Supports> findAllByTicketAndIsActive(Tickets ticket, Boolean isActive);
     List<Supports> findAllByDeveloper(Accounts developer);
+
+    boolean existsByTagsAndDateTakenBetween(Tags tag, OffsetDateTime dateAddedStart, OffsetDateTime dateAddedEnd);
+    int countByTagsAndDateTakenBetween(Tags tag, OffsetDateTime dateTakenStart, OffsetDateTime dateTakenEnd);
 }

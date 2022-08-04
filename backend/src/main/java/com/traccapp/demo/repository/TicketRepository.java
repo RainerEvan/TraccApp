@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import com.traccapp.demo.model.Accounts;
+import com.traccapp.demo.model.Applications;
 import com.traccapp.demo.model.Status;
 import com.traccapp.demo.model.TicketPK;
 import com.traccapp.demo.model.Tickets;
@@ -20,6 +21,9 @@ public interface TicketRepository extends JpaRepository<Tickets, TicketPK> {
     List<Tickets> findAllByReporter(Accounts reporter);
 
     boolean existsByDateAddedBetween(OffsetDateTime dateAddedStart, OffsetDateTime dateAddedEnd);
+    boolean existsByApplicationAndDateAddedBetween(Applications application, OffsetDateTime dateAddedStart, OffsetDateTime dateAddedEnd);
+    
     int countByDateAddedBetween(OffsetDateTime dateAddedStart, OffsetDateTime dateAddedEnd);
     int countByStatusAndDateAddedBetween(Status status, OffsetDateTime dateAddedStart, OffsetDateTime dateAddedEnd);
+    int countByApplicationAndDateAddedBetween(Applications application, OffsetDateTime dateAddedStart, OffsetDateTime dateAddedEnd);
 }

@@ -18,6 +18,24 @@ type DashboardAnalytics{
     totalTickets:Int
     label:[String]
     data:[Int]
+    topApplications:[TopApplications]
+    topTags:[TopTags]
+    ticketRate:TicketRate
+}
+
+type TopApplications{
+    application:String
+    count:Int
+}
+
+type TopTags{
+    tag:String
+    count:Int
+}
+
+type TicketRate{
+    label:String
+    rate:Int
 }
 
 extend type Query{

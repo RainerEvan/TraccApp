@@ -50,26 +50,8 @@
         <h1 class="font-bold text-lg text-center mb-4">
             Top Applications
         </h1>
-        <div class="bg-white h-56 flex flex-row items-center justify-around space-x-4 border-2 border-gray-100 shadow-md p-8">
-            <div class="">
-                <p-chart type="pie" [data]="pieChartData" [options]="pieChartOption" width="10rem" height="10rem"></p-chart>
-            </div>
-            <div class="">
-                <ul class="flex flex-col space-y-1">
-                    <li>
-                        <span class="text-sm">CAMS</span>
-                    </li>
-                    <li>
-                        <span class="text-sm">SMILE</span>
-                    </li>
-                    <li>
-                        <span class="text-sm">GEOSPAC</span>
-                    </li>
-                    <li>
-                        <span class="text-sm">OTHER</span>
-                    </li>
-                </ul>
-            </div>
+        <div class="bg-white h-56 flex flex-row items-center border-2 border-gray-100 shadow-md p-8">
+            <p-chart type="pie" [data]="pieChartData" [options]="pieChartOption" width="18rem" height="10rem"></p-chart>
         </div>
     </div>
 
