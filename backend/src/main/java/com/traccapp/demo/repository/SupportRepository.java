@@ -6,10 +6,12 @@ import java.util.UUID;
 
 import com.traccapp.demo.model.Accounts;
 import com.traccapp.demo.model.Supports;
-import com.traccapp.demo.model.Tags;
 import com.traccapp.demo.model.Tickets;
+import com.traccapp.demo.payload.response.TopTagsResponse;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -17,6 +19,28 @@ public interface SupportRepository extends JpaRepository<Supports, UUID>{
     List<Supports> findAllByTicketAndIsActive(Tickets ticket, Boolean isActive);
     List<Supports> findAllByDeveloper(Accounts developer);
 
-    boolean existsByTagsAndDateTakenBetween(Tags tag, OffsetDateTime dateAddedStart, OffsetDateTime dateAddedEnd);
-    int countByTagsAndDateTakenBetween(Tags tag, OffsetDateTime dateTakenStart, OffsetDateTime dateTakenEnd);
+    // @Query(value="SELECT " +
+    //             "    new com.traccapp.demo.payload.response.TopTagsResponse(t.name, COUNT(t.name)) " +
+    //             "FROM " +
+    //             "    Supports AS s " +
+    //             "LEFT JOIN " +
+    //             "    s.tags AS t " +
+    //             "ON " +
+    //             "    t.name = :tagName" +
+    //             "WHERE " +
+    //             "    s.dateTaken BETWEEN :dateTakenStart AND :dateTakenEnd " +
+    //             "GROUP BY " +
+    //             "    t.name"
+    //             )
+    // List<TopTagsResponse> countSupportByTag(@Param("tagName") String tagName, @Param("dateTakenStart") OffsetDateTime dateTakenStart, @Param("dateTakenEnd") OffsetDateTime dateTakenEnd);
+
+    @Query(value="SELECT " +
+                "    new com.traccapp.demo.payload.response.TopTagsResponse(s.result, COUNT(s.result)) " +
+                "FROM " +
+                "    Supports AS s " +
+                "WHERE " +
+                "    s.dateTaken BETWEEN :dateTakenStart AND :dateTakenEnd " +
+                "GROUP BY " +
+                "    s.result")
+    List<TopTagsResponse> countSupportByTag(@Param("dateTakenStart") OffsetDateTime dateTakenStart, @Param("dateTakenEnd") OffsetDateTime dateTakenEnd);
 }

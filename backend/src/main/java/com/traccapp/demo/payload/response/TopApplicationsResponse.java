@@ -7,5 +7,5 @@ import lombok.Data;
 @AllArgsConstructor
 public class TopApplicationsResponse {
     private String application;
-    private int count;
+    private long count;
 }

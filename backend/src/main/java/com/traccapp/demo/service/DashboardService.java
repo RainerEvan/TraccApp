@@ -12,18 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.traccapp.demo.data.EStatus;
-import com.traccapp.demo.model.Applications;
 import com.traccapp.demo.model.Status;
-import com.traccapp.demo.model.Tags;
 import com.traccapp.demo.payload.response.DashboardActivityResponse;
 import com.traccapp.demo.payload.response.DashboardAnalyticsResponse;
 import com.traccapp.demo.payload.response.TicketRateResponse;
 import com.traccapp.demo.payload.response.TopApplicationsResponse;
 import com.traccapp.demo.payload.response.TopTagsResponse;
-import com.traccapp.demo.repository.ApplicationRepository;
 import com.traccapp.demo.repository.StatusRepository;
 import com.traccapp.demo.repository.SupportRepository;
-import com.traccapp.demo.repository.TagsRepository;
 import com.traccapp.demo.repository.TicketRepository;
 
 import lombok.AllArgsConstructor;
@@ -38,10 +34,6 @@ public class DashboardService {
     private final SupportRepository supportRepository;
     @Autowired
     private final StatusRepository statusRepository;
-    @Autowired
-    private final ApplicationRepository applicationRepository;
-    @Autowired
-    private final TagsRepository tagsRepository;
 
     public List<DashboardActivityResponse> getDashboardActivity(){
         List<DashboardActivityResponse> dashboardActivity = new ArrayList<>();
@@ -175,62 +167,47 @@ public class DashboardService {
     }
 
     public List<TopApplicationsResponse> calculateTopApplications(OffsetDateTime startDate, OffsetDateTime endDate){
-        List<TopApplicationsResponse> applicationsCount = new ArrayList<>();
-        List<Applications> applications = applicationRepository.findAll();
+        List<TopApplicationsResponse> topApplicationsList = ticketRepository.countTicketByApplication(startDate, endDate);
         
-        for(Applications application: applications){
-            boolean isExist = ticketRepository.existsByApplicationAndDateAddedBetween(application, startDate, endDate);
-            
-            if(isExist){
-                String name = application.getName();
-                int count = ticketRepository.countByApplicationAndDateAddedBetween(application, startDate, endDate);
-            
-                TopApplicationsResponse appCount = new TopApplicationsResponse(name, count);
-                applicationsCount.add(appCount);
-            }
-        }
+        Collections.sort(topApplicationsList, (o1,o2) -> (int) o1.getCount() - (int) o2.getCount());
+        Collections.reverse(topApplicationsList);
 
-        Collections.sort(applicationsCount, (o1,o2) -> o1.getCount() - o2.getCount());
-        Collections.reverse(applicationsCount);
-
-        if(applicationsCount.size() > 3){
-            List<TopApplicationsResponse> topApplications = new ArrayList<>();
+        if(topApplicationsList.size() > 3){
+            List<TopApplicationsResponse> top3Applications = new ArrayList<>();
 
             for(int i=0;i<3;i++){
-                topApplications.add(applicationsCount.get(0));
-                applicationsCount.remove(0);
+                top3Applications.add(topApplicationsList.get(0));
+                topApplicationsList.remove(0);
             }
     
-            int count = applicationsCount.stream().reduce(0, (total,topApp) -> total + topApp.getCount(), Integer::sum);
-            TopApplicationsResponse topApplication = new TopApplicationsResponse("OTHER", count);
-            topApplications.add(topApplication);
+            long count = topApplicationsList.stream().reduce(0, (total,app) -> total + (int) app.getCount(), Integer::sum);
+            TopApplicationsResponse otherApplications = new TopApplicationsResponse("OTHER", count);
+            top3Applications.add(otherApplications);
     
-            return topApplications;
+            return top3Applications;
         }
 
-        return applicationsCount;
+        return topApplicationsList;
     }
 
     public List<TopTagsResponse> calculateTopTags(OffsetDateTime startDate, OffsetDateTime endDate){
-        List<TopTagsResponse> tagsCount = new ArrayList<>();
-        List<Tags> tags = tagsRepository.findAll();
+        List<TopTagsResponse> topTagsList = supportRepository.countSupportByTag("Error",startDate, endDate);
+        
+        Collections.sort(topTagsList, (o1,o2) -> (int) o1.getCount() - (int) o2.getCount());
+        Collections.reverse(topTagsList);
 
-        for(Tags tag: tags){
-            boolean isExist = supportRepository.existsByTagsAndDateTakenBetween(tag, startDate, endDate);
-            
-            if(isExist){
-                String name = tag.getName();
-                int count = supportRepository.countByTagsAndDateTakenBetween(tag, startDate, endDate);
-            
-                TopTagsResponse tagCount = new TopTagsResponse(name, count);
-                tagsCount.add(tagCount);
+        if(topTagsList.size() > 3){
+            List<TopTagsResponse> top3Tags = new ArrayList<>();
+
+            for(int i=0;i<3;i++){
+                top3Tags.add(topTagsList.get(0));
+                topTagsList.remove(0);
             }
+    
+            return top3Tags;
         }
 
-        Collections.sort(tagsCount, (o1,o2) -> o1.getCount() - o2.getCount());
-        Collections.reverse(tagsCount);
-
-        return tagsCount;
+        return topTagsList;
     }
 
     public TicketRateResponse calculateTicketRate(OffsetDateTime startDate, OffsetDateTime endDate){
