@@ -60,6 +60,8 @@ export class DashboardAnalyticsComponent implements OnInit {
     this.data = analytics.data;
     this.applications = analytics.topApplications.map(topApplication => topApplication.application);
     this.count = analytics.topApplications.map(topApplication => topApplication.count);
+    this.topTags = analytics.topTags;
+    this.ticketRate = analytics.ticketRate;
     this.generateBarChart();
     this.generatePieChart();
   }

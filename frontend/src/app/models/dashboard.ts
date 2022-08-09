@@ -36,5 +36,5 @@ export type TopTags ={
 
 export type TicketRate ={
     label:string;
-    rate:number;
+    rate:string;
 }

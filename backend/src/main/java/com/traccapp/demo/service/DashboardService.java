@@ -1,5 +1,6 @@
 package com.traccapp.demo.service;
 
+import java.text.NumberFormat;
 import java.time.DayOfWeek;
 import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
@@ -191,30 +192,45 @@ public class DashboardService {
     }
 
     public List<TopTagsResponse> calculateTopTags(OffsetDateTime startDate, OffsetDateTime endDate){
-        List<TopTagsResponse> topTagsList = supportRepository.countSupportByTag("Error",startDate, endDate);
+        List<TopTagsResponse> topTagsList = supportRepository.countSupportByTag(startDate, endDate);
         
         Collections.sort(topTagsList, (o1,o2) -> (int) o1.getCount() - (int) o2.getCount());
         Collections.reverse(topTagsList);
 
-        if(topTagsList.size() > 3){
-            List<TopTagsResponse> top3Tags = new ArrayList<>();
-
-            for(int i=0;i<3;i++){
-                top3Tags.add(topTagsList.get(0));
-                topTagsList.remove(0);
-            }
-    
-            return top3Tags;
-        }
-
-        return topTagsList;
+        return topTagsList.stream().limit(3).toList();
     }
 
     public TicketRateResponse calculateTicketRate(OffsetDateTime startDate, OffsetDateTime endDate){
-        String label = "";
-        double data = 0;
+        Status resolved = statusRepository.findByName(EStatus.RESOLVED).get();
+        Status closed = statusRepository.findByName(EStatus.CLOSED).get();
 
-        return new TicketRateResponse(label,data);
+        double totalResolved = ticketRepository.countByStatusAndDateAddedBetween(resolved, startDate, endDate) + ticketRepository.countByStatusAndDateAddedBetween(closed, startDate, endDate);
+        double totalTickets = ticketRepository.countByDateAddedBetween(startDate, endDate);
+
+        double percentage = totalResolved/totalTickets;
+        String rate = NumberFormat.getPercentInstance().format(percentage);
+        String label = "";
+
+        if(percentage == 1){
+            label = "PERFECT";
+        }
+        else if(percentage >= 0.9){
+            label = "GREAT";
+        }
+        else if(percentage >= 0.8){
+            label = "GOOD";
+        }
+        else if(percentage >= 0.7){
+            label = "ACCEPTABLE";
+        }
+        else if(percentage >= 0.6){
+            label = "BAD";
+        }
+        else{
+            label = "POOR";
+        }
+
+        return new TicketRateResponse(label,rate);
     }
 
     // public DashboardActivityResponse calculateActivityThisWeek(){

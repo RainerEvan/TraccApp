@@ -15,7 +15,7 @@ import com.traccapp.demo.model.Tickets;
 import com.traccapp.demo.payload.request.SupportRequest;
 import com.traccapp.demo.payload.request.TicketRequest;
 import com.traccapp.demo.payload.response.TopApplicationsResponse;
-import com.traccapp.demo.payload.response.TopTagsResponse;
+import com.traccapp.demo.payload.response.TicketRateResponse;
 import com.traccapp.demo.repository.SupportRepository;
 import com.traccapp.demo.service.DashboardService;
 import com.traccapp.demo.service.SupportAttachmentService;
@@ -67,13 +67,13 @@ public class TicketSupportController {
     }
 
     @GetMapping(path = "/test")
-    public List<TopTagsResponse> test(){
+    public TicketRateResponse test(){
         OffsetDateTime now = OffsetDateTime.now();
         OffsetDateTime startDate = now.withHour(0).with(TemporalAdjusters.firstDayOfYear());
         OffsetDateTime endDate = now.withHour(23).withMinute(59).with(TemporalAdjusters.lastDayOfYear());
-        List<TopTagsResponse> topApplications = supportRepository.countSupportByTag("Error",startDate, endDate);
+        TicketRateResponse topTags = dashboardService.calculateTicketRate(startDate, endDate);
 
-        return topApplications;
+        return topTags;
     }
 
     @PostMapping(path = "/add")

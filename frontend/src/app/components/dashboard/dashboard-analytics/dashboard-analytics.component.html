@@ -59,27 +59,17 @@
         <h1 class="font-bold text-lg text-center mb-4">
             Top Tags
         </h1>
-        <div class="bg-white h-56 flex items-center justify-center border-2 border-gray-100 shadow-md p-8">
+        <div class="bg-white h-56 flex items-start justify-center border-2 border-gray-100 shadow-md p-6">
             <table class="table-auto bg-white w-full">
                 <tr>
                     <th class="border-b-2 text-left text-sm px-4 py-2">Rank</th>
                     <th class="border-b-2 text-left text-sm px-4 py-2">Tags</th>
                     <th class="border-b-2 text-left text-sm px-4 py-2">Tickets Reported</th>
                 </tr>
-                <tr>
-                    <td class="text-xs px-4 py-4">1</td>
-                    <td class="text-xs px-4 py-4">Error</td>
-                    <td class="text-xs px-4 py-4">4</td>
-                </tr>
-                <tr>
-                    <td class="text-xs px-4 py-4">2</td>
-                    <td class="text-xs px-4 py-4">Bug</td>
-                    <td class="text-xs px-4 py-4">2</td>
-                </tr>
-                <tr>
-                    <td class="text-xs px-4 py-4">3</td>
-                    <td class="text-xs px-4 py-4">Data Output</td>
-                    <td class="text-xs px-4 py-4">1</td>
+                <tr *ngFor="let topTag of topTags;let i = index">
+                    <td class="text-xs px-4 py-4">{{i+1}}</td>
+                    <td class="text-xs px-4 py-4">{{topTag.tag}}</td>
+                    <td class="text-xs px-4 py-4">{{topTag.count}}</td>
                 </tr>
             </table>
         </div>
@@ -91,8 +81,8 @@
         </h1>
         <div class="bg-white h-56 flex flex-col space-y-2 justify-center border-2 border-gray-100 shadow-md py-8 px-16">
             <span class="font-semibold text-sm">Resolved</span>
-            <span class="font-regular text-6xl">100%</span>
-            <span class="font-semibold text-xs text-gray-400 border-t-2 border-gray-400 py-2">PERFECT</span>
+            <span class="font-regular text-6xl">{{ticketRate.rate}}</span>
+            <span class="font-semibold text-xs text-gray-400 border-t-2 border-gray-400 py-2">{{ticketRate.label}}</span>
         </div>
     </div>
 </div>

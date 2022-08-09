@@ -1,6 +1,8 @@
 package com.traccapp.demo.config;
 
 import java.time.OffsetDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.traccapp.demo.data.ERoles;
 import com.traccapp.demo.data.EStatus;
@@ -74,6 +76,17 @@ public class StartAppConfig {
 
             Tags tag = tagsService.addTag("Error");
             Tags tag2 = tagsService.addTag("Bug");
+            Tags tag3 = tagsService.addTag("Data Output");
+            Tags tag4 = tagsService.addTag("Network Error");
+            
+            Set<Tags> tags = new HashSet<>();
+            tags.add(tag);
+            tags.add(tag2);
+
+            Set<Tags> tags2 = new HashSet<>();
+            tags2.add(tag);
+            tags2.add(tag3);
+            tags2.add(tag4);
 
             Applications application = applicationService.addApplication("CAMS");
             Applications application2 = applicationService.addApplication("SMILE");
@@ -304,6 +317,15 @@ public class StartAppConfig {
             ticket3.setStatus(status3);
             ticketRepository.save(ticket3);
 
+            Tickets ticket4 = new Tickets();
+            ticket4.setDateAdded(OffsetDateTime.now().minusYears(1));
+            ticket4.setApplication(application2);
+            ticket4.setReporter(account);
+            ticket4.setTitle("App Smile Tidak bisa Input Data Perumahan");
+            ticket4.setDescription("Form gabisa diisi lagi gimana dong");
+            ticket4.setStatus(status3);
+            ticketRepository.save(ticket4);
+
             Supports support = new Supports();
             support.setTicket(ticket);
             support.setDateTaken(OffsetDateTime.now());
@@ -317,8 +339,19 @@ public class StartAppConfig {
             support2.setDeveloper(account2);
             support2.setResult("Form sudah dibenerin");
             support2.setDescription("Formnya udah bisa dipake coba lagi bisa ga");
+            support2.setTags(tags);
             support2.setIsActive(true);
             supportRepository.save(support2);
+
+            Supports support3 = new Supports();
+            support3.setTicket(ticket4);
+            support3.setDateTaken(OffsetDateTime.now().minusYears(1));
+            support3.setDeveloper(account2);
+            support3.setResult("Form sudah dibenerin");
+            support3.setDescription("Formnya udah bisa dipake coba lagi bisa ga");
+            support3.setTags(tags2);
+            support3.setIsActive(true);
+            supportRepository.save(support3);
 
             Comments comment = new Comments();
             comment.setTicket(ticket3);

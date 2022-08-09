@@ -7,5 +7,5 @@ import lombok.Data;
 @AllArgsConstructor
 public class TicketRateResponse {
     private String label;
-    private double rate;
+    private String rate;
 }

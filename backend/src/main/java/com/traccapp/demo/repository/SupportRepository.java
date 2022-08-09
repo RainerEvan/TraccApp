@@ -19,28 +19,34 @@ public interface SupportRepository extends JpaRepository<Supports, UUID>{
     List<Supports> findAllByTicketAndIsActive(Tickets ticket, Boolean isActive);
     List<Supports> findAllByDeveloper(Accounts developer);
 
-    // @Query(value="SELECT " +
-    //             "    new com.traccapp.demo.payload.response.TopTagsResponse(t.name, COUNT(t.name)) " +
-    //             "FROM " +
-    //             "    Supports AS s " +
-    //             "LEFT JOIN " +
-    //             "    s.tags AS t " +
-    //             "ON " +
-    //             "    t.name = :tagName" +
-    //             "WHERE " +
-    //             "    s.dateTaken BETWEEN :dateTakenStart AND :dateTakenEnd " +
-    //             "GROUP BY " +
-    //             "    t.name"
-    //             )
-    // List<TopTagsResponse> countSupportByTag(@Param("tagName") String tagName, @Param("dateTakenStart") OffsetDateTime dateTakenStart, @Param("dateTakenEnd") OffsetDateTime dateTakenEnd);
-
     @Query(value="SELECT " +
-                "    new com.traccapp.demo.payload.response.TopTagsResponse(s.result, COUNT(s.result)) " +
+                "    new com.traccapp.demo.payload.response.TopTagsResponse(t.name, COUNT(s.id)) " +
                 "FROM " +
-                "    Supports AS s " +
+                "    Tags AS t " +
+                "LEFT JOIN " +
+                "    t.supports AS s " +
+                // "LEFT JOIN " +
+                // "    supports_tags AS st" +
+                // "ON " +
+                // "    s.id = st.supports_id" +
+                // "LEFT JOIN " +
+                // "    Tags AS t" +
+                // "ON " +
+                // "    t.id = st.tags_id" +
                 "WHERE " +
                 "    s.dateTaken BETWEEN :dateTakenStart AND :dateTakenEnd " +
                 "GROUP BY " +
-                "    s.result")
+                "    t.name"
+                )
     List<TopTagsResponse> countSupportByTag(@Param("dateTakenStart") OffsetDateTime dateTakenStart, @Param("dateTakenEnd") OffsetDateTime dateTakenEnd);
+
+    // @Query(value="SELECT " +
+    //             "    new com.traccapp.demo.payload.response.TopTagsResponse(s.result, COUNT(s.result)) " +
+    //             "FROM " +
+    //             "    Supports AS s " +
+    //             "WHERE " +
+    //             "    s.dateTaken BETWEEN :dateTakenStart AND :dateTakenEnd " +
+    //             "GROUP BY " +
+    //             "    s.result")
+    // List<TopTagsResponse> countSupportByTag(@Param("dateTakenStart") OffsetDateTime dateTakenStart, @Param("dateTakenEnd") OffsetDateTime dateTakenEnd);
 }
