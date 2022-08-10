@@ -22,9 +22,9 @@ public interface SupportRepository extends JpaRepository<Supports, UUID>{
     @Query(value="SELECT " +
                 "    new com.traccapp.demo.payload.response.TopTagsResponse(t.name, COUNT(s.id)) " +
                 "FROM " +
-                "    Tags AS t " +
-                "LEFT JOIN " +
-                "    t.supports AS s " +
+                "    Supports AS s " +
+                "RIGHT JOIN " +
+                "    s.tags AS t " +
                 // "LEFT JOIN " +
                 // "    supports_tags AS st" +
                 // "ON " +

@@ -14,10 +14,11 @@
                         <span class="text-xs text-gray-500">Tickets</span>
                     </div>
                 </div>
-                <div class="">
-                    <div class="w-24 h-24 flex justify-center items-center border-4 border-gray-300 rounded-full">
+                <div>
+                    <div *ngIf="dashboardActivity" class="w-24 h-24 flex justify-center items-center border-4 border-gray-300 rounded-full">
                         <span class="font-medium text-4xl">{{totalPending}}</span>
                     </div>
+                    <p-skeleton *ngIf="loading" shape="circle" width="6rem" height="6rem"></p-skeleton>
                 </div>
             </div>
             <div class="w-full bg-white flex flex-row items-center justify-between space-x-2 border-2 border-gray-100 shadow-md py-6 px-8">
@@ -31,9 +32,10 @@
                     </div>
                 </div>
                 <div>
-                    <div class="w-24 h-24 flex justify-center items-center border-4 border-gray-400 rounded-full">
+                    <div *ngIf="dashboardActivity" class="w-24 h-24 flex justify-center items-center border-4 border-gray-400 rounded-full">
                         <span class="font-medium text-4xl">{{totalInProgress}}</span>
                     </div>
+                    <p-skeleton *ngIf="loading" shape="circle" width="6rem" height="6rem"></p-skeleton>
                 </div>
             </div>
             <div class="w-full bg-white flex flex-row items-center justify-between border-2 border-gray-100 shadow-md py-6 px-8">
@@ -47,9 +49,10 @@
                     </div>
                 </div>
                 <div>
-                    <div class="w-24 h-24 flex justify-center items-center border-4 border-gray-500 rounded-full">
+                    <div *ngIf="dashboardActivity" class="w-24 h-24 flex justify-center items-center border-4 border-gray-500 rounded-full">
                         <span class="font-medium text-4xl">{{totalResolved}}</span>
                     </div>
+                    <p-skeleton *ngIf="loading" shape="circle" width="6rem" height="6rem"></p-skeleton>
                 </div>
             </div>
             <div class="w-full bg-white flex flex-row items-center justify-between border-2 border-gray-100 shadow-md py-6 px-8">
@@ -63,15 +66,17 @@
                     </div>
                 </div>
                 <div>
-                    <div class="w-24 h-24 flex justify-center items-center border-4 border-gray-600 rounded-full">
+                    <div *ngIf="dashboardActivity" class="w-24 h-24 flex justify-center items-center border-4 border-gray-600 rounded-full">
                         <span class="font-medium text-4xl">{{totalDropped}}</span>
                     </div>
+                    <p-skeleton *ngIf="loading" shape="circle" width="6rem" height="6rem"></p-skeleton>
                 </div>
             </div>
         </div>
         <div class="bg-white flex flex-row border-2 border-gray-100 shadow-md p-8">
             <div class="w-3/5 flex flex-row items-center justify-center">
-                <p-chart type="line" [data]="basicData" [options]="basicOption" width="35rem" height="18rem"></p-chart>
+                <p-chart *ngIf="dashboardActivity" type="line" [data]="basicData" [options]="basicOption" width="35rem" height="18rem"></p-chart>
+                <p-skeleton *ngIf="loading" width="24rem" height="16rem"></p-skeleton>
             </div>
             <div class="w-2/5 flex flex-col justify-between pr-8">
                 <ul class="flex flex-row items-center justify-center space-x-4 py-6 border-b-2 border-gray-400">
@@ -79,18 +84,14 @@
                         <input type="radio" [id]="activity.menu" name="ticket-activity" [checked]="(activity.menu === 'This Week')" class="hidden peer">
                         <label (click)="getActivityData(activity)" [for]="activity.menu" class="px-4 py-2 rounded-lg font-medium text-sm peer-checked:bg-gray-300 hover:bg-gray-200 cursor-pointer">{{activity.menu}}</label>
                     </li>
-                    <!-- <li>
-                        <input type="radio" id="monthly" name="ticket-activity" class="hidden peer">
-                        <label (click)="getThisMonth()" for="monthly" class="px-4 py-2 rounded-lg font-medium text-sm peer-checked:bg-gray-300 hover:bg-gray-200 cursor-pointer">This Month</label>
-                    </li>
-                    <li>
-                        <input type="radio" id="yearly" name="ticket-activity" class="hidden peer">
-                        <label (click)="getThisYear()" for="yearly" class="px-4 py-2 rounded-lg font-medium text-sm peer-checked:bg-gray-300 hover:bg-gray-200 cursor-pointer">This Year</label>
-                    </li> -->
+                    <p-skeleton *ngIf="loading" width="6rem" height="2rem"></p-skeleton>
+                    <p-skeleton *ngIf="loading" width="6rem" height="2rem"></p-skeleton>
+                    <p-skeleton *ngIf="loading" width="6rem" height="2rem"></p-skeleton>
                 </ul>
                 <div class="flex flex-col p-8">
                     <span class="font-semibold text-sm">Total Tickets</span>
-                    <span class="font-regular text-3xl">{{totalTickets}}</span>
+                    <span *ngIf="dashboardActivity" class="font-regular text-3xl">{{totalTickets}}</span>
+                    <p-skeleton *ngIf="loading" width="4rem" height="4rem"></p-skeleton>
                 </div>
             </div>
         </div>

@@ -10,13 +10,13 @@ import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation
   styleUrls: ['./profile-dropdown.component.css']
 })
 export class ProfileDropdownComponent implements OnInit, OnDestroy {
-  account: AuthDetails;
+  username: String;
   ref: DynamicDialogRef;
 
   constructor(public dialogService:DialogService, private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.account = this.authService.accountValue;
+    this.username = this.authService.accountValue.username;
   }
 
   ngOnDestroy(): void {

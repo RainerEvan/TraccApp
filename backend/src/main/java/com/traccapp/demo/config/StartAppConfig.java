@@ -2,6 +2,7 @@ package com.traccapp.demo.config;
 
 import java.time.OffsetDateTime;
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 
 import com.traccapp.demo.data.ERoles;
@@ -180,37 +181,135 @@ public class StartAppConfig {
             notification5.setBody("Your ticket has been taken by a developer, check it out right here");
             notificationRepository.save(notification5);
 
-            for(int i=0;i<2;i++){
-                Tickets ticket = new Tickets();
-                ticket.setDateAdded(OffsetDateTime.now().withMonth(11).minusYears(3));
-                ticket.setApplication(application);
-                ticket.setReporter(account);
-                ticket.setTitle("Aplikasi CAMS error");
-                ticket.setDescription("Form gabisa diisi lagi gimana dong");
-                ticket.setStatus(status5);
-                ticketRepository.save(ticket);
+
+            for(int i=0;i<12;i++){
+                Random random = new Random();
+                int n = random.nextInt(4)+1;
+                
+                for(int j=0;j<n;j++){
+                    Tickets ticket = new Tickets();
+                    ticket.setDateAdded(OffsetDateTime.now().withMonth(i+1).minusYears(1));
+                    ticket.setApplication(application);
+                    ticket.setReporter(account);
+                    ticket.setTitle("Aplikasi CAMS error");
+                    ticket.setDescription("Form gabisa diisi lagi gimana dong");
+                    ticket.setStatus(status4);
+                    ticketRepository.save(ticket);
+                }
+                if(i%2 == 0){
+                    Tickets ticket = new Tickets();
+                    ticket.setDateAdded(OffsetDateTime.now().withMonth(i+1).minusYears(1));
+                    ticket.setApplication(application);
+                    ticket.setReporter(account);
+                    ticket.setTitle("Aplikasi CAMS error");
+                    ticket.setDescription("Form gabisa diisi lagi gimana dong");
+                    ticket.setStatus(status5);
+                    ticketRepository.save(ticket);
+                }
             }
 
-            for(int i=0;i<2;i++){
-                Tickets ticket = new Tickets();
-                ticket.setDateAdded(OffsetDateTime.now().withMonth(5).minusYears(2));
-                ticket.setApplication(application2);
-                ticket.setReporter(account);
-                ticket.setTitle("Aplikasi CAMS error");
-                ticket.setDescription("Form gabisa diisi lagi gimana dong");
-                ticket.setStatus(status5);
-                ticketRepository.save(ticket);
+            for(int i=0;i<12;i++){
+                Random random = new Random();
+                int n = random.nextInt(4)+1;
+                
+                for(int j=0;j<n;j++){
+                    Tickets ticket = new Tickets();
+                    ticket.setDateAdded(OffsetDateTime.now().withMonth(i+1).minusYears(1));
+                    ticket.setApplication(application2);
+                    ticket.setReporter(account);
+                    ticket.setTitle("Aplikasi CAMS error");
+                    ticket.setDescription("Form gabisa diisi lagi gimana dong");
+                    ticket.setStatus(status4);
+                    ticketRepository.save(ticket);
+                }
+                if(i%2 == 0){
+                    Tickets ticket = new Tickets();
+                    ticket.setDateAdded(OffsetDateTime.now().withMonth(i+1).minusYears(1));
+                    ticket.setApplication(application2);
+                    ticket.setReporter(account);
+                    ticket.setTitle("Aplikasi CAMS error");
+                    ticket.setDescription("Form gabisa diisi lagi gimana dong");
+                    ticket.setStatus(status5);
+                    ticketRepository.save(ticket);
+                }
             }
 
-            for(int i=0;i<2;i++){
-                Tickets ticket = new Tickets();
-                ticket.setDateAdded(OffsetDateTime.now().withMonth(12).minusYears(1));
-                ticket.setApplication(application3);
-                ticket.setReporter(account);
-                ticket.setTitle("Aplikasi CAMS error");
-                ticket.setDescription("Form gabisa diisi lagi gimana dong");
-                ticket.setStatus(status5);
-                ticketRepository.save(ticket);
+            for(int i=0;i<12;i++){
+                Random random = new Random();
+                int n = random.nextInt(3)+1;
+                
+                for(int j=0;j<n;j++){
+                    Tickets ticket = new Tickets();
+                    ticket.setDateAdded(OffsetDateTime.now().withMonth(i+1).minusYears(1));
+                    ticket.setApplication(application3);
+                    ticket.setReporter(account);
+                    ticket.setTitle("Aplikasi CAMS error");
+                    ticket.setDescription("Form gabisa diisi lagi gimana dong");
+                    ticket.setStatus(status4);
+                    ticketRepository.save(ticket);
+                }
+                if(i%2 == 0){
+                    Tickets ticket = new Tickets();
+                    ticket.setDateAdded(OffsetDateTime.now().withMonth(i+1).minusYears(1));
+                    ticket.setApplication(application3);
+                    ticket.setReporter(account);
+                    ticket.setTitle("Aplikasi CAMS error");
+                    ticket.setDescription("Form gabisa diisi lagi gimana dong");
+                    ticket.setStatus(status5);
+                    ticketRepository.save(ticket);
+                }
+            }
+
+            for(int i=0;i<12;i++){
+                Random random = new Random();
+                int n = random.nextInt(2)+1;
+                
+                for(int j=0;j<n;j++){
+                    Tickets ticket = new Tickets();
+                    ticket.setDateAdded(OffsetDateTime.now().withMonth(i+1).minusYears(1));
+                    ticket.setApplication(application4);
+                    ticket.setReporter(account);
+                    ticket.setTitle("Aplikasi CAMS error");
+                    ticket.setDescription("Form gabisa diisi lagi gimana dong");
+                    ticket.setStatus(status4);
+                    ticketRepository.save(ticket);
+                }
+                if(i%2 == 0){
+                    Tickets ticket = new Tickets();
+                    ticket.setDateAdded(OffsetDateTime.now().withMonth(i+1).minusYears(1));
+                    ticket.setApplication(application4);
+                    ticket.setReporter(account);
+                    ticket.setTitle("Aplikasi CAMS error");
+                    ticket.setDescription("Form gabisa diisi lagi gimana dong");
+                    ticket.setStatus(status5);
+                    ticketRepository.save(ticket);
+                }
+            }
+
+            for(int i=0;i<12;i++){
+                Random random = new Random();
+                int n = random.nextInt(2)+1;
+                
+                for(int j=0;j<n;j++){
+                    Tickets ticket = new Tickets();
+                    ticket.setDateAdded(OffsetDateTime.now().withMonth(i+1).minusYears(1));
+                    ticket.setApplication(application5);
+                    ticket.setReporter(account);
+                    ticket.setTitle("Aplikasi CAMS error");
+                    ticket.setDescription("Form gabisa diisi lagi gimana dong");
+                    ticket.setStatus(status4);
+                    ticketRepository.save(ticket);
+                }
+                if(i%2 == 0){
+                    Tickets ticket = new Tickets();
+                    ticket.setDateAdded(OffsetDateTime.now().withMonth(i+1).minusYears(1));
+                    ticket.setApplication(application5);
+                    ticket.setReporter(account);
+                    ticket.setTitle("Aplikasi CAMS error");
+                    ticket.setDescription("Form gabisa diisi lagi gimana dong");
+                    ticket.setStatus(status5);
+                    ticketRepository.save(ticket);
+                }
             }
 
             for(int i=0;i<2;i++){

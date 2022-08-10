@@ -1,8 +1,8 @@
-<div class="text-black">
-    <div class="p-2 border-b-2 border-gray-400">
+<div class="flex flex-col divide-y-2 divide-gray-400 text-black">
+    <div class="p-2">
         <span class="font-medium text-sm">Notifications</span>
     </div>
-    <div class="py-1">
+    <div class="py-2">
         <p-table #notificationTable [value]="notifications" [loading]="loading" responsiveLayout="scroll" sortField="createdAt" [sortOrder]="-1">
             <ng-template pTemplate="body" let-notification>
                 <div routerLink="/notifications" class="flex flex-row space-x-4 items-center text-black shadow-sm hover:bg-gray-100/50 cursor-pointer py-2 pl-2 pr-4">
@@ -23,9 +23,12 @@
             <ng-template pTemplate="emptymessage">
                 <div class="font-medium text-sm text-gray-400 text-center p-2">No notifications yet</div>
             </ng-template>
+            <ng-template pTemplate="loadingbody">
+                <div class="py-6"></div>
+            </ng-template>
         </p-table>
     </div>
-    <div class="py-1 border-t-2 border-gray-400">
+    <div class="py-1">
         <a routerLink="/notifications" class="flex items-center justify-center p-1 hover:bg-gray-100">
             <span class="font-medium text-sm">See All</span>
         </a>

@@ -6,41 +6,35 @@
         <div class="w-2/5 flex flex-col justify-between px-8">
             <div class="flex flex-row items-center justify-around py-6 border-b-2 border-gray-400">
                 <span class="font-medium text-lg">Timeframe</span>
-                <p-dropdown [options]="dashboardAnalytics" optionLabel="period" (onChange)="getAnalyticsData($event.value)" emptyMessage="Year"></p-dropdown>
-                <!-- <li>
-                    <input type="radio" id="weekly" name="ticket-analytics" class="hidden peer" checked>
-                    <label (click)="getDashboardAnalytics()" for="weekly" class="px-6 py-2 rounded-lg font-medium text-sm peer-checked:bg-gray-300 hover:bg-gray-200 cursor-pointer">Weekly</label>
-                </li>
-                <li>
-                    <input type="radio" id="monthly" name="ticket-analytics" class="hidden peer">
-                    <label (click)="getDashboardAnalytics()" for="monthly" class="px-6 py-2 rounded-lg font-medium text-sm peer-checked:bg-gray-300 hover:bg-gray-200 cursor-pointer">Monthly</label>
-                </li>
-                <li>
-                    <input type="radio" id="yearly" name="ticket-analytics" class="hidden peer">
-                    <label (click)="getDashboardAnalytics()" for="yearly" class="px-6 py-2 rounded-lg font-medium text-sm peer-checked:bg-gray-300 hover:bg-gray-200 cursor-pointer">Yearly</label>
-                </li> -->
+                <p-dropdown *ngIf="dashboardAnalytics" [options]="dashboardAnalytics" optionLabel="period" (onChange)="getAnalyticsData($event.value)" emptyMessage="Year"></p-dropdown>
+                <p-skeleton *ngIf="loading" width="8rem" height="2rem"></p-skeleton>
             </div>
             <div class="grid grid-cols-2 gap-4 justify-end p-8">
                 <div class="flex flex-col">
                     <span class="font-semibold text-sm">Min Tickets</span>
-                    <span class="font-regular text-3xl">{{minTickets}}</span>
+                    <span *ngIf="dashboardAnalytics" class="font-regular text-3xl">{{minTickets}}</span>
+                    <p-skeleton *ngIf="loading" width="4rem" height="4rem"></p-skeleton>
                 </div>
                 <div class="flex flex-col">
                     <span class="font-semibold text-sm">Max Tickets</span>
-                    <span class="font-regular text-3xl">{{maxTickets}}</span>
+                    <span *ngIf="dashboardAnalytics" class="font-regular text-3xl">{{maxTickets}}</span>
+                    <p-skeleton *ngIf="loading" width="4rem" height="4rem"></p-skeleton>
                 </div>
                 <div class="flex flex-col">
                     <span class="font-semibold text-sm">Avg Tickets</span>
-                    <span class="font-regular text-3xl">{{avgTickets}}</span>
+                    <span *ngIf="dashboardAnalytics" class="font-regular text-3xl">{{avgTickets}}</span>
+                    <p-skeleton *ngIf="loading" width="4rem" height="4rem"></p-skeleton>
                 </div>
                 <div class="flex flex-col">
                     <span class="font-semibold text-sm">Total Tickets</span>
-                    <span class="font-regular text-3xl">{{totalTickets}}</span>
+                    <span *ngIf="dashboardAnalytics" class="font-regular text-3xl">{{totalTickets}}</span>
+                    <p-skeleton *ngIf="loading" width="4rem" height="4rem"></p-skeleton>
                 </div>
             </div>
         </div>
         <div class="w-3/5 flex flex-row items-center justify-center">
-            <p-chart type="bar" [data]="barChartData" [options]="barChartOption" width="35rem" height="18rem"></p-chart>
+            <p-chart *ngIf="dashboardAnalytics" type="bar" [data]="barChartData" [options]="barChartOption" width="35rem" height="18rem"></p-chart>
+            <p-skeleton *ngIf="loading" width="24rem" height="16rem"></p-skeleton>
         </div>
     </div>
 </div>
@@ -50,8 +44,15 @@
         <h1 class="font-bold text-lg text-center mb-4">
             Top Applications
         </h1>
-        <div class="bg-white h-56 flex flex-row items-center border-2 border-gray-100 shadow-md p-8">
-            <p-chart type="pie" [data]="pieChartData" [options]="pieChartOption" width="18rem" height="10rem"></p-chart>
+        <div class="bg-white h-56 flex flex-row items-center justify-start space-x-6 border-2 border-gray-100 shadow-md p-8">
+            <p-chart *ngIf="dashboardAnalytics" type="pie" [data]="pieChartData" [options]="pieChartOption" width="18rem" height="10rem"></p-chart>
+            <p-skeleton *ngIf="loading" shape="circle" width="9rem" height="9rem"></p-skeleton>
+            <div *ngIf="loading" class="flex flex-col space-y-4">
+                <p-skeleton width="8rem"></p-skeleton>
+                <p-skeleton width="8rem"></p-skeleton>
+                <p-skeleton width="8rem"></p-skeleton>
+                <p-skeleton width="8rem"></p-skeleton>
+            </div>
         </div>
     </div>
 
@@ -71,6 +72,39 @@
                     <td class="text-xs px-4 py-4">{{topTag.tag}}</td>
                     <td class="text-xs px-4 py-4">{{topTag.count}}</td>
                 </tr>
+                <tr *ngIf="loading">
+                    <td class="px-4 py-4">
+                        <p-skeleton width="2rem"></p-skeleton>
+                    </td>
+                    <td class="px-4 py-4">
+                        <p-skeleton width="6rem"></p-skeleton>
+                    </td>
+                    <td class="px-4 py-4">
+                        <p-skeleton width="8rem"></p-skeleton>
+                    </td>
+                </tr>
+                <tr *ngIf="loading">
+                    <td class="px-4 py-4">
+                        <p-skeleton width="2rem"></p-skeleton>
+                    </td>
+                    <td class="px-4 py-4">
+                        <p-skeleton width="6rem"></p-skeleton>
+                    </td>
+                    <td class="px-4 py-4">
+                        <p-skeleton width="8rem"></p-skeleton>
+                    </td>
+                </tr>
+                <tr *ngIf="loading">
+                    <td class="px-4 py-4">
+                        <p-skeleton width="2rem"></p-skeleton>
+                    </td>
+                    <td class="px-4 py-4">
+                        <p-skeleton width="6rem"></p-skeleton>
+                    </td>
+                    <td class="px-4 py-4">
+                        <p-skeleton width="8rem"></p-skeleton>
+                    </td>
+                </tr>
             </table>
         </div>
     </div>
@@ -81,8 +115,10 @@
         </h1>
         <div class="bg-white h-56 flex flex-col space-y-2 justify-center border-2 border-gray-100 shadow-md py-8 px-16">
             <span class="font-semibold text-sm">Resolved</span>
-            <span class="font-regular text-6xl">{{ticketRate.rate}}</span>
-            <span class="font-semibold text-xs text-gray-400 border-t-2 border-gray-400 py-2">{{ticketRate.label}}</span>
+            <span *ngIf="dashboardAnalytics" class="font-regular text-6xl">{{ticketRate.rate}}</span>
+            <p-skeleton *ngIf="loading" width="8rem" height="4rem"></p-skeleton>
+            <span *ngIf="dashboardAnalytics" class="font-semibold text-xs text-gray-400 border-t-2 border-gray-400 py-2">{{ticketRate.label}}</span>
+            <p-skeleton *ngIf="loading" width="8rem"></p-skeleton>
         </div>
     </div>
 </div>

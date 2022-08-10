@@ -15,6 +15,7 @@ import com.traccapp.demo.model.Tickets;
 import com.traccapp.demo.payload.request.SupportRequest;
 import com.traccapp.demo.payload.request.TicketRequest;
 import com.traccapp.demo.payload.response.TopApplicationsResponse;
+import com.traccapp.demo.payload.response.TopTagsResponse;
 import com.traccapp.demo.payload.response.TicketRateResponse;
 import com.traccapp.demo.repository.SupportRepository;
 import com.traccapp.demo.service.DashboardService;
@@ -58,20 +59,21 @@ public class TicketSupportController {
     private final DashboardService dashboardService;
 
     @GetMapping(path = "/count")
-    public void count(){
+    public TicketRateResponse count(){
         OffsetDateTime now = OffsetDateTime.now();
         OffsetDateTime startDate = now.withHour(0).with(TemporalAdjusters.firstDayOfYear());
         OffsetDateTime endDate = now.withHour(23).withMinute(59).with(TemporalAdjusters.lastDayOfYear());
-        List<TopApplicationsResponse> applicationCounts = new ArrayList<>();
+        TicketRateResponse ticketRate = dashboardService.calculateTicketRate(startDate, endDate);
 
+        return ticketRate;
     }
 
     @GetMapping(path = "/test")
-    public TicketRateResponse test(){
+    public List<TopTagsResponse> test(){
         OffsetDateTime now = OffsetDateTime.now();
         OffsetDateTime startDate = now.withHour(0).with(TemporalAdjusters.firstDayOfYear());
         OffsetDateTime endDate = now.withHour(23).withMinute(59).with(TemporalAdjusters.lastDayOfYear());
-        TicketRateResponse topTags = dashboardService.calculateTicketRate(startDate, endDate);
+        List<TopTagsResponse> topTags = dashboardService.calculateTopTags(startDate, endDate);
 
         return topTags;
     }

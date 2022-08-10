@@ -214,16 +214,16 @@ public class DashboardService {
         if(percentage == 1){
             label = "PERFECT";
         }
-        else if(percentage >= 0.9){
+        else if(percentage >= 0.90 && percentage < 1){
             label = "GREAT";
         }
-        else if(percentage >= 0.8){
+        else if(percentage >= 0.80 && percentage < 0.90){
             label = "GOOD";
         }
-        else if(percentage >= 0.7){
+        else if(percentage >= 0.70 && percentage < 0.80){
             label = "ACCEPTABLE";
         }
-        else if(percentage >= 0.6){
+        else if(percentage >= 0.60 && percentage < 0.70){
             label = "BAD";
         }
         else{

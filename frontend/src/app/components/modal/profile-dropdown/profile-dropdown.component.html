@@ -2,7 +2,7 @@
     <div class="py-1">
         <div href="" class="flex flex-col p-1">
             <span class="font-medium text-sm">Signed in as</span>
-            <span class="font-bold mt-1 text-sm">{{account.username}}</span>
+            <span *ngIf="username" class="font-bold mt-1 text-sm">{{username}}</span>
         </div>
     </div>
     <div class="py-1 border-t-2 border-gray-400">
