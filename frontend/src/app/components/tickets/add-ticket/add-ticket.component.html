@@ -34,7 +34,7 @@
                     <span class="font-medium">Select files</span>
                 </div>
             </div>
-            <input #fileInput accept="image/*,text/*,application/pdf" multiple type="file" class="hidden" (change)="onSelectFile($event)"/>
+            <input #fileInput accept="image/*" multiple type="file" class="hidden" (change)="onSelectFile($event)"/>
         </div>
         <span class="text-sm">{{ticketAttachments.length}} file(s) selected</span>
         <div *ngIf="ticketAttachments.length > 0" class="flex flex-col space-y-1 py-4">

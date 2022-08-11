@@ -1,8 +1,5 @@
 package com.traccapp.demo.controller;
 
-import java.time.OffsetDateTime;
-import java.time.temporal.TemporalAdjusters;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
@@ -14,11 +11,6 @@ import com.traccapp.demo.model.TicketAttachments;
 import com.traccapp.demo.model.Tickets;
 import com.traccapp.demo.payload.request.SupportRequest;
 import com.traccapp.demo.payload.request.TicketRequest;
-import com.traccapp.demo.payload.response.TopApplicationsResponse;
-import com.traccapp.demo.payload.response.TopTagsResponse;
-import com.traccapp.demo.payload.response.TicketRateResponse;
-import com.traccapp.demo.repository.SupportRepository;
-import com.traccapp.demo.service.DashboardService;
 import com.traccapp.demo.service.SupportAttachmentService;
 import com.traccapp.demo.service.SupportService;
 import com.traccapp.demo.service.TicketAttachmentService;
@@ -29,7 +21,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,35 +39,11 @@ public class TicketSupportController {
     @Autowired
     private final TicketService ticketService;
     @Autowired
-    private final SupportRepository supportRepository;
-    @Autowired
     private final TicketAttachmentService ticketAttachmentService;
     @Autowired
     private final SupportService supportService;
     @Autowired
     private final SupportAttachmentService supportAttachmentService;
-    @Autowired
-    private final DashboardService dashboardService;
-
-    @GetMapping(path = "/count")
-    public TicketRateResponse count(){
-        OffsetDateTime now = OffsetDateTime.now();
-        OffsetDateTime startDate = now.withHour(0).with(TemporalAdjusters.firstDayOfYear());
-        OffsetDateTime endDate = now.withHour(23).withMinute(59).with(TemporalAdjusters.lastDayOfYear());
-        TicketRateResponse ticketRate = dashboardService.calculateTicketRate(startDate, endDate);
-
-        return ticketRate;
-    }
-
-    @GetMapping(path = "/test")
-    public List<TopTagsResponse> test(){
-        OffsetDateTime now = OffsetDateTime.now();
-        OffsetDateTime startDate = now.withHour(0).with(TemporalAdjusters.firstDayOfYear());
-        OffsetDateTime endDate = now.withHour(23).withMinute(59).with(TemporalAdjusters.lastDayOfYear());
-        List<TopTagsResponse> topTags = dashboardService.calculateTopTags(startDate, endDate);
-
-        return topTags;
-    }
 
     @PostMapping(path = "/add")
     public ResponseEntity<Object> addTicket(@RequestPart(name="files", required = false) MultipartFile[] files, @RequestPart("ticket") TicketRequest ticketRequest){

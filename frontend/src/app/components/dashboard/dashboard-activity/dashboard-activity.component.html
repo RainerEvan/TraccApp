@@ -74,7 +74,7 @@
             </div>
         </div>
         <div class="bg-white flex flex-row border-2 border-gray-100 shadow-md p-8">
-            <div class="w-3/5 flex flex-row items-center justify-center">
+            <div class="w-3/5 flex flex-row items-center justify-center p-6">
                 <p-chart *ngIf="dashboardActivity" type="line" [data]="basicData" [options]="basicOption" width="35rem" height="18rem"></p-chart>
                 <p-skeleton *ngIf="loading" width="24rem" height="16rem"></p-skeleton>
             </div>

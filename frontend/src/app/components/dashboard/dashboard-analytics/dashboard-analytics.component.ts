@@ -81,12 +81,7 @@ export class DashboardAnalyticsComponent implements OnInit {
     this.barChartOption = {
       plugins: {
         legend: {
-            labels: {
-              font:{
-                family:"'Montserrat', sans-serif",
-              },
-              color: '#000000'
-            }
+            display:false,
         }
       },
       scales: {

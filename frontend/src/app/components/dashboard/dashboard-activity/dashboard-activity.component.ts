@@ -56,39 +56,6 @@ export class DashboardActivityComponent implements OnInit {
     this.generateChart();
   }
 
-  // getThisWeek(activity:DashBoardActivity){
-  //   this.totalPending = activity.totalPending;
-  //   this.totalInProgress = activity.totalInProgress;
-  //   this.totalResolved = activity.totalResolved;
-  //   this.totalDropped = activity.totalDropped;
-  //   this.totalTickets = activity.totalTickets;
-  //   this.label = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-  //   this.data = [0,1,4,2,1,1,0];
-  //   this.generateChart();
-  // }
-
-  // getThisMonth(activity:DashBoardActivity){
-  //   this.totalPending = 4;
-  //   this.totalInProgress = 2;
-  //   this.totalResolved = 33;
-  //   this.totalDropped = 2;
-  //   this.totalTickets = 39;
-  //   this.label = ['Week 1','Week 2','Week 3','Week 4'];
-  //   this.data = [7,12,9,11];
-  //   this.generateChart();
-  // }
-
-  // getThisYear(activity:DashBoardActivity){
-  //   this.totalPending = 4;
-  //   this.totalInProgress = 2;
-  //   this.totalResolved = 429;
-  //   this.totalDropped = 3;
-  //   this.totalTickets = 435;
-  //   this.label = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  //   this.data = [32,20,18,25,38,23,19,27,21,29,17,21];
-  //   this.generateChart();
-  // }
-
   generateChart(){
     this.basicData = {
       labels: this.label,
@@ -107,12 +74,7 @@ export class DashboardActivityComponent implements OnInit {
     this.basicOption = {
       plugins: {
         legend: {
-            labels: {
-              font:{
-                family:"'Montserrat', sans-serif",
-              },
-              color: '#000000'
-            }
+          display:false,
         }
       },
       scales: {

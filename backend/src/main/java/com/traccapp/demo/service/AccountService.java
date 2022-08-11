@@ -1,5 +1,6 @@
 package com.traccapp.demo.service;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Base64;
 import java.util.HashSet;
@@ -19,6 +20,7 @@ import com.traccapp.demo.repository.DivisionRepository;
 import com.traccapp.demo.repository.RoleRepository;
 import com.traccapp.demo.utils.ProfileImageUtils;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -77,10 +79,7 @@ public class AccountService {
             .orElseThrow(() -> new IllegalStateException("Division with current id cannot be found: "+accountRequest.getDivisionId()));
 
         account.setDivision(division);
-
-        if(file != null){
-            account.setProfileImg(addImage(file));
-        }
+        account.setProfileImg(addImage(file));
 
         Roles role = roleRepository.findByName(accountRequest.getRolesName())
             .orElseThrow(() -> new IllegalStateException("Role with current name cannot be found "+accountRequest.getRolesName()));
@@ -102,8 +101,7 @@ public class AccountService {
         String email = accountRequest.getEmail();
         String contactNo = accountRequest.getContactNo();
         UUID divisionId = accountRequest.getDivisionId();
-        Roles rolesName = roleRepository.findByName(accountRequest.getRolesName())
-            .orElseThrow(() -> new IllegalStateException("Role with current name cannot be found "+accountRequest.getRolesName()));
+        ERoles rolesName = accountRequest.getRolesName();
         Boolean isActive = accountRequest.getIsActive();
 
         if(accountRepository.existsByUsername(username)){
@@ -137,11 +135,16 @@ public class AccountService {
             account.setDivision(division);
         }
 
-        if(rolesName != null && !account.getRoles().contains(rolesName)){
-            Set<Roles> roleSet = new HashSet<>();
-            roleSet.add(rolesName);
+        if(rolesName != null){
+            Roles role = roleRepository.findByName(rolesName)
+                .orElseThrow(() -> new IllegalStateException("Role with current name cannot be found "+rolesName));
 
-            account.setRoles(roleSet);
+            if(!account.getRoles().contains(role)){
+                Set<Roles> roleSet = new HashSet<>();
+                roleSet.add(role);
+
+                account.setRoles(roleSet);
+            }
         }
 
         if(isActive != null && !Objects.equals(account.getIsActive(), isActive)){
@@ -168,7 +171,14 @@ public class AccountService {
 
     public String addImage(MultipartFile file){
         try{
-            byte[] image = ProfileImageUtils.cropImageSquare(file);
+            byte[] image = new byte[0];
+
+            File defaultImg = new File("src/main/resources/image/profile.jpg");
+            image = FileUtils.readFileToByteArray(defaultImg);
+            
+            if(file != null){
+                image = ProfileImageUtils.cropImageSquare(file);
+            }
 
             String encodedString = Base64.getEncoder().encodeToString(image);
 

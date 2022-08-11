@@ -51,5 +51,5 @@ public class ProfileImageUtils {
         byte[] imageBytes = toByteArray(croppedImage, format);
         
         return imageBytes;
-      }
+    }
 }

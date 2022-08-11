@@ -6,7 +6,7 @@
         <div class="bg-white border-2 border-gray-100 shadow-md py-10 px-20">
             <div class="grid grid-cols-9 gap-6 items-start bg-gray-200 rounded-md py-8 px-12 mb-8">
                 <div class="col-span-1 w-full flex justify-center">
-                    <img src="https://t4.ftcdn.net/jpg/02/15/84/43/360_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg" alt="Profile" class="rounded-full w-20">
+                    <img [src]="imageUrl+currAuthorId" alt="Profile" class="rounded-full w-20">
                 </div>
                 <div class="col-span-8 w-full">
                     <form [formGroup]="commentForm" (ngSubmit)="addComment()" class="flex flex-col space-y-4">
@@ -31,8 +31,7 @@
                 <ng-template pTemplate="body" let-comment>
                     <div class="grid grid-cols-12 gap-3 p-6">
                         <div class="col-span-1 row-span-2 flex flex-col items-center justify-start">
-                            <img *ngIf="comment.author.profileImg" [(src)]="imageUrl+comment.author.id" alt="Profile" class="rounded-full w-14">
-                            <img *ngIf="!comment.author.profileImg" src="https://t4.ftcdn.net/jpg/02/15/84/43/360_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg" alt="Profile" class="rounded-full w-14">
+                            <img [(src)]="imageUrl+comment.author.id" alt="Profile" class="rounded-full w-14">
                         </div>
                         <div class="col-span-10 flex flex-col justify-center">
                             <div class="flex flex-row justify-between">
@@ -40,10 +39,11 @@
                                 <span *ngIf="comment.author.id == currAuthorId" class="font-medium text-sm text-gray-400">You</span>
                             </div>
                             <div class="flex flex-row space-x-2 items-center">
-                                <span class="font-regular text-xs">{{comment.createdAt | date:'d MMM y, h:mm a'}}</span>
+                                <span *ngIf="!comment.updatedAt" class="font-regular text-xs">{{comment.createdAt | date:'d MMM y, h:mm a'}}</span>
+                                <span *ngIf="comment.updatedAt" class="font-regular text-xs">{{comment.updatedAt | date:'d MMM y, h:mm a'}}</span>
                                 <span *ngIf="comment.updatedAt" class="flex flex-row items-center space-x-1 font-regular text-xs">
                                     <i class="pi pi-circle-fill" style="font-size:4px"></i> 
-                                    <span>Updated {{comment.updatedAt | date:'d MMM y, h:mm a'}}</span>
+                                    <span>Updated</span>
                                 </span>
                             </div>
                         </div>
