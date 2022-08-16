@@ -58,6 +58,8 @@ import { NotificationDropdownComponent } from './components/modal/notification-d
 import { DashboardPageComponent } from './components/dashboard/dashboard-page/dashboard-page.component';
 import { DashboardActivityComponent } from './components/dashboard/dashboard-activity/dashboard-activity.component';
 import { DashboardAnalyticsComponent } from './components/dashboard/dashboard-analytics/dashboard-analytics.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -118,6 +120,12 @@ import { DashboardAnalyticsComponent } from './components/dashboard/dashboard-an
     EditorModule,
     ChartModule,
     ApolloModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    }),
   ],
   providers: [
     {
