@@ -58,6 +58,10 @@ import { NotificationDropdownComponent } from './components/modal/notification-d
 import { DashboardPageComponent } from './components/dashboard/dashboard-page/dashboard-page.component';
 import { DashboardActivityComponent } from './components/dashboard/dashboard-activity/dashboard-activity.component';
 import { DashboardAnalyticsComponent } from './components/dashboard/dashboard-analytics/dashboard-analytics.component';
+import { AngularFireMessagingModule } from '@angular/fire/compat/messaging';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFireModule } from '@angular/fire/compat/';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 
@@ -120,7 +124,11 @@ import { environment } from '../environments/environment';
     EditorModule,
     ChartModule,
     ApolloModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
+    AngularFireMessagingModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    ServiceWorkerModule.register('main-sw.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the application is stable
       // or after 30 seconds (whichever comes first).
