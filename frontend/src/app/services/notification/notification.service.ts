@@ -20,9 +20,14 @@ export class NotificationService {
         query getAllNotificationsForAccount($accountId:ID!){
           getAllNotificationsForAccount(accountId: $accountId){
             id
+            receiver{
+              id
+              fullname
+            }
             createdAt
             readAt
             title
+            body
           }
         }
       `,
@@ -50,30 +55,6 @@ export class NotificationService {
       },
     })
       .valueChanges.pipe(map((result)=>result.data.getTopNotificationsForAccount));
-  }
-
-  public getNotification(notificationId: string): Observable<Notifications>{
-    return this.apollo.watchQuery<any>({
-      query:gql`
-        query getNotification($notificationId:ID!){
-          getNotification(notificationId: $notificationId){
-            id
-            receiver{
-              id
-              fullname
-            }
-            createdAt
-            readAt
-            title
-            body
-          }
-        }
-      `,
-      variables: {
-        notificationId: notificationId,
-      },
-    })
-      .valueChanges.pipe(map((result)=>result.data.getNotification));
   }
 
   public addNotification(formData:FormData): Observable<any>{

@@ -12,7 +12,7 @@
                     </div>
                     <p-table #notificationTable [value]="notifications" [loading]="loading" [totalRecords]="totalRecords" [scrollable]="true" scrollHeight="30rem" responsiveLayout="scroll" sortField="createdAt" [sortOrder]="-1">
                         <ng-template pTemplate="body" let-notification>
-                            <div (click)="getNotification(notification.id)" class="flex flex-row space-x-4 items-center text-black shadow-sm hover:bg-gray-100/50 cursor-pointer py-4 px-6">
+                            <div (click)="onSelect(notification)" class="flex flex-row space-x-4 items-center text-black shadow-sm hover:bg-gray-100/50 cursor-pointer py-4 px-6">
                                 <div class="w-auto">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-14 w-14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -34,22 +34,7 @@
                 </div>
             </div>
             <div class="w-2/3 bg-white border-2 border-gray-100 shadow-md">
-                <div *ngIf="notification" class="space-y-8 p-8">
-                    <div class="flex flex-row items-start justify-between">
-                        <span class="font-semibold text-2xl">{{notification.title}}</span>
-                        <div class="flex flex-col items-end">
-                            <span class="font-semibold text-xs">{{notification.createdAt | date:'d MMMM y'}}</span>
-                            <span class="font-medium text-xs">{{notification.createdAt | date:'h:mm a'}}</span>
-                        </div>
-                    </div>
-                    <div>
-                        <p class="text-sm text-justify">{{notification.body}}</p>
-                    </div>
-                </div>
-                
-                <div *ngIf="!notification" class="h-full w-full flex justify-center items-center">
-                    <span class="text-gray-400">Click to preview notification</span>
-                </div>
+                <app-notification-detail [notification]="selected"></app-notification-detail>
             </div>
         </div>
     </div>

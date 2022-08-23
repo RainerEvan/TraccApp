@@ -13,7 +13,7 @@ export class NotificationPageComponent implements OnInit {
 
   accountId: string;
   notifications: Notifications[];
-  notification: Notifications;
+  selected: Notifications;
   loading: boolean;
   totalRecords: number = 0;
   totalUnread: number = 0;
@@ -40,23 +40,13 @@ export class NotificationPageComponent implements OnInit {
     });
   }
 
-  public getNotification(notificationId:string):void{
-    if(notificationId){
-      this.loading = true;
-      this.notificationService.getNotification(notificationId).subscribe({
-        next: (notification: Notifications) => {
-          this.loading = false;
-          this.notification = notification;
-          if(!notification.readAt){
-            this.notificationService.readNotification(notification.id).subscribe({
-              next: () => {
-                this.getAllNotifications();
-              },
-              error: (error: any) => {
-                console.log(error);
-              }
-            });
-          }
+  onSelect(notification:Notifications){
+    this.selected = notification;
+
+    if(!notification.readAt){
+      this.notificationService.readNotification(notification.id).subscribe({
+        next: () => {
+          this.getAllNotifications();
         },
         error: (error: any) => {
           console.log(error);

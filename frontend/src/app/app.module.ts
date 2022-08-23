@@ -64,6 +64,7 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireModule } from '@angular/fire/compat/';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { NotificationDetailComponent } from './components/notifications/notification-detail/notification-detail.component';
 
 @NgModule({
   declarations: [
@@ -98,6 +99,7 @@ import { environment } from '../environments/environment';
     EditProfileComponent,
     ChangePasswordComponent,
     NotificationPageComponent,
+    NotificationDetailComponent,
     ProfileDropdownComponent,
     NotificationDropdownComponent,
     DashboardPageComponent,
