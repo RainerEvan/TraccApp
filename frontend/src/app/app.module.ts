@@ -25,6 +25,7 @@ import { InputSwitchModule } from 'primeng/inputswitch';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { DropdownModule } from 'primeng/dropdown';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { ToastModule } from 'primeng/toast';
 import { TableModule } from 'primeng/table';
 import { EditorModule } from 'primeng/editor';
 import { ChartModule } from 'primeng/chart';
@@ -38,7 +39,6 @@ import { EditAccountComponent } from './components/accounts/edit-account/edit-ac
 import { MyTicketListComponent } from './components/my-tickets/my-ticket-list/my-ticket-list.component';
 import { MyTaskListComponent } from './components/my-tasks/my-task-list/my-task-list.component';
 import { MessageService } from 'primeng/api';
-import { MessagesModule } from 'primeng/messages';
 import { HasRoleDirective } from './directives/has-role.directive';
 import { ConfigDivisionComponent } from './components/config/config-division/config-division.component';
 import { ConfigApplicationComponent } from './components/config/config-application/config-application.component';
@@ -119,7 +119,7 @@ import { environment } from '../environments/environment';
     InputSwitchModule,
     DropdownModule,
     OverlayPanelModule,
-    MessagesModule,
+    ToastModule,
     SkeletonModule,
     EditorModule,
     ChartModule,

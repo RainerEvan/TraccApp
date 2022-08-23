@@ -182,212 +182,212 @@ public class StartAppConfig {
             notificationRepository.save(notification5);
 
 
-            for(int i=0;i<12;i++){
-                Random random = new Random();
-                int n = random.nextInt(4)+1;
+            // for(int i=0;i<12;i++){
+            //     Random random = new Random();
+            //     int n = random.nextInt(4)+1;
                 
-                for(int j=0;j<n;j++){
-                    Tickets ticket = new Tickets();
-                    ticket.setDateAdded(OffsetDateTime.now().withMonth(i+1).minusYears(1));
-                    ticket.setApplication(application);
-                    ticket.setReporter(account);
-                    ticket.setTitle("Aplikasi CAMS error");
-                    ticket.setDescription("Form gabisa diisi lagi gimana dong");
-                    ticket.setStatus(status4);
-                    ticketRepository.save(ticket);
-                }
-                if(i%2 == 0){
-                    Tickets ticket = new Tickets();
-                    ticket.setDateAdded(OffsetDateTime.now().withMonth(i+1).minusYears(1));
-                    ticket.setApplication(application);
-                    ticket.setReporter(account);
-                    ticket.setTitle("Aplikasi CAMS error");
-                    ticket.setDescription("Form gabisa diisi lagi gimana dong");
-                    ticket.setStatus(status5);
-                    ticketRepository.save(ticket);
-                }
-            }
+            //     for(int j=0;j<n;j++){
+            //         Tickets ticket = new Tickets();
+            //         ticket.setDateAdded(OffsetDateTime.now().withMonth(i+1).minusYears(1));
+            //         ticket.setApplication(application);
+            //         ticket.setReporter(account);
+            //         ticket.setTitle("Aplikasi CAMS error");
+            //         ticket.setDescription("Form gabisa diisi lagi gimana dong");
+            //         ticket.setStatus(status4);
+            //         ticketRepository.save(ticket);
+            //     }
+            //     if(i%2 == 0){
+            //         Tickets ticket = new Tickets();
+            //         ticket.setDateAdded(OffsetDateTime.now().withMonth(i+1).minusYears(1));
+            //         ticket.setApplication(application);
+            //         ticket.setReporter(account);
+            //         ticket.setTitle("Aplikasi CAMS error");
+            //         ticket.setDescription("Form gabisa diisi lagi gimana dong");
+            //         ticket.setStatus(status5);
+            //         ticketRepository.save(ticket);
+            //     }
+            // }
 
-            for(int i=0;i<12;i++){
-                Random random = new Random();
-                int n = random.nextInt(4)+1;
+            // for(int i=0;i<12;i++){
+            //     Random random = new Random();
+            //     int n = random.nextInt(4)+1;
                 
-                for(int j=0;j<n;j++){
-                    Tickets ticket = new Tickets();
-                    ticket.setDateAdded(OffsetDateTime.now().withMonth(i+1).minusYears(1));
-                    ticket.setApplication(application2);
-                    ticket.setReporter(account);
-                    ticket.setTitle("Aplikasi CAMS error");
-                    ticket.setDescription("Form gabisa diisi lagi gimana dong");
-                    ticket.setStatus(status4);
-                    ticketRepository.save(ticket);
-                }
-                if(i%2 == 0){
-                    Tickets ticket = new Tickets();
-                    ticket.setDateAdded(OffsetDateTime.now().withMonth(i+1).minusYears(1));
-                    ticket.setApplication(application2);
-                    ticket.setReporter(account);
-                    ticket.setTitle("Aplikasi CAMS error");
-                    ticket.setDescription("Form gabisa diisi lagi gimana dong");
-                    ticket.setStatus(status5);
-                    ticketRepository.save(ticket);
-                }
-            }
+            //     for(int j=0;j<n;j++){
+            //         Tickets ticket = new Tickets();
+            //         ticket.setDateAdded(OffsetDateTime.now().withMonth(i+1).minusYears(1));
+            //         ticket.setApplication(application2);
+            //         ticket.setReporter(account);
+            //         ticket.setTitle("Aplikasi CAMS error");
+            //         ticket.setDescription("Form gabisa diisi lagi gimana dong");
+            //         ticket.setStatus(status4);
+            //         ticketRepository.save(ticket);
+            //     }
+            //     if(i%2 == 0){
+            //         Tickets ticket = new Tickets();
+            //         ticket.setDateAdded(OffsetDateTime.now().withMonth(i+1).minusYears(1));
+            //         ticket.setApplication(application2);
+            //         ticket.setReporter(account);
+            //         ticket.setTitle("Aplikasi CAMS error");
+            //         ticket.setDescription("Form gabisa diisi lagi gimana dong");
+            //         ticket.setStatus(status5);
+            //         ticketRepository.save(ticket);
+            //     }
+            // }
 
-            for(int i=0;i<12;i++){
-                Random random = new Random();
-                int n = random.nextInt(3)+1;
+            // for(int i=0;i<12;i++){
+            //     Random random = new Random();
+            //     int n = random.nextInt(3)+1;
                 
-                for(int j=0;j<n;j++){
-                    Tickets ticket = new Tickets();
-                    ticket.setDateAdded(OffsetDateTime.now().withMonth(i+1).minusYears(1));
-                    ticket.setApplication(application3);
-                    ticket.setReporter(account);
-                    ticket.setTitle("Aplikasi CAMS error");
-                    ticket.setDescription("Form gabisa diisi lagi gimana dong");
-                    ticket.setStatus(status4);
-                    ticketRepository.save(ticket);
-                }
-                if(i%2 == 0){
-                    Tickets ticket = new Tickets();
-                    ticket.setDateAdded(OffsetDateTime.now().withMonth(i+1).minusYears(1));
-                    ticket.setApplication(application3);
-                    ticket.setReporter(account);
-                    ticket.setTitle("Aplikasi CAMS error");
-                    ticket.setDescription("Form gabisa diisi lagi gimana dong");
-                    ticket.setStatus(status5);
-                    ticketRepository.save(ticket);
-                }
-            }
+            //     for(int j=0;j<n;j++){
+            //         Tickets ticket = new Tickets();
+            //         ticket.setDateAdded(OffsetDateTime.now().withMonth(i+1).minusYears(1));
+            //         ticket.setApplication(application3);
+            //         ticket.setReporter(account);
+            //         ticket.setTitle("Aplikasi CAMS error");
+            //         ticket.setDescription("Form gabisa diisi lagi gimana dong");
+            //         ticket.setStatus(status4);
+            //         ticketRepository.save(ticket);
+            //     }
+            //     if(i%2 == 0){
+            //         Tickets ticket = new Tickets();
+            //         ticket.setDateAdded(OffsetDateTime.now().withMonth(i+1).minusYears(1));
+            //         ticket.setApplication(application3);
+            //         ticket.setReporter(account);
+            //         ticket.setTitle("Aplikasi CAMS error");
+            //         ticket.setDescription("Form gabisa diisi lagi gimana dong");
+            //         ticket.setStatus(status5);
+            //         ticketRepository.save(ticket);
+            //     }
+            // }
 
-            for(int i=0;i<12;i++){
-                Random random = new Random();
-                int n = random.nextInt(2)+1;
+            // for(int i=0;i<12;i++){
+            //     Random random = new Random();
+            //     int n = random.nextInt(2)+1;
                 
-                for(int j=0;j<n;j++){
-                    Tickets ticket = new Tickets();
-                    ticket.setDateAdded(OffsetDateTime.now().withMonth(i+1).minusYears(1));
-                    ticket.setApplication(application4);
-                    ticket.setReporter(account);
-                    ticket.setTitle("Aplikasi CAMS error");
-                    ticket.setDescription("Form gabisa diisi lagi gimana dong");
-                    ticket.setStatus(status4);
-                    ticketRepository.save(ticket);
-                }
-                if(i%2 == 0){
-                    Tickets ticket = new Tickets();
-                    ticket.setDateAdded(OffsetDateTime.now().withMonth(i+1).minusYears(1));
-                    ticket.setApplication(application4);
-                    ticket.setReporter(account);
-                    ticket.setTitle("Aplikasi CAMS error");
-                    ticket.setDescription("Form gabisa diisi lagi gimana dong");
-                    ticket.setStatus(status5);
-                    ticketRepository.save(ticket);
-                }
-            }
+            //     for(int j=0;j<n;j++){
+            //         Tickets ticket = new Tickets();
+            //         ticket.setDateAdded(OffsetDateTime.now().withMonth(i+1).minusYears(1));
+            //         ticket.setApplication(application4);
+            //         ticket.setReporter(account);
+            //         ticket.setTitle("Aplikasi CAMS error");
+            //         ticket.setDescription("Form gabisa diisi lagi gimana dong");
+            //         ticket.setStatus(status4);
+            //         ticketRepository.save(ticket);
+            //     }
+            //     if(i%2 == 0){
+            //         Tickets ticket = new Tickets();
+            //         ticket.setDateAdded(OffsetDateTime.now().withMonth(i+1).minusYears(1));
+            //         ticket.setApplication(application4);
+            //         ticket.setReporter(account);
+            //         ticket.setTitle("Aplikasi CAMS error");
+            //         ticket.setDescription("Form gabisa diisi lagi gimana dong");
+            //         ticket.setStatus(status5);
+            //         ticketRepository.save(ticket);
+            //     }
+            // }
 
-            for(int i=0;i<12;i++){
-                Random random = new Random();
-                int n = random.nextInt(2)+1;
+            // for(int i=0;i<12;i++){
+            //     Random random = new Random();
+            //     int n = random.nextInt(2)+1;
                 
-                for(int j=0;j<n;j++){
-                    Tickets ticket = new Tickets();
-                    ticket.setDateAdded(OffsetDateTime.now().withMonth(i+1).minusYears(1));
-                    ticket.setApplication(application5);
-                    ticket.setReporter(account);
-                    ticket.setTitle("Aplikasi CAMS error");
-                    ticket.setDescription("Form gabisa diisi lagi gimana dong");
-                    ticket.setStatus(status4);
-                    ticketRepository.save(ticket);
-                }
-                if(i%2 == 0){
-                    Tickets ticket = new Tickets();
-                    ticket.setDateAdded(OffsetDateTime.now().withMonth(i+1).minusYears(1));
-                    ticket.setApplication(application5);
-                    ticket.setReporter(account);
-                    ticket.setTitle("Aplikasi CAMS error");
-                    ticket.setDescription("Form gabisa diisi lagi gimana dong");
-                    ticket.setStatus(status5);
-                    ticketRepository.save(ticket);
-                }
-            }
+            //     for(int j=0;j<n;j++){
+            //         Tickets ticket = new Tickets();
+            //         ticket.setDateAdded(OffsetDateTime.now().withMonth(i+1).minusYears(1));
+            //         ticket.setApplication(application5);
+            //         ticket.setReporter(account);
+            //         ticket.setTitle("Aplikasi CAMS error");
+            //         ticket.setDescription("Form gabisa diisi lagi gimana dong");
+            //         ticket.setStatus(status4);
+            //         ticketRepository.save(ticket);
+            //     }
+            //     if(i%2 == 0){
+            //         Tickets ticket = new Tickets();
+            //         ticket.setDateAdded(OffsetDateTime.now().withMonth(i+1).minusYears(1));
+            //         ticket.setApplication(application5);
+            //         ticket.setReporter(account);
+            //         ticket.setTitle("Aplikasi CAMS error");
+            //         ticket.setDescription("Form gabisa diisi lagi gimana dong");
+            //         ticket.setStatus(status5);
+            //         ticketRepository.save(ticket);
+            //     }
+            // }
 
-            for(int i=0;i<2;i++){
-                Tickets ticket = new Tickets();
-                ticket.setDateAdded(OffsetDateTime.now().withMonth(1));
-                ticket.setApplication(application5);
-                ticket.setReporter(account);
-                ticket.setTitle("Aplikasi CAMS error");
-                ticket.setDescription("Form gabisa diisi lagi gimana dong");
-                ticket.setStatus(status5);
-                ticketRepository.save(ticket);
-            }
+            // for(int i=0;i<2;i++){
+            //     Tickets ticket = new Tickets();
+            //     ticket.setDateAdded(OffsetDateTime.now().withMonth(1));
+            //     ticket.setApplication(application5);
+            //     ticket.setReporter(account);
+            //     ticket.setTitle("Aplikasi CAMS error");
+            //     ticket.setDescription("Form gabisa diisi lagi gimana dong");
+            //     ticket.setStatus(status5);
+            //     ticketRepository.save(ticket);
+            // }
 
-            for(int i=0;i<5;i++){
-                Tickets ticket = new Tickets();
-                ticket.setDateAdded(OffsetDateTime.now().withMonth(2));
-                ticket.setApplication(application);
-                ticket.setReporter(account);
-                ticket.setTitle("Aplikasi CAMS error");
-                ticket.setDescription("Form gabisa diisi lagi gimana dong");
-                ticket.setStatus(status4);
-                ticketRepository.save(ticket);
-            }
+            // for(int i=0;i<5;i++){
+            //     Tickets ticket = new Tickets();
+            //     ticket.setDateAdded(OffsetDateTime.now().withMonth(2));
+            //     ticket.setApplication(application);
+            //     ticket.setReporter(account);
+            //     ticket.setTitle("Aplikasi CAMS error");
+            //     ticket.setDescription("Form gabisa diisi lagi gimana dong");
+            //     ticket.setStatus(status4);
+            //     ticketRepository.save(ticket);
+            // }
 
-            for(int i=0;i<4;i++){
-                Tickets ticket = new Tickets();
-                ticket.setDateAdded(OffsetDateTime.now().withMonth(3));
-                ticket.setApplication(application2);
-                ticket.setReporter(account);
-                ticket.setTitle("Aplikasi CAMS error");
-                ticket.setDescription("Form gabisa diisi lagi gimana dong");
-                ticket.setStatus(status4);
-                ticketRepository.save(ticket);
-            }
+            // for(int i=0;i<4;i++){
+            //     Tickets ticket = new Tickets();
+            //     ticket.setDateAdded(OffsetDateTime.now().withMonth(3));
+            //     ticket.setApplication(application2);
+            //     ticket.setReporter(account);
+            //     ticket.setTitle("Aplikasi CAMS error");
+            //     ticket.setDescription("Form gabisa diisi lagi gimana dong");
+            //     ticket.setStatus(status4);
+            //     ticketRepository.save(ticket);
+            // }
 
-            for(int i=0;i<5;i++){
-                Tickets ticket = new Tickets();
-                ticket.setDateAdded(OffsetDateTime.now().withMonth(4));
-                ticket.setApplication(application3);
-                ticket.setReporter(account);
-                ticket.setTitle("Aplikasi CAMS error");
-                ticket.setDescription("Form gabisa diisi lagi gimana dong");
-                ticket.setStatus(status4);
-                ticketRepository.save(ticket);
-            }
+            // for(int i=0;i<5;i++){
+            //     Tickets ticket = new Tickets();
+            //     ticket.setDateAdded(OffsetDateTime.now().withMonth(4));
+            //     ticket.setApplication(application3);
+            //     ticket.setReporter(account);
+            //     ticket.setTitle("Aplikasi CAMS error");
+            //     ticket.setDescription("Form gabisa diisi lagi gimana dong");
+            //     ticket.setStatus(status4);
+            //     ticketRepository.save(ticket);
+            // }
 
-            for(int i=0;i<3;i++){
-                Tickets ticket = new Tickets();
-                ticket.setDateAdded(OffsetDateTime.now().withMonth(5));
-                ticket.setApplication(application2);
-                ticket.setReporter(account);
-                ticket.setTitle("Aplikasi CAMS error");
-                ticket.setDescription("Form gabisa diisi lagi gimana dong");
-                ticket.setStatus(status4);
-                ticketRepository.save(ticket);
-            }
+            // for(int i=0;i<3;i++){
+            //     Tickets ticket = new Tickets();
+            //     ticket.setDateAdded(OffsetDateTime.now().withMonth(5));
+            //     ticket.setApplication(application2);
+            //     ticket.setReporter(account);
+            //     ticket.setTitle("Aplikasi CAMS error");
+            //     ticket.setDescription("Form gabisa diisi lagi gimana dong");
+            //     ticket.setStatus(status4);
+            //     ticketRepository.save(ticket);
+            // }
 
-            for(int i=0;i<2;i++){
-                Tickets ticket = new Tickets();
-                ticket.setDateAdded(OffsetDateTime.now().withMonth(6));
-                ticket.setApplication(application4);
-                ticket.setReporter(account);
-                ticket.setTitle("Aplikasi CAMS error");
-                ticket.setDescription("Form gabisa diisi lagi gimana dong");
-                ticket.setStatus(status4);
-                ticketRepository.save(ticket);
-            }
+            // for(int i=0;i<2;i++){
+            //     Tickets ticket = new Tickets();
+            //     ticket.setDateAdded(OffsetDateTime.now().withMonth(6));
+            //     ticket.setApplication(application4);
+            //     ticket.setReporter(account);
+            //     ticket.setTitle("Aplikasi CAMS error");
+            //     ticket.setDescription("Form gabisa diisi lagi gimana dong");
+            //     ticket.setStatus(status4);
+            //     ticketRepository.save(ticket);
+            // }
 
-            for(int i=0;i<5;i++){
-                Tickets ticket = new Tickets();
-                ticket.setDateAdded(OffsetDateTime.now().withMonth(7));
-                ticket.setApplication(application);
-                ticket.setReporter(account);
-                ticket.setTitle("Aplikasi CAMS error");
-                ticket.setDescription("Form gabisa diisi lagi gimana dong");
-                ticket.setStatus(status4);
-                ticketRepository.save(ticket);
-            }
+            // for(int i=0;i<5;i++){
+            //     Tickets ticket = new Tickets();
+            //     ticket.setDateAdded(OffsetDateTime.now().withMonth(7));
+            //     ticket.setApplication(application);
+            //     ticket.setReporter(account);
+            //     ticket.setTitle("Aplikasi CAMS error");
+            //     ticket.setDescription("Form gabisa diisi lagi gimana dong");
+            //     ticket.setStatus(status4);
+            //     ticketRepository.save(ticket);
+            // }
 
             Tickets ticket = new Tickets();
             ticket.setDateAdded(OffsetDateTime.now().minusDays(1));

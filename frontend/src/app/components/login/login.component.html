@@ -8,14 +8,14 @@
         <h3 class="font-semibold text-xl text-center">LOGIN</h3>
         <form [formGroup]="loginForm" (ngSubmit)="login()" class="flex flex-col space-y-4">
             <div class="flex flex-col space-y-1">
-                <label for="username" class="form-label">Username</label>
+                <label for="username" class="text-sm">Username</label>
                 <input pInputText type="text" placeholder="Enter your username" class="p-inputtext-sm form-field" formControlName="username" required>
                 <div *ngIf="username.invalid && (username.dirty || username.touched)" class="font-regular text-xs text-red-400">
                     Username is required
                 </div>
             </div>
             <div class="flex flex-col space-y-1">
-                <label for="password" class="form-label">Password</label>
+                <label for="password" class="text-sm">Password</label>
                 <span class="p-input-icon-right">
                         <i *ngIf="show" (click)="show=false" class="pi pi-eye-slash cursor-pointer"></i>
                         <i *ngIf="!show" (click)="show=true" class="pi pi-eye cursor-pointer"></i>
@@ -31,7 +31,5 @@
         </form>
     </div>
 
-    <div class="max-w-lg py-8 scale-90">
-        <p-messages></p-messages>
-    </div>
+    <p-toast position="top-center"></p-toast>
 </div>
