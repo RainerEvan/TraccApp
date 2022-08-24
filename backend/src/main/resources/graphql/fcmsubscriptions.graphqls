@@ -1,0 +1,10 @@
+type FcmSubscriptions{
+    id:ID
+    account:Accounts
+    token:String
+    timestamp:DateTime
+}
+
+extend type Query{
+    getFcmSubscription(accountId:ID!):FcmSubscriptions
+}

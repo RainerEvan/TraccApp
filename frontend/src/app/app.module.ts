@@ -59,8 +59,6 @@ import { DashboardPageComponent } from './components/dashboard/dashboard-page/da
 import { DashboardActivityComponent } from './components/dashboard/dashboard-activity/dashboard-activity.component';
 import { DashboardAnalyticsComponent } from './components/dashboard/dashboard-analytics/dashboard-analytics.component';
 import { AngularFireMessagingModule } from '@angular/fire/compat/messaging';
-import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
-import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireModule } from '@angular/fire/compat/';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
@@ -126,8 +124,6 @@ import { NotificationDetailComponent } from './components/notifications/notifica
     EditorModule,
     ChartModule,
     ApolloModule,
-    AngularFireDatabaseModule,
-    AngularFireAuthModule,
     AngularFireMessagingModule,
     AngularFireModule.initializeApp(environment.firebase),
     ServiceWorkerModule.register('main-sw.js', {
