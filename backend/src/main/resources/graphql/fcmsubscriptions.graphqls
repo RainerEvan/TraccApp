@@ -6,5 +6,5 @@ type FcmSubscriptions{
 }
 
 extend type Query{
-    getFcmSubscription(accountId:ID!):FcmSubscriptions
+    getAllFcmSubscriptionsForAccount(accountId:ID!):[FcmSubscriptions]
 }

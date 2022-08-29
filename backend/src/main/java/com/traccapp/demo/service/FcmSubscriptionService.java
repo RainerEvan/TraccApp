@@ -1,5 +1,7 @@
 package com.traccapp.demo.service;
 
+import java.time.OffsetDateTime;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +23,23 @@ public class FcmSubscriptionService {
     private final FcmSubscriptionRepository fcmSubscriptionRepository;
     @Autowired
     private final AccountRepository accountRepository;
+    @Autowired
+    private final AuthService authService;
 
-    public FcmSubscriptions getFcmSubscriptions(UUID accountId){
+    public List<FcmSubscriptions> getAllFcmSubscriptionsForAccount(UUID accountId){
         Accounts account = accountRepository.findById(accountId)
             .orElseThrow(() -> new AbstractGraphQLException("Account with current id cannot be found: "+accountId,"accountId"));
 
-        return fcmSubscriptionRepository.findByAccount(account);
+        return fcmSubscriptionRepository.findAllByAccount(account);
+    }
+
+    public FcmSubscriptions addFcmSubscriptions(String token){
+        
+        FcmSubscriptions fcmSubscription = new FcmSubscriptions();
+        fcmSubscription.setAccount(authService.getCurrentAccount());
+        fcmSubscription.setToken(token);
+        fcmSubscription.setTimestamp(OffsetDateTime.now());
+
+        return fcmSubscriptionRepository.save(fcmSubscription);
     }
 }
