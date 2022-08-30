@@ -27,7 +27,7 @@ public class FcmSubscriptions {
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
     @ManyToOne
-    @JoinColumn(name="author_id")
+    @JoinColumn(name="account_id")
     private Accounts account;
     private String token;
     private OffsetDateTime timestamp;

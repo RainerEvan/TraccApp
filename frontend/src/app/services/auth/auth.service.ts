@@ -12,11 +12,9 @@ const API_URL = environment.apiUrl+'/auth';
 })
 export class AuthService {
   private accountSubject: BehaviorSubject<AuthDetails>;
-  public account: Observable<AuthDetails>;
 
   constructor(private router: Router, private http: HttpClient) { 
     this.accountSubject = new BehaviorSubject<AuthDetails>(JSON.parse(sessionStorage.getItem('account')));
-    this.account = this.accountSubject.asObservable();
   }
 
   public get accountValue(): AuthDetails {
