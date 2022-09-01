@@ -4,6 +4,8 @@ import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.UUID;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +28,7 @@ public class FcmSubscriptionService {
     @Autowired
     private final AuthService authService;
 
+    @Transactional
     public List<FcmSubscriptions> getAllFcmSubscriptionsForAccount(UUID accountId){
         Accounts account = accountRepository.findById(accountId)
             .orElseThrow(() -> new AbstractGraphQLException("Account with current id cannot be found: "+accountId,"accountId"));
@@ -33,6 +36,7 @@ public class FcmSubscriptionService {
         return fcmSubscriptionRepository.findAllByAccount(account);
     }
 
+    @Transactional
     public FcmSubscriptions addFcmSubscriptions(String token){
         
         FcmSubscriptions fcmSubscription = new FcmSubscriptions();

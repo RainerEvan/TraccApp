@@ -15,7 +15,7 @@ import com.traccapp.demo.utils.ResponseHandler;
 import lombok.AllArgsConstructor;
 
 @RestController
-@RequestMapping("/api/fcmsubscription")
+@RequestMapping("/api/fcmsubscriptions")
 @AllArgsConstructor
 public class FcmSubscriptionController {
     
