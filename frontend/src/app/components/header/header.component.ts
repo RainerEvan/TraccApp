@@ -15,20 +15,30 @@ import { FcmsubscriptionService } from 'src/app/services/fcmsubscription/fcmsubs
 export class HeaderComponent implements OnInit {
 
   account: AuthDetails;
-  currentMessage = new BehaviorSubject(null);
-  message:any;
   isTokenExist: boolean;
 
-  constructor(private angularFireMessaging: AngularFireMessaging,private authService:AuthService, private fcmSubscriptionService: FcmsubscriptionService, private messageService:MessageService){}
+  constructor(private angularFireMessaging: AngularFireMessaging,private authService:AuthService, private fcmSubscriptionService: FcmsubscriptionService, private messageService: MessageService){}
 
+  
   ngOnInit(): void {
     this.account = this.authService.accountValue;
     
     if (this.account){
       this.getAccountFcmToken(this.account.accountId);
       this.receiveMessage();
-      this.message = this.currentMessage;
     }
+  }
+  
+  getAccountFcmToken(accountId:string){
+    this.fcmSubscriptionService.getAllFcmSubscriptionsForAccount(accountId).subscribe({
+      next: (fcm:FcmSubscriptions[]) => {
+        this.requestPermission(fcm);
+        console.log("Fcm Token Retrieved!");
+      },
+      error: (error:any) => {
+        console.log(error);
+      }
+    });
   }
   
   requestPermission(fcmSubscriptions:FcmSubscriptions[]) {
@@ -36,7 +46,7 @@ export class HeaderComponent implements OnInit {
       next: (token:any) => {
         console.log("Notification permission granted!", token);
 
-        if(!this.checkToken(fcmSubscriptions,token)){
+        if(this.checkToken(fcmSubscriptions,token)){
           this.saveToken(token);
         }
       },
@@ -48,9 +58,9 @@ export class HeaderComponent implements OnInit {
 
   receiveMessage(){
     this.angularFireMessaging.messages.subscribe({
-      next:(payload:any) => {
-        console.log("New message received ", payload);
-        this.currentMessage.next(payload);
+      next:(message:any) => {
+        console.log("New message received ", message);
+        this.messageService.add({severity:'custom', summary: message.notification.title, detail: message.notification.body, life:5000, icon: 'pi-envelope'});
       }
     })
   }
@@ -70,24 +80,12 @@ export class HeaderComponent implements OnInit {
     console.log(fcmSubscriptions);
     if(token){
       if(fcmSubscriptions.some(fcmToken => token.includes(fcmToken.token))){
-        return true;
-      } else{
         return false;
+      } else{
+        return true;
       }
     }
 
-    return true;
-  }
-
-  getAccountFcmToken(accountId:string){
-    this.fcmSubscriptionService.getAllFcmSubscriptionsForAccount(accountId).subscribe({
-      next: (fcm:FcmSubscriptions[]) => {
-        this.requestPermission(fcm);
-        console.log("Fcm Token Retrieved!");
-      },
-      error: (error:any) => {
-        console.log(error);
-      }
-    });
+    return false;
   }
 }

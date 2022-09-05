@@ -1,15 +1,18 @@
 package com.traccapp.demo.controller;
 
+import java.io.IOException;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.traccapp.demo.model.Notifications;
@@ -41,5 +44,13 @@ public class NotificationController {
     @PutMapping(path = "/{notificationId}")
     public void readNotification(@PathVariable("notificationId") UUID notificationId){
         notificationService.readNotification(notificationId);
+    }
+
+    @GetMapping(path = "/test")
+    public String test(@RequestParam("accountId") UUID accountId, @RequestParam("title") String title, @RequestParam("body") String body ) throws IOException{
+
+        String result = notificationService.sendPushNotification(accountId, title, body);
+
+        return result;
     }
 }

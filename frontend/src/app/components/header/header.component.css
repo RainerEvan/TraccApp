@@ -6,3 +6,6 @@
     @apply text-black border-b-2 border-gray-700;
 }
 
+:host ::ng-deep .p-toast-message-custom {
+    @apply bg-stone-200 text-stone-600;
+}
