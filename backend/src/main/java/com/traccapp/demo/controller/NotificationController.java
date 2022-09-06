@@ -5,6 +5,7 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.google.firebase.messaging.FirebaseMessagingException;
 import com.traccapp.demo.model.Notifications;
 import com.traccapp.demo.payload.request.NotificationRequest;
 import com.traccapp.demo.service.NotificationService;
@@ -45,9 +45,8 @@ public class NotificationController {
         notificationService.readNotification(notificationId);
     }
 
-    @PostMapping(path = "/test")
-    public String test(@RequestParam("fcmToken") String fcmToken, @RequestParam("title") String title, @RequestParam("body") String body ) throws FirebaseMessagingException{
-
+    @GetMapping(path = "/test")
+    public String test(@RequestParam("fcmToken") String fcmToken, @RequestParam("title") String title, @RequestParam("body") String body ){
         return notificationService.sendPushNotification(fcmToken, title, body);
     }
 }
