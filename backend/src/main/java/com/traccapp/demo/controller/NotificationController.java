@@ -1,12 +1,10 @@
 package com.traccapp.demo.controller;
 
-import java.io.IOException;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -15,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.google.firebase.messaging.FirebaseMessagingException;
 import com.traccapp.demo.model.Notifications;
 import com.traccapp.demo.payload.request.NotificationRequest;
 import com.traccapp.demo.service.NotificationService;
@@ -46,11 +45,9 @@ public class NotificationController {
         notificationService.readNotification(notificationId);
     }
 
-    @GetMapping(path = "/test")
-    public String test(@RequestParam("accountId") UUID accountId, @RequestParam("title") String title, @RequestParam("body") String body ) throws IOException{
+    @PostMapping(path = "/test")
+    public String test(@RequestParam("fcmToken") String fcmToken, @RequestParam("title") String title, @RequestParam("body") String body ) throws FirebaseMessagingException{
 
-        String result = notificationService.sendPushNotification(accountId, title, body);
-
-        return result;
+        return notificationService.sendPushNotification(fcmToken, title, body);
     }
 }
