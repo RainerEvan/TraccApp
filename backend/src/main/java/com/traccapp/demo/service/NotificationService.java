@@ -115,12 +115,12 @@ public class NotificationService {
 
         RestTemplate restTemplate = new RestTemplate();
         ArrayList<ClientHttpRequestInterceptor> interceptors = new ArrayList<>();
-        interceptors.add(new HeaderRequestInterceptor("Authorization", "key"+firebaseServerKey));
+        interceptors.add(new HeaderRequestInterceptor("Authorization", "key="+firebaseServerKey));
         interceptors.add(new HeaderRequestInterceptor("Content-Type", "application/json"));
         restTemplate.setInterceptors(interceptors);
         HttpEntity<String> request = new HttpEntity<>(json.toString());
         String firebaseResponse = restTemplate.postForObject(firebaseApiUrl, request, String.class);
 
-        return json.toString();
+        return firebaseResponse;
     }
 }
