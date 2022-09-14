@@ -4,14 +4,12 @@ import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
 import com.traccapp.demo.exception.AbstractGraphQLException;
 import com.traccapp.demo.model.Accounts;
-import com.traccapp.demo.model.FcmSubscriptions;
 import com.traccapp.demo.model.Notifications;
 import com.traccapp.demo.payload.request.NotificationRequest;
 import com.traccapp.demo.repository.AccountRepository;
@@ -24,13 +22,11 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -83,6 +79,8 @@ public class NotificationService {
         notification.setTitle(notificationRequest.getTitle());
         notification.setBody(notificationRequest.getBody());
 
+        sendPushNotification(account, "New Notification", "Check it out");
+
         return notificationRepository.save(notification);
     }
 
@@ -98,29 +96,35 @@ public class NotificationService {
     }
 
     @Async
-    public String sendPushNotification(String fcmToken, String title, String body){
+    @Transactional
+    public void sendPushNotification(Accounts account, String title, String body){
 
-        JSONObject json = new JSONObject();
+        List<String> fcmTokens = fcmSubscriptionRepository.findAllByAccount(account).stream()
+            .map(subs -> subs.getToken())
+            .collect(Collectors.toList());
 
-		try {
-			json.put("to", fcmToken);
+        for(String fcmToken : fcmTokens){
+            JSONObject json = new JSONObject();
 
-			JSONObject notification = new JSONObject();
-			notification.put("title", title); // Notification title
-			notification.put("body", body); // Notification
-			json.put("notification", notification);
-		} catch (JSONException e1) {
-			e1.printStackTrace();
-		}
-
-        RestTemplate restTemplate = new RestTemplate();
-        ArrayList<ClientHttpRequestInterceptor> interceptors = new ArrayList<>();
-        interceptors.add(new HeaderRequestInterceptor("Authorization", "key="+firebaseServerKey));
-        interceptors.add(new HeaderRequestInterceptor("Content-Type", "application/json"));
-        restTemplate.setInterceptors(interceptors);
-        HttpEntity<String> request = new HttpEntity<>(json.toString());
-        String firebaseResponse = restTemplate.postForObject(firebaseApiUrl, request, String.class);
-
-        return firebaseResponse;
+            try {
+                json.put("to", fcmToken);
+    
+                JSONObject notification = new JSONObject();
+                notification.put("title", title);
+                notification.put("body", body); 
+                json.put("notification", notification);
+            } catch (JSONException e1) {
+                e1.printStackTrace();
+            }
+    
+            RestTemplate restTemplate = new RestTemplate();
+            ArrayList<ClientHttpRequestInterceptor> interceptors = new ArrayList<>();
+            interceptors.add(new HeaderRequestInterceptor("Authorization", "key="+firebaseServerKey));
+            interceptors.add(new HeaderRequestInterceptor("Content-Type", "application/json"));
+            restTemplate.setInterceptors(interceptors);
+            HttpEntity<String> request = new HttpEntity<>(json.toString());
+            restTemplate.postForObject(firebaseApiUrl, request, String.class);
+        }
+        
     }
 }

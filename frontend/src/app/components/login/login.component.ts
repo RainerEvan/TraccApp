@@ -44,12 +44,12 @@ export class LoginComponent implements OnInit {
     if(this.loginForm.valid){
       this.authService.login(this.username.value,this.password.value).subscribe({
         next: () => {
-          this.messageService.add({severity:'success', summary: 'Login Success', detail: 'Welcome to Tracc App'});
+          this.messageService.add({key:'login', severity:'success', summary: 'Login Success', detail: 'Welcome to Tracc App'});
           const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
           this.router.navigateByUrl(returnUrl);
         },
         error: (error: any) => {
-          this.messageService.add({severity:'error', summary: 'Login Failed', detail: error});
+          this.messageService.add({key:'login', severity:'error', summary: 'Login Failed', detail: error});
           console.log(error);
         }
       });
