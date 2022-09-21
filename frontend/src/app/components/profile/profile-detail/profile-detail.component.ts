@@ -75,5 +75,4 @@ export class ProfileDetailComponent implements OnInit {
       width:'40vw',
     });
   }
-
 }

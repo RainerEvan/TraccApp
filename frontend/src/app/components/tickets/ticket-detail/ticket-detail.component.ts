@@ -7,6 +7,7 @@ import { ConfirmationDialogComponent } from '../../modal/confirmation-dialog/con
 import { ResultDialogComponent } from '../../modal/result-dialog/result-dialog.component';
 import { SolveTicketComponent } from '../solve-ticket/solve-ticket.component';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { ImageDialogComponent } from '../../modal/image-dialog/image-dialog.component';
 
 @Component({
   selector: 'app-ticket-detail',
@@ -182,6 +183,18 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       else{
         this.getTicket();
       }
+    });
+  }
+
+  showImageDialog(fileName:string, fileBase64:string){
+    this.ref = this.dialogService.open(ImageDialogComponent, {
+      header: fileName,
+      data: {
+        attachment: fileBase64,
+      },
+      baseZIndex: 10000,
+      contentStyle: {"max-height": "600px", "overflow": "auto"},
+      width:'75vw',
     });
   }
 }

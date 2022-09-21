@@ -27,6 +27,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { ToastModule } from 'primeng/toast';
 import { TableModule } from 'primeng/table';
+import {ImageModule} from 'primeng/image';
 import { EditorModule } from 'primeng/editor';
 import { ChartModule } from 'primeng/chart';
 import { SkeletonModule } from 'primeng/skeleton';
@@ -63,6 +64,7 @@ import { AngularFireModule } from '@angular/fire/compat/';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { NotificationDetailComponent } from './components/notifications/notification-detail/notification-detail.component';
+import { ImageDialogComponent } from './components/modal/image-dialog/image-dialog.component';
 
 @NgModule({
   declarations: [
@@ -103,6 +105,7 @@ import { NotificationDetailComponent } from './components/notifications/notifica
     DashboardPageComponent,
     DashboardActivityComponent,
     DashboardAnalyticsComponent,
+    ImageDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -120,6 +123,7 @@ import { NotificationDetailComponent } from './components/notifications/notifica
     DropdownModule,
     OverlayPanelModule,
     ToastModule,
+    ImageModule,
     SkeletonModule,
     EditorModule,
     ChartModule,
