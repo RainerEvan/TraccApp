@@ -8,6 +8,7 @@ import { ResultDialogComponent } from '../../modal/result-dialog/result-dialog.c
 import { SolveTicketComponent } from '../solve-ticket/solve-ticket.component';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { ImageDialogComponent } from '../../modal/image-dialog/image-dialog.component';
+import { NotificationService } from 'src/app/services/notification/notification.service';
 
 @Component({
   selector: 'app-ticket-detail',
@@ -22,7 +23,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
   isCurrUser: boolean;
   ref: DynamicDialogRef;
 
-  constructor(private router: Router, public dialogService:DialogService, private route:ActivatedRoute, private ticketSupportService:TicketSupportService, private authService: AuthService) { }
+  constructor(private router: Router, public dialogService:DialogService, private route:ActivatedRoute, private ticketSupportService:TicketSupportService, private notificationService:NotificationService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.getTicket();
@@ -58,6 +59,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       next: (result: any) => {
         console.log(result);
         this.showResultDialog("Success","Ticket has been added to your task list",null);
+        this.sendNotification(this.ticket.reporter.id,"Ticket Taken By Developer","Your ticket has been taken by a developer, check it out");
       },
       error: (error: any) => {
         console.log(error);
@@ -94,6 +96,23 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
         this.showResultDialog("Failed",error,null);
       }
     });
+  }
+
+  sendNotification(accountId:string, title:string, body:string){
+    const notification = {
+      receiverId: accountId,
+      title: title,
+      body: body
+    }
+
+    this.notificationService.addNotification(notification).subscribe({
+      next: (result: any) => {
+        console.log(result);
+      },
+      error: (error: any) => {
+        console.log(error);
+      }
+    })
   }
 
   checkDeveloper(){
@@ -135,6 +154,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     this.ref.onClose.subscribe((success:boolean) =>{
       if (success) {
         this.getTicket();
+        this.sendNotification(this.ticket.reporter.id,"Ticket Solved By Developer","Your ticket has been solved by a developer, check it out");
       } 
     });
   }

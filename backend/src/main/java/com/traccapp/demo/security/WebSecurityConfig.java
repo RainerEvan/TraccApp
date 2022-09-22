@@ -65,23 +65,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()
-            // .httpBasic().disable();
-			.exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
-			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-            .authorizeRequests()
-            .antMatchers("/api/auth/**").permitAll()
-            .antMatchers("/graphql").permitAll()
-            .antMatchers("/graphiql").permitAll()
-            .antMatchers("/api/**").permitAll()
-            .anyRequest().authenticated()
-            .and()
-            .logout()
-                .clearAuthentication(true)
-                .invalidateHttpSession(true)
-                .deleteCookies("JSESSIONID")
-                .permitAll();
+            .httpBasic().disable();
+		// 	.exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
+		// 	.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+        //     .authorizeRequests()
+        //     .antMatchers("/api/auth/**").permitAll()
+        //     .antMatchers("/graphql").permitAll()
+        //     .antMatchers("/graphiql").permitAll()
+        //     .antMatchers("/api/**").permitAll()
+        //     .anyRequest().authenticated()
+        //     .and()
+        //     .logout()
+        //         .clearAuthentication(true)
+        //         .invalidateHttpSession(true)
+        //         .deleteCookies("JSESSIONID")
+        //         .permitAll();
 
-        http.addFilterBefore(authTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+        // http.addFilterBefore(authTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
     

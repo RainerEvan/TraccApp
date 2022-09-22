@@ -57,8 +57,8 @@ export class NotificationService {
       .valueChanges.pipe(map((result)=>result.data.getTopNotificationsForAccount));
   }
 
-  public addNotification(formData:FormData): Observable<any>{
-    return this.http.post(API_URL+'/add',formData);
+  public addNotification(notification:any): Observable<any>{
+    return this.http.post(API_URL+'/add',notification);
   }
 
   public readNotification(notificationId:string): Observable<void>{

@@ -5,15 +5,19 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.traccapp.demo.model.Accounts;
 import com.traccapp.demo.model.Notifications;
 import com.traccapp.demo.payload.request.NotificationRequest;
+import com.traccapp.demo.repository.AccountRepository;
 import com.traccapp.demo.service.NotificationService;
 import com.traccapp.demo.utils.ResponseHandler;
 
@@ -26,6 +30,16 @@ public class NotificationController {
     
     @Autowired
     private final NotificationService notificationService;
+    // @Autowired
+    // private final AccountRepository accountRepository;
+
+    // @GetMapping(path = "/test")
+    // public void test(@RequestParam(name = "accountId") UUID accountId, @RequestParam(name = "title") String title, @RequestParam(name = "body") String body){
+    //     Accounts account = accountRepository.findById(accountId)
+    //         .orElseThrow(() -> new IllegalStateException("Account with current id cannot be found: "+accountId));
+
+    //     notificationService.sendPushNotification(account, title, body);
+    // }
 
     @PostMapping(path = "/add")
     public ResponseEntity<Object> addNotification(@RequestBody NotificationRequest notificationRequest){
