@@ -214,7 +214,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       },
       baseZIndex: 10000,
       contentStyle: {"max-height": "600px", "overflow": "auto"},
-      width:'75vw',
+      width:'60vw',
     });
   }
 }

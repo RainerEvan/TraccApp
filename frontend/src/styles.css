@@ -123,6 +123,10 @@ body{
     @apply w-auto bg-white border-2 border-gray-400 rounded-md px-4 py-1.5 font-medium text-xs text-gray-600 hover:bg-gray-400 hover:text-white disabled:text-gray-300 disabled:bg-white disabled:border-gray-300;
 }
 
+.ticket-list{
+    @apply grid grid-cols-6 auto-cols-auto gap-6 py-4 px-6 text-black drop-shadow-sm transition ease-in-out duration-100 border-gray-200 hover:border-l-4 hover:rounded-l-sm hover:bg-gray-100/40 cursor-pointer;
+}
+
 .ticket-status-PENDING{
     @apply bg-gray-200 !important;
 }

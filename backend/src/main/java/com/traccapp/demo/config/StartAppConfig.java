@@ -146,40 +146,40 @@ public class StartAppConfig {
             
             Accounts account4 = accountService.addAccount(null,accountRequest4);
 
-            Notifications notification = new Notifications();
-            notification.setReceiver(account);
-            notification.setCreatedAt(OffsetDateTime.now());
-            notification.setTitle("Ticket Taken by Developer");
-            notification.setBody("Your ticket has been taken by a developer, check it out right here");
-            notificationRepository.save(notification);
+            // Notifications notification = new Notifications();
+            // notification.setReceiver(account);
+            // notification.setCreatedAt(OffsetDateTime.now());
+            // notification.setTitle("Ticket Taken by Developer");
+            // notification.setBody("Your ticket has been taken by a developer, check it out right here");
+            // notificationRepository.save(notification);
 
-            Notifications notification2 = new Notifications();
-            notification2.setReceiver(account);
-            notification2.setCreatedAt(OffsetDateTime.now());
-            notification2.setTitle("Ticket Reassigned to New Developer");
-            notification2.setBody("Your ticket has been reassigned to a new developer, check it out right here");
-            notificationRepository.save(notification2);
+            // Notifications notification2 = new Notifications();
+            // notification2.setReceiver(account);
+            // notification2.setCreatedAt(OffsetDateTime.now());
+            // notification2.setTitle("Ticket Reassigned to New Developer");
+            // notification2.setBody("Your ticket has been reassigned to a new developer, check it out right here");
+            // notificationRepository.save(notification2);
 
-            Notifications notification3 = new Notifications();
-            notification3.setReceiver(account);
-            notification3.setCreatedAt(OffsetDateTime.now());
-            notification3.setTitle("Ticket Resolved by Developer");
-            notification3.setBody("Your ticket has been resolved by a developer, check it out right here");
-            notificationRepository.save(notification3);
+            // Notifications notification3 = new Notifications();
+            // notification3.setReceiver(account);
+            // notification3.setCreatedAt(OffsetDateTime.now());
+            // notification3.setTitle("Ticket Resolved by Developer");
+            // notification3.setBody("Your ticket has been resolved by a developer, check it out right here");
+            // notificationRepository.save(notification3);
 
-            Notifications notification4 = new Notifications();
-            notification4.setReceiver(account);
-            notification4.setCreatedAt(OffsetDateTime.now());
-            notification4.setTitle("Ticket Dropped by Developer");
-            notification4.setBody("Your ticket has been dropped by a developer, check it out right here");
-            notificationRepository.save(notification4);
+            // Notifications notification4 = new Notifications();
+            // notification4.setReceiver(account);
+            // notification4.setCreatedAt(OffsetDateTime.now());
+            // notification4.setTitle("Ticket Dropped by Developer");
+            // notification4.setBody("Your ticket has been dropped by a developer, check it out right here");
+            // notificationRepository.save(notification4);
 
-            Notifications notification5 = new Notifications();
-            notification5.setReceiver(account);
-            notification5.setCreatedAt(OffsetDateTime.now());
-            notification5.setTitle("Ticket Taken by Developer");
-            notification5.setBody("Your ticket has been taken by a developer, check it out right here");
-            notificationRepository.save(notification5);
+            // Notifications notification5 = new Notifications();
+            // notification5.setReceiver(account);
+            // notification5.setCreatedAt(OffsetDateTime.now());
+            // notification5.setTitle("Ticket Taken by Developer");
+            // notification5.setBody("Your ticket has been taken by a developer, check it out right here");
+            // notificationRepository.save(notification5);
 
 
             // for(int i=0;i<12;i++){

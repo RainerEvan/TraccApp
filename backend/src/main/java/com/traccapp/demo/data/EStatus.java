@@ -5,5 +5,6 @@ public enum EStatus {
     IN_PROGRESS,
     RESOLVED,
     CLOSED,
-    DROPPED
+    DROPPED,
+    AWAITING
 }

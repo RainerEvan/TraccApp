@@ -24,7 +24,7 @@
                     </div>
                 </ng-template>
                 <ng-template pTemplate="body" let-ticket>
-                    <div routerLink="/ticket-detail/{{ticket.ticketId}}" class="grid grid-cols-6 auto-cols-auto gap-6 py-4 px-6 text-black drop-shadow-sm hover:bg-gray-100/40 cursor-pointer">
+                    <div routerLink="/ticket-detail/{{ticket.ticketId}}" class="ticket-list">
                         <div class="col-span-1">
                             <div [class]="'ticket-status-'+ticket.status.name" class="w-full h-full flex flex-col items-center justify-center space-y-2 rounded-sm shadow-md px-4 py-10">
                                 <i class="pi pi-ticket" style="font-size: 20px;"></i>
