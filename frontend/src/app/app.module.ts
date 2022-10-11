@@ -65,6 +65,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { NotificationDetailComponent } from './components/notifications/notification-detail/notification-detail.component';
 import { ImageDialogComponent } from './components/modal/image-dialog/image-dialog.component';
+import { ReassignTicketComponent } from './components/tickets/reassign-ticket/reassign-ticket.component';
 
 @NgModule({
   declarations: [
@@ -106,6 +107,7 @@ import { ImageDialogComponent } from './components/modal/image-dialog/image-dial
     DashboardActivityComponent,
     DashboardAnalyticsComponent,
     ImageDialogComponent,
+    ReassignTicketComponent,
   ],
   imports: [
     BrowserModule,

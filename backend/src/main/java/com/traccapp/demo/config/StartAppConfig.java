@@ -75,6 +75,10 @@ public class StartAppConfig {
             status5.setName(EStatus.DROPPED);
             statusRepository.save(status5);
 
+            Status status6 = new Status();
+            status6.setName(EStatus.AWAITING);
+            statusRepository.save(status6);
+
             Tags tag = tagsService.addTag("Error");
             Tags tag2 = tagsService.addTag("Bug");
             Tags tag3 = tagsService.addTag("Data Output");
@@ -142,7 +146,7 @@ public class StartAppConfig {
             accountRequest4.setContactNo("092002031");
             accountRequest4.setDivisionId(division.getId());
             accountRequest4.setIsActive(true);
-            accountRequest4.setRolesName(ERoles.DEVELOPER);
+            accountRequest4.setRolesName(ERoles.SUPERVISOR);
             
             Accounts account4 = accountService.addAccount(null,accountRequest4);
 

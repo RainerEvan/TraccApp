@@ -38,4 +38,6 @@ public class Notifications {
     private String title;
     @Lob
     private String body;
+    @Lob
+    private String data;
 }

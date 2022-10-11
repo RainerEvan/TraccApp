@@ -13,4 +13,5 @@ public class NotificationRequest {
     private UUID receiverId;
     private String title;
     private String body;
+    private String data;
 }

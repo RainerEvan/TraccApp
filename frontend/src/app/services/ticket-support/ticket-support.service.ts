@@ -182,6 +182,21 @@ export class TicketSupportService {
     return this.http.delete(API_URL+'/delete',{params:params});
   }
 
+  public requestDropTicket(ticketId: string): Observable<any>{
+    const params = new HttpParams().set('ticketId',ticketId);
+    return this.http.put(API_URL+'/request-drop',null,{params:params});
+  }
+
+  public dropTicket(ticketId: string): Observable<any>{
+    const params = new HttpParams().set('ticketId',ticketId);
+    return this.http.put(API_URL+'/drop',null,{params:params});
+  }
+
+  public reassignTicket(ticketId: string): Observable<any>{
+    const params = new HttpParams().set('ticketId',ticketId);
+    return this.http.put(API_URL+'/reassign',null,{params:params});
+  }
+
   public addSupport(ticketId: string): Observable<any>{
     const params = new HttpParams().set('ticketId',ticketId);
     return this.http.post(API_URL+'/supports/add',null,{params:params});

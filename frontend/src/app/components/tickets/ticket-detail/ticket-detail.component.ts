@@ -9,6 +9,7 @@ import { SolveTicketComponent } from '../solve-ticket/solve-ticket.component';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { ImageDialogComponent } from '../../modal/image-dialog/image-dialog.component';
 import { NotificationService } from 'src/app/services/notification/notification.service';
+import { ReassignTicketComponent } from '../reassign-ticket/reassign-ticket.component';
 
 @Component({
   selector: 'app-ticket-detail',
@@ -98,11 +99,52 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     });
   }
 
+  public requestDropTicket(){
+    const ticketId = this.ticket.ticketId;
+
+    this.ticketSupportService.requestDropTicket(ticketId).subscribe({
+      next: (result: any) => {
+        console.log(result);
+        this.showResultDialog("Success","Drop ticket request has been sent to your supervisor",null);
+      },
+      error: (error: any) => {
+        console.log(error);
+        this.showResultDialog("Failed","There was a problem, try again later",null);
+      }
+    });
+  }
+
+  public dropTicket(){
+    const ticketId = this.ticket.ticketId;
+
+    this.ticketSupportService.dropTicket(ticketId).subscribe({
+      next: (result: any) => {
+        console.log(result);
+        this.showResultDialog("Success","Ticket has been dropped successfully",null);
+      },
+      error: (error: any) => {
+        console.log(error);
+        this.showResultDialog("Failed","There was a problem, try again later",null);
+      }
+    });
+  }
+
+  public reassignTicket(){
+
+  }
+
   sendNotification(accountId:string, title:string, body:string){
+
+    const data = {
+      ticketNo: this.ticket.ticketNo,
+      ticketId: this.ticket.ticketId
+    }
+
     const notification = {
       receiverId: accountId,
       title: title,
-      body: body
+      body: body,
+      data: JSON.stringify(data)
     }
 
     this.notificationService.addNotification(notification).subscribe({
@@ -159,6 +201,28 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     });
   }
 
+  showReassignTicketDialog(){
+    const supportId = this.ticket.support[0].id;
+
+    this.ref = this.dialogService.open(ReassignTicketComponent, {
+      header: "Solve Ticket",
+      footer: " ",
+      data: {
+        supportId: supportId,
+      },
+      baseZIndex: 10000,
+      contentStyle: {"max-height": "650px", "overflow": "auto"},
+      width:'40vw',
+    });
+
+    this.ref.onClose.subscribe((success:boolean) =>{
+      if (success) {
+        this.getTicket();
+        this.sendNotification(this.ticket.reporter.id,"Ticket Solved By Developer","Your ticket has been solved by a developer, check it out");
+      } 
+    });
+  }
+
   showConfirmationDialog(title:string, message:string, action:string){
     this.ref = this.dialogService.open(ConfirmationDialogComponent, {
       header: title,
@@ -180,6 +244,12 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
           }
           else if(action == 'cancel'){
             this.cancelTicket();
+          }
+          else if(action == 'requestDrop'){
+            this.requestDropTicket();
+          }
+          else if(action == 'drop'){
+            this.dropTicket();
           }
         }
     });

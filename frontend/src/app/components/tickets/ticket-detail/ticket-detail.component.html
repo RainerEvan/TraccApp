@@ -15,12 +15,16 @@
                     <div class="flex flex-row items-center">
                         <div *appHasRole="['DEVELOPER']" class="flex flex-row items-center space-x-4">
                             <button *ngIf="ticket?.status.name === 'IN_PROGRESS' && isCurrDeveloper" [disabled]="loading" (click)="showSolveTicketDialog()" class="button-secondary">Solve Ticket</button>
-                            <button *ngIf="ticket?.status.name === 'IN_PROGRESS' && isCurrDeveloper" [disabled]="loading" (click)="showConfirmationDialog('Drop Ticket','Do you want to drop this ticket?','drop')" class="button-primary">Drop Ticket</button>
+                            <button *ngIf="ticket?.status.name === 'IN_PROGRESS' && isCurrDeveloper" [disabled]="loading" (click)="showConfirmationDialog('Drop Ticket','Do you want to request to drop this ticket?','requestDrop')" class="button-primary">Drop Ticket</button>
                             <button *ngIf="ticket?.status.name === 'PENDING'" [disabled]="loading" (click)="showConfirmationDialog('Take Ticket','Do you want to take this ticket?','take')" class="button-primary">Take Ticket</button>
                         </div>
                         <div *appHasRole="['USER']" class="flex flex-row items-center space-x-4">
                             <button *ngIf="ticket?.status.name === 'RESOLVED' && isCurrUser" [disabled]="loading" (click)="showConfirmationDialog('Close Ticket','Do you want to close this ticket?','close')" class="button-primary">Close Ticket</button>
                             <button *ngIf="ticket?.status.name === 'PENDING' && isCurrUser" [disabled]="loading" (click)="showConfirmationDialog('Cancel Ticket','Do you want to cancel this ticket?','cancel')" class="button-primary">Cancel Ticket</button>
+                        </div>
+                        <div *appHasRole="['SUPERVISOR']" class="flex flex-row items-center space-x-4">
+                            <button *ngIf="ticket?.status.name === 'AWAITING'" [disabled]="loading" (click)="showReassignTicketDialog()" class="button-secondary">Reassign Ticket</button>
+                            <button *ngIf="ticket?.status.name === 'AWAITING'" [disabled]="loading" (click)="showConfirmationDialog('Drop Ticket','Do you want to drop this ticket?','drop')" class="button-primary">Drop Ticket</button>
                         </div>
                     </div>
                 </div>
@@ -182,7 +186,7 @@
                         </div>
                     </div>
                     <div *ngIf="ticket" class="w-full px-4 pb-4">
-                        <div *ngIf="ticket.support[0]" class="flex flex-col border-2 border-dotted border-gray-300 bg-gray-50 rounded-md p-6 space-y-4">
+                        <div *ngIf="ticket.support[0].devNote" class="flex flex-col border-2 border-dotted border-gray-300 bg-gray-50 rounded-md p-6 space-y-4">
                             <h4 class="font-medium text-gray-500">Developer Notes</h4>
                             <p class="text-gray-500 text-sm" [innerHTML]="ticket.support[0].devNote"></p>
                         </div>

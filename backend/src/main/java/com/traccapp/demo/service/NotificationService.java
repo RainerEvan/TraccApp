@@ -78,6 +78,7 @@ public class NotificationService {
         notification.setCreatedAt(OffsetDateTime.now());
         notification.setTitle(notificationRequest.getTitle());
         notification.setBody(notificationRequest.getBody());
+        notification.setData(notificationRequest.getData());
 
         sendPushNotification(account, "New Notification", "Check it out");
 

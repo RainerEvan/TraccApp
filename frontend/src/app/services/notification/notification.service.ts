@@ -28,6 +28,7 @@ export class NotificationService {
             readAt
             title
             body
+            data
           }
         }
       `,

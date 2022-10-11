@@ -10,6 +10,7 @@ import { NotificationService } from 'src/app/services/notification/notification.
 export class NotificationDetailComponent implements OnInit {
 
   @Input() notification?: Notifications;
+  @Input() data?: any;
 
   constructor() { }
 

@@ -14,6 +14,7 @@ export class NotificationPageComponent implements OnInit {
   accountId: string;
   notifications: Notifications[];
   selected: Notifications;
+  notificationData:any;
   loading: boolean;
   totalRecords: number = 0;
   totalUnread: number = 0;
@@ -42,6 +43,7 @@ export class NotificationPageComponent implements OnInit {
 
   onSelect(notification:Notifications){
     this.selected = notification;
+    this.notificationData = JSON.parse(notification.data);
 
     if(!notification.readAt){
       this.notificationService.readNotification(notification.id).subscribe({

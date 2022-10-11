@@ -49,6 +49,7 @@ enum EStatus{
     RESOLVED
     CLOSED
     DROPPED
+    AWAITING
 }
 
 type TicketAttachments{

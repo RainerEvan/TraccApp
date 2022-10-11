@@ -5,6 +5,7 @@ type Notifications{
     readAt:DateTime
     title:String
     body:String
+    data:String
 }
 
 extend type Query{

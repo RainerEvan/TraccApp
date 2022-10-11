@@ -6,8 +6,12 @@
             <span class="font-medium text-xs">{{notification.createdAt | date:'h:mm a'}}</span>
         </div>
     </div>
-    <div>
+    <div class="flex flex-col space-y-10">
         <p class="text-sm text-justify">{{notification.body}}</p>
+        <div *ngIf="data" class="flex flex-col">
+            <span class="font-medium text-sm">Check Ticket:</span>
+            <a routerLink="/ticket-detail/{{data.ticketId}}" class="font-semibold text-gray-400 hover:text-gray-500">{{data.ticketNo}}</a>
+        </div>
     </div>
 </div>
 

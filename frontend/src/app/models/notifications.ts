@@ -7,4 +7,5 @@ export type Notifications ={
     readAt: Date;
     title: string;
     body: string;
+    data: string;
 }
