@@ -31,12 +31,18 @@ public class NotificationController {
     @Autowired
     private final NotificationService notificationService;
 
-    @GetMapping(path = "/test")
-    public void test(@RequestParam(name = "notifId") UUID id){
-        Notifications notification = notificationService.getNotification(id);
+    // @GetMapping(path = "/test")
+    // public ResponseEntity<Object> test(@RequestParam(name = "notifId") UUID id){
+    //     try {
+    //         Notifications notification = notificationService.getNotification(id);
 
-        notificationService.sendPushNotification(notification);
-    }
+    //         String result = notificationService.sendPushNotification(notification);
+        
+    //         return ResponseHandler.generateResponse("Notification has been sent successfully!", HttpStatus.OK, result);
+    //     } catch (Exception e) {
+    //         return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.BAD_REQUEST, null);
+    //     }
+    // }
 
     @PostMapping(path = "/add")
     public ResponseEntity<Object> addNotification(@RequestBody NotificationRequest notificationRequest){
