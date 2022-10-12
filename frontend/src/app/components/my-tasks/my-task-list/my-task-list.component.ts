@@ -37,7 +37,7 @@ export class MyTaskListComponent implements OnInit {
     this.loading = true;
     this.ticketSupportService.getAllSupportsForDeveloper(this.accountId).subscribe({
       next: (supports: Supports[]) => {
-        this.myTasks = cloneDeep(supports);
+        this.myTasks = cloneDeep(supports).filter((support) => support.isActive == true);
         this.loading = false;
         this.totalRecords = supports.length;
       },

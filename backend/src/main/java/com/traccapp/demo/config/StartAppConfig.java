@@ -150,12 +150,36 @@ public class StartAppConfig {
             
             Accounts account4 = accountService.addAccount(null,accountRequest4);
 
-            // Notifications notification = new Notifications();
-            // notification.setReceiver(account);
-            // notification.setCreatedAt(OffsetDateTime.now());
-            // notification.setTitle("Ticket Taken by Developer");
-            // notification.setBody("Your ticket has been taken by a developer, check it out right here");
-            // notificationRepository.save(notification);
+            AccountRequest accountRequest5 = new AccountRequest();
+            accountRequest5.setUsername("evantanu");
+            accountRequest5.setFullname("Evan Tanu");
+            accountRequest5.setPassword("pass123");
+            accountRequest5.setEmail("evan@gmail.com");
+            accountRequest5.setContactNo("092039031");
+            accountRequest5.setDivisionId(division.getId());
+            accountRequest5.setIsActive(true);
+            accountRequest5.setRolesName(ERoles.DEVELOPER);
+            
+            Accounts account5 = accountService.addAccount(null,accountRequest5);
+
+            AccountRequest accountRequest6 = new AccountRequest();
+            accountRequest6.setUsername("dodo");
+            accountRequest6.setFullname("Dodo Sulaiman");
+            accountRequest6.setPassword("pass123");
+            accountRequest6.setEmail("dodo@gmail.com");
+            accountRequest6.setContactNo("092039031");
+            accountRequest6.setDivisionId(division.getId());
+            accountRequest6.setIsActive(true);
+            accountRequest6.setRolesName(ERoles.DEVELOPER);
+            
+            Accounts account6 = accountService.addAccount(null,accountRequest6);
+
+            Notifications notification = new Notifications();
+            notification.setReceiver(account);
+            notification.setCreatedAt(OffsetDateTime.now());
+            notification.setTitle("Ticket Taken by Developer");
+            notification.setBody("Your ticket has been taken by a developer, check it out right here");
+            notificationRepository.save(notification);
 
             // Notifications notification2 = new Notifications();
             // notification2.setReceiver(account);
@@ -410,6 +434,17 @@ public class StartAppConfig {
             ticket2.setDescription("Form gabisa diisi lagi gimana dong");
             ticket2.setStatus(status1);
             ticketRepository.save(ticket2);
+
+            for(int i=0; i<2; i++){
+                Tickets ticket10 = new Tickets();
+                ticket10.setDateAdded(OffsetDateTime.now());
+                ticket10.setApplication(application2);
+                ticket10.setReporter(account);
+                ticket10.setTitle("Smile Bug pada Form Tidak ada alamat");
+                ticket10.setDescription("Form gabisa diisi lagi gimana dong");
+                ticket10.setStatus(status1);
+                ticketRepository.save(ticket10);
+            }
 
             Tickets ticket3 = new Tickets();
             ticket3.setDateAdded(OffsetDateTime.now().minusDays(1));

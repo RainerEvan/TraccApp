@@ -56,11 +56,16 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
   public takeTicket():void{
     const ticketId = this.ticket.ticketId;
 
+    const data = {
+      ticketNo: this.ticket.ticketNo,
+      ticketId: this.ticket.ticketId
+    }
+
     this.ticketSupportService.addSupport(ticketId).subscribe({
       next: (result: any) => {
         console.log(result);
         this.showResultDialog("Success","Ticket has been added to your task list",null);
-        this.sendNotification(this.ticket.reporter.id,"Ticket Taken By Developer","Your ticket has been taken by a developer, check it out");
+        this.sendNotification(this.ticket.reporter.id,"Ticket Taken By Developer","Your ticket has been taken by a developer, check it out", data);
       },
       error: (error: any) => {
         console.log(error);
@@ -129,16 +134,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     });
   }
 
-  public reassignTicket(){
-
-  }
-
-  sendNotification(accountId:string, title:string, body:string){
-
-    const data = {
-      ticketNo: this.ticket.ticketNo,
-      ticketId: this.ticket.ticketId
-    }
+  sendNotification(accountId:string, title:string, body:string, data:any){
 
     const notification = {
       receiverId: accountId,
@@ -182,6 +178,11 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
   showSolveTicketDialog(){
     const supportId = this.ticket.support[0].id;
 
+    const data = {
+      ticketNo: this.ticket.ticketNo,
+      ticketId: this.ticket.ticketId
+    }
+
     this.ref = this.dialogService.open(SolveTicketComponent, {
       header: "Solve Ticket",
       footer: " ",
@@ -196,19 +197,28 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     this.ref.onClose.subscribe((success:boolean) =>{
       if (success) {
         this.getTicket();
-        this.sendNotification(this.ticket.reporter.id,"Ticket Solved By Developer","Your ticket has been solved by a developer, check it out");
+        this.sendNotification(this.ticket.reporter.id,"Ticket Solved By Developer","Your ticket has been solved by a developer, check it out",data);
       } 
     });
   }
 
   showReassignTicketDialog(){
-    const supportId = this.ticket.support[0].id;
+    const ticketInfo = {
+      ticketId: this.ticket.ticketId,
+      currSupportId: this.ticket.support[0].id,
+      currDeveloperId: this.ticket.support[0].developer.id
+    }
+
+    const data = {
+      ticketNo: this.ticket.ticketNo,
+      ticketId: this.ticket.ticketId
+    }
 
     this.ref = this.dialogService.open(ReassignTicketComponent, {
-      header: "Solve Ticket",
+      header: "Reassign Ticket",
       footer: " ",
       data: {
-        supportId: supportId,
+        ticketInfo: ticketInfo
       },
       baseZIndex: 10000,
       contentStyle: {"max-height": "650px", "overflow": "auto"},
@@ -218,7 +228,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     this.ref.onClose.subscribe((success:boolean) =>{
       if (success) {
         this.getTicket();
-        this.sendNotification(this.ticket.reporter.id,"Ticket Solved By Developer","Your ticket has been solved by a developer, check it out");
+        this.sendNotification(this.ticket.reporter.id,"Ticket Reassigned By Developer","Your ticket has been reassigned to a new developer, check it out",data);
       } 
     });
   }

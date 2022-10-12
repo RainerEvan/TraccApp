@@ -39,6 +39,24 @@ export class AccountService {
       .valueChanges.pipe(map((result)=>result.data.getAllAccounts));
   }
 
+  public getAllDevelopers(): Observable<Accounts[]>{
+    return this.apollo.watchQuery<any>({
+      query:gql`
+        query getAllDevelopers{
+          getAllDevelopers{
+            id
+            fullname
+            division{
+              name
+            }
+            profileImg
+          }
+        }
+      `,
+    })
+      .valueChanges.pipe(map((result)=>result.data.getAllDevelopers));
+  }
+
   public getAccount(accountId: string): Observable<Accounts>{
     return this.apollo.watchQuery<any>({
       query: gql`

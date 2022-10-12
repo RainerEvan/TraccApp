@@ -9,6 +9,8 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
+import javax.transaction.Transactional;
+
 import com.traccapp.demo.data.ERoles;
 import com.traccapp.demo.exception.AbstractGraphQLException;
 import com.traccapp.demo.model.Accounts;
@@ -43,13 +45,23 @@ public class AccountService {
     @Autowired
     private final AuthService authService;
 
+    @Transactional
     public List<Accounts> getAllAccounts(){
         return accountRepository.findAll();
     }
 
-    public List<Accounts> getAllAccountsByRole(ERoles name){
-        Roles role = roleRepository.findByName(name)
-            .orElseThrow(() -> new AbstractGraphQLException("Role with current name cannot be found"+name,"roleName"));
+    // @Transactional
+    // public List<Accounts> getAllAccountsByRole(ERoles name){
+    //     Roles role = roleRepository.findByName(name)
+    //         .orElseThrow(() -> new AbstractGraphQLException("Role with current name cannot be found"+name,"roleName"));
+
+    //     return accountRepository.findAllByRoles(role);
+    // }
+
+    @Transactional
+    public List<Accounts> getAllDevelopers(){
+        Roles role = roleRepository.findByName(ERoles.DEVELOPER)
+            .orElseThrow(() -> new AbstractGraphQLException("Role with current name cannot be found: "+ERoles.DEVELOPER,"roleName"));
 
         return accountRepository.findAllByRoles(role);
     }

@@ -9,6 +9,7 @@ import com.traccapp.demo.data.EStatus;
 import com.traccapp.demo.model.Supports;
 import com.traccapp.demo.model.TicketAttachments;
 import com.traccapp.demo.model.Tickets;
+import com.traccapp.demo.payload.request.ReassignSupportRequest;
 import com.traccapp.demo.payload.request.SupportRequest;
 import com.traccapp.demo.payload.request.TicketRequest;
 import com.traccapp.demo.service.SupportAttachmentService;
@@ -23,6 +24,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -128,9 +130,9 @@ public class TicketSupportController {
     }
 
     @PostMapping(path = "/supports/reassign")
-    public ResponseEntity<Object> reassignSupport(@RequestParam("ticketId") UUID ticketId, @RequestParam("currSupportId") UUID currSupportId, @RequestParam("developerId") UUID developerId){
+    public ResponseEntity<Object> reassignSupport(@RequestBody ReassignSupportRequest reassignSupportRequest){
         try {
-            Supports support = supportService.reassignSupport(ticketId, currSupportId, developerId);
+            Supports support = supportService.reassignSupport(reassignSupportRequest);
             String status = updateTicketStatus(support.getTicket().getTicketId(), EStatus.IN_PROGRESS);
             return ResponseHandler.generateResponse("New support has been added successfully!", HttpStatus.OK, status);
     

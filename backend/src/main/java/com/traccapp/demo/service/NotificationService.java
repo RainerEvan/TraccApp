@@ -80,8 +80,6 @@ public class NotificationService {
         notification.setBody(notificationRequest.getBody());
         notification.setData(notificationRequest.getData());
 
-        sendPushNotification(account, "New Notification", "Check it out");
-
         return notificationRepository.save(notification);
     }
 
@@ -98,9 +96,10 @@ public class NotificationService {
 
     @Async
     @Transactional
-    public void sendPushNotification(Accounts account, String title, String body){
+    public String sendPushNotification(Notifications notificationObject){
+        String result="";
 
-        List<String> fcmTokens = fcmSubscriptionRepository.findAllByAccount(account).stream()
+        List<String> fcmTokens = fcmSubscriptionRepository.findAllByAccount(notificationObject.getReceiver()).stream()
             .map(subs -> subs.getToken())
             .collect(Collectors.toList());
 
@@ -111,8 +110,8 @@ public class NotificationService {
                 json.put("to", fcmToken);
     
                 JSONObject notification = new JSONObject();
-                notification.put("title", title);
-                notification.put("body", body); 
+                notification.put("title", notificationObject.getTitle());
+                notification.put("body", notificationObject.getBody()); 
                 json.put("notification", notification);
             } catch (JSONException e1) {
                 e1.printStackTrace();
@@ -124,8 +123,9 @@ public class NotificationService {
             interceptors.add(new HeaderRequestInterceptor("Content-Type", "application/json"));
             restTemplate.setInterceptors(interceptors);
             HttpEntity<String> request = new HttpEntity<>(json.toString());
-            restTemplate.postForObject(firebaseApiUrl, request, String.class);
+            result = restTemplate.postForObject(firebaseApiUrl, request, String.class);
         }
         
+        return result;
     }
 }

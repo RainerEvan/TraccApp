@@ -158,6 +158,7 @@ export class TicketSupportService {
                 name
               }
             }
+            isActive
           }
         }
       `,
@@ -192,9 +193,8 @@ export class TicketSupportService {
     return this.http.put(API_URL+'/drop',null,{params:params});
   }
 
-  public reassignTicket(ticketId: string): Observable<any>{
-    const params = new HttpParams().set('ticketId',ticketId);
-    return this.http.put(API_URL+'/reassign',null,{params:params});
+  public reassignTicket(reassign: any): Observable<any>{
+    return this.http.post(API_URL+'/supports/reassign',reassign);
   }
 
   public addSupport(ticketId: string): Observable<any>{

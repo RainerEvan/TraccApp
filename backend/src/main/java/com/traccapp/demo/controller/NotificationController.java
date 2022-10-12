@@ -30,23 +30,21 @@ public class NotificationController {
     
     @Autowired
     private final NotificationService notificationService;
-    // @Autowired
-    // private final AccountRepository accountRepository;
 
-    // @GetMapping(path = "/test")
-    // public void test(@RequestParam(name = "accountId") UUID accountId, @RequestParam(name = "title") String title, @RequestParam(name = "body") String body){
-    //     Accounts account = accountRepository.findById(accountId)
-    //         .orElseThrow(() -> new IllegalStateException("Account with current id cannot be found: "+accountId));
+    @GetMapping(path = "/test")
+    public void test(@RequestParam(name = "notifId") UUID id){
+        Notifications notification = notificationService.getNotification(id);
 
-    //     notificationService.sendPushNotification(account, title, body);
-    // }
+        notificationService.sendPushNotification(notification);
+    }
 
     @PostMapping(path = "/add")
     public ResponseEntity<Object> addNotification(@RequestBody NotificationRequest notificationRequest){
         try {
             Notifications notification = notificationService.addNotification(notificationRequest);
+            String result = notificationService.sendPushNotification(notification);
         
-            return ResponseHandler.generateResponse("Notification has been sent successfully!", HttpStatus.OK, notification.getCreatedAt());
+            return ResponseHandler.generateResponse("Notification has been sent successfully!", HttpStatus.OK, result);
         } catch (Exception e) {
             return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.BAD_REQUEST, null);
         }

@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.UUID;
 
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
-import com.traccapp.demo.data.ERoles;
 import com.traccapp.demo.model.Accounts;
 import com.traccapp.demo.service.AccountService;
 
@@ -24,8 +23,8 @@ public class AccountsQueryResolver implements GraphQLQueryResolver{
         return accountService.getAllAccounts();
     }
 
-    public List<Accounts> getAllAccountsByRole(ERoles name){
-        return accountService.getAllAccountsByRole(name);
+    public List<Accounts> getAllDevelopers(){
+        return accountService.getAllDevelopers();
     }
 
     public Accounts getAccount(UUID accountId){

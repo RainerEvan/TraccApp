@@ -12,6 +12,6 @@ type Accounts{
 
 extend type Query{
     getAllAccounts:[Accounts]
-    getAllAccountsByRole(name:ERoles!):[Accounts]
+    getAllDevelopers:[Accounts]
     getAccount(accountId:ID!):Accounts
 }

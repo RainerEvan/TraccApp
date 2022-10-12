@@ -13,6 +13,7 @@ import com.traccapp.demo.model.Accounts;
 import com.traccapp.demo.model.Supports;
 import com.traccapp.demo.model.Tags;
 import com.traccapp.demo.model.Tickets;
+import com.traccapp.demo.payload.request.ReassignSupportRequest;
 import com.traccapp.demo.payload.request.SupportRequest;
 import com.traccapp.demo.repository.AccountRepository;
 import com.traccapp.demo.repository.SupportRepository;
@@ -99,28 +100,17 @@ public class SupportService {
     }
 
     @Transactional
-    public Supports withdrawSupport(UUID supportId, String result, String description) {
-        Supports support = supportRepository
-            .findById(supportId).orElseThrow(() -> new IllegalStateException("Support with current id cannot be found: "+supportId));
-
-        support.setResult(result);
-        support.setDescription(description);
-
-        return supportRepository.save(support);
-    }
-
-    @Transactional
-    public Supports reassignSupport(UUID ticketId, UUID currSupportId, UUID developerId){
-        Supports currSupport = supportRepository.findById(currSupportId)
-            .orElseThrow(() -> new IllegalStateException("Support with current id cannot be found: "+currSupportId));
+    public Supports reassignSupport(ReassignSupportRequest reassignSupportRequest){
+        Supports currSupport = supportRepository.findById(reassignSupportRequest.getCurrSupportId())
+            .orElseThrow(() -> new IllegalStateException("Support with current id cannot be found: "+reassignSupportRequest.getCurrSupportId()));
         currSupport.setIsActive(false);
         supportRepository.save(currSupport);
         
-        Tickets ticket = ticketRepository.findByTicketId(ticketId)
-            .orElseThrow(() -> new IllegalStateException("Ticket with current id cannot be found: "+ticketId));
+        Tickets ticket = ticketRepository.findByTicketId(reassignSupportRequest.getTicketId())
+            .orElseThrow(() -> new IllegalStateException("Ticket with current id cannot be found: "+reassignSupportRequest.getTicketId()));
 
-        Accounts developer = accountRepository.findById(developerId)
-            .orElseThrow(() -> new IllegalStateException("Account with current id cannot be found: "+developerId));
+        Accounts developer = accountRepository.findById(reassignSupportRequest.getDeveloperId())
+            .orElseThrow(() -> new IllegalStateException("Account with current id cannot be found: "+reassignSupportRequest.getDeveloperId()));
 
         Supports newSupport = new Supports();          
         newSupport.setTicket(ticket);
