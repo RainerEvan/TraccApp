@@ -174,12 +174,12 @@ public class StartAppConfig {
             
             Accounts account6 = accountService.addAccount(null,accountRequest6);
 
-            Notifications notification = new Notifications();
-            notification.setReceiver(account);
-            notification.setCreatedAt(OffsetDateTime.now());
-            notification.setTitle("Ticket Taken by Developer");
-            notification.setBody("Your ticket has been taken by a developer, check it out right here");
-            notificationRepository.save(notification);
+            // Notifications notification = new Notifications();
+            // notification.setReceiver(account);
+            // notification.setCreatedAt(OffsetDateTime.now());
+            // notification.setTitle("Ticket Taken by Developer");
+            // notification.setBody("Your ticket has been taken by a developer, check it out right here");
+            // notificationRepository.save(notification);
 
             // Notifications notification2 = new Notifications();
             // notification2.setReceiver(account);

@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { ImageDialogComponent } from '../../modal/image-dialog/image-dialog.component';
 import { NotificationService } from 'src/app/services/notification/notification.service';
 import { ReassignTicketComponent } from '../reassign-ticket/reassign-ticket.component';
+import { RequestDropTicketComponent } from '../request-drop-ticket/request-drop-ticket.component';
 
 @Component({
   selector: 'app-ticket-detail',
@@ -104,21 +105,6 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     });
   }
 
-  public requestDropTicket(){
-    const ticketId = this.ticket.ticketId;
-
-    this.ticketSupportService.requestDropTicket(ticketId).subscribe({
-      next: (result: any) => {
-        console.log(result);
-        this.showResultDialog("Success","Drop ticket request has been sent to your supervisor",null);
-      },
-      error: (error: any) => {
-        console.log(error);
-        this.showResultDialog("Failed","There was a problem, try again later",null);
-      }
-    });
-  }
-
   public dropTicket(){
     const ticketId = this.ticket.ticketId;
 
@@ -202,6 +188,40 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     });
   }
 
+  showRequestDropTicketDialog(){
+    const supportId = this.ticket.support[0].id;
+
+    const data = {
+      ticketNo: this.ticket.ticketNo,
+      ticketId: this.ticket.ticketId
+    }
+
+    this.ref = this.dialogService.open(RequestDropTicketComponent, {
+      header: "Request Drop Ticket",
+      footer: " ",
+      data: {
+        supportId: supportId,
+      },
+      baseZIndex: 10000,
+      contentStyle: {"max-height": "650px", "overflow": "auto"},
+      width:'40vw',
+    });
+
+    this.ref.onClose.subscribe((result:any) =>{
+      if (result.isRequestDropTicketSuccess) {
+        this.getTicket();
+
+        const data = {
+          ticketNo: this.ticket.ticketNo,
+          ticketId: this.ticket.ticketId,
+          details: result.details
+        }
+
+        this.sendNotification(this.ticket.reporter.id,"Drop Ticket Request","Hey, it looks like a developer wants to drop this ticket",data);
+      } 
+    });
+  }
+
   showReassignTicketDialog(){
     const ticketInfo = {
       ticketId: this.ticket.ticketId,
@@ -256,7 +276,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
             this.cancelTicket();
           }
           else if(action == 'requestDrop'){
-            this.requestDropTicket();
+            this.showRequestDropTicketDialog();
           }
           else if(action == 'drop'){
             this.dropTicket();

@@ -11,7 +11,7 @@
                 <div class="col-span-8 w-full">
                     <form [formGroup]="commentForm" (ngSubmit)="addComment()" class="flex flex-col space-y-4">
                         <p-editor [style]="{'height':'8rem'}" placeholder="Say something..." formControlName="body"></p-editor>
-                        <button type="submit" class="w-24 self-end bg-gray-400 rounded-md px-4 py-1.5 font-medium text-sm text-white hover:bg-gray-500">Post</button>
+                        <button [disabled]="commentForm.invalid" type="submit" class="w-24 self-end bg-gray-400 rounded-md px-4 py-1.5 font-medium text-sm text-white hover:bg-gray-500 disabled:bg-gray-300 disabled:text-gray-400 disabled:shadow-inner">Post</button>
                     </form>
                 </div>
             </div>

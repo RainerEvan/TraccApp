@@ -107,9 +107,10 @@ public class TicketSupportController {
     }
 
     @PutMapping(path = "/request-drop")
-    public ResponseEntity<Object> requestDropTicket(@RequestParam("ticketId") UUID ticketId){
+    public ResponseEntity<Object> requestDropTicket(@RequestParam("supportId") UUID supportId, @RequestBody SupportRequest supportRequest){
         try {
-            String status = updateTicketStatus(ticketId, EStatus.AWAITING);
+            Supports support = supportService.requestDropSupport(supportId, supportRequest);
+            String status = updateTicketStatus(support.getTicket().getTicketId(), EStatus.AWAITING);
 
             return ResponseHandler.generateResponse("Ticket is now awaiting for approval!", HttpStatus.OK, status);
         } catch (Exception e) {

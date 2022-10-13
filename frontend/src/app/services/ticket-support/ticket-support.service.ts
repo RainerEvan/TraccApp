@@ -183,9 +183,9 @@ export class TicketSupportService {
     return this.http.delete(API_URL+'/delete',{params:params});
   }
 
-  public requestDropTicket(ticketId: string): Observable<any>{
-    const params = new HttpParams().set('ticketId',ticketId);
-    return this.http.put(API_URL+'/request-drop',null,{params:params});
+  public requestDropTicket(supportId: string, support:any): Observable<any>{
+    const params = new HttpParams().set('supportId',supportId);
+    return this.http.put(API_URL+'/request-drop',support,{params:params});
   }
 
   public dropTicket(ticketId: string): Observable<any>{

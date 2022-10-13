@@ -66,6 +66,7 @@ import { environment } from '../environments/environment';
 import { NotificationDetailComponent } from './components/notifications/notification-detail/notification-detail.component';
 import { ImageDialogComponent } from './components/modal/image-dialog/image-dialog.component';
 import { ReassignTicketComponent } from './components/tickets/reassign-ticket/reassign-ticket.component';
+import { RequestDropTicketComponent } from './components/tickets/request-drop-ticket/request-drop-ticket.component';
 
 @NgModule({
   declarations: [
@@ -108,6 +109,7 @@ import { ReassignTicketComponent } from './components/tickets/reassign-ticket/re
     DashboardAnalyticsComponent,
     ImageDialogComponent,
     ReassignTicketComponent,
+    RequestDropTicketComponent,
   ],
   imports: [
     BrowserModule,

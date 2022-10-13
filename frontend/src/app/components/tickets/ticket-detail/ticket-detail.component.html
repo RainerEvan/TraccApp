@@ -185,12 +185,10 @@
                             </div>
                         </div>
                     </div>
-                    <div *ngIf="ticket" class="w-full px-4 pb-4">
-                        <div *ngIf="ticket.support[0]">
-                            <div *ngIf="ticket.support[0].devNote" class="flex flex-col border-2 border-dotted border-gray-300 bg-gray-50 rounded-md p-6 space-y-4">
-                                <h4 class="font-medium text-gray-500">Developer Notes</h4>
-                                <p class="text-gray-500 text-sm" [innerHTML]="ticket.support[0].devNote"></p>
-                            </div>
+                    <div *appHasRole="['DEVELOPER','SUPERVISOR']" class="w-full px-4 pb-4">
+                        <div *ngIf="ticket?.support[0]?.devNote" class="flex flex-col border-2 border-dotted border-gray-300 bg-gray-50 rounded-md p-6 space-y-4">
+                            <h4 class="font-medium text-gray-500">Developer Notes</h4>
+                            <p class="text-gray-500 text-sm" [innerHTML]="ticket.support[0].devNote"></p>
                         </div>
                     </div>
                 </div>

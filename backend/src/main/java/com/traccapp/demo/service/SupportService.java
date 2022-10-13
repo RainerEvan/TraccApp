@@ -100,6 +100,18 @@ public class SupportService {
     }
 
     @Transactional
+    public Supports requestDropSupport(UUID supportId, SupportRequest supportRequest){
+        Supports support = supportRepository.findById(supportId)
+            .orElseThrow(() -> new IllegalStateException("Support with current id cannot be found: "+supportId));
+
+        support.setResult(supportRequest.getResult());
+        support.setDescription(supportRequest.getDescription());
+        support.setDevNote(supportRequest.getDevNote());
+
+        return supportRepository.save(support);
+    }
+
+    @Transactional
     public Supports reassignSupport(ReassignSupportRequest reassignSupportRequest){
         Supports currSupport = supportRepository.findById(reassignSupportRequest.getCurrSupportId())
             .orElseThrow(() -> new IllegalStateException("Support with current id cannot be found: "+reassignSupportRequest.getCurrSupportId()));
