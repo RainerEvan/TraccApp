@@ -10,9 +10,9 @@ import com.traccapp.demo.model.Applications;
 import com.traccapp.demo.model.Divisions;
 import com.traccapp.demo.model.Roles;
 import com.traccapp.demo.model.Tags;
-import com.traccapp.demo.repository.RoleRepository;
 import com.traccapp.demo.service.ApplicationService;
 import com.traccapp.demo.service.DivisionService;
+import com.traccapp.demo.service.RoleService;
 import com.traccapp.demo.service.TagsService;
 
 import lombok.AllArgsConstructor;
@@ -27,7 +27,7 @@ public class MainQueryResolver implements GraphQLQueryResolver{
     @Autowired
     private final TagsService tagsService;
     @Autowired
-    private final RoleRepository roleRepository;
+    private final RoleService roleService;
 
     public List<Applications> getAllApplications(){
         return applicationService.getAllApplications();
@@ -42,6 +42,6 @@ public class MainQueryResolver implements GraphQLQueryResolver{
     }
 
     public List<Roles> getAllRoles(){
-        return roleRepository.findAll();
+        return roleService.getAllRoles();
     }
 }
