@@ -1,124 +1,126 @@
-<div class="py-6">
+<div class="bg-white shadow-md mb-8 p-10">
     <h1 class="font-bold text-lg text-center mb-4">
         Ticket Analytics
     </h1>
-    <div class="bg-white flex flex-row border-2 border-gray-100 shadow-md p-8">
-        <div class="w-2/5 flex flex-col justify-between px-8">
-            <div class="flex flex-row items-center justify-around py-6 border-b-2 border-gray-400">
-                <span class="font-medium text-lg">Timeframe</span>
-                <p-dropdown *ngIf="dashboardAnalytics" [options]="dashboardAnalytics" optionLabel="period" (onChange)="getAnalyticsData($event.value)" emptyMessage="Year"></p-dropdown>
-                <p-skeleton *ngIf="loading" width="8rem" height="2rem"></p-skeleton>
+    <div class="flex flex-col space-y-8">
+        <div class="card flex flex-row p-8">
+            <div class="w-2/5 flex flex-col justify-between px-8">
+                <div class="flex flex-row items-center justify-around py-6 border-b-2 border-gray-400">
+                    <span class="font-medium text-lg">Timeframe</span>
+                    <p-dropdown *ngIf="dashboardAnalytics" [options]="dashboardAnalytics" optionLabel="period" (onChange)="getAnalyticsData($event.value)" emptyMessage="Year"></p-dropdown>
+                    <p-skeleton *ngIf="loading" width="8rem" height="2rem"></p-skeleton>
+                </div>
+                <div class="grid grid-cols-2 gap-4 justify-end p-8">
+                    <div class="flex flex-col">
+                        <span class="font-semibold text-sm">Min Tickets</span>
+                        <span *ngIf="dashboardAnalytics" class="font-regular text-3xl">{{minTickets}}</span>
+                        <p-skeleton *ngIf="loading" width="4rem" height="4rem"></p-skeleton>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-semibold text-sm">Max Tickets</span>
+                        <span *ngIf="dashboardAnalytics" class="font-regular text-3xl">{{maxTickets}}</span>
+                        <p-skeleton *ngIf="loading" width="4rem" height="4rem"></p-skeleton>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-semibold text-sm">Avg Tickets</span>
+                        <span *ngIf="dashboardAnalytics" class="font-regular text-3xl">{{avgTickets}}</span>
+                        <p-skeleton *ngIf="loading" width="4rem" height="4rem"></p-skeleton>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-semibold text-sm">Total Tickets</span>
+                        <span *ngIf="dashboardAnalytics" class="font-regular text-3xl">{{totalTickets}}</span>
+                        <p-skeleton *ngIf="loading" width="4rem" height="4rem"></p-skeleton>
+                    </div>
+                </div>
             </div>
-            <div class="grid grid-cols-2 gap-4 justify-end p-8">
-                <div class="flex flex-col">
-                    <span class="font-semibold text-sm">Min Tickets</span>
-                    <span *ngIf="dashboardAnalytics" class="font-regular text-3xl">{{minTickets}}</span>
-                    <p-skeleton *ngIf="loading" width="4rem" height="4rem"></p-skeleton>
-                </div>
-                <div class="flex flex-col">
-                    <span class="font-semibold text-sm">Max Tickets</span>
-                    <span *ngIf="dashboardAnalytics" class="font-regular text-3xl">{{maxTickets}}</span>
-                    <p-skeleton *ngIf="loading" width="4rem" height="4rem"></p-skeleton>
-                </div>
-                <div class="flex flex-col">
-                    <span class="font-semibold text-sm">Avg Tickets</span>
-                    <span *ngIf="dashboardAnalytics" class="font-regular text-3xl">{{avgTickets}}</span>
-                    <p-skeleton *ngIf="loading" width="4rem" height="4rem"></p-skeleton>
-                </div>
-                <div class="flex flex-col">
-                    <span class="font-semibold text-sm">Total Tickets</span>
-                    <span *ngIf="dashboardAnalytics" class="font-regular text-3xl">{{totalTickets}}</span>
-                    <p-skeleton *ngIf="loading" width="4rem" height="4rem"></p-skeleton>
-                </div>
-            </div>
-        </div>
-        <div class="w-3/5 flex flex-row items-center justify-center p-6">
-            <p-chart *ngIf="dashboardAnalytics" type="bar" [data]="barChartData" [options]="barChartOption" width="35rem" height="18rem"></p-chart>
-            <p-skeleton *ngIf="loading" width="24rem" height="16rem"></p-skeleton>
-        </div>
-    </div>
-</div>
-
-<div class="flex flex-row space-x-10">
-    <div class="w-4/12 py-6">
-        <h1 class="font-bold text-lg text-center mb-4">
-            Top Applications
-        </h1>
-        <div class="bg-white h-56 flex flex-row items-center justify-start space-x-6 border-2 border-gray-100 shadow-md p-8">
-            <p-chart *ngIf="dashboardAnalytics" type="pie" [data]="pieChartData" [options]="pieChartOption" width="18rem" height="10rem"></p-chart>
-            <p-skeleton *ngIf="loading" shape="circle" width="9rem" height="9rem"></p-skeleton>
-            <div *ngIf="loading" class="flex flex-col space-y-4">
-                <p-skeleton width="8rem"></p-skeleton>
-                <p-skeleton width="8rem"></p-skeleton>
-                <p-skeleton width="8rem"></p-skeleton>
-                <p-skeleton width="8rem"></p-skeleton>
+            <div class="w-3/5 flex flex-row items-center justify-center p-6">
+                <p-chart *ngIf="dashboardAnalytics" type="bar" [data]="barChartData" [options]="barChartOption" width="35rem" height="18rem"></p-chart>
+                <p-skeleton *ngIf="loading" width="24rem" height="16rem"></p-skeleton>
             </div>
         </div>
-    </div>
 
-    <div class="w-5/12 py-6">
-        <h1 class="font-bold text-lg text-center mb-4">
-            Top 3 Tags
-        </h1>
-        <div class="bg-white h-56 flex items-start justify-center border-2 border-gray-100 shadow-md p-6">
-            <table class="table-auto bg-white w-full">
-                <tr>
-                    <th class="border-b-2 text-left text-sm px-4 py-2">Rank</th>
-                    <th class="border-b-2 text-left text-sm px-4 py-2">Tags</th>
-                    <th class="border-b-2 text-left text-sm px-4 py-2">Tickets Reported</th>
-                </tr>
-                <tr *ngFor="let topTag of topTags;let i = index">
-                    <td class="text-xs px-4 py-4">{{i+1}}</td>
-                    <td class="text-xs px-4 py-4">{{topTag.tag}}</td>
-                    <td class="text-xs px-4 py-4">{{topTag.count}}</td>
-                </tr>
-                <tr *ngIf="loading">
-                    <td class="px-4 py-4">
-                        <p-skeleton width="2rem"></p-skeleton>
-                    </td>
-                    <td class="px-4 py-4">
-                        <p-skeleton width="6rem"></p-skeleton>
-                    </td>
-                    <td class="px-4 py-4">
+        <div class="flex flex-row space-x-10">
+            <div class="w-4/12">
+                <h1 class="font-bold text-lg text-center mb-4">
+                    Top Applications
+                </h1>
+                <div class="bg-white h-56 flex flex-row items-center justify-start space-x-6 border-2 border-gray-100 shadow-md p-8">
+                    <p-chart *ngIf="dashboardAnalytics" type="pie" [data]="pieChartData" [options]="pieChartOption" width="18rem" height="10rem"></p-chart>
+                    <p-skeleton *ngIf="loading" shape="circle" width="9rem" height="9rem"></p-skeleton>
+                    <div *ngIf="loading" class="flex flex-col space-y-4">
                         <p-skeleton width="8rem"></p-skeleton>
-                    </td>
-                </tr>
-                <tr *ngIf="loading">
-                    <td class="px-4 py-4">
-                        <p-skeleton width="2rem"></p-skeleton>
-                    </td>
-                    <td class="px-4 py-4">
-                        <p-skeleton width="6rem"></p-skeleton>
-                    </td>
-                    <td class="px-4 py-4">
                         <p-skeleton width="8rem"></p-skeleton>
-                    </td>
-                </tr>
-                <tr *ngIf="loading">
-                    <td class="px-4 py-4">
-                        <p-skeleton width="2rem"></p-skeleton>
-                    </td>
-                    <td class="px-4 py-4">
-                        <p-skeleton width="6rem"></p-skeleton>
-                    </td>
-                    <td class="px-4 py-4">
                         <p-skeleton width="8rem"></p-skeleton>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </div>
-
-    <div class="w-3/12 py-6">
-        <h1 class="font-bold text-lg text-center mb-4">
-            Ticket Rate
-        </h1>
-        <div class="bg-white h-56 flex flex-col space-y-2 justify-center border-2 border-gray-100 shadow-md py-8 px-16">
-            <span class="font-semibold text-sm">Resolved</span>
-            <span *ngIf="dashboardAnalytics" class="font-regular text-6xl">{{ticketRate.rate}}</span>
-            <p-skeleton *ngIf="loading" width="8rem" height="4rem"></p-skeleton>
-            <span *ngIf="dashboardAnalytics" class="font-semibold text-xs text-gray-400 border-t-2 border-gray-400 py-2">{{ticketRate.label}}</span>
-            <p-skeleton *ngIf="loading" width="8rem"></p-skeleton>
+                        <p-skeleton width="8rem"></p-skeleton>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="w-5/12">
+                <h1 class="font-bold text-lg text-center mb-4">
+                    Top 3 Tags
+                </h1>
+                <div class="bg-white h-56 flex items-start justify-center border-2 border-gray-100 shadow-md p-6">
+                    <table class="table-auto bg-white w-full">
+                        <tr>
+                            <th class="border-b-2 text-left text-sm px-4 py-2">Rank</th>
+                            <th class="border-b-2 text-left text-sm px-4 py-2">Tags</th>
+                            <th class="border-b-2 text-left text-sm px-4 py-2">Tickets Reported</th>
+                        </tr>
+                        <tr *ngFor="let topTag of topTags;let i = index">
+                            <td class="text-xs px-4 py-4">{{i+1}}</td>
+                            <td class="text-xs px-4 py-4">{{topTag.tag}}</td>
+                            <td class="text-xs px-4 py-4">{{topTag.count}}</td>
+                        </tr>
+                        <tr *ngIf="loading">
+                            <td class="px-4 py-4">
+                                <p-skeleton width="2rem"></p-skeleton>
+                            </td>
+                            <td class="px-4 py-4">
+                                <p-skeleton width="6rem"></p-skeleton>
+                            </td>
+                            <td class="px-4 py-4">
+                                <p-skeleton width="8rem"></p-skeleton>
+                            </td>
+                        </tr>
+                        <tr *ngIf="loading">
+                            <td class="px-4 py-4">
+                                <p-skeleton width="2rem"></p-skeleton>
+                            </td>
+                            <td class="px-4 py-4">
+                                <p-skeleton width="6rem"></p-skeleton>
+                            </td>
+                            <td class="px-4 py-4">
+                                <p-skeleton width="8rem"></p-skeleton>
+                            </td>
+                        </tr>
+                        <tr *ngIf="loading">
+                            <td class="px-4 py-4">
+                                <p-skeleton width="2rem"></p-skeleton>
+                            </td>
+                            <td class="px-4 py-4">
+                                <p-skeleton width="6rem"></p-skeleton>
+                            </td>
+                            <td class="px-4 py-4">
+                                <p-skeleton width="8rem"></p-skeleton>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        
+            <div class="w-3/12">
+                <h1 class="font-bold text-lg text-center mb-4">
+                    Ticket Rate
+                </h1>
+                <div class="bg-white h-56 flex flex-col space-y-2 justify-center border-2 border-gray-100 shadow-md py-8 px-16">
+                    <span class="font-semibold text-sm">Resolved</span>
+                    <span *ngIf="dashboardAnalytics" class="font-regular text-6xl">{{ticketRate.rate}}</span>
+                    <p-skeleton *ngIf="loading" width="8rem" height="4rem"></p-skeleton>
+                    <span *ngIf="dashboardAnalytics" class="font-semibold text-xs text-gray-400 border-t-2 border-gray-400 py-2">{{ticketRate.label}}</span>
+                    <p-skeleton *ngIf="loading" width="8rem"></p-skeleton>
+                </div>
+            </div>
         </div>
     </div>
 </div>

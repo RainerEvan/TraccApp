@@ -75,13 +75,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
         //     .antMatchers("/api/**").permitAll()
         //     .anyRequest().authenticated()
         //     .and()
-        //     .logout()
-        //         .clearAuthentication(true)
-        //         .invalidateHttpSession(true)
-        //         .deleteCookies("JSESSIONID")
-        //         .permitAll();
-
-        // http.addFilterBefore(authTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+        //     .addFilterBefore(authTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
     

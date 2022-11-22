@@ -72,7 +72,7 @@ export class DashboardAnalyticsComponent implements OnInit {
       datasets: [
           {
               label: 'Tickets',
-              backgroundColor: '#808080',
+              backgroundColor: '#0066AE',
               data: this.data
           },
       ]
@@ -128,10 +128,10 @@ export class DashboardAnalyticsComponent implements OnInit {
       datasets: [
         {
           backgroundColor: [
-            "#555555",
-            "#808080",
-            "#A9A9A9",
-            "#D3D3D3",
+            "#004A80",
+            "#0066AE",
+            "#4DB5FF",
+            "#99D5FF",
           ],
           data: this.count,
         },
