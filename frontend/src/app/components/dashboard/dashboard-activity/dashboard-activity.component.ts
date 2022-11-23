@@ -63,8 +63,8 @@ export class DashboardActivityComponent implements OnInit {
           {
               label: 'Tickets',
               fill: false,
-              borderColor: '#0066AE',
-              backgroundColor: '#0066AE',
+              borderColor: '#808080',
+              backgroundColor: '#808080',
               tension: .4,
               data: this.data
           },

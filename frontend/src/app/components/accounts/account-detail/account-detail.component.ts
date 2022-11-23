@@ -54,8 +54,7 @@ export class AccountDetailComponent implements OnInit {
         accountData:this.account,
       },
       baseZIndex: 10000,
-      contentStyle: {"max-height": "650px", "overflow": "auto"},
-      width:'40vw',
+      contentStyle: {"max-height": "650px","width":"40vw", "min-width":"550px", "max-width":"700px", "overflow": "auto"},
     });
 
     this.ref.onClose.subscribe((success:boolean) =>{

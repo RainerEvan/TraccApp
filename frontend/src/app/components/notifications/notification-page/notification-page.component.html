@@ -4,7 +4,7 @@
             Notifications
         </h1>
         <div class="flex flex-row space-x-6">
-            <div class="w-1/3 bg-white border-2 border-gray-100 shadow-md">
+            <div class="w-1/3 bg-white border border-gray-100 shadow-md">
                 <div class="w-full">
                     <div class="flex flex-row justify-between py-2 px-6 border-b-2 border-gray-300">
                         <span class="font-medium text-sm">{{totalRecords}} Notification(s)</span>
@@ -33,7 +33,7 @@
                     </p-table>
                 </div>
             </div>
-            <div class="w-2/3 bg-white border-2 border-gray-100 shadow-md">
+            <div class="w-2/3 bg-white border border-gray-100 shadow-md">
                 <app-notification-detail [notification]="selected" [data]="notificationData"></app-notification-detail>
             </div>
         </div>

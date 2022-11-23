@@ -15,7 +15,7 @@
                     </div>
                 </div>
                 <div>
-                    <div *ngIf="dashboardActivity" class="w-24 h-24 flex justify-center items-center border-4 border-bca-200 rounded-full">
+                    <div *ngIf="dashboardActivity" class="w-24 h-24 flex justify-center items-center border-4 border-gray-300 rounded-full">
                         <span class="font-medium text-4xl">{{totalPending}}</span>
                     </div>
                     <p-skeleton *ngIf="loading" shape="circle" width="6rem" height="6rem"></p-skeleton>
@@ -32,7 +32,7 @@
                     </div>
                 </div>
                 <div>
-                    <div *ngIf="dashboardActivity" class="w-24 h-24 flex justify-center items-center border-4 border-bca-300 rounded-full">
+                    <div *ngIf="dashboardActivity" class="w-24 h-24 flex justify-center items-center border-4 border-gray-400 rounded-full">
                         <span class="font-medium text-4xl">{{totalInProgress}}</span>
                     </div>
                     <p-skeleton *ngIf="loading" shape="circle" width="6rem" height="6rem"></p-skeleton>
@@ -49,7 +49,7 @@
                     </div>
                 </div>
                 <div>
-                    <div *ngIf="dashboardActivity" class="w-24 h-24 flex justify-center items-center border-4 border-bca-500 rounded-full">
+                    <div *ngIf="dashboardActivity" class="w-24 h-24 flex justify-center items-center border-4 border-gray-500 rounded-full">
                         <span class="font-medium text-4xl">{{totalResolved}}</span>
                     </div>
                     <p-skeleton *ngIf="loading" shape="circle" width="6rem" height="6rem"></p-skeleton>
@@ -66,32 +66,34 @@
                     </div>
                 </div>
                 <div>
-                    <div *ngIf="dashboardActivity" class="w-24 h-24 flex justify-center items-center border-4 border-bca-600 rounded-full">
+                    <div *ngIf="dashboardActivity" class="w-24 h-24 flex justify-center items-center border-4 border-gray-700 rounded-full">
                         <span class="font-medium text-4xl">{{totalDropped}}</span>
                     </div>
                     <p-skeleton *ngIf="loading" shape="circle" width="6rem" height="6rem"></p-skeleton>
                 </div>
             </div>
         </div>
-        <div class="card flex flex-row p-8">
-            <div class="w-3/5 flex flex-row items-center justify-center p-6">
-                <p-chart *ngIf="dashboardActivity" type="line" [data]="basicData" [options]="basicOption" width="35rem" height="18rem"></p-chart>
-                <p-skeleton *ngIf="loading" width="24rem" height="16rem"></p-skeleton>
-            </div>
-            <div class="w-2/5 flex flex-col justify-between pr-8">
-                <ul class="flex flex-row items-center justify-center space-x-4 py-6 border-b-2 border-gray-400">
+        <div class="card flex flex-col space-y-4 p-8">
+            <div class="w-full flex flex-row justify-between px-8 py-4">
+                <ul class="flex flex-row items-center justify-center space-x-4">
                     <li *ngFor="let activity of dashboardActivity">
                         <input type="radio" [id]="activity.menu" name="ticket-activity" [checked]="(activity.menu === 'This Week')" class="hidden peer">
-                        <label (click)="getActivityData(activity)" [for]="activity.menu" class="px-4 py-2 rounded-lg font-medium text-sm peer-checked:text-white peer-checked:bg-bca-500 hover:bg-bca-100 cursor-pointer">{{activity.menu}}</label>
+                        <label (click)="getActivityData(activity)" [for]="activity.menu" class="px-4 py-2 rounded-lg font-medium text-sm peer-checked:text-white peer-checked:bg-gray-500 hover:bg-gray-100 cursor-pointer">{{activity.menu}}</label>
                     </li>
                     <p-skeleton *ngIf="loading" width="6rem" height="2rem"></p-skeleton>
                     <p-skeleton *ngIf="loading" width="6rem" height="2rem"></p-skeleton>
                     <p-skeleton *ngIf="loading" width="6rem" height="2rem"></p-skeleton>
                 </ul>
-                <div class="flex flex-col p-8">
+                <div class="flex flex-col">
                     <span class="font-semibold text-sm">Total Tickets</span>
                     <span *ngIf="dashboardActivity" class="font-regular text-3xl">{{totalTickets}}</span>
                     <p-skeleton *ngIf="loading" width="4rem" height="4rem"></p-skeleton>
+                </div>
+            </div>
+            <div class="w-full flex flex-row items-center justify-center px-8 py-4">
+                <div class="w-full h-80">
+                    <p-chart *ngIf="dashboardActivity" type="line" [data]="basicData" [options]="basicOption" width="100%" height="100%"></p-chart>
+                    <p-skeleton *ngIf="loading" width="100%" height="100%"></p-skeleton>
                 </div>
             </div>
         </div>

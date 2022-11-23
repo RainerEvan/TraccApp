@@ -176,8 +176,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
         supportId: supportId,
       },
       baseZIndex: 10000,
-      contentStyle: {"max-height": "650px", "overflow": "auto"},
-      width:'40vw',
+      contentStyle: {"max-height": "650px","width":"40vw", "min-width":"550px", "max-width":"700px", "overflow": "auto"},
     });
 
     this.ref.onClose.subscribe((success:boolean) =>{
@@ -203,8 +202,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
         supportId: supportId,
       },
       baseZIndex: 10000,
-      contentStyle: {"max-height": "650px", "overflow": "auto"},
-      width:'40vw',
+      contentStyle: {"max-height": "650px","width":"40vw", "min-width":"550px", "max-width":"700px", "overflow": "auto"},
     });
 
     this.ref.onClose.subscribe((result:any) =>{
@@ -241,8 +239,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
         ticketInfo: ticketInfo
       },
       baseZIndex: 10000,
-      contentStyle: {"max-height": "650px", "overflow": "auto"},
-      width:'40vw',
+      contentStyle: {"max-height": "650px","width":"40vw", "min-width":"550px", "max-width":"700px", "overflow": "auto"},
     });
 
     this.ref.onClose.subscribe((success:boolean) =>{
@@ -260,8 +257,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
         message: message,
       },
       baseZIndex: 10000,
-      contentStyle: {"max-height": "500px", "overflow": "auto"},
-      width:'30vw',
+      contentStyle: {"max-height": "650px","width":"40vw", "min-width":"350px", "max-width":"500px", "overflow": "auto"},
     });
 
     this.ref.onClose.subscribe((confirm:boolean) =>{
@@ -292,8 +288,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
         message: message,
       },
       baseZIndex: 10000,
-      contentStyle: {"max-height": "500px", "overflow": "auto"},
-      width:'30vw'
+      contentStyle: {"max-height": "650px","width":"40vw", "min-width":"350px", "max-width":"500px", "overflow": "auto"},
     });
 
     this.ref.onClose.subscribe(() =>{
@@ -313,8 +308,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
         attachment: fileBase64,
       },
       baseZIndex: 10000,
-      contentStyle: {"max-height": "600px", "overflow": "auto"},
-      width:'60vw',
+      contentStyle: {"max-height": "650px","width":"40vw", "min-width":"550px", "max-width":"700px", "overflow": "auto"},
     });
   }
 }

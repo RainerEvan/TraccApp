@@ -5,18 +5,18 @@
             <h1 class="text-center font-semibold text-4xl italic tracking-widest">TRACC APP</h1>
         </div>
     
-        <div class="w-full bg-white rounded-md px-8 sm:px-12 py-8 drop-shadow-lg flex flex-col space-y-4">
+        <div class="w-full bg-white rounded-sm px-8 sm:px-12 py-8 shadow-md flex flex-col space-y-4">
             <h3 class="font-semibold text-xl text-center">LOGIN</h3>
             <form [formGroup]="loginForm" (ngSubmit)="login()" class="flex flex-col space-y-4">
                 <div class="flex flex-col space-y-1">
-                    <label for="username" class="text-sm">Username</label>
+                    <label for="username" class="">Username</label>
                     <input pInputText type="text" placeholder="Enter your username" class="p-inputtext-sm form-field" formControlName="username" required>
                     <div *ngIf="username.invalid && (username.dirty || username.touched)" class="font-regular text-xs text-red-300">
                         Username is required
                     </div>
                 </div>
                 <div class="flex flex-col space-y-1">
-                    <label for="password" class="text-sm">Password</label>
+                    <label for="password" class="">Password</label>
                     <span class="p-input-icon-right">
                             <i *ngIf="show" (click)="show=false" class="pi pi-eye-slash cursor-pointer"></i>
                             <i *ngIf="!show" (click)="show=true" class="pi pi-eye cursor-pointer"></i>

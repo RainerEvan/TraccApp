@@ -1,85 +1,83 @@
-<div class="bg-white drop-shadow-lg max-w-7xl mx-auto mb-8 px-10 py-4">
-    <div class="py-6">
-        <h1 class="font-bold text-lg text-center mb-4">
-            Task List
-        </h1>
-        <div class="bg-white border-2 border-gray-100 shadow-md p-8">
-            <p-table #ticketTable [value]="myTasks" [loading]="loading" [totalRecords]="totalRecords" [paginator]="true" [rows]="8" [showCurrentPageReport]="true" selectionMode="single" responsiveLayout="scroll" [filterDelay]="0" sortField="dateTaken" [sortOrder]="-1"
-                [globalFilterFields]="['ticket.ticketNo','ticket.application.name','ticket.title','ticket.reporter.fullname','ticket.dateAdded','developer.fullname','dateTaken','ticket.status.name']">
-                <ng-template pTemplate="caption">
-                    <div class="px-2 flex items-center place-content-between">
-                        <span class="p-input-icon-left">
-                            <i class="pi pi-search pl-1 opacity-60"></i>
-                            <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Search Tasks" />
-                        </span>
-                        <div class="flex flex-row space-x-4">
-                            <button (click)="getAllTickets()" class="py-2 px-3 flex flex-row items-center space-x-2 rounded-md stroke-white text-white hover:bg-bca-600">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 stroke-inherit" [class.rotate]="loading" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                                </svg>
-                                <span class="font-medium text-sm text-inherit">Refresh</span>
-                            </button>
+<div class="bg-white shadow-md mb-8 p-10">
+    <h1 class="font-bold text-lg text-center mb-4">
+        Task List
+    </h1>
+    <div class="card p-8">
+        <p-table #ticketTable [value]="myTasks" [loading]="loading" [totalRecords]="totalRecords" [paginator]="true" [rows]="8" [showCurrentPageReport]="true" selectionMode="single" responsiveLayout="scroll" [filterDelay]="0" sortField="dateTaken" [sortOrder]="-1"
+            [globalFilterFields]="['ticket.ticketNo','ticket.application.name','ticket.title','ticket.reporter.fullname','ticket.dateAdded','developer.fullname','dateTaken','ticket.status.name']">
+            <ng-template pTemplate="caption">
+                <div class="px-2 flex items-center place-content-between">
+                    <span class="p-input-icon-left">
+                        <i class="pi pi-search pl-1 opacity-60"></i>
+                        <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Search Tasks" />
+                    </span>
+                    <div class="flex flex-row space-x-4">
+                        <button (click)="getAllTickets()" class="py-2 px-3 flex flex-row items-center space-x-2 rounded-md stroke-gray-500 text-gray-500 hover:bg-gray-300/60">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 stroke-inherit" [class.rotate]="loading" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                            </svg>
+                            <span class="font-medium text-sm text-inherit">Refresh</span>
+                        </button>
+                    </div>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="body" let-support>
+                <div routerLink="/ticket-detail/{{support.ticket.ticketId}}" class="ticket-list">
+                    <div class="col-span-1">
+                        <div [class]="'ticket-status-'+support.ticket.status.name" class="w-full h-full flex flex-col items-center justify-center space-y-2 rounded-sm shadow-md px-4 py-10">
+                            <i class="pi pi-ticket" style="font-size: 20px;"></i>
+                            <span class="font-semibold text-xs">{{support.ticket.ticketNo}}</span>
                         </div>
                     </div>
-                </ng-template>
-                <ng-template pTemplate="body" let-support>
-                    <div routerLink="/ticket-detail/{{support.ticket.ticketId}}" class="ticket-list">
-                        <div class="col-span-1">
-                            <div [class]="'ticket-status-'+support.ticket.status.name" class="w-full h-full flex flex-col items-center justify-center space-y-2 rounded-sm shadow-md px-4 py-10">
-                                <i class="pi pi-ticket" style="font-size: 20px;"></i>
-                                <span class="font-semibold text-xs">{{support.ticket.ticketNo}}</span>
+                    <div class="col-span-2">
+                        <div class="w-full h-full flex flex-col justify-between py-2">
+                            <div class="flex flex-col">
+                                <span class="font-semibold text-base uppercase break-words">{{support.ticket.title}}</span>
+                                <span class="font-regular text-sm">{{support.ticket.application.name}}</span>
                             </div>
-                        </div>
-                        <div class="col-span-2">
-                            <div class="w-full h-full flex flex-col justify-between py-2">
-                                <div class="flex flex-col">
-                                    <span class="font-semibold text-base uppercase break-words">{{support.ticket.title}}</span>
-                                    <span class="font-regular text-sm">{{support.ticket.application.name}}</span>
-                                </div>
-                                <div class="flex flex-row items-center space-x-2">
-                                    <div [class]="'ticket-status-'+support.ticket.status.name" class="p-1.5 rounded-full"></div>
-                                    <span class="font-medium text-xs">{{support.ticket.status.name}}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-span-1">
-                            <div class="w-full h-full flex flex-col justify-between py-2">
-                                <div class="flex flex-col justify-center">
-                                    <span class="font-medium text-xs">Date Added</span>
-                                    <span class="font-regular text-sm text-gray-500">{{support.ticket.dateAdded | date:'dd/MM/yyyy'}}</span>
-                                </div>
-                                <div class="flex flex-col justify-center">
-                                    <span class="font-medium text-xs">Report</span>
-                                    <span class="font-regular text-sm text-gray-500">{{support.ticket.reporter.fullname}}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-span-1">
-                            <div class="w-full h-full flex flex-col justify-between py-2">
-                                <div class="flex flex-col justify-center">
-                                    <span class="font-medium text-xs">Date Taken</span>
-                                    <span class="font-regular text-sm text-gray-500">{{support.dateTaken | date:'dd/MM/yyyy'}}</span>
-                                </div>
-                                <div class="flex flex-col justify-center">
-                                    <span class="font-medium text-xs">Support</span>
-                                    <span class="font-regular text-sm text-gray-500">{{support.developer.fullname}}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-span-1">
-                            <div class="w-full h-full flex items-center justify-center">
-                                <a routerLink="/ticket-detail/{{support.ticket.ticketId}}" class="flex flex-row space-x-2 p-3 items-center hover:text-gray-500">
-                                    <i class="pi pi-chevron-circle-right" style="font-size: 16px;"></i>
-                                    <span class="font-medium text-xs">View Details</span>
-                                </a>
+                            <div class="flex flex-row items-center space-x-2">
+                                <div [class]="'ticket-status-'+support.ticket.status.name" class="p-1.5 rounded-full"></div>
+                                <span class="font-medium text-xs">{{support.ticket.status.name}}</span>
                             </div>
                         </div>
                     </div>
-                </ng-template>
-                <ng-template pTemplate="emptymessage">
-                    <div class="font-medium text-sm text-gray-400 text-center my-10">NO TASKS FOUND</div>
-                </ng-template>
-            </p-table>
-        </div>
+                    <div class="col-span-1">
+                        <div class="w-full h-full flex flex-col justify-between py-2">
+                            <div class="flex flex-col justify-center">
+                                <span class="font-medium text-xs">Date Added</span>
+                                <span class="font-regular text-sm text-gray-500">{{support.ticket.dateAdded | date:'dd/MM/yyyy'}}</span>
+                            </div>
+                            <div class="flex flex-col justify-center">
+                                <span class="font-medium text-xs">Report</span>
+                                <span class="font-regular text-sm text-gray-500">{{support.ticket.reporter.fullname}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-span-1">
+                        <div class="w-full h-full flex flex-col justify-between py-2">
+                            <div class="flex flex-col justify-center">
+                                <span class="font-medium text-xs">Date Taken</span>
+                                <span class="font-regular text-sm text-gray-500">{{support.dateTaken | date:'dd/MM/yyyy'}}</span>
+                            </div>
+                            <div class="flex flex-col justify-center">
+                                <span class="font-medium text-xs">Support</span>
+                                <span class="font-regular text-sm text-gray-500">{{support.developer.fullname}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-span-1">
+                        <div class="w-full h-full flex items-center justify-center">
+                            <a routerLink="/ticket-detail/{{support.ticket.ticketId}}" class="flex flex-row space-x-2 p-3 items-center hover:text-gray-500">
+                                <i class="pi pi-chevron-circle-right" style="font-size: 16px;"></i>
+                                <span class="font-medium text-xs">View Details</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+                <div class="font-medium text-sm text-gray-400 text-center my-10">NO TASKS FOUND</div>
+            </ng-template>
+        </p-table>
     </div>
 </div>
