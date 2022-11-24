@@ -116,7 +116,7 @@ body{
 .card{
     @apply w-full bg-white border border-gray-100 shadow-md !important;
 }
-l
+
 .button-primary{
     @apply bg-gray-500 border-2 border-gray-500 rounded-md px-3 py-1.5 text-sm text-white transition ease-in-out duration-200 hover:bg-gray-400 hover:border-gray-400 disabled:text-gray-400 disabled:bg-gray-200 disabled:border-gray-200;
 }

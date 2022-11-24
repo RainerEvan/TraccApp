@@ -1,7 +1,6 @@
 type TicketLogs{
     id:ID
     ticket:Tickets
-    support:Supports
     actor:Accounts
     action:String
     dateTime:DateTime

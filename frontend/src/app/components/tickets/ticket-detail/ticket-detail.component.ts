@@ -205,14 +205,14 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       contentStyle: {"max-height": "650px","width":"40vw", "min-width":"550px", "max-width":"700px", "overflow": "auto"},
     });
 
-    this.ref.onClose.subscribe((result:any) =>{
-      if (result.isRequestDropTicketSuccess) {
+    this.ref.onClose.subscribe((detail:any) =>{
+      if (detail) {
         this.getTicket();
 
         const data = {
           ticketNo: this.ticket.ticketNo,
           ticketId: this.ticket.ticketId,
-          details: result.details
+          details: detail
         }
 
         this.sendNotification(this.ticket.reporter.id,"Drop Ticket Request","Hey, it looks like a developer wants to drop this ticket",data);

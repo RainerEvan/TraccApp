@@ -37,10 +37,6 @@ public class TicketLogs {
     private Tickets ticket;
 
     @ManyToOne
-    @JoinColumn(name="support_id")
-    private Supports support;
-
-    @ManyToOne
     @JoinColumn(name="actor_id")
     private Accounts actor;
 

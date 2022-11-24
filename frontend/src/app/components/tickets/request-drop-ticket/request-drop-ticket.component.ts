@@ -13,7 +13,6 @@ export class RequestDropTicketComponent implements OnInit {
 
   requestDropForm: FormGroup;
   supportId: string;
-  isRequestDropFormSubmitted: boolean = false;
 
   constructor(public dialogService:DialogService, public ref: DynamicDialogRef, public config: DynamicDialogConfig, private ticketSupportService: TicketSupportService, private formBuilder: FormBuilder) { }
 
@@ -30,18 +29,12 @@ export class RequestDropTicketComponent implements OnInit {
       this.ticketSupportService.requestDropTicket(supportId, support).subscribe({
         next: (result: any) => {
           console.log(result);
-          this.isRequestDropFormSubmitted = true;
-          const response = {
-            isRequestDropTicketSuccess: this.isRequestDropFormSubmitted,
-            details: support
-          }
-          this.ref.close(response);
+          this.ref.close(support);
           this.showResultDialog("Success","Drop ticket request has been sent to your supervisor");
         },
         error: (error: any) => {
           console.log(error);
-          this.isRequestDropFormSubmitted = false;
-          this.ref.close(this.isRequestDropFormSubmitted);
+          this.ref.close(null);
           this.showResultDialog("Failed","There was a problem, try again later");
         }
       });

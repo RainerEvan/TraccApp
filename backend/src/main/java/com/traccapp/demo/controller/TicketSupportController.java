@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import com.traccapp.demo.data.EStatus;
 import com.traccapp.demo.model.Supports;
 import com.traccapp.demo.model.TicketAttachments;
+import com.traccapp.demo.model.TicketLogs;
 import com.traccapp.demo.model.Tickets;
 import com.traccapp.demo.payload.request.ReassignSupportRequest;
 import com.traccapp.demo.payload.request.SupportRequest;
@@ -15,6 +16,7 @@ import com.traccapp.demo.payload.request.TicketRequest;
 import com.traccapp.demo.service.SupportAttachmentService;
 import com.traccapp.demo.service.SupportService;
 import com.traccapp.demo.service.TicketAttachmentService;
+import com.traccapp.demo.service.TicketLogsService;
 import com.traccapp.demo.service.TicketService;
 import com.traccapp.demo.utils.ResponseHandler;
 
@@ -46,6 +48,8 @@ public class TicketSupportController {
     private final SupportService supportService;
     @Autowired
     private final SupportAttachmentService supportAttachmentService;
+    @Autowired
+    private final TicketLogsService ticketLogsService;
 
     @PostMapping(path = "/add")
     public ResponseEntity<Object> addTicket(@RequestPart(name="files", required = false) MultipartFile[] files, @RequestPart("ticket") TicketRequest ticketRequest){
@@ -57,6 +61,9 @@ public class TicketSupportController {
                     .map(file -> ticketAttachmentService.addFile(file, ticket))
                     .collect(Collectors.toList());
             }
+
+            TicketLogs ticketLogs = ticketLogsService.addTicketLogs(ticket.getTicketId(), "New ticket created");
+            ticketLogsService.logTicketInfo(ticketLogs);
 
             return ResponseHandler.generateResponse("Ticket has been added successfully!", HttpStatus.OK, ticket.getTicketNo());
 
@@ -70,6 +77,11 @@ public class TicketSupportController {
         try {
             String status = updateTicketStatus(ticketId, EStatus.CLOSED);
 
+            Tickets ticket = ticketService.getTicket(ticketId);
+
+            TicketLogs ticketLogs = ticketLogsService.addTicketLogs(ticket.getTicketId(), "Ticket closed");
+            ticketLogsService.logTicketInfo(ticketLogs);
+
             return ResponseHandler.generateResponse("Ticket has been closed!", HttpStatus.OK, status);
         } catch (Exception e) {
             return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.BAD_REQUEST, null);
@@ -80,6 +92,11 @@ public class TicketSupportController {
     public ResponseEntity<Object> dropTicket(@RequestParam("ticketId") UUID ticketId){
         try {
             String status = updateTicketStatus(ticketId, EStatus.DROPPED);
+
+            Tickets ticket = ticketService.getTicket(ticketId);
+
+            TicketLogs ticketLogs = ticketLogsService.addTicketLogs(ticket.getTicketId(), "Ticket dropped");
+            ticketLogsService.logTicketInfo(ticketLogs);
 
             return ResponseHandler.generateResponse("Ticket has been dropped!", HttpStatus.OK, status);
         } catch (Exception e) {
@@ -99,6 +116,9 @@ public class TicketSupportController {
                 ticketAttachmentService.deleteFile(file.getId());
             }
 
+            TicketLogs ticketLogs = ticketLogsService.addTicketLogs(ticket.getTicketId(), "Ticket canceled");
+            ticketLogsService.logTicketInfo(ticketLogs);
+
             return ResponseHandler.generateResponse("Ticket has been canceled!", HttpStatus.OK, null);
 
         } catch (Exception e) {
@@ -112,6 +132,9 @@ public class TicketSupportController {
             Supports support = supportService.requestDropSupport(supportId, supportRequest);
             String status = updateTicketStatus(support.getTicket().getTicketId(), EStatus.AWAITING);
 
+            TicketLogs ticketLogs = ticketLogsService.addTicketLogs(support.getTicket().getTicketId(), "Request drop ticket");
+            ticketLogsService.logTicketInfo(ticketLogs);
+
             return ResponseHandler.generateResponse("Ticket is now awaiting for approval!", HttpStatus.OK, status);
         } catch (Exception e) {
             return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.BAD_REQUEST, null);
@@ -123,8 +146,11 @@ public class TicketSupportController {
         try {
             Supports support = supportService.addSupport(ticketId);
             String status = updateTicketStatus(support.getTicket().getTicketId(), EStatus.IN_PROGRESS);
-            return ResponseHandler.generateResponse("Support has been added successfully!", HttpStatus.OK, status);
 
+            TicketLogs ticketLogs = ticketLogsService.addTicketLogs(support.getTicket().getTicketId(), "Ticket taken for support");
+            ticketLogsService.logTicketInfo(ticketLogs);
+
+            return ResponseHandler.generateResponse("Support has been added successfully!", HttpStatus.OK, status);
         } catch (Exception e) {
             return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.BAD_REQUEST, null);
         }
@@ -135,8 +161,11 @@ public class TicketSupportController {
         try {
             Supports support = supportService.reassignSupport(reassignSupportRequest);
             String status = updateTicketStatus(support.getTicket().getTicketId(), EStatus.IN_PROGRESS);
+
+            TicketLogs ticketLogs = ticketLogsService.addTicketLogs(support.getTicket().getTicketId(), "Ticket reassigned to new support");
+            ticketLogsService.logTicketInfo(ticketLogs);
+
             return ResponseHandler.generateResponse("New support has been added successfully!", HttpStatus.OK, status);
-    
         } catch (Exception e) {
             return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.BAD_REQUEST, null);
         }
@@ -154,16 +183,15 @@ public class TicketSupportController {
             }
 
             String status = updateTicketStatus(support.getTicket().getTicketId(), EStatus.RESOLVED);
+
+            TicketLogs ticketLogs = ticketLogsService.addTicketLogs(support.getTicket().getTicketId(), "Ticket solved");
+            ticketLogsService.logTicketInfo(ticketLogs);
+
             return ResponseHandler.generateResponse("Support has been updated successfully!", HttpStatus.OK, status);
         } catch (Exception e) {
             return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.BAD_REQUEST, null);
         }
     }
-
-    //withdraw Support
-    // public Supports withdrawSupport(UUID supportId, String result, String description){
-    //     return supportService.withdrawSupport(supportId, result, description);
-    // }
 
     public String updateTicketStatus(UUID ticketId, EStatus status){
         Tickets ticket = ticketService.updateTicketStatus(ticketId, status);
