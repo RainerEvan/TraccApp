@@ -40,13 +40,5 @@ public interface SupportRepository extends JpaRepository<Supports, UUID>{
                 )
     List<TopTagsResponse> countSupportByTag(@Param("dateTakenStart") OffsetDateTime dateTakenStart, @Param("dateTakenEnd") OffsetDateTime dateTakenEnd);
 
-    // @Query(value="SELECT " +
-    //             "    new com.traccapp.demo.payload.response.TopTagsResponse(s.result, COUNT(s.result)) " +
-    //             "FROM " +
-    //             "    Supports AS s " +
-    //             "WHERE " +
-    //             "    s.dateTaken BETWEEN :dateTakenStart AND :dateTakenEnd " +
-    //             "GROUP BY " +
-    //             "    s.result")
-    // List<TopTagsResponse> countSupportByTag(@Param("dateTakenStart") OffsetDateTime dateTakenStart, @Param("dateTakenEnd") OffsetDateTime dateTakenEnd);
+    int countByDeveloperAndIsActiveAndDateTakenBetween(Accounts developer, Boolean isActive, OffsetDateTime dateTakenStart, OffsetDateTime dateTakenEnd);
 }

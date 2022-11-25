@@ -2,11 +2,11 @@
     <p-table #reportTable [value]="developers" [loading]="loading" selectionMode="single" [(selection)]="selectedDeveloper" dataKey="id" [scrollable]="true" scrollHeight="300px" [responsive]="true" responsiveLayout="scroll">
         <ng-template pTemplate="header">
             <tr>
-                <th class="text-sm">Developers</th>
+                <th class="font-medium">Developers</th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-developer>
-            <div [pSelectableRow]="developer" class="grid grid-cols-5 auto-cols-auto gap-2 p-2 text-black drop-shadow-sm transition ease-in-out duration-100 border-gray-200 hover:border-l-4 hover:rounded-l-sm hover:bg-gray-100/40 cursor-pointer">
+            <div [pSelectableRow]="developer" class="grid grid-cols-5 auto-cols-auto gap-2 p-2 transition ease-in-out duration-100 hover:border-l-4 hover:rounded-l-sm hover:bg-gray-100/40 hover:border-gray-200 cursor-pointer">
                 <div class="col-span-1">
                     <div class="w-full h-full flex items-center justify-center">
                         <img [(src)]="imageUrl+developer.id" alt="Profile" class="rounded-full w-12">
@@ -38,6 +38,6 @@
         <span class="text-black">{{selectedDeveloper?.fullname ?? 'Not yet selected'}}</span>
     </div>
     <div class="w-full flex flex-row items-center justify-center space-x-6">
-        <button (click)="showConfirmationDialog('Reassign Ticket','Do you want to reassign ticket to this developer?')" [disabled]="!selectedDeveloper" type="button" class="button-primary scale-110">Select</button>
+        <button (click)="showConfirmationDialog('Reassign Ticket','Do you want to reassign ticket to this developer?')" [disabled]="!selectedDeveloper" type="button" class="w-24 button-primary scale-110">Select</button>
     </div>
 </div>

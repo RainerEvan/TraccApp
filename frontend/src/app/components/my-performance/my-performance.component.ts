@@ -1,41 +1,41 @@
 import { Component, OnInit } from '@angular/core';
-import { DashboardActivity } from 'src/app/models/dashboard';
-import { DashboardService } from 'src/app/services/dashboard/dashboard.service';
+import { Performance } from 'src/app/models/performance';
+import { AuthService } from 'src/app/services/auth/auth.service';
+import { PerformanceService } from 'src/app/services/performance/performance.service';
 
 @Component({
-  selector: 'app-dashboard-activity',
-  templateUrl: './dashboard-activity.component.html',
-  styleUrls: ['./dashboard-activity.component.css']
+  selector: 'app-my-performance',
+  templateUrl: './my-performance.component.html',
+  styleUrls: ['./my-performance.component.css']
 })
-export class DashboardActivityComponent implements OnInit {
-  
+export class MyPerformanceComponent implements OnInit {
+
   basicData: any;
   basicOption: any;
   loading: boolean;
   
-  dashboardActivity: DashboardActivity[];
+  performances: Performance[];
   period: string;
-  totalPending: number;
-  totalInProgress: number;
-  totalResolved: number;
-  totalDropped: number;
   totalTickets: number;
+  rate: string;
   label: string[];
   data: number[];
 
-  constructor(private dashboardService:DashboardService) { }
+  constructor(private performanceService:PerformanceService, private authService:AuthService) { }
 
   ngOnInit(): void {
-    this.getDashboardActivity();
+    this.getPerformance();
   }
 
-  public getDashboardActivity(){
+  public getPerformance(){
+    const accountId = this.authService.accountValue.accountId;
+
     this.loading = true;
 
-    this.dashboardService.getDashboardActivity().subscribe({
-      next: (activity: DashboardActivity[]) => {
-        this.dashboardActivity = activity;
-        this.getActivityData(activity[0]);
+    this.performanceService.getPerformanceForDeveloper(accountId).subscribe({
+      next: (performances: Performance[]) => {
+        this.performances = performances;
+        this.getPerformanceData(performances[0]);
         this.loading = false;
       },
       error: (error: any) => {
@@ -44,15 +44,12 @@ export class DashboardActivityComponent implements OnInit {
     });
   }
 
-  getActivityData(activity:DashboardActivity){
-    this.period = activity.period;
-    this.totalPending = activity.totalPending;
-    this.totalInProgress = activity.totalInProgress;
-    this.totalResolved = activity.totalResolved;
-    this.totalDropped = activity.totalDropped;
-    this.totalTickets = activity.totalTickets;
-    this.label = activity.label;
-    this.data = activity.data
+  getPerformanceData(performance:Performance){
+    this.period = performance.period;
+    this.totalTickets = performance.totalTickets;
+    this.rate = performance.rate;
+    this.label = performance.label;
+    this.data = performance.data
     this.generateChart();
   }
 

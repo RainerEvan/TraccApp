@@ -44,7 +44,7 @@
                 <h1 class="font-bold text-lg text-center mb-4">
                     Top Applications
                 </h1>
-                <div class="bg-white h-56 flex flex-row items-center space-x-6 border-2 border-gray-100 shadow-md p-8">
+                <div class="card h-56 flex flex-row items-center space-x-6 p-8">
                     <div class="w-full">
                         <p-chart *ngIf="dashboardAnalytics" type="pie" [data]="pieChartData" [options]="pieChartOption" width="100%" height="10rem"></p-chart>
                         <p-skeleton *ngIf="loading" shape="circle" width="9rem" height="9rem"></p-skeleton>
@@ -62,7 +62,7 @@
                 <h1 class="font-bold text-lg text-center mb-4">
                     Top 3 Tags
                 </h1>
-                <div class="bg-white h-56 flex items-start justify-center border-2 border-gray-100 shadow-md py-6 px-10">
+                <div class="card h-56 flex items-start justify-center py-6 px-10">
                     <table class="table-auto bg-white w-full">
                         <tr>
                             <th class="border-b-2 text-left text-sm px-4 py-2">Rank</th>
@@ -115,9 +115,9 @@
                 <h1 class="font-bold text-lg text-center mb-4">
                     Ticket Rate
                 </h1>
-                <div class="bg-white h-56 flex flex-col space-y-2 justify-center border-2 border-gray-100 shadow-md py-8 px-12">
+                <div class="card h-56 flex flex-col space-y-2 justify-center py-8 px-12">
                     <span class="font-semibold text-sm">Resolved</span>
-                    <span *ngIf="dashboardAnalytics" class="font-regular text-6xl">{{ticketRate.rate}}</span>
+                    <span *ngIf="dashboardAnalytics" class="font-regular text-5xl lg:text-6xl">{{ticketRate.rate}}</span>
                     <p-skeleton *ngIf="loading" width="8rem" height="4rem"></p-skeleton>
                     <span *ngIf="dashboardAnalytics" class="font-semibold text-xs text-gray-400 border-t-2 border-gray-400 py-2">{{ticketRate.label}}</span>
                     <p-skeleton *ngIf="loading" width="8rem"></p-skeleton>

@@ -1,6 +1,8 @@
 package com.traccapp.demo.service;
 
+import java.time.DayOfWeek;
 import java.time.OffsetDateTime;
+import java.time.temporal.TemporalAdjusters;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -52,7 +54,6 @@ public class SupportService {
 
     @Transactional
     public List<Supports> getAllSupportsForDeveloper(UUID accountId){
-
         Accounts developer = accountRepository.findById(accountId)
             .orElseThrow(() -> new AbstractGraphQLException("Account with current id cannot be found: "+accountId,"accountId"));
         

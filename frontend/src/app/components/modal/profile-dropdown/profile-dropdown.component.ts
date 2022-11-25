@@ -32,8 +32,7 @@ export class ProfileDropdownComponent implements OnInit, OnDestroy {
         message: message,
       },
       baseZIndex: 10000,
-      contentStyle: {"max-height": "500px", "overflow": "auto"},
-      width:'30vw',
+      contentStyle: {"max-height": "650px","width":"40vw", "min-width":"350px", "max-width":"500px", "overflow": "auto"},
     });
 
     this.ref.onClose.subscribe((confirm:boolean) =>{

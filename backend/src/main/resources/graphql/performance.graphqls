@@ -1,0 +1,12 @@
+type Performance{
+    menu:String
+    period:String
+    totalTickets:Int
+    rate:String
+    label:[String]
+    data:[Int]
+}
+
+extend type Query{
+    getPerformanceForDeveloper(accountId:ID!):[Performance]
+}

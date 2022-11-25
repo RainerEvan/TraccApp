@@ -94,11 +94,11 @@ body{
 }
 
 .p-inputswitch-slider {
-    @apply ring-0 outline-none bg-red-600 hover:bg-red-700 !important;
+    @apply ring-0 outline-none bg-rose-600 hover:bg-rose-700 !important;
 }
 
 .p-inputswitch-checked .p-inputswitch-slider {
-    @apply bg-green-600 hover:bg-green-700 !important;
+    @apply bg-emerald-500 hover:bg-emerald-600 !important;
 }
 
 .drag-area{
@@ -154,9 +154,9 @@ body{
 }
 
 .account-status-true{
-    @apply bg-green-600 text-white !important;
+    @apply bg-emerald-500 text-white !important;
 }
 
 .account-status-false{
-    @apply bg-red-600 text-white !important;
+    @apply bg-rose-600 text-white !important;
 }

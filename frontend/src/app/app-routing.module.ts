@@ -10,6 +10,7 @@ import { ConfigTagComponent } from './components/config/config-tag/config-tag.co
 import { DashboardPageComponent } from './components/dashboard/dashboard-page/dashboard-page.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
+import { MyPerformanceComponent } from './components/my-performance/my-performance.component';
 import { MyTaskListComponent } from './components/my-tasks/my-task-list/my-task-list.component';
 import { MyTicketListComponent } from './components/my-tickets/my-ticket-list/my-ticket-list.component';
 import { NotificationPageComponent } from './components/notifications/notification-page/notification-page.component';
@@ -115,6 +116,12 @@ const routes: Routes = [
       {
         path:'my-task', 
         component: MyTaskListComponent,
+        canActivate:[AuthGuard],
+        data:{roles:'DEVELOPER'},
+      },
+      {
+        path:'my-performance', 
+        component: MyPerformanceComponent,
         canActivate:[AuthGuard],
         data:{roles:'DEVELOPER'},
       },

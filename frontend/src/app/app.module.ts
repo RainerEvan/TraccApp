@@ -27,7 +27,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { ToastModule } from 'primeng/toast';
 import { TableModule } from 'primeng/table';
-import {ImageModule} from 'primeng/image';
+import { ImageModule } from 'primeng/image';
 import { EditorModule } from 'primeng/editor';
 import { ChartModule } from 'primeng/chart';
 import { SkeletonModule } from 'primeng/skeleton';
@@ -67,6 +67,7 @@ import { NotificationDetailComponent } from './components/notifications/notifica
 import { ImageDialogComponent } from './components/modal/image-dialog/image-dialog.component';
 import { ReassignTicketComponent } from './components/tickets/reassign-ticket/reassign-ticket.component';
 import { RequestDropTicketComponent } from './components/tickets/request-drop-ticket/request-drop-ticket.component';
+import { MyPerformanceComponent } from './components/my-performance/my-performance.component';
 
 @NgModule({
   declarations: [
@@ -110,6 +111,7 @@ import { RequestDropTicketComponent } from './components/tickets/request-drop-ti
     ImageDialogComponent,
     ReassignTicketComponent,
     RequestDropTicketComponent,
+    MyPerformanceComponent,
   ],
   imports: [
     BrowserModule,
