@@ -71,6 +71,7 @@ public class AccountService {
             .orElseThrow(() -> new AbstractGraphQLException("Account with current id cannot be found: "+accountId,"accountId"));
     }
 
+    @Transactional
     public Accounts addAccount(MultipartFile file, AccountRequest accountRequest) {
 
         String username = accountRequest.getUsername();
@@ -104,6 +105,7 @@ public class AccountService {
         return accountRepository.save(account);
     }
 
+    @Transactional
     public Accounts editAccount(MultipartFile file, UUID accountId, AccountRequest accountRequest) {
         
         Accounts account = getAccount(accountId);
@@ -166,6 +168,7 @@ public class AccountService {
         return accountRepository.save(account);
     }
 
+    @Transactional
     public void changePassword(String currentPassword, String newPassword){
         
         Accounts account = authService.getCurrentAccount();

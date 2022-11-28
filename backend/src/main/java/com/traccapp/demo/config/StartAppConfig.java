@@ -418,7 +418,7 @@ public class StartAppConfig {
             // }
 
             Tickets ticket = new Tickets();
-            ticket.setDateAdded(OffsetDateTime.now().minusDays(1));
+            ticket.setDateAdded(OffsetDateTime.now());
             ticket.setApplication(application);
             ticket.setReporter(account);
             ticket.setTitle("Aplikasi CAMS error");
@@ -426,34 +426,50 @@ public class StartAppConfig {
             ticket.setStatus(status2);
             ticketRepository.save(ticket);
 
+            Supports support = new Supports();
+            support.setTicket(ticket);
+            support.setDateTaken(OffsetDateTime.now());
+            support.setDeveloper(account2);
+            support.setIsActive(true);
+            supportRepository.save(support);
+
             Tickets ticket2 = new Tickets();
             ticket2.setDateAdded(OffsetDateTime.now());
             ticket2.setApplication(application2);
             ticket2.setReporter(account);
             ticket2.setTitle("Smile Bug pada Form Tidak ada alamat");
             ticket2.setDescription("Form gabisa diisi lagi gimana dong");
-            ticket2.setStatus(status1);
+            ticket2.setStatus(status3);
             ticketRepository.save(ticket2);
 
-            for(int i=0; i<2; i++){
-                Tickets ticket10 = new Tickets();
-                ticket10.setDateAdded(OffsetDateTime.now());
-                ticket10.setApplication(application2);
-                ticket10.setReporter(account);
-                ticket10.setTitle("Smile Bug pada Form Tidak ada alamat");
-                ticket10.setDescription("Form gabisa diisi lagi gimana dong");
-                ticket10.setStatus(status1);
-                ticketRepository.save(ticket10);
-            }
+            Supports support2 = new Supports();
+            support2.setTicket(ticket2);
+            support2.setDateTaken(OffsetDateTime.now());
+            support2.setDeveloper(account2);
+            support2.setResult("Form sudah dibenerin");
+            support2.setDescription("Formnya udah bisa dipake coba lagi bisa ga");
+            support2.setTags(tags);
+            support2.setIsActive(true);
+            supportRepository.save(support2);
 
             Tickets ticket3 = new Tickets();
-            ticket3.setDateAdded(OffsetDateTime.now().minusDays(1));
+            ticket3.setDateAdded(OffsetDateTime.now().minusWeeks(1));
             ticket3.setApplication(application3);
             ticket3.setReporter(account);
             ticket3.setTitle("App Geospacial Tidak bisa Input Data Perumahan");
             ticket3.setDescription("Form gabisa diisi lagi gimana dong");
             ticket3.setStatus(status3);
             ticketRepository.save(ticket3);
+
+            Supports support3 = new Supports();
+            support3.setTicket(ticket3);
+            support3.setDateTaken(OffsetDateTime.now().minusWeeks(1));
+            support3.setDeveloper(account2);
+            support3.setResult("Form sudah dibenerin");
+            support3.setDescription("Formnya udah bisa dipake coba lagi bisa ga");
+            support3.setTags(tags2);
+            support3.setIsActive(true);
+            supportRepository.save(support3);
 
             Tickets ticket4 = new Tickets();
             ticket4.setDateAdded(OffsetDateTime.now().minusMonths(1));
@@ -464,32 +480,24 @@ public class StartAppConfig {
             ticket4.setStatus(status3);
             ticketRepository.save(ticket4);
 
-            Supports support = new Supports();
-            support.setTicket(ticket);
-            support.setDateTaken(OffsetDateTime.now());
-            support.setDeveloper(account2);
-            support.setIsActive(true);
-            supportRepository.save(support);
+            Supports support4 = new Supports();
+            support4.setTicket(ticket4);
+            support4.setDateTaken(OffsetDateTime.now().minusMonths(1));
+            support4.setDeveloper(account2);
+            support4.setResult("Form sudah dibenerin");
+            support4.setDescription("Formnya udah bisa dipake coba lagi bisa ga");
+            support4.setTags(tags2);
+            support4.setIsActive(true);
+            supportRepository.save(support4);
 
-            Supports support2 = new Supports();
-            support2.setTicket(ticket3);
-            support2.setDateTaken(OffsetDateTime.now());
-            support2.setDeveloper(account2);
-            support2.setResult("Form sudah dibenerin");
-            support2.setDescription("Formnya udah bisa dipake coba lagi bisa ga");
-            support2.setTags(tags);
-            support2.setIsActive(true);
-            supportRepository.save(support2);
-
-            Supports support3 = new Supports();
-            support3.setTicket(ticket4);
-            support3.setDateTaken(OffsetDateTime.now().minusMonths(1));
-            support3.setDeveloper(account2);
-            support3.setResult("Form sudah dibenerin");
-            support3.setDescription("Formnya udah bisa dipake coba lagi bisa ga");
-            support3.setTags(tags2);
-            support3.setIsActive(true);
-            supportRepository.save(support3);
+            Tickets ticket5 = new Tickets();
+            ticket5.setDateAdded(OffsetDateTime.now());
+            ticket5.setApplication(application2);
+            ticket5.setReporter(account);
+            ticket5.setTitle("App Smile Tidak bisa Input Data Perumahan");
+            ticket5.setDescription("Form gabisa diisi lagi gimana dong");     
+            ticket5.setStatus(status1);
+            ticketRepository.save(ticket5);
 
             Comments comment = new Comments();
             comment.setTicket(ticket3);
@@ -499,12 +507,6 @@ public class StartAppConfig {
             comment.setIsActive(true);
             commentRepository.save(comment);
 
-            // Supports support2 = new Supports();
-            // support2.setTicket(ticket);
-            // support2.setDateTaken(LocalDate.now());
-            // support2.setDeveloper(account);
-            // support2.setIsActive(false);
-            // supportRepository.save(support2);
         };
     }
 }

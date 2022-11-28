@@ -68,7 +68,7 @@ public class PerformanceService {
                 String day = date.format(DateTimeFormatter.ofPattern("EE"));
                 label.add(day);
     
-                int total = supportRepository.countByDeveloperAndIsActiveAndDateTakenBetween(developer,true,date,date.withHour(23).withMinute(59));
+                int total = supportRepository.countByDeveloperAndDateTakenBetween(developer,date,date.withHour(23).withMinute(59));
                 data.add(total);
             }
         }
@@ -81,7 +81,7 @@ public class PerformanceService {
                 String day = date.format(DateTimeFormatter.ofPattern("dd"));
                 label.add(day);
     
-                int total = supportRepository.countByDeveloperAndIsActiveAndDateTakenBetween(developer,true,date,date.withHour(23).withMinute(59));
+                int total = supportRepository.countByDeveloperAndDateTakenBetween(developer,date,date.withHour(23).withMinute(59));
                 data.add(total);
             }
         }
@@ -94,23 +94,28 @@ public class PerformanceService {
                 String month = date.format(DateTimeFormatter.ofPattern("MMM"));
                 label.add(month);
     
-                int total = supportRepository.countByDeveloperAndIsActiveAndDateTakenBetween(developer,true,date,date.withHour(23).withMinute(59).with(TemporalAdjusters.lastDayOfMonth()));
+                int total = supportRepository.countByDeveloperAndDateTakenBetween(developer,date,date.withHour(23).withMinute(59).with(TemporalAdjusters.lastDayOfMonth()));
                 data.add(total);
             }
         }
 
-        int totalTickets = supportRepository.countByDeveloperAndIsActiveAndDateTakenBetween(developer,true,startDate, endDate);
+        
+        Status pending = statusRepository.findByName(EStatus.PENDING).get();
+        Status inProgress = statusRepository.findByName(EStatus.IN_PROGRESS).get();
+        Status resolved = statusRepository.findByName(EStatus.RESOLVED).get();
+        Status closed = statusRepository.findByName(EStatus.CLOSED).get();
+        Status dropped = statusRepository.findByName(EStatus.DROPPED).get();
+        
+        int totalPending = supportRepository.countSupportByTicketStatus(developer, true, pending, startDate, endDate) + supportRepository.countSupportByTicketStatus(developer, true, closed, startDate, endDate);
+        int totalInProgress = supportRepository.countSupportByTicketStatus(developer, true, inProgress, startDate, endDate) + supportRepository.countSupportByTicketStatus(developer, true, closed, startDate, endDate);
+        int totalResolved = supportRepository.countSupportByTicketStatus(developer, true, resolved, startDate, endDate) + supportRepository.countSupportByTicketStatus(developer, true, closed, startDate, endDate);
+        int totalDropped = supportRepository.countSupportByTicketStatus(developer, true, dropped, startDate, endDate) + supportRepository.countSupportByTicketStatus(developer, true, closed, startDate, endDate);
+        int totalTickets = supportRepository.countByDeveloperAndDateTakenBetween(developer,startDate, endDate);
 
-        // Status resolved = statusRepository.findByName(EStatus.RESOLVED).get();
-        // Status closed = statusRepository.findByName(EStatus.CLOSED).get();
+        double percentage = (double) totalResolved/ (double) totalTickets;
+        String rate = NumberFormat.getPercentInstance().format(percentage);
 
-        // double totalResolved = ticketRepository.countByStatusAndDateAddedBetween(resolved, startDate, endDate) + ticketRepository.countByStatusAndDateAddedBetween(closed, startDate, endDate);
-        // double totalTickets = ticketRepository.countByDateAddedBetween(startDate, endDate);
-
-        // double percentage = totalResolved/totalTickets;
-        String rate = NumberFormat.getPercentInstance().format(0.9);
-
-        return new PerformanceResponse(menu, period, totalTickets, rate, label, data);
+        return new PerformanceResponse(menu, period, totalPending, totalInProgress, totalResolved, totalDropped, totalTickets, rate, label, data);
     }
 
 }

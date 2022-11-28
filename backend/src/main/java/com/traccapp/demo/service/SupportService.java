@@ -1,8 +1,6 @@
 package com.traccapp.demo.service;
 
-import java.time.DayOfWeek;
 import java.time.OffsetDateTime;
-import java.time.temporal.TemporalAdjusters;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;

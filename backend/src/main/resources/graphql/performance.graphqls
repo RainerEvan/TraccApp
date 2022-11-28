@@ -1,6 +1,10 @@
 type Performance{
     menu:String
     period:String
+    totalPending:Int
+    totalInProgress:Int
+    totalResolved:Int
+    totalDropped:Int
     totalTickets:Int
     rate:String
     label:[String]

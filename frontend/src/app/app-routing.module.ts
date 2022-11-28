@@ -126,7 +126,12 @@ const routes: Routes = [
         data:{roles:'DEVELOPER'},
       },
     ]
-  }
+  },
+  {
+    path:'**',
+    redirectTo: 'dashboard',
+    pathMatch: 'full'
+  },
 ];
 
 @NgModule({

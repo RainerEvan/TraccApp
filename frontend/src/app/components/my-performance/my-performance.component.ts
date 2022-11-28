@@ -16,6 +16,10 @@ export class MyPerformanceComponent implements OnInit {
   
   performances: Performance[];
   period: string;
+  totalPending: number;
+  totalInProgress: number;
+  totalResolved: number;
+  totalDropped: number;
   totalTickets: number;
   rate: string;
   label: string[];
@@ -46,6 +50,10 @@ export class MyPerformanceComponent implements OnInit {
 
   getPerformanceData(performance:Performance){
     this.period = performance.period;
+    this.totalPending = performance.totalPending;
+    this.totalInProgress = performance.totalInProgress;
+    this.totalResolved = performance.totalResolved;
+    this.totalDropped = performance.totalDropped;
     this.totalTickets = performance.totalTickets;
     this.rate = performance.rate;
     this.label = performance.label;

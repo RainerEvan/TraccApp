@@ -17,6 +17,10 @@ export class PerformanceService {
           getPerformanceForDeveloper(accountId: $accountId){
             menu
             period
+            totalPending
+            totalInProgress
+            totalResolved
+            totalDropped
             totalTickets
             rate
             label

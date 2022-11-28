@@ -15,7 +15,6 @@ import { FcmsubscriptionService } from 'src/app/services/fcmsubscription/fcmsubs
 export class HeaderComponent implements OnInit {
 
   account: AuthDetails;
-  isTokenExist: boolean;
 
   constructor(private angularFireMessaging: AngularFireMessaging,private authService:AuthService, private fcmSubscriptionService: FcmsubscriptionService, private messageService: MessageService){}
 

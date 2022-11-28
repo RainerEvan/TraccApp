@@ -1,5 +1,5 @@
 :host ::ng-deep .p-datatable-header{
-    @apply bg-gray-200 py-2 px-8 rounded-t-md !important;
+    @apply bg-gray-100 py-2 px-8 rounded-t-md !important;
 }
 
 :host ::ng-deep .p-datatable-tbody{
