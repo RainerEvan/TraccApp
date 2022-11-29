@@ -2,8 +2,8 @@
     <h1 class="font-bold text-lg text-center mb-4">
         Configuration
     </h1>
-    <div class="card p-8 flex flex-row space-x-6">
-        <div class="w-1/3 flex flex-col items-center space-y-4 px-4">
+    <div class="card p-8 grid grid-cols-1 gap-8 lg:grid-cols-6">
+        <div class="flex flex-col items-center space-y-4 lg:col-span-2">
             <div class="w-full bg-gray-400/70 px-4 py-2">
                 <span class="font-bold text-base">MENU</span>
             </div>
@@ -34,7 +34,7 @@
                 </button>
             </div>
         </div>
-        <div class="w-2/3 shadow-inner">
+        <div class="shadow-inner lg:col-span-4 ">
             <router-outlet></router-outlet>
         </div>
     </div>

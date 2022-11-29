@@ -23,14 +23,14 @@
                 </div>
             </ng-template>
             <ng-template pTemplate="body" let-account>
-                <div routerLink="/account-detail/{{account.id}}" class="grid grid-cols-8 auto-cols-auto gap-6 py-4 px-6 transition ease-in-out duration-100 border-bca-500 hover:border-l-4 hover:rounded-l-sm hover:bg-gray-100/40 cursor-pointer">
+                <div routerLink="/account-detail/{{account.id}}" class="table-list grid grid-cols-2 auto-cols-auto gap-6 py-4 px-6 lg:grid-cols-8">
                     <div class="col-span-1">
                         <div class="flex items-center justify-center py-2 bg-white shadow-md">
-                            <img [(src)]="imageUrl+account.id" alt="Profile" class="rounded-full w-20">
+                            <img [(src)]="imageUrl+account.id" alt="Profile" class="rounded-full w-36 lg:w-20">
                         </div>
                     </div>
-                    <div class="col-span-2">
-                        <div class="w-full h-full flex flex-col justify-between py-2">
+                    <div class="col-span-1 lg:col-span-2">
+                        <div class="w-full h-full flex flex-col justify-between space-y-2 py-2">
                             <div class="flex flex-col">
                                 <span class="font-semibold text-base uppercase break-words">{{account.fullname}}</span>
                                 <span class="font-regular text-sm">{{account.roles[0].name}}</span>
@@ -41,8 +41,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-span-2">
-                        <div class="w-full h-full flex flex-col justify-between py-2">
+                    <div class="col-span-1 lg:col-span-2">
+                        <div class="w-full h-full flex flex-col justify-between space-y-2 lg:py-2">
                             <div class="flex flex-col justify-center">
                                 <span class="font-medium text-xs">Username</span>
                                 <span class="font-regular text-sm text-gray-500">{{account.username}}</span>
@@ -54,8 +54,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-span-2">
-                        <div class="w-full h-full flex flex-col justify-between py-2">
+                    <div class="col-span-1 lg:col-span-2">
+                        <div class="w-full h-full flex flex-col justify-between space-y-2 lg:py-2">
                             <div class="flex flex-col justify-center">
                                 <span class="font-medium text-xs">Division</span>
                                 <span class="font-regular text-sm text-gray-500">{{account.division.name}}</span>
@@ -68,8 +68,8 @@
                         </div>
                     </div>
                     <div class="col-span-1">
-                        <div class="w-full h-full flex items-center justify-center">
-                            <a routerLink="/account-detail/{{account.accountId}}" class="flex flex-row space-x-2 p-3 items-center hover:text-gray-500">
+                        <div class="w-full h-full flex items-center lg:justify-center">
+                            <a routerLink="/account-detail/{{account.accountId}}" class="flex flex-row space-x-2 items-center hover:text-gray-500">
                                 <i class="pi pi-chevron-circle-right" style="font-size: 16px;"></i>
                                 <span class="font-medium text-xs">View Details</span>
                             </a>

@@ -22,15 +22,15 @@
                 </div>
             </ng-template>
             <ng-template pTemplate="body" let-ticket>
-                <div routerLink="/ticket-detail/{{ticket.ticketId}}" class="ticket-list">
-                    <div class="col-span-1">
+                <div routerLink="/ticket-detail/{{ticket.ticketId}}" class="table-list grid grid-cols-2 gap-6 py-4 px-6 lg:grid-cols-6">
+                    <div class="col-span-2 lg:col-span-1">
                         <div [class]="'ticket-status-'+ticket.status.name" class="w-full h-full flex flex-col items-center justify-center space-y-2 rounded-sm shadow-md px-4 py-10">
                             <i class="pi pi-ticket" style="font-size: 20px;"></i>
                             <span class="font-semibold text-xs">{{ticket.ticketNo}}</span>
                         </div>
                     </div>
                     <div class="col-span-2">
-                        <div class="w-full h-full flex flex-col justify-between py-2">
+                        <div class="w-full h-full flex flex-col justify-between space-y-2 lg:py-2">
                             <div class="flex flex-col">
                                 <span class="font-semibold text-base uppercase break-words">{{ticket.title}}</span>
                                 <span class="font-regular text-sm">{{ticket.application.name}}</span>
@@ -42,7 +42,7 @@
                         </div>
                     </div>
                     <div class="col-span-1">
-                        <div class="w-full h-full flex flex-col justify-between py-2">
+                        <div class="w-full h-full flex flex-col justify-between space-y-2 lg:py-2">
                             <div class="flex flex-col justify-center">
                                 <span class="font-medium text-xs">Date Added</span>
                                 <span class="font-regular text-sm text-gray-500">{{ticket.dateAdded | date:'dd/MM/yyyy'}}</span>
@@ -54,7 +54,7 @@
                         </div>
                     </div>
                     <div class="col-span-1">
-                        <div class="w-full h-full flex flex-col justify-between py-2">
+                        <div class="w-full h-full flex flex-col justify-between space-y-2 lg:py-2">
                             <div class="flex flex-col justify-center">
                                 <span class="font-medium text-xs">Date Taken</span>
                                 <span *ngIf="ticket.support[0]" class="font-regular text-sm text-gray-500">{{ticket.support[0].dateTaken | date:'dd/MM/yyyy'}}</span>
@@ -68,8 +68,8 @@
                         </div>
                     </div>
                     <div class="col-span-1">
-                        <div class="w-full h-full flex items-center justify-center">
-                            <a routerLink="/ticket-detail/{{ticket.ticketId}}" class="flex flex-row space-x-2 p-3 items-center hover:text-gray-500">
+                        <div class="w-full h-full flex items-center lg:justify-center">
+                            <a routerLink="/ticket-detail/{{ticket.ticketId}}" class="flex flex-row space-x-2 items-center hover:text-gray-500">
                                 <i class="pi pi-chevron-circle-right" style="font-size: 16px;"></i>
                                 <span class="font-medium text-xs">View Details</span>
                             </a>
