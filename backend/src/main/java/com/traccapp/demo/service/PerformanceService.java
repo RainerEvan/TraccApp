@@ -106,10 +106,10 @@ public class PerformanceService {
         Status closed = statusRepository.findByName(EStatus.CLOSED).get();
         Status dropped = statusRepository.findByName(EStatus.DROPPED).get();
         
-        int totalPending = supportRepository.countSupportByTicketStatus(developer, true, pending, startDate, endDate) + supportRepository.countSupportByTicketStatus(developer, true, closed, startDate, endDate);
-        int totalInProgress = supportRepository.countSupportByTicketStatus(developer, true, inProgress, startDate, endDate) + supportRepository.countSupportByTicketStatus(developer, true, closed, startDate, endDate);
+        int totalPending = supportRepository.countSupportByTicketStatus(developer, true, pending, startDate, endDate);
+        int totalInProgress = supportRepository.countSupportByTicketStatus(developer, true, inProgress, startDate, endDate);
         int totalResolved = supportRepository.countSupportByTicketStatus(developer, true, resolved, startDate, endDate) + supportRepository.countSupportByTicketStatus(developer, true, closed, startDate, endDate);
-        int totalDropped = supportRepository.countSupportByTicketStatus(developer, true, dropped, startDate, endDate) + supportRepository.countSupportByTicketStatus(developer, true, closed, startDate, endDate);
+        int totalDropped = supportRepository.countSupportByTicketStatus(developer, true, dropped, startDate, endDate);
         int totalTickets = supportRepository.countByDeveloperAndDateTakenBetween(developer,startDate, endDate);
 
         double percentage = (double) totalResolved/ (double) totalTickets;

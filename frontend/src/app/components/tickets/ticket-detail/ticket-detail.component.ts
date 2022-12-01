@@ -308,7 +308,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
         attachment: fileBase64,
       },
       baseZIndex: 10000,
-      contentStyle: {"max-height": "650px","width":"40vw", "min-width":"550px", "max-width":"700px", "overflow": "auto"},
+      contentStyle: {"max-height": "700px","width":"50vw", "min-width":"600px", "max-width":"750px", "overflow": "auto"},
     });
   }
 }

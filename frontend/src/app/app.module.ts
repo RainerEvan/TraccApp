@@ -68,6 +68,7 @@ import { ImageDialogComponent } from './components/modal/image-dialog/image-dial
 import { ReassignTicketComponent } from './components/tickets/reassign-ticket/reassign-ticket.component';
 import { RequestDropTicketComponent } from './components/tickets/request-drop-ticket/request-drop-ticket.component';
 import { MyPerformanceComponent } from './components/my-performance/my-performance.component';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -163,7 +164,7 @@ import { MyPerformanceComponent } from './components/my-performance/my-performan
             }
           },
           link: httpLink.create({
-            uri: 'http://localhost:8080/graphql',
+            uri: environment.serverUrl+'/graphql',
           }),
         };
       },
@@ -174,6 +175,9 @@ import { MyPerformanceComponent } from './components/my-performance/my-performan
     },
     { 
       provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true 
+    },
+    {
+      provide: LocationStrategy, useClass:HashLocationStrategy
     },
     DialogService,
     MessageService
