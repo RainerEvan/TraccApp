@@ -2,6 +2,7 @@ type Supports{
     id:ID
     ticket:Tickets
     dateTaken:DateTime
+    dateReassigned:DateTime
     developer:Accounts
     result:String
     description:String

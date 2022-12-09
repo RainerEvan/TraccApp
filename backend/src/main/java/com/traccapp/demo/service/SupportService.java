@@ -115,6 +115,7 @@ public class SupportService {
         Supports currSupport = supportRepository.findById(reassignSupportRequest.getCurrSupportId())
             .orElseThrow(() -> new IllegalStateException("Support with current id cannot be found: "+reassignSupportRequest.getCurrSupportId()));
         currSupport.setIsActive(false);
+        currSupport.setDateReassigned(OffsetDateTime.now());
         supportRepository.save(currSupport);
         
         Tickets ticket = ticketRepository.findByTicketId(reassignSupportRequest.getTicketId())

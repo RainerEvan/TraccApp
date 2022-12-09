@@ -4,6 +4,8 @@ import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.UUID;
 
+import javax.transaction.Transactional;
+
 import com.traccapp.demo.model.Accounts;
 import com.traccapp.demo.model.Status;
 import com.traccapp.demo.model.Supports;
@@ -19,7 +21,26 @@ import org.springframework.stereotype.Repository;
 public interface SupportRepository extends JpaRepository<Supports, UUID>{
     List<Supports> findAllByTicketAndIsActive(Tickets ticket, Boolean isActive);
     List<Supports> findAllByDeveloper(Accounts developer);
+    List<Supports> findAllByDeveloperAndIsActiveAndDateTakenBetween(Accounts developer, Boolean isActive, OffsetDateTime dateTakenStart, OffsetDateTime dateTakenEnd);
 
+    @Transactional
+    @Query(value="SELECT " +
+                "    (s) " +
+                "FROM " +
+                "    Supports AS s " +
+                "LEFT JOIN " +
+                "    s.ticket AS t " +
+                "WHERE " +
+                "    s.developer = :developer " +
+                "AND " +
+                "    s.isActive = :isActive " +
+                "AND " +
+                "    t.status = :status " +
+                "AND " +
+                "    s.dateTaken BETWEEN :dateTakenStart AND :dateTakenEnd"
+                )
+    List<Supports> findAllSupportByTicketStatus(@Param("developer") Accounts developer, @Param("isActive") Boolean isActive, @Param("status") Status status, @Param("dateTakenStart") OffsetDateTime dateTakenStart, @Param("dateTakenEnd") OffsetDateTime dateTakenEnd);
+    
     @Query(value="SELECT " +
                 "    new com.traccapp.demo.payload.response.TopTagsResponse(t.name, COUNT(s.id)) " +
                 "FROM " +
@@ -59,4 +80,6 @@ public interface SupportRepository extends JpaRepository<Supports, UUID>{
     int countSupportByTicketStatus(@Param("developer") Accounts developer, @Param("isActive") Boolean isActive, @Param("status") Status status, @Param("dateTakenStart") OffsetDateTime dateTakenStart, @Param("dateTakenEnd") OffsetDateTime dateTakenEnd);
 
     int countByDeveloperAndDateTakenBetween(Accounts developer, OffsetDateTime dateTakenStart, OffsetDateTime dateTakenEnd);
+
+    int countByDeveloperAndIsActiveAndDateTakenBetween(Accounts developer, Boolean isActive, OffsetDateTime dateTakenStart, OffsetDateTime dateTakenEnd);
 }

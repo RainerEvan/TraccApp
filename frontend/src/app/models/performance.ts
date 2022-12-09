@@ -1,10 +1,10 @@
 export type Performance ={
     menu:string;
     period:string;
-    totalPending:number;
     totalInProgress:number;
     totalResolved:number;
     totalDropped:number;
+    totalReassigned:number;
     totalTickets:number;
     rate:string;
     label:string[];

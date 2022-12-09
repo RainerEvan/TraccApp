@@ -13,11 +13,13 @@ import com.traccapp.demo.model.Comments;
 import com.traccapp.demo.model.Divisions;
 import com.traccapp.demo.model.Notifications;
 import com.traccapp.demo.model.Roles;
+import com.traccapp.demo.model.ScoreConfigs;
 import com.traccapp.demo.model.Status;
 import com.traccapp.demo.model.Supports;
 import com.traccapp.demo.model.Tags;
 import com.traccapp.demo.model.Tickets;
 import com.traccapp.demo.payload.request.AccountRequest;
+import com.traccapp.demo.payload.request.ScoreConfigRequest;
 import com.traccapp.demo.repository.CommentRepository;
 import com.traccapp.demo.repository.NotificationRepository;
 import com.traccapp.demo.repository.RoleRepository;
@@ -27,6 +29,7 @@ import com.traccapp.demo.repository.TicketRepository;
 import com.traccapp.demo.service.AccountService;
 import com.traccapp.demo.service.ApplicationService;
 import com.traccapp.demo.service.DivisionService;
+import com.traccapp.demo.service.ScoreConfigService;
 import com.traccapp.demo.service.TagsService;
 
 import org.springframework.boot.CommandLineRunner;
@@ -36,7 +39,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class StartAppConfig {
     @Bean
-    CommandLineRunner commandLineRunner(TagsService tagsService, AccountService accountService, ApplicationService applicationService, DivisionService divisionService, RoleRepository roleRepository, StatusRepository statusRepository, TicketRepository ticketRepository, SupportRepository supportRepository, CommentRepository commentRepository, NotificationRepository notificationRepository){
+    CommandLineRunner commandLineRunner(TagsService tagsService, AccountService accountService, ApplicationService applicationService, DivisionService divisionService, ScoreConfigService scoreConfigService, RoleRepository roleRepository, StatusRepository statusRepository, TicketRepository ticketRepository, SupportRepository supportRepository, CommentRepository commentRepository, NotificationRepository notificationRepository){
         return args -> {
 
             Roles role1 = new Roles();
@@ -440,6 +443,7 @@ public class StartAppConfig {
             ticket2.setTitle("Smile Bug pada Form Tidak ada alamat");
             ticket2.setDescription("Form gabisa diisi lagi gimana dong");
             ticket2.setStatus(status3);
+            ticket2.setDateClosed(OffsetDateTime.now().plusDays(4));
             ticketRepository.save(ticket2);
 
             Supports support2 = new Supports();
@@ -459,6 +463,7 @@ public class StartAppConfig {
             ticket3.setTitle("App Geospacial Tidak bisa Input Data Perumahan");
             ticket3.setDescription("Form gabisa diisi lagi gimana dong");
             ticket3.setStatus(status3);
+            ticket2.setDateClosed(OffsetDateTime.now().minusWeeks(1).plusDays(1));
             ticketRepository.save(ticket3);
 
             Supports support3 = new Supports();
@@ -478,6 +483,7 @@ public class StartAppConfig {
             ticket4.setTitle("App Smile Tidak bisa Input Data Perumahan");
             ticket4.setDescription("Form gabisa diisi lagi gimana dong");
             ticket4.setStatus(status3);
+            ticket2.setDateClosed(OffsetDateTime.now().minusMonths(1).plusDays(1));
             ticketRepository.save(ticket4);
 
             Supports support4 = new Supports();
@@ -507,6 +513,8 @@ public class StartAppConfig {
             comment.setIsActive(true);
             commentRepository.save(comment);
 
+                ScoreConfigRequest scoreConfigRequest = new ScoreConfigRequest(10, 2, 5, 2);
+                ScoreConfigs scoreConfig = scoreConfigService.addScoreConfig(scoreConfigRequest);
         };
     }
 }

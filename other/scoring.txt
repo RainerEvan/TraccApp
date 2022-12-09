@@ -1,0 +1,51 @@
+Data:
+1 ticket resolved = 10 poin
+1 ticket reassigned = 10 poin - 2 poin
+
+20 tickets total 
+10 tickets taken by Rainer
+5 tickets resolved by Rainer
+2 tickets in progress by Rainer
+1 ticket reassigned from Rainer
+2 tickets dropped by Rainer
+
+- Scoring by status:
+5 ticket resolved = 50 poin
+1 ticket reassigned = 8 poin
+
+total poin = 58 poin
+
+score = 58/60
+      = 96,7 %
+
+- Scoring by SLA:
+ex SLA = 2 days
+1 ticket resolved <= SLA = 10 poin
+1 ticket resolved > SLA = 10 poin - (x) days, max 5 days
+1 ticket dropped <= SLA = 10 poin
+1 ticket dropped > SLA = 10 poin - (x) days, max 5 days
+1 ticket reassigned <= SLA = 10 poin - 2 poin
+1 ticket reassigned > SLA = 10 poin - 2 poin - (x) days, max 5 days
+
+10 tickets taken by Rainer
+5 tickets resolved by Rainer
+(4 tickets resolved < SLA, 1 tickets resolved > SLA + 2 days )
+
+2 tickets in progress by Rainer
+1 tickets reassigned < SLA
+2 tickets dropped by Rainer
+(1 ticket dropped < SLA, 1 ticket dropped > SLA + 2 days)
+
+4 ticket resolved < SLA = 40 poin
+1 tickets resolved > SLA + 2 days = 10 poin - 2 days = 8 poin
+1 tickets reassigned < SLA = 5 poin
+1 tickets dropped < SLA = 10 poin
+1 tickets dropped > SLA + 2 days = 10 poin - 2 days = 8 poin
+
+total poin = 71
+
+score = 71/80
+	   = 88,8 %
+
+total performance= 96,7 + 88,8 / 2
+	         = 92.75 %

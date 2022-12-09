@@ -57,6 +57,7 @@ public class Tickets {
     private Applications application;
 
     private OffsetDateTime dateAdded;
+    private OffsetDateTime dateClosed;
 
     @ManyToOne
     @JoinColumn(name="reporter_id")
@@ -66,7 +67,6 @@ public class Tickets {
 
     @Lob
     private String description;
-    private OffsetDateTime dateClosed;
 
     @ManyToOne
     @JoinColumn(name="status_id")

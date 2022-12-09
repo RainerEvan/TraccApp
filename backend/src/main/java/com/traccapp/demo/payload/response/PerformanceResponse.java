@@ -10,10 +10,10 @@ import lombok.Data;
 public class PerformanceResponse {
     private String menu;
     private String period;
-    private int totalPending;
     private int totalInProgress;
     private int totalResolved;
     private int totalDropped;
+    private int totalReassigned;
     private int totalTickets;
     private String rate;
     private List<String> label;

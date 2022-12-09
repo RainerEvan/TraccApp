@@ -87,7 +87,7 @@ public class TicketService {
 
         ticket.setStatus(status);
 
-        if(statusName.equals(EStatus.CLOSED) || statusName.equals(EStatus.DROPPED)){
+        if(statusName.equals(EStatus.RESOLVED) || statusName.equals(EStatus.DROPPED)){
             ticket.setDateClosed(OffsetDateTime.now());
         }
 

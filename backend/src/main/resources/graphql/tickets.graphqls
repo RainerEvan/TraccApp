@@ -3,10 +3,10 @@ type Tickets{
     ticketNo:String
     application:Applications
     dateAdded:DateTime
+    dateClosed:DateTime
     reporter:Accounts
     title:String
     description:String
-    dateClosed:DateTime
     status:Status
     support:[Supports]
     attachments:[TicketAttachments]

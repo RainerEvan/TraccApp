@@ -46,6 +46,7 @@ public class Supports {
     private Tickets ticket;
 
     private OffsetDateTime dateTaken;
+    private OffsetDateTime dateReassigned;
 
     @ManyToOne
     @JoinColumn(name="developer_id")
