@@ -112,12 +112,6 @@ public class SupportService {
 
     @Transactional
     public Supports reassignSupport(ReassignSupportRequest reassignSupportRequest){
-        Supports currSupport = supportRepository.findById(reassignSupportRequest.getCurrSupportId())
-            .orElseThrow(() -> new IllegalStateException("Support with current id cannot be found: "+reassignSupportRequest.getCurrSupportId()));
-        currSupport.setIsActive(false);
-        currSupport.setDateReassigned(OffsetDateTime.now());
-        supportRepository.save(currSupport);
-        
         Tickets ticket = ticketRepository.findByTicketId(reassignSupportRequest.getTicketId())
             .orElseThrow(() -> new IllegalStateException("Ticket with current id cannot be found: "+reassignSupportRequest.getTicketId()));
 
@@ -131,6 +125,16 @@ public class SupportService {
         newSupport.setIsActive(true);
 
         return supportRepository.save(newSupport);
+    }
+
+    @Transactional
+    public void deactivateSupport(UUID supportId){
+        Supports currSupport = supportRepository.findById(supportId)
+            .orElseThrow(() -> new IllegalStateException("Support with current id cannot be found: "+supportId));
+            
+        currSupport.setIsActive(false);
+        currSupport.setDateReassigned(OffsetDateTime.now());
+        supportRepository.save(currSupport);
     }
 
 }

@@ -442,17 +442,13 @@ public class StartAppConfig {
             ticket2.setReporter(account);
             ticket2.setTitle("Smile Bug pada Form Tidak ada alamat");
             ticket2.setDescription("Form gabisa diisi lagi gimana dong");
-            ticket2.setStatus(status3);
-            ticket2.setDateClosed(OffsetDateTime.now().plusDays(4));
+            ticket2.setStatus(status2);
             ticketRepository.save(ticket2);
 
             Supports support2 = new Supports();
             support2.setTicket(ticket2);
             support2.setDateTaken(OffsetDateTime.now());
             support2.setDeveloper(account2);
-            support2.setResult("Form sudah dibenerin");
-            support2.setDescription("Formnya udah bisa dipake coba lagi bisa ga");
-            support2.setTags(tags);
             support2.setIsActive(true);
             supportRepository.save(support2);
 
@@ -462,17 +458,13 @@ public class StartAppConfig {
             ticket3.setReporter(account);
             ticket3.setTitle("App Geospacial Tidak bisa Input Data Perumahan");
             ticket3.setDescription("Form gabisa diisi lagi gimana dong");
-            ticket3.setStatus(status3);
-            ticket2.setDateClosed(OffsetDateTime.now().minusWeeks(1).plusDays(1));
+            ticket3.setStatus(status2);
             ticketRepository.save(ticket3);
 
             Supports support3 = new Supports();
             support3.setTicket(ticket3);
             support3.setDateTaken(OffsetDateTime.now().minusWeeks(1));
             support3.setDeveloper(account2);
-            support3.setResult("Form sudah dibenerin");
-            support3.setDescription("Formnya udah bisa dipake coba lagi bisa ga");
-            support3.setTags(tags2);
             support3.setIsActive(true);
             supportRepository.save(support3);
 
@@ -482,17 +474,13 @@ public class StartAppConfig {
             ticket4.setReporter(account);
             ticket4.setTitle("App Smile Tidak bisa Input Data Perumahan");
             ticket4.setDescription("Form gabisa diisi lagi gimana dong");
-            ticket4.setStatus(status3);
-            ticket2.setDateClosed(OffsetDateTime.now().minusMonths(1).plusDays(1));
+            ticket4.setStatus(status2);
             ticketRepository.save(ticket4);
 
             Supports support4 = new Supports();
             support4.setTicket(ticket4);
             support4.setDateTaken(OffsetDateTime.now().minusMonths(1));
             support4.setDeveloper(account2);
-            support4.setResult("Form sudah dibenerin");
-            support4.setDescription("Formnya udah bisa dipake coba lagi bisa ga");
-            support4.setTags(tags2);
             support4.setIsActive(true);
             supportRepository.save(support4);
 
@@ -513,8 +501,8 @@ public class StartAppConfig {
             comment.setIsActive(true);
             commentRepository.save(comment);
 
-                ScoreConfigRequest scoreConfigRequest = new ScoreConfigRequest(10, 2, 5, 2);
-                ScoreConfigs scoreConfig = scoreConfigService.addScoreConfig(scoreConfigRequest);
+            ScoreConfigRequest scoreConfigRequest = new ScoreConfigRequest(10, 2, 5, 2);
+            ScoreConfigs scoreConfig = scoreConfigService.addScoreConfig(scoreConfigRequest);
         };
     }
 }

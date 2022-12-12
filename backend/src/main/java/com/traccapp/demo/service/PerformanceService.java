@@ -141,7 +141,11 @@ public class PerformanceService {
         double totalPoints = totalResolvedPoints + totalDroppedPoints + totalReassignedPoints;
         double totalTicketPoints = (totalResolved + totalDropped + totalReassigned) * scoreConfig.getTicketPoint();
 
-        double totalScore = totalPoints / totalTicketPoints;
+        double totalScore = 0;
+        
+        if(totalPoints != 0){
+            totalScore = totalPoints / totalTicketPoints;
+        }
 
         return totalScore;
     }
@@ -160,19 +164,7 @@ public class PerformanceService {
         
         if(!supports.isEmpty()){
             for(Supports support:supports){
-                int days = Period.between(support.getDateTaken().toLocalDate(), support.getTicket().getDateClosed().toLocalDate()).getDays();
-    
-                int ticketPoint = scoreConfig.getTicketPoint();
-                int ticketSLA = scoreConfig.getTicketSLA();
-                int maxTicketSLA = scoreConfig.getMaxTicketSLA();
-    
-                if(days > ticketSLA){
-                    if(days - ticketSLA > maxTicketSLA){
-                        ticketPoint -= maxTicketSLA;
-                    } else{
-                        ticketPoint -= (days - ticketSLA);
-                    }
-                }
+                double ticketPoint = calculatePointsForSupport(support, scoreConfig, support.getDateTaken(), support.getTicket().getDateClosed());
     
                 totalPoints += ticketPoint;
             }
@@ -182,19 +174,7 @@ public class PerformanceService {
 
         if(!supportsReassigned.isEmpty()){
             for(Supports support:supportsReassigned){
-                int days = Period.between(support.getDateTaken().toLocalDate(), support.getDateReassigned().toLocalDate()).getDays();
-    
-                int ticketPoint = scoreConfig.getTicketPoint();
-                int ticketSLA = scoreConfig.getTicketSLA();
-                int maxTicketSLA = scoreConfig.getMaxTicketSLA();
-    
-                if(days > ticketSLA){
-                    if(days - ticketSLA > maxTicketSLA){
-                        ticketPoint -= maxTicketSLA;
-                    } else{
-                        ticketPoint -= (days - ticketSLA);
-                    }
-                }
+                double ticketPoint = calculatePointsForSupport(support, scoreConfig, support.getDateTaken(), support.getDateReassigned());
     
                 totalPoints += (ticketPoint - scoreConfig.getTicketReassignedDeduction());
             }
@@ -202,9 +182,31 @@ public class PerformanceService {
 
         double totalTicketPoints = (supports.size() + supportsReassigned.size()) * scoreConfig.getTicketPoint();
 
-        double totalScore = totalPoints / totalTicketPoints;
+        double totalScore = 0;
+
+        if(totalPoints != 0){
+            totalScore = totalPoints / totalTicketPoints;
+        }
         
         return totalScore;
     }
 
+    @Transactional
+    public double calculatePointsForSupport(Supports support, ScoreConfigs scoreConfig, OffsetDateTime dateTaken, OffsetDateTime dateClosed){
+        int days = Period.between(dateTaken.toLocalDate(), dateClosed.toLocalDate()).getDays();
+    
+        int ticketPoint = scoreConfig.getTicketPoint();
+        int ticketSLA = scoreConfig.getTicketSLA();
+        int maxTicketSLA = scoreConfig.getMaxTicketSLA();
+
+        if(days > ticketSLA){
+            if(days - ticketSLA > maxTicketSLA){
+                ticketPoint -= maxTicketSLA;
+            } else{
+                ticketPoint -= (days - ticketSLA);
+            }
+        }
+
+        return ticketPoint;
+    }
 }

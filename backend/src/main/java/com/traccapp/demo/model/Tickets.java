@@ -72,8 +72,8 @@ public class Tickets {
     @JoinColumn(name="status_id")
     private Status status;
 
-    @OneToMany(mappedBy = "ticket", fetch = FetchType.EAGER)
-    private List<Supports> support;
+    // @OneToMany(mappedBy = "ticket", fetch = FetchType.LAZY)
+    // private List<Supports> support;
 
     @OneToMany(mappedBy = "ticket",cascade = CascadeType.PERSIST,orphanRemoval = true,fetch = FetchType.LAZY)
     private List<TicketAttachments> attachments;
