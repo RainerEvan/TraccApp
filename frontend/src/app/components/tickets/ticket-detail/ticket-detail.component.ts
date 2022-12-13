@@ -143,7 +143,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     this.isCurrDeveloper = false;
 
     const accountId = this.authService.accountValue.accountId;
-    const developerId = this.ticket.support[0]?.developer.id;
+    const developerId = this.ticket.support?.developer.id;
 
     if(accountId == developerId){
       this.isCurrDeveloper = true;
@@ -162,7 +162,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
   }
 
   showSolveTicketDialog(){
-    const supportId = this.ticket.support[0].id;
+    const supportId = this.ticket.support.id;
 
     const data = {
       ticketNo: this.ticket.ticketNo,
@@ -188,7 +188,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
   }
 
   showRequestDropTicketDialog(){
-    const supportId = this.ticket.support[0].id;
+    const supportId = this.ticket.support.id;
 
     const data = {
       ticketNo: this.ticket.ticketNo,
@@ -223,8 +223,8 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
   showReassignTicketDialog(){
     const ticketInfo = {
       ticketId: this.ticket.ticketId,
-      currSupportId: this.ticket.support[0].id,
-      currDeveloperId: this.ticket.support[0].developer.id
+      currSupportId: this.ticket.support.id,
+      currDeveloperId: this.ticket.support.developer.id
     }
 
     const data = {

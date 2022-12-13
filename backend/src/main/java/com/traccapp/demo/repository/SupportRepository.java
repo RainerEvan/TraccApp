@@ -19,7 +19,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SupportRepository extends JpaRepository<Supports, UUID>{
-    List<Supports> findAllByTicketAndIsActive(Tickets ticket, Boolean isActive);
+    Supports findFirstByTicketAndIsActive(Tickets ticket, Boolean isActive);
     List<Supports> findAllByDeveloper(Accounts developer);
 
     @Transactional

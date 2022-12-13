@@ -14,7 +14,7 @@ export type Tickets ={
     description: string;
     dateClosed: Date;
     status: Status;
-    support: Supports[];
+    support: Supports;
     attachments: TicketAttachments[];
 }
 

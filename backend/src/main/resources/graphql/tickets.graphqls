@@ -8,7 +8,7 @@ type Tickets{
     title:String
     description:String
     status:Status
-    support:[Supports]
+    support:Supports
     attachments:[TicketAttachments]
 }
 

@@ -114,8 +114,8 @@
                         <div class="flex flex-row items-start space-x-8 my-6">
                             <span class="w-1/3 ticket-field">Result</span>
                             <div *ngIf="ticket" class="w-2/3 ticket-value">
-                                <span *ngIf="ticket.support[0]">{{ticket.support[0].result}}</span>
-                                <span *ngIf="!ticket.support[0] || !ticket.support[0].result">No result yet</span>
+                                <span *ngIf="ticket.support">{{ticket.support.result}}</span>
+                                <span *ngIf="!ticket.support || !ticket.support.result">No result yet</span>
                             </div>
                             <div *ngIf="loading || !ticket" class="w-2/3 self-center">
                                 <p-skeleton width="50%"></p-skeleton>
@@ -124,8 +124,8 @@
                         <div class="flex flex-row items-start space-x-8 my-6">
                             <span class="w-1/3 ticket-field">Description</span>
                             <div *ngIf="ticket" class="w-2/3 ticket-value">
-                                <span *ngIf="ticket.support[0]">{{ticket.support[0].description}}</span>
-                                <span *ngIf="!ticket.support[0] || !ticket.support[0].description">No result yet</span>
+                                <span *ngIf="ticket.support">{{ticket.support.description}}</span>
+                                <span *ngIf="!ticket.support || !ticket.support.description">No result yet</span>
                             </div>
                             <div *ngIf="loading || !ticket" class="w-2/3 self-center">
                                 <p-skeleton width="50%"></p-skeleton>
@@ -134,12 +134,12 @@
                         <div class="flex flex-row items-start space-x-8 my-6">
                             <span class="w-1/3 ticket-field">Tags</span>
                             <div *ngIf="ticket" class="w-2/3 ticket-value">
-                                <div *ngIf="ticket.support[0]" class="flex flex-row items-center space-x-2">
-                                    <div *ngFor="let tag of ticket.support[0].tags">
+                                <div *ngIf="ticket.support" class="flex flex-row items-center space-x-2">
+                                    <div *ngFor="let tag of ticket.support.tags">
                                         <span *ngIf="tag" class="px-3 py-1.5 rounded-full bg-gray-500 text-white text-xs">{{tag.name}}</span>
                                     </div>
                                 </div>
-                                <div *ngIf="!ticket.support[0] || !ticket.support[0].tags[0]">No tags yet</div>
+                                <div *ngIf="!ticket.support || !ticket.support.tags[0]">No tags yet</div>
                             </div>
                             <div *ngIf="loading || !ticket" class="w-2/3 self-center">
                                 <p-skeleton width="50%"></p-skeleton>
@@ -148,12 +148,12 @@
                         <div class="flex flex-row items-start space-x-8 my-6">
                             <span class="w-1/3 ticket-field">Attachment(s)</span>
                             <div *ngIf="ticket" class="w-2/3 ticket-value">
-                                <div *ngIf="ticket.support[0]" class="flex flex-col space-y-2">
-                                    <button *ngFor="let supportattachment of ticket.support[0].attachments" (click)="showImageDialog(supportattachment.fileName, supportattachment.fileBase64)" class="ticket-attachment">
+                                <div *ngIf="ticket.support" class="flex flex-col space-y-2">
+                                    <button *ngFor="let supportattachment of ticket.support.attachments" (click)="showImageDialog(supportattachment.fileName, supportattachment.fileBase64)" class="ticket-attachment">
                                         <span *ngIf="supportattachment" class="text-xs">{{supportattachment.fileName}}</span>
                                     </button>
                                 </div>
-                                <div *ngIf="!ticket.support[0] || !ticket.support[0].attachments[0]">No attachment yet</div>
+                                <div *ngIf="!ticket.support || !ticket.support.attachments[0]">No attachment yet</div>
                             </div>
                             <div *ngIf="loading || !ticket" class="w-2/3 self-center">
                                 <p-skeleton width="50%"></p-skeleton>
@@ -165,8 +165,8 @@
                         <div class="flex flex-row items-start space-x-8 my-6">
                             <span class="w-1/3 ticket-field">Date Taken</span>
                             <div *ngIf="ticket" class="w-2/3 ticket-value">
-                                <span *ngIf="ticket.support[0]">{{ticket.support[0].dateTaken | date:'dd/MM/yyyy'}}</span>
-                                <span *ngIf="!ticket.support[0]">Not yet taken</span>
+                                <span *ngIf="ticket.support">{{ticket.support.dateTaken | date:'dd/MM/yyyy'}}</span>
+                                <span *ngIf="!ticket.support">Not yet taken</span>
                             </div>
                             <div *ngIf="loading || !ticket" class="w-2/3 self-center">
                                 <p-skeleton width="50%"></p-skeleton>
@@ -175,8 +175,8 @@
                         <div class="flex flex-row items-start space-x-8 my-6">
                             <span class="w-1/3 ticket-field">Developer</span>
                             <div *ngIf="ticket" class="w-2/3 ticket-value">
-                                <span *ngIf="ticket.support[0]">{{ticket.support[0].developer.fullname}}</span>
-                                <span *ngIf="!ticket.support[0]">Not yet assigned</span>
+                                <span *ngIf="ticket.support">{{ticket.support.developer.fullname}}</span>
+                                <span *ngIf="!ticket.support">Not yet assigned</span>
                             </div>
                             <div *ngIf="loading || !ticket" class="w-2/3 self-center">
                                 <p-skeleton width="50%"></p-skeleton>
@@ -187,7 +187,7 @@
                 <div *appHasRole="['DEVELOPER','SUPERVISOR']" class="w-full px-4 pb-4">
                     <div *ngIf="ticket?.support[0]?.devNote" class="flex flex-col border-2 border-dotted border-gray-300 bg-gray-50 rounded-md p-6 space-y-4">
                         <h4 class="font-medium text-gray-500">Developer Notes</h4>
-                        <p class="text-gray-500 text-sm" [innerHTML]="ticket.support[0].devNote"></p>
+                        <p class="text-gray-500 text-sm" [innerHTML]="ticket.support.devNote"></p>
                     </div>
                 </div>
             </div>

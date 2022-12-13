@@ -15,6 +15,8 @@ import { MyTaskListComponent } from './components/my-tasks/my-task-list/my-task-
 import { MyTicketListComponent } from './components/my-tickets/my-ticket-list/my-ticket-list.component';
 import { NotificationPageComponent } from './components/notifications/notification-page/notification-page.component';
 import { ProfileDetailComponent } from './components/profile/profile-detail/profile-detail.component';
+import { TeamDetailComponent } from './components/teams/team-detail/team-detail.component';
+import { TeamListComponent } from './components/teams/team-list/team-list.component';
 import { TicketDetailComponent } from './components/tickets/ticket-detail/ticket-detail.component';
 import { TicketListComponent } from './components/tickets/ticket-list/ticket-list.component';
 import { AuthGuard } from './helpers/auth-guard';
@@ -108,13 +110,13 @@ const routes: Routes = [
         canActivate:[AuthGuard],
       },
       {
-        path:'my-ticket',
+        path:'my-tickets',
         component: MyTicketListComponent,
         canActivate:[AuthGuard],
         data:{roles:'USER'},
       },
       {
-        path:'my-task', 
+        path:'my-tasks', 
         component: MyTaskListComponent,
         canActivate:[AuthGuard],
         data:{roles:'DEVELOPER'},
@@ -124,6 +126,18 @@ const routes: Routes = [
         component: MyPerformanceComponent,
         canActivate:[AuthGuard],
         data:{roles:'DEVELOPER'},
+      },
+      {
+        path:'teams', 
+        component: TeamListComponent,
+        canActivate:[AuthGuard],
+        data:{roles:'SUPERVISOR'},
+      },
+      {
+        path:'team-detail/:id', 
+        component: TeamDetailComponent,
+        canActivate:[AuthGuard],
+        data:{roles:'SUPERVISOR'},
       },
     ]
   },

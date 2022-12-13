@@ -57,13 +57,13 @@
                         <div class="w-full h-full flex flex-col justify-between space-y-2 lg:py-2">
                             <div class="flex flex-col justify-center">
                                 <span class="font-medium text-xs">Date Taken</span>
-                                <span *ngIf="ticket.support[0]" class="font-regular text-sm text-gray-500">{{ticket.support[0].dateTaken | date:'dd/MM/yyyy'}}</span>
-                                <span *ngIf="!ticket.support[0]" class="font-regular text-sm text-gray-500">-</span>
+                                <span *ngIf="ticket.support" class="font-regular text-sm text-gray-500">{{ticket.support.dateTaken | date:'dd/MM/yyyy'}}</span>
+                                <span *ngIf="!ticket.support" class="font-regular text-sm text-gray-500">-</span>
                             </div>
                             <div class="flex flex-col justify-center">
                                 <span class="font-medium text-xs">Support</span>
-                                <span *ngIf="ticket.support[0]" class="font-regular text-sm text-gray-500">{{ticket.support[0].developer.fullname}}</span>
-                                <span *ngIf="!ticket.support[0]" class="font-regular text-sm text-gray-500">-</span>
+                                <span *ngIf="ticket.support" class="font-regular text-sm text-gray-500">{{ticket.support.developer.fullname}}</span>
+                                <span *ngIf="!ticket.support" class="font-regular text-sm text-gray-500">-</span>
                             </div>
                         </div>
                     </div>

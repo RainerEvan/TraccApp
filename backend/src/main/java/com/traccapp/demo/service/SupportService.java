@@ -46,8 +46,8 @@ public class SupportService {
     }
     
     @Transactional
-    public List<Supports> getSupportForTicket(Tickets ticket){
-        return supportRepository.findAllByTicketAndIsActive(ticket, true);
+    public Supports getSupportForTicket(Tickets ticket){
+        return supportRepository.findFirstByTicketAndIsActive(ticket, true);
     }
 
     @Transactional

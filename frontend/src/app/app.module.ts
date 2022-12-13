@@ -69,6 +69,9 @@ import { ReassignTicketComponent } from './components/tickets/reassign-ticket/re
 import { RequestDropTicketComponent } from './components/tickets/request-drop-ticket/request-drop-ticket.component';
 import { MyPerformanceComponent } from './components/my-performance/my-performance.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { TeamListComponent } from './components/teams/team-list/team-list.component';
+import { TeamDetailComponent } from './components/teams/team-detail/team-detail.component';
+import { AddTeamComponent } from './components/teams/add-team/add-team.component';
 
 @NgModule({
   declarations: [
@@ -113,6 +116,9 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     ReassignTicketComponent,
     RequestDropTicketComponent,
     MyPerformanceComponent,
+    TeamListComponent,
+    TeamDetailComponent,
+    AddTeamComponent,
   ],
   imports: [
     BrowserModule,

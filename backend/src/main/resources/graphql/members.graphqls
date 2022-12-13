@@ -1,0 +1,11 @@
+type Members{
+    id:ID
+    team:Teams
+    developer:Accounts
+}
+
+extend type Query{
+    getAllMembersForTeam(teamId:ID!):[Members]
+    getFirstMemberForDeveloper(accountId:ID!):Members
+    getMember(memberId:ID!):Members
+}

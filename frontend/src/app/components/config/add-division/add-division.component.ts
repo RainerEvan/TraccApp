@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { DivisionService } from 'src/app/services/division/division.service';
 import { ResultDialogComponent } from '../../modal/result-dialog/result-dialog.component';
 
@@ -14,7 +14,7 @@ export class AddDivisionComponent implements OnInit {
   divisionForm: FormGroup;
   isDivisionFormSubmitted: boolean = false;
   
-  constructor(public dialogService:DialogService, public ref: DynamicDialogRef, public config: DynamicDialogConfig, private divisionService: DivisionService, private formBuilder: FormBuilder) { }
+  constructor(public dialogService:DialogService, public ref: DynamicDialogRef, private divisionService: DivisionService, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.generateDivisionForm();

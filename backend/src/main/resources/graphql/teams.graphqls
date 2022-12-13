@@ -1,0 +1,11 @@
+type Teams{
+    id:ID
+    name:String
+    supervisor:Accounts
+    members:[Members]
+}
+
+extend type Query{
+    getAllTeamsForSupervisor(accountId:ID!):[Teams]
+    getTeam(teamId:ID!):Teams
+}

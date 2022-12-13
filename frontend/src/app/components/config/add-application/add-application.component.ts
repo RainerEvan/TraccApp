@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ApplicationService } from 'src/app/services/application/application.service';
 import { ResultDialogComponent } from '../../modal/result-dialog/result-dialog.component';
 
@@ -14,7 +14,7 @@ export class AddApplicationComponent implements OnInit {
   applicationForm: FormGroup;
   isApplicationFormSubmitted: boolean = false;
   
-  constructor(public dialogService:DialogService, public ref: DynamicDialogRef, public config: DynamicDialogConfig, private applicationService: ApplicationService, private formBuilder: FormBuilder) { }
+  constructor(public dialogService:DialogService, public ref: DynamicDialogRef, private applicationService: ApplicationService, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.generateApplicationForm();

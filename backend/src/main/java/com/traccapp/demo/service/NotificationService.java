@@ -71,7 +71,7 @@ public class NotificationService {
     @Transactional
     public Notifications addNotification(NotificationRequest notificationRequest){
         Accounts account = accountRepository.findById(notificationRequest.getReceiverId())
-            .orElseThrow(() -> new AbstractGraphQLException("Account with current id cannot be found: "+notificationRequest.getReceiverId(),"accountId"));
+            .orElseThrow(() -> new IllegalStateException("Account with current id cannot be found: "+notificationRequest.getReceiverId()));
 
         Notifications notification = new Notifications();
         notification.setReceiver(account);

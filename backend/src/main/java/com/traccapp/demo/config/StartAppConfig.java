@@ -11,20 +11,24 @@ import com.traccapp.demo.model.Accounts;
 import com.traccapp.demo.model.Applications;
 import com.traccapp.demo.model.Comments;
 import com.traccapp.demo.model.Divisions;
+import com.traccapp.demo.model.Members;
 import com.traccapp.demo.model.Notifications;
 import com.traccapp.demo.model.Roles;
 import com.traccapp.demo.model.ScoreConfigs;
 import com.traccapp.demo.model.Status;
 import com.traccapp.demo.model.Supports;
 import com.traccapp.demo.model.Tags;
+import com.traccapp.demo.model.Teams;
 import com.traccapp.demo.model.Tickets;
 import com.traccapp.demo.payload.request.AccountRequest;
 import com.traccapp.demo.payload.request.ScoreConfigRequest;
 import com.traccapp.demo.repository.CommentRepository;
+import com.traccapp.demo.repository.MemberRepository;
 import com.traccapp.demo.repository.NotificationRepository;
 import com.traccapp.demo.repository.RoleRepository;
 import com.traccapp.demo.repository.StatusRepository;
 import com.traccapp.demo.repository.SupportRepository;
+import com.traccapp.demo.repository.TeamRepository;
 import com.traccapp.demo.repository.TicketRepository;
 import com.traccapp.demo.service.AccountService;
 import com.traccapp.demo.service.ApplicationService;
@@ -39,7 +43,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class StartAppConfig {
     @Bean
-    CommandLineRunner commandLineRunner(TagsService tagsService, AccountService accountService, ApplicationService applicationService, DivisionService divisionService, ScoreConfigService scoreConfigService, RoleRepository roleRepository, StatusRepository statusRepository, TicketRepository ticketRepository, SupportRepository supportRepository, CommentRepository commentRepository, NotificationRepository notificationRepository){
+    CommandLineRunner commandLineRunner(TagsService tagsService, AccountService accountService, ApplicationService applicationService, DivisionService divisionService, ScoreConfigService scoreConfigService, RoleRepository roleRepository, StatusRepository statusRepository, TicketRepository ticketRepository, SupportRepository supportRepository, CommentRepository commentRepository, NotificationRepository notificationRepository, TeamRepository teamRepository, MemberRepository memberRepository){
         return args -> {
 
             Roles role1 = new Roles();
@@ -176,6 +180,21 @@ public class StartAppConfig {
             accountRequest6.setRolesName(ERoles.DEVELOPER);
             
             Accounts account6 = accountService.addAccount(null,accountRequest6);
+
+                Teams team = new Teams();
+                team.setName("SMILE");
+                team.setSupervisor(account4);
+                teamRepository.save(team);
+
+                Members member1 = new Members();
+                member1.setTeam(team);
+                member1.setDeveloper(account2);
+                memberRepository.save(member1);
+
+                Members member2 = new Members();
+                member2.setTeam(team);
+                member2.setDeveloper(account5);
+                memberRepository.save(member2);
 
             // Notifications notification = new Notifications();
             // notification.setReceiver(account);

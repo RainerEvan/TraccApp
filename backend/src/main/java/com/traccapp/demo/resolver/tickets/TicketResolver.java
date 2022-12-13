@@ -23,7 +23,7 @@ public class TicketResolver implements GraphQLResolver<Tickets> {
     @Autowired
     private final TicketAttachmentService ticketAttachmentService;
 
-    public List<Supports> getSupport(Tickets ticket){
+    public Supports getSupport(Tickets ticket){
         return supportService.getSupportForTicket(ticket);
     }
 

@@ -1,54 +1,54 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { TagsService } from 'src/app/services/tags/tags.service';
+import { TeamService } from 'src/app/services/team/team.service';
 import { ResultDialogComponent } from '../../modal/result-dialog/result-dialog.component';
 
 @Component({
-  selector: 'app-add-tag',
-  templateUrl: './add-tag.component.html',
-  styleUrls: ['./add-tag.component.css']
+  selector: 'app-add-team',
+  templateUrl: './add-team.component.html',
+  styleUrls: ['./add-team.component.css']
 })
-export class AddTagComponent implements OnInit {
+export class AddTeamComponent implements OnInit {
 
-  tagForm: FormGroup;
-  isTagFormSubmitted: boolean = false;
+  teamForm: FormGroup;
+  isTeamFormSubmitted: boolean = false;
   
-  constructor(public dialogService:DialogService, public ref: DynamicDialogRef, private tagService: TagsService, private formBuilder: FormBuilder) { }
+  constructor(public dialogService:DialogService, public ref: DynamicDialogRef, private teamService:TeamService, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
-    this.generateTagForm();
+    this.generateTeamForm();
   }
 
-  public addTag(): void{
-    if(this.tagForm.valid){
-      const name = this.tagForm.value.name;
+  public addTeam(): void{
+    if(this.teamForm.valid){
+      const name = this.teamForm.value.name;
 
-      this.tagService.addTag(name).subscribe({
+      this.teamService.addTeam(name).subscribe({
         next: (result: any) => {
           console.log(result);
-          this.isTagFormSubmitted = true;
-          this.ref.close(this.isTagFormSubmitted);
-          this.showResultDialog("Success","Tag has been added successfully");
+          this.isTeamFormSubmitted = true;
+          this.ref.close(this.isTeamFormSubmitted);
+          this.showResultDialog("Success","Team has been added successfully");
         },
         error: (error: any) => {
           console.log(error);
-          this.isTagFormSubmitted = false;
-          this.ref.close(this.isTagFormSubmitted);
+          this.isTeamFormSubmitted = false;
+          this.ref.close(this.isTeamFormSubmitted);
           this.showResultDialog("Failed","There was a problem, try again later");
         }
       });
     } 
   }
 
-  generateTagForm(){
-    this.tagForm = this.formBuilder.group({
+  generateTeamForm(){
+    this.teamForm = this.formBuilder.group({
       name: [null, [Validators.required]],
     });
   }
 
   get name(){
-    return this.tagForm.get('name');
+    return this.teamForm.get('name');
   }
 
   showResultDialog(title:string, message:string){
