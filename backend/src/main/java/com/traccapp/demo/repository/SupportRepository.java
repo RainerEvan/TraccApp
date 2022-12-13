@@ -21,6 +21,8 @@ import org.springframework.stereotype.Repository;
 public interface SupportRepository extends JpaRepository<Supports, UUID>{
     List<Supports> findAllByTicketAndIsActive(Tickets ticket, Boolean isActive);
     List<Supports> findAllByDeveloper(Accounts developer);
+
+    @Transactional
     List<Supports> findAllByDeveloperAndIsActiveAndDateTakenBetween(Accounts developer, Boolean isActive, OffsetDateTime dateTakenStart, OffsetDateTime dateTakenEnd);
 
     @Transactional

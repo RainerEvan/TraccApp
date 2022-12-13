@@ -246,6 +246,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       if (success) {
         this.getTicket();
         this.sendNotification(this.ticket.reporter.id,"Ticket Reassigned By Developer","Your ticket has been reassigned to a new developer, check it out",data);
+        this.sendNotification(ticketInfo.currDeveloperId,"Ticket Reassigned By Superviosr","Your support has been reassigned to a new developer, check it out",data);
       } 
     });
   }
