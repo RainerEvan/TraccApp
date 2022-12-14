@@ -12,6 +12,7 @@ import com.traccapp.demo.exception.AbstractGraphQLException;
 import com.traccapp.demo.model.Accounts;
 import com.traccapp.demo.model.Members;
 import com.traccapp.demo.model.Teams;
+import com.traccapp.demo.payload.request.MemberRequest;
 import com.traccapp.demo.repository.AccountRepository;
 import com.traccapp.demo.repository.MemberRepository;
 import com.traccapp.demo.repository.TeamRepository;
@@ -52,12 +53,12 @@ public class MemberService {
     }
 
     @Transactional
-    public Members addMember(UUID teamId, UUID accountId){
-        Teams team = teamRepository.findById(teamId)
-            .orElseThrow(() -> new IllegalStateException("Team with current id cannot be found: "+teamId));
+    public Members addMember(MemberRequest memberRequest){
+        Teams team = teamRepository.findById(memberRequest.getTeamId())
+            .orElseThrow(() -> new IllegalStateException("Team with current id cannot be found: "+memberRequest.getTeamId()));
         
-        Accounts developer = accountRepository.findById(accountId)
-            .orElseThrow(() -> new IllegalStateException("Account with current id cannot be found: "+accountId));
+        Accounts developer = accountRepository.findById(memberRequest.getDeveloperId())
+            .orElseThrow(() -> new IllegalStateException("Account with current id cannot be found: "+memberRequest.getDeveloperId()));
 
         Members member = new Members();
         member.setTeam(team);

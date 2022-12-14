@@ -22,7 +22,7 @@
                 </div>
             </ng-template>
             <ng-template pTemplate="body" let-support>
-                <div routerLink="/ticket-detail/{{support.ticket.ticketId}}" class="table-list grid grid-cols-2 gap-6 py-4 px-6 lg:grid-cols-6">
+                <a routerLink="/ticket-detail/{{support.ticket.ticketId}}" class="table-list grid grid-cols-2 gap-6 py-4 px-6 lg:grid-cols-6">
                     <div class="col-span-2 lg:col-span-1">
                         <div [class]="'ticket-status-'+support.ticket.status.name" class="w-full h-full flex flex-col items-center justify-center space-y-2 rounded-sm shadow-md px-4 py-10">
                             <i class="pi pi-ticket" style="font-size: 20px;"></i>
@@ -73,7 +73,7 @@
                             </a>
                         </div>
                     </div>
-                </div>
+                </a>
             </ng-template>
             <ng-template pTemplate="emptymessage">
                 <div class="font-medium text-sm text-gray-400 text-center my-10">NO TASKS FOUND</div>

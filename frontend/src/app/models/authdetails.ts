@@ -5,7 +5,6 @@ export class AuthDetails{
     expirationDate: Date;
     accountId: string;
     username: string;
-    email: string;
     isActive: boolean;
     roles: Roles[];
 } 

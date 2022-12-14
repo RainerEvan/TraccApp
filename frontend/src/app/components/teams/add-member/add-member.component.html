@@ -1,12 +1,15 @@
 <div class="flex flex-col space-y-6">
-    <p-table #developerTable [value]="developers" [loading]="loading" selectionMode="single" [(selection)]="selectedDeveloper" dataKey="id" [scrollable]="true" scrollHeight="300px" [responsive]="true" responsiveLayout="scroll">
+    <p-table #reportTable [value]="developers" [loading]="loading" selectionMode="multiple" [(selection)]="selectedDevelopers" dataKey="id" [scrollable]="true" scrollHeight="400px" [responsive]="true" responsiveLayout="scroll">
         <ng-template pTemplate="header">
             <tr>
                 <th class="font-medium">Developers</th>
+                <th class="flex items-center justify-end">
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-developer>
-            <div [pSelectableRow]="developer" class="grid grid-cols-5 auto-cols-auto gap-2 p-2 transition ease-in-out duration-100 hover:border-l-4 hover:rounded-l-sm hover:bg-gray-100/40 hover:border-gray-200 cursor-pointer">
+            <div class="grid grid-cols-5 items-center gap-2 p-2 transition ease-in-out duration-100 hover:border-l-4 hover:rounded-l-sm hover:bg-gray-100/40 hover:border-gray-200">
                 <div class="col-span-1">
                     <div class="w-full h-full flex items-center justify-center">
                         <img [(src)]="imageUrl+developer.id" alt="Profile" class="rounded-full w-12">
@@ -22,11 +25,7 @@
                 </div>
                 <div class="col-span-1">
                     <div class="w-full h-full flex items-center justify-center">
-                        <div *ngIf="selectedDeveloper === developer" class="text-gray-400">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7 text-inherit">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                              </svg>
-                        </div>
+                        <p-tableCheckbox [value]="developer"></p-tableCheckbox>
                     </div>
                 </div>
             </div>
@@ -37,9 +36,9 @@
     </p-table>
     <div class="w-full flex flex-row items-center px-2 space-x-4">
         <span class="font-medium text-black">Selected:</span>
-        <span class="text-black">{{selectedDeveloper?.fullname ?? 'Not yet selected'}}</span>
+        <span class="text-black">{{selectedDevelopers?.length}}</span>
     </div>
-    <div class="w-full flex flex-row items-center justify-center">
-        <button (click)="showConfirmationDialog('Reassign Ticket','Do you want to reassign ticket to this developer?')" [disabled]="!selectedDeveloper" type="button" class="w-24 button-primary scale-110">Select</button>
+    <div class="w-full flex flex-row items-center justify-center space-x-6">
+        <button (click)="showConfirmationDialog('Select Developer','Do you want to add all the selected developers to this team?')" [disabled]="selectedDevelopers.length <= 0" type="button" class="w-24 button-primary scale-110">Select</button>
     </div>
 </div>

@@ -26,7 +26,19 @@ export class MemberService {
             }
             developer{
               id
+              username
               fullname
+              email
+              contactNo
+              division{
+                id
+                name
+              }
+              isActive
+              roles{
+                id
+                name
+              }           
             }
           }
         }
@@ -47,6 +59,9 @@ export class MemberService {
             team{
               id
               name
+              supervisor{
+                id
+              }
             }
             developer{
               id
@@ -86,7 +101,7 @@ export class MemberService {
       .valueChanges.pipe(map((result)=>result.data.getMember));
   }
 
-  public addMember(formData: FormData): Observable<any>{
+  public addMember(formData: any): Observable<any>{
     return this.http.post(API_URL+'/add',formData);
   }
 

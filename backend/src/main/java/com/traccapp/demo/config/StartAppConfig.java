@@ -181,20 +181,15 @@ public class StartAppConfig {
             
             Accounts account6 = accountService.addAccount(null,accountRequest6);
 
-                Teams team = new Teams();
-                team.setName("SMILE");
-                team.setSupervisor(account4);
-                teamRepository.save(team);
+            Teams team = new Teams();
+            team.setName("SMILE");
+            team.setSupervisor(account4);
+            teamRepository.save(team);
 
-                Members member1 = new Members();
-                member1.setTeam(team);
-                member1.setDeveloper(account2);
-                memberRepository.save(member1);
-
-                Members member2 = new Members();
-                member2.setTeam(team);
-                member2.setDeveloper(account5);
-                memberRepository.save(member2);
+            Members member1 = new Members();
+            member1.setTeam(team);
+            member1.setDeveloper(account2);
+            memberRepository.save(member1);
 
             // Notifications notification = new Notifications();
             // notification.setReceiver(account);

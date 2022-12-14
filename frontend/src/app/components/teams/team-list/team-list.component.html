@@ -1,9 +1,9 @@
 <div class="bg-white shadow-md mb-8 p-10">
     <h1 class="font-bold text-lg text-center mb-4">
-        Ticket List
+        Team List
     </h1>
     <div class="card p-8">
-        <p-table #ticketTable [value]="teams" [loading]="loading" [totalRecords]="totalRecords" [paginator]="true" [rows]="8" [showCurrentPageReport]="true" selectionMode="single" responsiveLayout="scroll" [filterDelay]="0" sortField="name" [sortOrder]="1"
+        <p-table #teamTable [value]="teams" [loading]="loading" [totalRecords]="totalRecords" [paginator]="true" [rows]="8" [showCurrentPageReport]="true" selectionMode="single" responsiveLayout="scroll" [filterDelay]="0" sortField="name" [sortOrder]="1"
             [globalFilterFields]="['name','supervisor.fullname']">
             <ng-template pTemplate="caption">
                 <div class="px-2 flex items-center place-content-between">
@@ -23,17 +23,17 @@
                 </div>
             </ng-template>
             <ng-template pTemplate="header">
-                <div class="grid grid-cols-6 auto-cols-auto py-4 px-6 font-semibold text-sm text-black bg-white border-b-2">
+                <div class="grid grid-cols-9 gap-4 py-4 px-6 font-semibold text-sm text-black bg-white border-b-2">
                     <div class="col-span-1">
                         No
                     </div>
-                    <div class="col-span-1">
+                    <div class="col-span-2">
                         Team
                     </div>
-                    <div class="col-span-2">
+                    <div class="col-span-3">
                         Supervisor
                     </div>
-                    <div class="col-span-1">
+                    <div class="col-span-2">
                         Total Members
                     </div>
                     <div class="col-span-1">
@@ -42,25 +42,28 @@
                 </div>
             </ng-template>
             <ng-template pTemplate="body" let-team let-i="rowIndex">
-                <div class="grid grid-cols-6 auto-cols-auto py-4 px-6 text-sm text-black shadow-sm hover:bg-gray-100/40">
+                <a class="grid grid-cols-9 gap-4 py-4 px-6 text-sm text-black shadow-sm hover:bg-gray-100/40">
                     <div class="col-span-1 flex items-center">
                         {{i+1}}
                     </div>
-                    <div class="col-span-1 flex items-center">
+                    <div class="col-span-2 flex items-center">
                         {{team.name}}
                     </div>
-                    <div class="col-span-2 flex items-center">
+                    <div class="col-span-3 flex items-center">
                         {{team.supervisor.fullname}}
                     </div>
-                    <div class="col-span-1 flex items-center">
+                    <div class="col-span-2 flex items-center">
                         {{team.members.length}} Developers
                     </div>
-                    <div class="col-span-1 flex items-center">
-                        <button (click)="showConfirmationDialog('Delete','Do you want to delete this team?','delete',team.id)" class="flex items-center justify-center bg-gray-500 rounded-md p-2 font-regular text-white hover:bg-gray-400 hover:border-gray-400">
+                    <div class="col-span-1 flex items-center justify-center space-x-2 md:justify-start">
+                        <a routerLink="/team-detail/{{team.id}}" class="z-10 flex items-center justify-center bg-gray-500 rounded-md p-2 font-regular text-white hover:bg-gray-400 hover:border-gray-400">
+                            <i class="pi pi-info-circle"></i>
+                        </a>
+                        <button (click)="showConfirmationDialog('Delete','Do you want to delete this team?','delete',team.id)" class="z-10 flex items-center justify-center bg-gray-500 rounded-md p-2 font-regular text-white hover:bg-gray-400 hover:border-gray-400">
                             <i class="pi pi-trash"></i>
                         </button>
                     </div>
-                </div>
+                </a>
             </ng-template>
             <ng-template pTemplate="emptymessage">
                 <div class="font-medium text-sm text-gray-400 text-center my-10">NO TEAMS FOUND</div>

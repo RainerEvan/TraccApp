@@ -72,6 +72,8 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { TeamListComponent } from './components/teams/team-list/team-list.component';
 import { TeamDetailComponent } from './components/teams/team-detail/team-detail.component';
 import { AddTeamComponent } from './components/teams/add-team/add-team.component';
+import { MemberListComponent } from './components/teams/member-list/member-list.component';
+import { AddMemberComponent } from './components/teams/add-member/add-member.component';
 
 @NgModule({
   declarations: [
@@ -119,6 +121,8 @@ import { AddTeamComponent } from './components/teams/add-team/add-team.component
     TeamListComponent,
     TeamDetailComponent,
     AddTeamComponent,
+    MemberListComponent,
+    AddMemberComponent,
   ],
   imports: [
     BrowserModule,

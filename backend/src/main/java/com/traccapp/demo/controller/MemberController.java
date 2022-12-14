@@ -1,6 +1,5 @@
 package com.traccapp.demo.controller;
 
-import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.traccapp.demo.model.Members;
 import com.traccapp.demo.payload.request.MemberRequest;
 import com.traccapp.demo.service.MemberService;
 import com.traccapp.demo.utils.ResponseHandler;
@@ -30,11 +30,9 @@ public class MemberController {
     @PostMapping(path = "/add")
     public ResponseEntity<Object> addMember(@RequestBody MemberRequest memberRequest){
         try{
-            List<UUID> developersId = memberRequest.getDevelopersId();
+            Members member = memberService.addMember(memberRequest);
 
-            developersId.stream().map(developerId -> memberService.addMember(memberRequest.getTeamId(), developerId));
-
-            return ResponseHandler.generateResponse("Member has been added successfully!", HttpStatus.OK, developersId.size());
+            return ResponseHandler.generateResponse("Member has been added successfully!", HttpStatus.OK, member);
         } catch (Exception e){
             return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.BAD_REQUEST, null);
         }

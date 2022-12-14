@@ -126,7 +126,7 @@ body{
 }
 
 .table-list{
-    @apply border-gray-500 transition ease-in-out duration-100 hover:border-l-4 hover:rounded-l-sm hover:bg-gray-50 cursor-pointer;
+    @apply border-gray-500 shadow-sm transition ease-in-out duration-100 hover:border-l-4 hover:rounded-l-sm hover:bg-gray-50;
 }
 
 .ticket-status-PENDING{

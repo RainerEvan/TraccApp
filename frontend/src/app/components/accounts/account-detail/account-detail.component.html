@@ -11,7 +11,7 @@
                     <div *ngIf="account" [class]="'account-status-'+account.isActive">{{account.isActive ? 'ACTIVE':'DISABLED'}}</div>
                     <p-skeleton *ngIf="loading" width="8rem"></p-skeleton>
                 </div>
-                <div class="flex flex-row items-center space-x-6">
+                <div *appHasRole="['ADMIN']" class="flex flex-row items-center space-x-6">
                     <button [disabled]="loading" (click)="showEditAccountDialog()" class="button-primary">Edit Details</button>
                 </div>
             </div>

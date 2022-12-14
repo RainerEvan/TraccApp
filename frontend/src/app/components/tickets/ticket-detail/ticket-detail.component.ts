@@ -11,6 +11,8 @@ import { ImageDialogComponent } from '../../modal/image-dialog/image-dialog.comp
 import { NotificationService } from 'src/app/services/notification/notification.service';
 import { ReassignTicketComponent } from '../reassign-ticket/reassign-ticket.component';
 import { RequestDropTicketComponent } from '../request-drop-ticket/request-drop-ticket.component';
+import { MemberService } from 'src/app/services/member/member.service';
+import { Members } from 'src/app/models/members';
 
 @Component({
   selector: 'app-ticket-detail',
@@ -25,7 +27,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
   isCurrUser: boolean;
   ref: DynamicDialogRef;
 
-  constructor(private router: Router, public dialogService:DialogService, private route:ActivatedRoute, private ticketSupportService:TicketSupportService, private notificationService:NotificationService, private authService: AuthService) { }
+  constructor(private router: Router, public dialogService:DialogService, private route:ActivatedRoute, private ticketSupportService:TicketSupportService, private notificationService:NotificationService, private memberService:MemberService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.getTicket();
@@ -121,7 +123,6 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
   }
 
   sendNotification(accountId:string, title:string, body:string, data:any){
-
     const notification = {
       receiverId: accountId,
       title: title,
@@ -215,7 +216,14 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
           details: detail
         }
 
-        this.sendNotification(this.ticket.reporter.id,"Drop Ticket Request","Hey, it looks like a developer wants to drop this ticket",data);
+        this.memberService.getFirstMemberForDeveloper(this.ticket.support.developer.id).subscribe({
+          next: (member: Members) => {
+            this.sendNotification(member.team.supervisor.id,"Drop Ticket Request","Hey, it looks like a developer wants to drop this ticket",data);
+          },
+          error: (error: any) => {
+            console.log(error);
+          }
+        });
       } 
     });
   }

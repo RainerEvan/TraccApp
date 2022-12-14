@@ -49,7 +49,7 @@ export class TeamService {
               id
               fullname
             }
-            member{
+            members{
               id
             }
           }
