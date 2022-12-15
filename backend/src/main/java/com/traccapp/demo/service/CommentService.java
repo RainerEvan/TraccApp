@@ -41,7 +41,7 @@ public class CommentService {
     public Comments addComment(UUID ticketId, String body) {
 
         Tickets ticket = ticketRepository.findByTicketId(ticketId)
-            .orElseThrow(() -> new AbstractGraphQLException("Ticket with current id cannot be found: "+ticketId, "ticketId"));
+            .orElseThrow(() -> new IllegalStateException("Ticket with current id cannot be found: "+ticketId));
 
         Comments comment = new Comments();
         comment.setTicket(ticket);
@@ -56,7 +56,8 @@ public class CommentService {
     @Transactional
     public Comments editComment(UUID commentId, String body){
 
-        Comments comment = commentRepository.findById(commentId).orElseThrow(() -> new AbstractGraphQLException("Comment with current id cannot be found"+commentId,"commentId"));
+        Comments comment = commentRepository.findById(commentId)
+            .orElseThrow(() -> new IllegalStateException("Comment with current id cannot be found"+commentId));
         comment.setBody(body);
         comment.setUpdatedAt(OffsetDateTime.now());
 
@@ -65,7 +66,8 @@ public class CommentService {
 
     public void deleteComment(UUID commentId){
 
-        Comments comment = commentRepository.findById(commentId).orElseThrow(() -> new AbstractGraphQLException("Comment with current id cannot be found"+commentId,"commentId"));
+        Comments comment = commentRepository.findById(commentId)
+            .orElseThrow(() -> new IllegalStateException("Comment with current id cannot be found"+commentId));
         comment.setIsActive(false);
 
         commentRepository.save(comment);

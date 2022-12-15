@@ -52,6 +52,9 @@ public class TagsService {
 
     @Transactional
     public void deleteTags(UUID tagId){
-        tagsRepository.delete(getTag(tagId));
+        Tags tag = tagsRepository.findById(tagId)
+            .orElseThrow(() -> new IllegalStateException("Tag with current id cannot be found: "+tagId));
+
+        tagsRepository.delete(tag);
     }
 }

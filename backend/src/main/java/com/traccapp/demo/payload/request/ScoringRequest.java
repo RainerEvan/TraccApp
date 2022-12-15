@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class ScoreConfigRequest {
+public class ScoringRequest {
     private int ticketPoint;
     private int ticketSLA;
     private int maxTicketSLA;

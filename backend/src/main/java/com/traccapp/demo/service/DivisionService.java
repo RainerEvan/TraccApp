@@ -40,6 +40,9 @@ public class DivisionService {
     }
 
     public void deleteDivision(UUID divisionId){
-        divisionRepository.delete(getDivision(divisionId));
+        Divisions division = divisionRepository.findById(divisionId)
+            .orElseThrow(() -> new IllegalStateException("Division with current id cannot be found: "+divisionId));
+
+        divisionRepository.delete(division);
     }
 }

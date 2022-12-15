@@ -1,5 +1,7 @@
 package com.traccapp.demo.service;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.NumberFormat;
 import java.time.DayOfWeek;
 import java.time.OffsetDateTime;
@@ -19,7 +21,7 @@ import org.springframework.stereotype.Service;
 import com.traccapp.demo.data.EStatus;
 import com.traccapp.demo.exception.AbstractGraphQLException;
 import com.traccapp.demo.model.Accounts;
-import com.traccapp.demo.model.ScoreConfigs;
+import com.traccapp.demo.model.Scorings;
 import com.traccapp.demo.model.Status;
 import com.traccapp.demo.model.Supports;
 import com.traccapp.demo.payload.response.PerformanceResponse;
@@ -40,7 +42,7 @@ public class PerformanceService {
     @Autowired
     private final StatusRepository statusRepository;
     @Autowired
-    private final ScoreConfigService scoreConfigService;
+    private final ScoringService scoringService;
 
     public List<PerformanceResponse> getPerformanceForDeveloper(UUID accountId){
         Accounts developer = accountRepository.findById(accountId)
@@ -107,7 +109,6 @@ public class PerformanceService {
                 data.add(total);
             }
         }
-
         
         Status inProgress = statusRepository.findByName(EStatus.IN_PROGRESS).get();
         Status awaiting = statusRepository.findByName(EStatus.AWAITING).get();
@@ -121,25 +122,29 @@ public class PerformanceService {
         int totalReassigned = supportRepository.countByDeveloperAndIsActiveAndDateTakenBetween(developer, false, startDate, endDate);
         int totalTickets = supportRepository.countByDeveloperAndDateTakenBetween(developer,startDate, endDate);
 
-        ScoreConfigs scoreConfig = scoreConfigService.getScoreConfig();
+        Scorings scoring = scoringService.getScoring();
 
-        double scoreByStatus = calculateScoreByStatus(scoreConfig, totalResolved, totalDropped, totalReassigned);
-        double scoreBySLA = calculateScoreBySLA(scoreConfig, developer, resolved, closed, dropped, startDate, endDate);
+        double scoreByStatus = calculateScoreByStatus(scoring, totalResolved, totalDropped, totalReassigned);
+        double scoreBySLA = calculateScoreBySLA(scoring, developer, resolved, closed, dropped, startDate, endDate);
 
         double percentage = (scoreByStatus + scoreBySLA)/2;
-        String rate = NumberFormat.getPercentInstance().format(percentage);
+
+        BigDecimal bd = new BigDecimal(Double.toString(percentage));
+        bd = bd.setScale(2, RoundingMode.HALF_UP);
+
+        String rate = NumberFormat.getPercentInstance().format(bd);
 
         return new PerformanceResponse(menu, period, totalInProgress, totalResolved, totalDropped, totalReassigned, totalTickets, rate, label, data);
     }
 
     @Transactional
-    public double calculateScoreByStatus(ScoreConfigs scoreConfig, int totalResolved, int totalDropped, int totalReassigned){
-        double totalResolvedPoints = totalResolved * scoreConfig.getTicketPoint();
-        double totalDroppedPoints = totalDropped * scoreConfig.getTicketPoint();
-        double totalReassignedPoints = (totalReassigned * scoreConfig.getTicketPoint()) - (totalReassigned * scoreConfig.getTicketReassignedDeduction());
+    public double calculateScoreByStatus(Scorings scoring, int totalResolved, int totalDropped, int totalReassigned){
+        double totalResolvedPoints = totalResolved * scoring.getTicketPoint();
+        double totalDroppedPoints = totalDropped * scoring.getTicketPoint();
+        double totalReassignedPoints = (totalReassigned * scoring.getTicketPoint()) - (totalReassigned * scoring.getTicketReassignedDeduction());
 
         double totalPoints = totalResolvedPoints + totalDroppedPoints + totalReassignedPoints;
-        double totalTicketPoints = (totalResolved + totalDropped + totalReassigned) * scoreConfig.getTicketPoint();
+        double totalTicketPoints = (totalResolved + totalDropped + totalReassigned) * scoring.getTicketPoint();
 
         double totalScore = 0;
         
@@ -151,7 +156,7 @@ public class PerformanceService {
     }
 
     @Transactional
-    public double calculateScoreBySLA(ScoreConfigs scoreConfig, Accounts developer, Status resolved, Status closed, Status dropped, OffsetDateTime startDate, OffsetDateTime endDate){
+    public double calculateScoreBySLA(Scorings scoring, Accounts developer, Status resolved, Status closed, Status dropped, OffsetDateTime startDate, OffsetDateTime endDate){
         
         double totalPoints = 0;
 
@@ -164,7 +169,7 @@ public class PerformanceService {
         
         if(!supports.isEmpty()){
             for(Supports support:supports){
-                double ticketPoint = calculatePointsForSupport(support, scoreConfig, support.getDateTaken(), support.getTicket().getDateClosed());
+                double ticketPoint = calculatePointsForSupport(support, scoring, support.getDateTaken(), support.getTicket().getDateClosed());
     
                 totalPoints += ticketPoint;
             }
@@ -174,13 +179,13 @@ public class PerformanceService {
 
         if(!supportsReassigned.isEmpty()){
             for(Supports support:supportsReassigned){
-                double ticketPoint = calculatePointsForSupport(support, scoreConfig, support.getDateTaken(), support.getDateReassigned());
+                double ticketPoint = calculatePointsForSupport(support, scoring, support.getDateTaken(), support.getDateReassigned());
     
-                totalPoints += (ticketPoint - scoreConfig.getTicketReassignedDeduction());
+                totalPoints += (ticketPoint - scoring.getTicketReassignedDeduction());
             }
         }
 
-        double totalTicketPoints = (supports.size() + supportsReassigned.size()) * scoreConfig.getTicketPoint();
+        double totalTicketPoints = (supports.size() + supportsReassigned.size()) * scoring.getTicketPoint();
 
         double totalScore = 0;
 
@@ -192,12 +197,12 @@ public class PerformanceService {
     }
 
     @Transactional
-    public double calculatePointsForSupport(Supports support, ScoreConfigs scoreConfig, OffsetDateTime dateTaken, OffsetDateTime dateClosed){
+    public double calculatePointsForSupport(Supports support, Scorings scoring, OffsetDateTime dateTaken, OffsetDateTime dateClosed){
         int days = Period.between(dateTaken.toLocalDate(), dateClosed.toLocalDate()).getDays();
     
-        int ticketPoint = scoreConfig.getTicketPoint();
-        int ticketSLA = scoreConfig.getTicketSLA();
-        int maxTicketSLA = scoreConfig.getMaxTicketSLA();
+        int ticketPoint = scoring.getTicketPoint();
+        int ticketSLA = scoring.getTicketSLA();
+        int maxTicketSLA = scoring.getMaxTicketSLA();
 
         if(days > ticketSLA){
             if(days - ticketSLA > maxTicketSLA){

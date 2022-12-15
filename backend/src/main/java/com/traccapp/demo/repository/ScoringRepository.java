@@ -5,9 +5,9 @@ import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.traccapp.demo.model.ScoreConfigs;
+import com.traccapp.demo.model.Scorings;
 
 @Repository
-public interface ScoreConfigRepository extends JpaRepository<ScoreConfigs,UUID>{
+public interface ScoringRepository extends JpaRepository<Scorings,UUID>{
     
 }

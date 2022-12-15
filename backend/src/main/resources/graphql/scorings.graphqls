@@ -1,0 +1,11 @@
+type Scorings{
+    id:ID
+    ticketPoint:Int
+    ticketSLA:Int
+    maxTicketSLA:Int
+    ticketReassignedDeduction:Int
+}
+
+extend type Query{
+    getScoring:Scorings
+}

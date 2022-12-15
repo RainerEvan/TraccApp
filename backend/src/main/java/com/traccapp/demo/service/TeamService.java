@@ -52,6 +52,9 @@ public class TeamService {
 
     @Transactional
     public void deleteTeam(UUID teamId){
-        teamRepository.delete(getTeam(teamId));
+        Teams team = teamRepository.findById(teamId)
+            .orElseThrow(() -> new IllegalStateException("Team with current id cannot be found: "+teamId));
+
+        teamRepository.delete(team);
     }
 }

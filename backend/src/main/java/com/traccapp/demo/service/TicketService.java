@@ -80,7 +80,8 @@ public class TicketService {
 
     @Transactional
     public Tickets updateTicketStatus(UUID ticketId, EStatus statusName){
-        Tickets ticket = ticketRepository.findByTicketId(ticketId).orElseThrow(() -> new IllegalStateException("Ticket with current id cannot be found: "+ticketId));
+        Tickets ticket = ticketRepository.findByTicketId(ticketId)
+            .orElseThrow(() -> new IllegalStateException("Ticket with current id cannot be found: "+ticketId));
 
         Status status = statusRepository.findByName(statusName)
             .orElseThrow(() -> new IllegalStateException("Status with current name cannot be found: "+statusName));

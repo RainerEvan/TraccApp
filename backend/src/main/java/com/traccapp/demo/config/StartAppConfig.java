@@ -14,14 +14,14 @@ import com.traccapp.demo.model.Divisions;
 import com.traccapp.demo.model.Members;
 import com.traccapp.demo.model.Notifications;
 import com.traccapp.demo.model.Roles;
-import com.traccapp.demo.model.ScoreConfigs;
+import com.traccapp.demo.model.Scorings;
 import com.traccapp.demo.model.Status;
 import com.traccapp.demo.model.Supports;
 import com.traccapp.demo.model.Tags;
 import com.traccapp.demo.model.Teams;
 import com.traccapp.demo.model.Tickets;
 import com.traccapp.demo.payload.request.AccountRequest;
-import com.traccapp.demo.payload.request.ScoreConfigRequest;
+import com.traccapp.demo.payload.request.ScoringRequest;
 import com.traccapp.demo.repository.CommentRepository;
 import com.traccapp.demo.repository.MemberRepository;
 import com.traccapp.demo.repository.NotificationRepository;
@@ -33,7 +33,7 @@ import com.traccapp.demo.repository.TicketRepository;
 import com.traccapp.demo.service.AccountService;
 import com.traccapp.demo.service.ApplicationService;
 import com.traccapp.demo.service.DivisionService;
-import com.traccapp.demo.service.ScoreConfigService;
+import com.traccapp.demo.service.ScoringService;
 import com.traccapp.demo.service.TagsService;
 
 import org.springframework.boot.CommandLineRunner;
@@ -43,7 +43,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class StartAppConfig {
     @Bean
-    CommandLineRunner commandLineRunner(TagsService tagsService, AccountService accountService, ApplicationService applicationService, DivisionService divisionService, ScoreConfigService scoreConfigService, RoleRepository roleRepository, StatusRepository statusRepository, TicketRepository ticketRepository, SupportRepository supportRepository, CommentRepository commentRepository, NotificationRepository notificationRepository, TeamRepository teamRepository, MemberRepository memberRepository){
+    CommandLineRunner commandLineRunner(TagsService tagsService, AccountService accountService, ApplicationService applicationService, DivisionService divisionService, ScoringService scoreConfigService, RoleRepository roleRepository, StatusRepository statusRepository, TicketRepository ticketRepository, SupportRepository supportRepository, CommentRepository commentRepository, NotificationRepository notificationRepository, TeamRepository teamRepository, MemberRepository memberRepository){
         return args -> {
 
             Roles role1 = new Roles();
@@ -115,7 +115,7 @@ public class StartAppConfig {
             accountRequest.setPassword("pass123");
             accountRequest.setEmail("maman@gmail.com");
             accountRequest.setContactNo("092039031");
-            accountRequest.setDivisionId(division.getId());
+            accountRequest.setDivisionId(division2.getId());
             accountRequest.setIsActive(true);
             accountRequest.setRolesName(ERoles.USER);
             
@@ -127,7 +127,7 @@ public class StartAppConfig {
             accountRequest2.setPassword("pass123");
             accountRequest2.setEmail("rainer@gmail.com");
             accountRequest2.setContactNo("092039031");
-            accountRequest2.setDivisionId(division.getId());
+            accountRequest2.setDivisionId(division2.getId());
             accountRequest2.setIsActive(true);
             accountRequest2.setRolesName(ERoles.DEVELOPER);
             
@@ -139,7 +139,7 @@ public class StartAppConfig {
             accountRequest3.setPassword("pass123");
             accountRequest3.setEmail("admin@gmail.com");
             accountRequest3.setContactNo("092039031");
-            accountRequest3.setDivisionId(division.getId());
+            accountRequest3.setDivisionId(division2.getId());
             accountRequest3.setIsActive(true);
             accountRequest3.setRolesName(ERoles.ADMIN);
             
@@ -151,7 +151,7 @@ public class StartAppConfig {
             accountRequest4.setPassword("pass123");
             accountRequest4.setEmail("bob@gmail.com");
             accountRequest4.setContactNo("092002031");
-            accountRequest4.setDivisionId(division.getId());
+            accountRequest4.setDivisionId(division2.getId());
             accountRequest4.setIsActive(true);
             accountRequest4.setRolesName(ERoles.SUPERVISOR);
             
@@ -163,7 +163,7 @@ public class StartAppConfig {
             accountRequest5.setPassword("pass123");
             accountRequest5.setEmail("evan@gmail.com");
             accountRequest5.setContactNo("092039031");
-            accountRequest5.setDivisionId(division.getId());
+            accountRequest5.setDivisionId(division2.getId());
             accountRequest5.setIsActive(true);
             accountRequest5.setRolesName(ERoles.DEVELOPER);
             
@@ -175,7 +175,7 @@ public class StartAppConfig {
             accountRequest6.setPassword("pass123");
             accountRequest6.setEmail("dodo@gmail.com");
             accountRequest6.setContactNo("092039031");
-            accountRequest6.setDivisionId(division.getId());
+            accountRequest6.setDivisionId(division2.getId());
             accountRequest6.setIsActive(true);
             accountRequest6.setRolesName(ERoles.DEVELOPER);
             
@@ -515,8 +515,8 @@ public class StartAppConfig {
             comment.setIsActive(true);
             commentRepository.save(comment);
 
-            ScoreConfigRequest scoreConfigRequest = new ScoreConfigRequest(10, 2, 5, 2);
-            ScoreConfigs scoreConfig = scoreConfigService.addScoreConfig(scoreConfigRequest);
+            ScoringRequest scoringRequest = new ScoringRequest(10, 2, 5, 2);
+            Scorings scoreConfig = scoreConfigService.addScoring(scoringRequest);
         };
     }
 }

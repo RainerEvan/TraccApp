@@ -40,6 +40,9 @@ public class ApplicationService {
     }
 
     public void deleteApplication(UUID applicationId){
-        applicationRepository.delete(getApplication(applicationId));
+        Applications application = applicationRepository.findById(applicationId)
+            .orElseThrow(() -> new IllegalStateException("Application with current id cannot be found: "+applicationId));
+
+        applicationRepository.delete(application);
     }
 }

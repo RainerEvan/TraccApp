@@ -69,6 +69,9 @@ public class MemberService {
 
     @Transactional
     public void deletemember(UUID memberId){
-        memberRepository.delete(getMember(memberId));
+        Members member = memberRepository.findById(memberId)
+            .orElseThrow(() -> new IllegalStateException("Member with current id cannot be found: "+memberId));
+
+        memberRepository.delete(member);
     }
 }
