@@ -26,7 +26,6 @@ export class AccountService {
             division{
               name
             }
-            profileImg
             isActive
             contactNo
             roles{
@@ -49,7 +48,6 @@ export class AccountService {
             division{
               name
             }
-            profileImg
           }
         }
       `,
@@ -71,7 +69,6 @@ export class AccountService {
               id
               name
             }
-            profileImg
             isActive
             roles{
               id

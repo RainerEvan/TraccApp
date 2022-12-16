@@ -30,7 +30,7 @@
             <ng-template pTemplate="body" let-comment>
                 <div class="grid grid-cols-8 gap-3 p-6 lg:grid-cols-12">
                     <div class="col-span-1 row-span-2 flex flex-col items-center justify-start">
-                        <img [(src)]="imageUrl+comment.author.id" alt="Profile" class="rounded-full w-14">
+                        <img [src]="imageUrl+comment.author.id" alt="Profile" class="rounded-full w-14">
                     </div>
                     <div class="col-span-6 flex flex-col justify-center lg:col-span-10">
                         <div class="flex flex-row justify-between">

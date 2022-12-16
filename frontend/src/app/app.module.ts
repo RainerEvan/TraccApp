@@ -74,6 +74,7 @@ import { TeamDetailComponent } from './components/teams/team-detail/team-detail.
 import { AddTeamComponent } from './components/teams/add-team/add-team.component';
 import { MemberListComponent } from './components/teams/member-list/member-list.component';
 import { AddMemberComponent } from './components/teams/add-member/add-member.component';
+import { AssignTicketComponent } from './components/tickets/assign-ticket/assign-ticket.component';
 
 @NgModule({
   declarations: [
@@ -123,6 +124,7 @@ import { AddMemberComponent } from './components/teams/add-member/add-member.com
     AddTeamComponent,
     MemberListComponent,
     AddMemberComponent,
+    AssignTicketComponent,
   ],
   imports: [
     BrowserModule,

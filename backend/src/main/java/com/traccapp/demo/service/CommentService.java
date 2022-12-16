@@ -7,8 +7,11 @@ import java.util.UUID;
 import javax.transaction.Transactional;
 
 import com.traccapp.demo.exception.AbstractGraphQLException;
+import com.traccapp.demo.model.Accounts;
 import com.traccapp.demo.model.Comments;
 import com.traccapp.demo.model.Tickets;
+import com.traccapp.demo.payload.request.CommentRequest;
+import com.traccapp.demo.repository.AccountRepository;
 import com.traccapp.demo.repository.CommentRepository;
 import com.traccapp.demo.repository.TicketRepository;
 
@@ -24,9 +27,9 @@ public class CommentService {
     @Autowired
     private final CommentRepository commentRepository;
     @Autowired
-    private final TicketRepository ticketRepository;
+    private final AccountRepository accountRepository;
     @Autowired
-    private final AuthService authService;
+    private final TicketRepository ticketRepository;
 
     @Transactional
     public List<Comments> getAllCommentsForTicket(UUID ticketId){
@@ -38,16 +41,18 @@ public class CommentService {
     }
 
     @Transactional
-    public Comments addComment(UUID ticketId, String body) {
+    public Comments addComment(CommentRequest commentRequest) {
+        Accounts account = accountRepository.findById(commentRequest.getAccountId())
+            .orElseThrow(() -> new IllegalStateException("Account with current id cannot be found: "+commentRequest.getAccountId()));
 
-        Tickets ticket = ticketRepository.findByTicketId(ticketId)
-            .orElseThrow(() -> new IllegalStateException("Ticket with current id cannot be found: "+ticketId));
+        Tickets ticket = ticketRepository.findByTicketId(commentRequest.getTicketId())
+            .orElseThrow(() -> new IllegalStateException("Ticket with current id cannot be found: "+commentRequest.getTicketId()));
 
         Comments comment = new Comments();
         comment.setTicket(ticket);
-        comment.setAuthor(authService.getCurrentAccount());
+        comment.setAuthor(account);
         comment.setCreatedAt(OffsetDateTime.now());
-        comment.setBody(body);
+        comment.setBody(commentRequest.getBody());
         comment.setIsActive(true);
 
         return commentRepository.save(comment);
@@ -55,7 +60,6 @@ public class CommentService {
 
     @Transactional
     public Comments editComment(UUID commentId, String body){
-
         Comments comment = commentRepository.findById(commentId)
             .orElseThrow(() -> new IllegalStateException("Comment with current id cannot be found"+commentId));
         comment.setBody(body);

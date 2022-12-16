@@ -35,8 +35,6 @@ public class TicketService {
     private final AccountRepository accountRepository;
     @Autowired
     private final StatusRepository statusRepository;
-    @Autowired
-    private final AuthService authService;
 
     @Transactional
     public List<Tickets> getAllTickets(){
@@ -59,6 +57,8 @@ public class TicketService {
 
     @Transactional
     public Tickets addTicket(TicketRequest ticketRequest){
+        Accounts user = accountRepository.findById(ticketRequest.getAccountId())
+            .orElseThrow(() -> new IllegalStateException("Account with current id cannot be found: "+ticketRequest.getAccountId()));
 
         Applications application = applicationRepository.findById(ticketRequest.getApplicationId())
             .orElseThrow(() -> new IllegalStateException("Application with current id cannot be found: "+ticketRequest.getApplicationId()));
@@ -67,7 +67,7 @@ public class TicketService {
         ticket.setApplication(application);
         ticket.setTitle(ticketRequest.getTitle());
         ticket.setDescription(ticketRequest.getDescription());
-        ticket.setReporter(authService.getCurrentAccount());
+        ticket.setReporter(user);
         ticket.setDateAdded(OffsetDateTime.now());
 
         Status status = statusRepository.findByName(EStatus.PENDING)

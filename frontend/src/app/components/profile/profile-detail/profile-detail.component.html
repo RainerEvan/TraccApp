@@ -28,7 +28,7 @@
                 <div class="flex flex-col p-4 justify-between lg:flex-row">
                     <div class="w-full flex items-center justify-center py-4">
                         <div *ngIf="account" class="bg-gray-100 shadow-md">
-                            <img class="object-fill w-44" [src]="imageUrl" alt="Profile Image">
+                            <img class="object-fill w-44" [src]="imageUrl+account.id" alt="Profile Image">
                         </div>
                         <p-skeleton *ngIf="loading" width="11rem" height="11rem"></p-skeleton>
                     </div>

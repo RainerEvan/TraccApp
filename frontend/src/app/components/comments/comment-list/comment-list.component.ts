@@ -18,7 +18,6 @@ import { EditCommentComponent } from '../edit-comment/edit-comment.component';
 })
 export class CommentListComponent implements OnInit {
 
-  ticketId = this.route.snapshot.paramMap.get('id');
   imageUrl = environment.apiUrl+'/accounts/profileImg/';
   currAuthorId: string;
   comments: Comments[];
@@ -43,8 +42,10 @@ export class CommentListComponent implements OnInit {
   }
 
   public getAllComments(){
+    const ticketId = this.route.snapshot.paramMap.get('id');
+    
     this.loading = true;
-    this.commentService.getAllCommentsForTicket(this.ticketId).subscribe({
+    this.commentService.getAllCommentsForTicket(ticketId).subscribe({
       next: (comments: Comments[]) => {
         this.comments = cloneDeep(comments);
         this.loading = false;
@@ -58,9 +59,9 @@ export class CommentListComponent implements OnInit {
 
   public addComment(): void{
     if(this.commentForm.valid){
-      const body = this.commentForm.value.body;
+      const formData = this.commentForm.value;
 
-      this.commentService.addComment(this.ticketId,body).subscribe({
+      this.commentService.addComment(formData).subscribe({
         next: (result: any) => {
           this.isCommentFormSubmitted = true;
           this.commentForm.reset();
@@ -88,7 +89,11 @@ export class CommentListComponent implements OnInit {
   }
 
   generateCommentForm(){
+    const ticketId = this.route.snapshot.paramMap.get('id');
+
     this.commentForm = this.formBuilder.group({
+      accountId: [this.authService.accountValue.accountId, [Validators.required]],
+      ticketId: [ticketId, [Validators.required]],
       body: [null, [Validators.required]],
     });
   }

@@ -11,6 +11,7 @@ import com.traccapp.demo.model.Supports;
 import com.traccapp.demo.model.TicketAttachments;
 import com.traccapp.demo.model.TicketLogs;
 import com.traccapp.demo.model.Tickets;
+import com.traccapp.demo.payload.request.AssignSupportRequest;
 import com.traccapp.demo.payload.request.ReassignSupportRequest;
 import com.traccapp.demo.payload.request.SupportRequest;
 import com.traccapp.demo.payload.request.TicketRequest;
@@ -25,7 +26,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -52,13 +52,6 @@ public class TicketSupportController {
     private final SupportAttachmentService supportAttachmentService;
     @Autowired
     private final TicketLogsService ticketLogsService;
-
-    // @GetMapping(path = "/test")
-    // public List<Supports> test(@RequestBody UUID accountId){
-    //     List<Supports> supports = supportService.getAllReassignedSupportsForDeveloper(accountId);
-
-    //     return supports;
-    // }
 
     @PostMapping(path = "/add")
     public ResponseEntity<Object> addTicket(@RequestPart(name="files", required = false) MultipartFile[] files, @RequestPart("ticket") TicketRequest ticketRequest){
@@ -151,9 +144,9 @@ public class TicketSupportController {
     }
 
     @PostMapping(path = "/supports/add")
-    public ResponseEntity<Object> addSupport(@RequestParam("ticketId") UUID ticketId){
+    public ResponseEntity<Object> addSupport(@RequestBody AssignSupportRequest assignSupportRequest){
         try {
-            Supports support = supportService.addSupport(ticketId);
+            Supports support = supportService.addSupport(assignSupportRequest);
             String status = updateTicketStatus(support.getTicket().getTicketId(), EStatus.IN_PROGRESS);
 
             TicketLogs ticketLogs = ticketLogsService.addTicketLogs(support.getTicket().getTicketId(), "Ticket taken for support");

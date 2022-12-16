@@ -23,7 +23,6 @@ export class CommentService {
             author{
               id
               fullname
-              profileImg
             }
             createdAt
             updatedAt
@@ -38,9 +37,8 @@ export class CommentService {
       .valueChanges.pipe(map((result)=>result.data.getAllCommentsForTicket));
   }
 
-  public addComment(ticketId: string, body: string): Observable<any>{
-    const params = new HttpParams().set('ticketId',ticketId);
-    return this.http.post(API_URL+'/add',body,{params:params});
+  public addComment(formData:any): Observable<any>{
+    return this.http.post(API_URL+'/add',formData);
   }
 
   public editComment(commentId: string, body: string): Observable<any>{

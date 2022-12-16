@@ -5,6 +5,7 @@ import { ApplicationService } from 'src/app/services/application/application.ser
 import { TicketSupportService } from 'src/app/services/ticket-support/ticket-support.service';
 import { Applications } from 'src/app/models/applications';
 import { ResultDialogComponent } from '../../modal/result-dialog/result-dialog.component';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-add-ticket',
@@ -19,7 +20,7 @@ export class AddTicketComponent implements OnInit {
   ticketAttachments: File[]=[];
   fileDropArea:string;
   
-  constructor(public dialogService:DialogService, public ref: DynamicDialogRef, public config: DynamicDialogConfig, private ticketSupportService: TicketSupportService, private applicationService: ApplicationService, private formBuilder: FormBuilder) { }
+  constructor(public dialogService:DialogService, public ref: DynamicDialogRef, public config: DynamicDialogConfig, private ticketSupportService: TicketSupportService, private authService:AuthService, private applicationService: ApplicationService, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.generateTicketForm();
@@ -65,6 +66,7 @@ export class AddTicketComponent implements OnInit {
 
   generateTicketForm(){
     this.ticketForm = this.formBuilder.group({
+      accountId: [this.authService.accountValue.accountId, [Validators.required]],
       applicationId: [null, [Validators.required]],
       title: [null, [Validators.required,Validators.maxLength(255)]],
       description: [null, [Validators.required]],

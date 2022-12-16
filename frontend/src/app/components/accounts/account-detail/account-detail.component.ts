@@ -5,6 +5,7 @@ import { Accounts } from 'src/app/models/accounts';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { EditAccountComponent } from '../edit-account/edit-account.component';
 import { DomSanitizer } from '@angular/platform-browser';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-account-detail',
@@ -15,7 +16,7 @@ export class AccountDetailComponent implements OnInit {
 
   loading: boolean;
   account: Accounts;
-  imageUrl: any;
+  imageUrl = environment.apiUrl+'/accounts/profileImg/';
   ref: DynamicDialogRef;
 
   constructor(public dialogService:DialogService, private route:ActivatedRoute, private accountService:AccountService, private sanitizer: DomSanitizer) { }
@@ -38,7 +39,6 @@ export class AccountDetailComponent implements OnInit {
       next: (account: Accounts) => {
         this.loading = false;
         this.account = account;
-        this.imageUrl = this.sanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64,'+account.profileImg);
       },
       error: (error: any) => {
         console.log(error);

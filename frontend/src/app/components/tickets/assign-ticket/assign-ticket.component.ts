@@ -10,17 +10,17 @@ import { ResultDialogComponent } from '../../modal/result-dialog/result-dialog.c
 import { NotificationService } from 'src/app/services/notification/notification.service';
 
 @Component({
-  selector: 'app-reassign-ticket',
-  templateUrl: './reassign-ticket.component.html',
-  styleUrls: ['./reassign-ticket.component.css']
+  selector: 'app-assign-ticket',
+  templateUrl: './assign-ticket.component.html',
+  styleUrls: ['./assign-ticket.component.css']
 })
-export class ReassignTicketComponent implements OnInit, OnDestroy{
+export class AssignTicketComponent implements OnInit {
 
   developers: Accounts[];
   imageUrl = environment.apiUrl+'/accounts/profileImg/';
   loading: boolean;
   selectedDeveloper: Accounts;
-  isReassignSubmitted: boolean = false;
+  isAssignSubmitted: boolean = false;
   ticketInfo: any;
   ref2: DynamicDialogRef
 
@@ -42,7 +42,7 @@ export class ReassignTicketComponent implements OnInit, OnDestroy{
 
     this.accountService.getAllDevelopers().subscribe({
       next: (accounts: Accounts[]) => {
-        this.developers = cloneDeep(accounts).filter((developer) => developer.id != this.ticketInfo.currDeveloperId);
+        this.developers = cloneDeep(accounts);
         this.loading = false;
       },
       error: (error: any) => {
@@ -51,12 +51,11 @@ export class ReassignTicketComponent implements OnInit, OnDestroy{
     });
   }
 
-  reassignTicket(){
+  assignTicket(){
     if(this.selectedDeveloper){
-      const reassignInfo = {
+      const assignInfo = {
         ticketId: this.ticketInfo.ticketId,
-        currSupportId: this.ticketInfo.currSupportId,
-        developerId: this.selectedDeveloper.id
+        accountId: this.selectedDeveloper.id
       }
 
       const data = {
@@ -64,18 +63,18 @@ export class ReassignTicketComponent implements OnInit, OnDestroy{
         ticketId: this.ticketInfo.ticketId
       }
   
-      this.ticketSupportService.reassignTicket(reassignInfo).subscribe({
+      this.ticketSupportService.addSupport(assignInfo).subscribe({
         next: (result: any) => {
           console.log(result);
-          this.isReassignSubmitted = true;
-          this.ref.close(this.isReassignSubmitted);
-          this.showResultDialog("Success","Ticket has been reassigned successfully");
-          this.sendNotification(reassignInfo.developerId,"Ticket Assigned By Supervisor","You have been assigned to support a new ticket, check it out",data);
+          this.isAssignSubmitted = true;
+          this.ref.close(this.isAssignSubmitted);
+          this.showResultDialog("Success","Ticket has been assigned successfully");
+          this.sendNotification(this.selectedDeveloper.id,"Ticket Assigned By Supervisor","You have been assigned to support a new ticket, check it out",data);
         },
         error: (error: any) => {
           console.log(error);
-          this.isReassignSubmitted = false;
-          this.ref.close(this.isReassignSubmitted);
+          this.isAssignSubmitted = false;
+          this.ref.close(this.isAssignSubmitted);
           this.showResultDialog("Failed","There was a problem, try again later");
         }
       });
@@ -112,7 +111,7 @@ export class ReassignTicketComponent implements OnInit, OnDestroy{
 
     this.ref2.onClose.subscribe((confirm:boolean) =>{
         if (confirm) {
-          this.reassignTicket();
+          this.assignTicket();
         }
     });
   }
@@ -127,4 +126,5 @@ export class ReassignTicketComponent implements OnInit, OnDestroy{
       contentStyle: {"max-height": "650px","width":"40vw", "min-width":"350px", "max-width":"500px", "overflow": "auto"},
     });
   }
+
 }

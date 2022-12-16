@@ -13,6 +13,7 @@ import { ReassignTicketComponent } from '../reassign-ticket/reassign-ticket.comp
 import { RequestDropTicketComponent } from '../request-drop-ticket/request-drop-ticket.component';
 import { MemberService } from 'src/app/services/member/member.service';
 import { Members } from 'src/app/models/members';
+import { AssignTicketComponent } from '../assign-ticket/assign-ticket.component';
 
 @Component({
   selector: 'app-ticket-detail',
@@ -57,14 +58,17 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
   }
   
   public takeTicket():void{
-    const ticketId = this.ticket.ticketId;
+    const assignInfo = {
+      ticketId: this.ticket.ticketId,
+      accountId: this.authService.accountValue.accountId
+    }
 
     const data = {
       ticketNo: this.ticket.ticketNo,
       ticketId: this.ticket.ticketId
     }
 
-    this.ticketSupportService.addSupport(ticketId).subscribe({
+    this.ticketSupportService.addSupport(assignInfo).subscribe({
       next: (result: any) => {
         console.log(result);
         this.showResultDialog("Success","Ticket has been added to your task list",null);
@@ -191,11 +195,6 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
   showRequestDropTicketDialog(){
     const supportId = this.ticket.support.id;
 
-    const data = {
-      ticketNo: this.ticket.ticketNo,
-      ticketId: this.ticket.ticketId
-    }
-
     this.ref = this.dialogService.open(RequestDropTicketComponent, {
       header: "Request Drop Ticket",
       footer: " ",
@@ -228,8 +227,33 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     });
   }
 
+  showAssignTicketDialog(){
+    const data = {
+      ticketNo: this.ticket.ticketNo,
+      ticketId: this.ticket.ticketId
+    }
+
+    this.ref = this.dialogService.open(AssignTicketComponent, {
+      header: "Assign Ticket",
+      footer: " ",
+      data: {
+        ticketInfo: data
+      },
+      baseZIndex: 10000,
+      contentStyle: {"max-height": "650px","width":"40vw", "min-width":"550px", "max-width":"700px", "overflow": "auto"},
+    });
+
+    this.ref.onClose.subscribe((success:boolean) =>{
+      if (success) {
+        this.getTicket();
+        this.sendNotification(this.ticket.reporter.id,"Ticket Taken By Developer","Your ticket has been taken by a developer, check it out", data);
+      } 
+    });
+  }
+
   showReassignTicketDialog(){
     const ticketInfo = {
+      ticketNo: this.ticket.ticketNo,
       ticketId: this.ticket.ticketId,
       currSupportId: this.ticket.support.id,
       currDeveloperId: this.ticket.support.developer.id
@@ -254,7 +278,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       if (success) {
         this.getTicket();
         this.sendNotification(this.ticket.reporter.id,"Ticket Reassigned By Developer","Your ticket has been reassigned to a new developer, check it out",data);
-        this.sendNotification(ticketInfo.currDeveloperId,"Ticket Reassigned By Superviosr","Your support has been reassigned to a new developer, check it out",data);
+        this.sendNotification(ticketInfo.currDeveloperId,"Ticket Reassigned By Supervisor","Your support has been reassigned to a new developer, check it out",data);
       } 
     });
   }

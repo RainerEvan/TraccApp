@@ -193,13 +193,12 @@ export class TicketSupportService {
     return this.http.put(API_URL+'/drop',null,{params:params});
   }
 
-  public reassignTicket(reassign: any): Observable<any>{
-    return this.http.post(API_URL+'/supports/reassign',reassign);
+  public reassignTicket(formData: any): Observable<any>{
+    return this.http.post(API_URL+'/supports/reassign',formData);
   }
 
-  public addSupport(ticketId: string): Observable<any>{
-    const params = new HttpParams().set('ticketId',ticketId);
-    return this.http.post(API_URL+'/supports/add',null,{params:params});
+  public addSupport(formData:any): Observable<any>{
+    return this.http.post(API_URL+'/supports/add',formData);
   }
 
   public solveSupport(formData: FormData): Observable<any>{

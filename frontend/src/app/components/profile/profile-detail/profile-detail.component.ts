@@ -6,6 +6,7 @@ import { AccountService } from 'src/app/services/account/account.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { ChangePasswordComponent } from '../change-password/change-password.component';
 import { EditProfileComponent } from '../edit-profile/edit-profile.component';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-profile-detail',
@@ -16,7 +17,7 @@ export class ProfileDetailComponent implements OnInit {
 
   loading: boolean;
   account: Accounts;
-  imageUrl: any;
+  imageUrl = environment.apiUrl+'/accounts/profileImg/';
   ref: DynamicDialogRef;
 
   constructor(public dialogService:DialogService, private accountService:AccountService, private sanitizer: DomSanitizer, private authService: AuthService) { }
@@ -39,7 +40,6 @@ export class ProfileDetailComponent implements OnInit {
       next: (account: Accounts) => {
         this.loading = false;
         this.account = account;
-        this.imageUrl = this.sanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64,'+account.profileImg);
       },
       error: (error: any) => {
         console.log(error);

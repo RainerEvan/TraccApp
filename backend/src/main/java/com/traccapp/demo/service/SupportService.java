@@ -13,6 +13,7 @@ import com.traccapp.demo.model.Accounts;
 import com.traccapp.demo.model.Supports;
 import com.traccapp.demo.model.Tags;
 import com.traccapp.demo.model.Tickets;
+import com.traccapp.demo.payload.request.AssignSupportRequest;
 import com.traccapp.demo.payload.request.ReassignSupportRequest;
 import com.traccapp.demo.payload.request.SupportRequest;
 import com.traccapp.demo.repository.AccountRepository;
@@ -36,8 +37,6 @@ public class SupportService {
     private final AccountRepository accountRepository;
     @Autowired
     private final TagsService tagsService;
-    @Autowired
-    private final AuthService authService;
 
     @Transactional
     public Supports getSupport(UUID supportId){
@@ -59,15 +58,17 @@ public class SupportService {
     }
 
     @Transactional
-    public Supports addSupport(UUID ticketId) {
+    public Supports addSupport(AssignSupportRequest assignSupportRequest) {
+        Tickets ticket = ticketRepository.findByTicketId(assignSupportRequest.getTicketId())
+            .orElseThrow(() -> new IllegalStateException("Ticket with current id cannot be found: "+assignSupportRequest.getTicketId()));
 
-        Tickets ticket = ticketRepository.findByTicketId(ticketId)
-            .orElseThrow(() -> new IllegalStateException("Ticket with current id cannot be found: "+ticketId)); 
+        Accounts developer = accountRepository.findById(assignSupportRequest.getAccountId())
+            .orElseThrow(() -> new IllegalStateException("Account with current id cannot be found: "+assignSupportRequest.getAccountId()));
 
         Supports support = new Supports();        
         support.setTicket(ticket);
         support.setDateTaken(OffsetDateTime.now());
-        support.setDeveloper(authService.getCurrentAccount());
+        support.setDeveloper(developer);
         support.setIsActive(true);
 
         return supportRepository.save(support);

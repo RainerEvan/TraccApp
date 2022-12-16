@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.traccapp.demo.model.Comments;
+import com.traccapp.demo.payload.request.CommentRequest;
 import com.traccapp.demo.service.CommentService;
 import com.traccapp.demo.utils.ResponseHandler;
 
@@ -27,9 +28,9 @@ public class CommentController {
     private final CommentService commentService;
 
     @PostMapping(path = "/add")
-    public ResponseEntity<Object> addComment(@RequestParam("ticketId") UUID ticketId, @RequestBody String body){
+    public ResponseEntity<Object> addComment(@RequestBody CommentRequest commentRequest){
         try {
-            Comments comment = commentService.addComment(ticketId,body);
+            Comments comment = commentService.addComment(commentRequest);
         
             return ResponseHandler.generateResponse("Comment has been added successfully!", HttpStatus.OK, comment.getCreatedAt());
         } catch (Exception e) {

@@ -22,6 +22,7 @@
                         <button *ngIf="ticket?.status.name === 'PENDING' && isCurrUser" [disabled]="loading" (click)="showConfirmationDialog('Cancel Ticket','Do you want to cancel this ticket?','cancel')" class="button-primary">Cancel Ticket</button>
                     </div>
                     <div *appHasRole="['SUPERVISOR']" class="flex flex-row items-center space-x-4">
+                        <button *ngIf="ticket?.status.name === 'PENDING'" [disabled]="loading" (click)="showAssignTicketDialog()" class="button-primary">Assign Ticket</button>
                         <button *ngIf="ticket?.status.name === 'AWAITING'" [disabled]="loading" (click)="showReassignTicketDialog()" class="button-secondary">Reassign Ticket</button>
                         <button *ngIf="ticket?.status.name === 'AWAITING'" [disabled]="loading" (click)="showConfirmationDialog('Drop Ticket','Do you want to drop this ticket?','drop')" class="button-primary">Drop Ticket</button>
                     </div>
