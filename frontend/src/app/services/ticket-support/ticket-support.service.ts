@@ -63,7 +63,7 @@ export class TicketSupportService {
             }
             title
             description
-            dateClosed
+            dateResolved
             status{
               name
             }

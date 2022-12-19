@@ -11,6 +11,11 @@
                     <span *ngIf="ticket" [class]="'ticket-status-'+ticket.status.name">{{ticket.status.name}}</span>
                     <p-skeleton *ngIf="loading || !ticket" width="8rem"></p-skeleton>
                 </div>
+                <div *ngIf="ticket?.dateResolved" class="flex flex-row items-center space-x-6">
+                    <span class="font-semibold text-sm">Date Resolved</span>
+                    <span *ngIf="ticket" class="ticket-value">{{ticket.dateResolved | date:'dd/MM/yyyy'}}</span>
+                    <p-skeleton *ngIf="loading || !ticket" width="8rem"></p-skeleton>
+                </div>
                 <div class="flex flex-row items-center">
                     <div *appHasRole="['DEVELOPER']" class="flex flex-row items-center space-x-4">
                         <button *ngIf="ticket?.status.name === 'IN_PROGRESS' && isCurrDeveloper" [disabled]="loading" (click)="showSolveTicketDialog()" class="button-secondary">Solve Ticket</button>

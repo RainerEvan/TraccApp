@@ -12,7 +12,7 @@ export type Tickets ={
     reporter: Accounts;
     title: string;
     description: string;
-    dateClosed: Date;
+    dateResolved: Date;
     status: Status;
     support: Supports;
     attachments: TicketAttachments[];

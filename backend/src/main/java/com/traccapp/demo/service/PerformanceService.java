@@ -169,7 +169,7 @@ public class PerformanceService {
         
         if(!supports.isEmpty()){
             for(Supports support:supports){
-                double ticketPoint = calculatePointsForSupport(support, scoring, support.getDateTaken(), support.getTicket().getDateClosed());
+                double ticketPoint = calculatePointsForSupport(support, scoring, support.getDateTaken(), support.getTicket().getDateResolved());
     
                 totalPoints += ticketPoint;
             }

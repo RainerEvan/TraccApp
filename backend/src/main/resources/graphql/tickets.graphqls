@@ -3,7 +3,7 @@ type Tickets{
     ticketNo:String
     application:Applications
     dateAdded:DateTime
-    dateClosed:DateTime
+    dateResolved:DateTime
     reporter:Accounts
     title:String
     description:String
