@@ -68,7 +68,6 @@ export class ProfileDetailComponent implements OnInit {
   showChangePasswordDialog(){
     this.ref = this.dialogService.open(ChangePasswordComponent, {
       header: "Change Password",
-      footer: " ",
       baseZIndex: 10000,
       contentStyle: {"max-height": "650px","width":"40vw", "min-width":"550px", "max-width":"700px", "overflow": "auto"},
     });

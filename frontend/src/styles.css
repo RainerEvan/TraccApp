@@ -6,7 +6,7 @@
 @tailwind utilities;
 
 body{
-    @apply font-montserrat font-regular text-base text-gray-800 bg-gray-100 !important;
+    @apply font-montserrat font-regular text-base text-gray-800 bg-gradient-to-b from-gray-300 via-gray-100 to-gray-300 !important;
 }
 
 .p-component{
@@ -15,6 +15,14 @@ body{
 
 .p-datatable-header{
     @apply bg-gray-200 !important;
+}
+
+.p-datatable .p-sortable-column.p-highlight{
+    @apply ring-0 py-2 px-3 bg-transparent rounded-md font-regular text-gray-500 text-sm hover:bg-gray-300/60 !important;
+}
+
+.p-datatable .p-sortable-column.p-highlight .p-sortable-column-icon{
+    @apply text-inherit !important;
 }
 
 .p-inputtext {

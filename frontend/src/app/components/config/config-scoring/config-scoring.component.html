@@ -4,19 +4,19 @@
         <button *appHasRole="['ADMIN']" (click)="editScoring()" [disabled]="scoringForm.pristine" type="button" class="button-primary">Update</button>
     </div>
     <form [formGroup]="scoringForm" class="w-full flex flex-col space-y-8 p-7">
-        <div class="w-full inline-flex items-center">
+        <div class="w-full inline-flex items-center space-x-4">
             <label for="ticketPoint" class="form-label w-1/2 text-sm">Ticket Point</label>
             <input type="number" min="1" [value]="scoring?.ticketPoint" pInputText placeholder="Enter ticket point" class="form-field p-inputtext-sm" formControlName="ticketPoint">
         </div>
-        <div class="w-full inline-flex items-center">
+        <div class="w-full inline-flex items-center space-x-4">
             <label for="ticketSLA" class="form-label w-1/2 text-sm">SLA (Days)</label>
             <input type="number" min="1" [value]="scoring?.ticketSLA" pInputText placeholder="Enter ticket SLA" class="form-field p-inputtext-sm" formControlName="ticketSLA">
         </div>
-        <div class="w-full inline-flex items-center">
+        <div class="w-full inline-flex items-center space-x-4">
             <label for="maxTicketSLA" class="form-label w-1/2 text-sm">Max Days</label>
             <input type="number" min="1" [value]="scoring?.maxTicketSLA" pInputText placeholder="Enter max days" class="form-field p-inputtext-sm" formControlName="maxTicketSLA">
         </div>
-        <div class="w-full inline-flex items-center">
+        <div class="w-full inline-flex items-center space-x-4">
             <label for="ticketReassignedDeduction" class="form-label w-1/2 text-sm">Reassigned Point Deduction</label>
             <input type="number" min="1" [value]="scoring?.ticketReassignedDeduction" pInputText placeholder="Enter reassigned point deduction" class="form-field p-inputtext-sm" formControlName="ticketReassignedDeduction">
         </div>

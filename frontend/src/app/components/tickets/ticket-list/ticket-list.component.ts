@@ -4,7 +4,6 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Table } from 'primeng/table';
 import { TicketSupportService } from 'src/app/services/ticket-support/ticket-support.service';
 import { Tickets } from 'src/app/models/tickets';
-import { AddTicketComponent } from '../add-ticket/add-ticket.component';
 
 @Component({
   selector: 'app-ticket-list',
@@ -50,19 +49,4 @@ export class TicketListComponent implements OnInit {
     this.ticketTable.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
   }
 
-  showAddTicketDialog(){
-    this.ref = this.dialogService.open(AddTicketComponent, {
-      header: "Add Ticket",
-      footer: " ",
-      baseZIndex: 10000,
-      contentStyle: {"max-height": "650px","width":"40vw", "min-width":"550px", "max-width":"700px", "overflow": "auto"},
-    });
-
-    this.ref.onClose.subscribe((success:boolean) =>{
-      if (success) {
-        this.getAllTickets();
-      } 
-    });
-  }
-  
 }

@@ -6,17 +6,16 @@
         <p-table #accountTable [value]="accounts" [loading]="loading" [totalRecords]="totalRecords" [paginator]="true" [rows]="8" [showCurrentPageReport]="true" selectionMode="single" responsiveLayout="scroll" [filterDelay]="0" sortField="fullname" [sortOrder]="1"
             [globalFilterFields]="['username','email','fullname','roles[0].name','division.name','isActive']">
             <ng-template pTemplate="caption">
-                <div class="px-2 flex items-center place-content-between">
+                <div class="px-2 flex items-center justify-between">
+                    <button pSortableColumn="fullname">Sort Name<p-sortIcon field="fullname"></p-sortIcon></button>
                     <span class="p-input-icon-left">
                         <i class="pi pi-search pl-1 opacity-60"></i>
-                        <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Search Accounts" />
+                        <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Filter Accounts" />
                     </span>
                     <div class="flex flex-row space-x-4">
-                        <button (click)="getAllAccounts()" class="py-2 px-3 flex flex-row items-center space-x-2 rounded-md stroke-gray-500 text-gray-500 hover:bg-gray-300/60">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 stroke-inherit" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                            </svg>
-                            <span class="font-medium text-sm text-inherit">Refresh</span>
+                        <button (click)="getAllTickets()" class="py-2 px-3 flex flex-row items-center space-x-2 rounded-md stroke-gray-500 text-gray-500 hover:bg-gray-300/60">
+                            <i class="pi pi-sync" [ngClass]="loading ? 'pi-spin':''" style="font-size:14px"></i>
+                            <span class="text-sm text-inherit">Refresh</span>
                         </button>
                         <button *appHasRole="['ADMIN']" (click)="showAddAccountDialog()" class="button-primary">Add Account</button>
                     </div>
