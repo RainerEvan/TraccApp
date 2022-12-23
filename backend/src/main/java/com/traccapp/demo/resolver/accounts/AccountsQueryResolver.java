@@ -3,9 +3,10 @@ package com.traccapp.demo.resolver.accounts;
 import java.util.List;
 import java.util.UUID;
 
-import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import com.traccapp.demo.model.Accounts;
 import com.traccapp.demo.service.AccountService;
+
+import graphql.kickstart.tools.GraphQLQueryResolver;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

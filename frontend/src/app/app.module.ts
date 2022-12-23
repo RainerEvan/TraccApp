@@ -176,7 +176,7 @@ import { AssignTicketComponent } from './components/tickets/assign-ticket/assign
             }
           },
           link: httpLink.create({
-            uri: environment.serverUrl+'/graphql',
+            uri: environment.apiUrl+'/graphql',
           }),
         };
       },

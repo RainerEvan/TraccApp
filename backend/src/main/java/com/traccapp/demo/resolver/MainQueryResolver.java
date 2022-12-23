@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import com.traccapp.demo.model.Applications;
 import com.traccapp.demo.model.Divisions;
 import com.traccapp.demo.model.Roles;
@@ -15,6 +14,7 @@ import com.traccapp.demo.service.DivisionService;
 import com.traccapp.demo.service.RoleService;
 import com.traccapp.demo.service.TagsService;
 
+import graphql.kickstart.tools.GraphQLQueryResolver;
 import lombok.AllArgsConstructor;
 
 @Component

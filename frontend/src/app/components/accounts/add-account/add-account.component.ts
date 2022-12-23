@@ -151,11 +151,13 @@ export class AddAccountComponent implements OnInit {
 
   removeFile(){
     this.profileImg = null;
+    this.imageUrl = null;
   }
 
   resetForm(form: FormGroup){
     form.reset();
     this.profileImg = null;
+    this.imageUrl = null;
   }
 
   showResultDialog(title:string, message:string){

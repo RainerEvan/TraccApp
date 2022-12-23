@@ -8,6 +8,7 @@ import { AccountService } from 'src/app/services/account/account.service';
 import { DivisionService } from 'src/app/services/division/division.service';
 import { RoleService } from 'src/app/services/role/role.service';
 import { ResultDialogComponent } from '../../modal/result-dialog/result-dialog.component';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-edit-profile',
@@ -81,6 +82,8 @@ export class EditProfileComponent implements OnInit {
   }
 
   generateAccountForm(){
+    this.imageUrl = environment.apiUrl+"/accounts/profileImg/"+this.accountData.id;
+
     this.accountForm = this.formBuilder.group({
       username: [{value:this.accountData.username, disabled:true}],
       fullname: [this.accountData.fullname],
@@ -147,10 +150,6 @@ export class EditProfileComponent implements OnInit {
     reader.onload = (_event) => {
       this.imageUrl = reader.result;
     }
-  }
-
-  removeFile(){
-    this.profileImg = null;
   }
 
   resetForm(){

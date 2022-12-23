@@ -5,11 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.coxautodev.graphql.tools.GraphQLResolver;
 import com.traccapp.demo.model.Members;
 import com.traccapp.demo.model.Teams;
 import com.traccapp.demo.service.MemberService;
 
+import graphql.kickstart.tools.GraphQLResolver;
 import lombok.AllArgsConstructor;
 
 @Component

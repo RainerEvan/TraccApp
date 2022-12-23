@@ -64,7 +64,7 @@ export class CommentListComponent implements OnInit {
       this.commentService.addComment(formData).subscribe({
         next: (result: any) => {
           this.isCommentFormSubmitted = true;
-          this.commentForm.reset();
+          this.generateCommentForm();
           this.getAllComments();
         },
         error: (error: any) => {

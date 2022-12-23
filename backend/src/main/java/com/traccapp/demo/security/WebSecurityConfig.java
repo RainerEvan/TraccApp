@@ -12,14 +12,12 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import lombok.AllArgsConstructor;
 
@@ -27,12 +25,12 @@ import lombok.AllArgsConstructor;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @AllArgsConstructor
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
+public class WebSecurityConfig{
     
     @Autowired
     private final UserDetailsServiceImpl userDetailsService;
     @Autowired
-    private final AuthEntryPoint unauthorizedHandler;
+    private final AuthEntryPoint authEntryPoint;
 
     @Bean
     public AuthTokenFilter authTokenFilter(){
@@ -45,38 +43,37 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     }
 
     @Bean
-    CorsConfigurationSource corsConfigurationSource() {
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
-        return source;
+    public AuthenticationManager authManager(HttpSecurity http) throws Exception{
+        return http.getSharedObject(AuthenticationManagerBuilder.class)
+            .userDetailsService(userDetailsService)
+            .passwordEncoder(passwordEncoder())
+            .and()
+            .build();
     }
 
     @Bean
-    @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return (web) -> web.debug(false)
+        .ignoring()
+        .antMatchers("/css/**", "/js/**", "/img/**", "/lib/**", "/favicon.ico");
     }
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-    }
-
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http.cors().and().csrf().disable()
-            .httpBasic().disable();
-		// 	.exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
-		// 	.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-        //     .authorizeRequests()
-        //     .antMatchers("/api/auth/**").permitAll()
-        //     .antMatchers("/graphql").permitAll()
-        //     .antMatchers("/graphiql").permitAll()
-        //     .antMatchers("/api/**").permitAll()
-        //     .anyRequest().authenticated()
-        //     .and()
-        //     .addFilterBefore(authTokenFilter(), UsernamePasswordAuthenticationFilter.class);
-    }
+            // .httpBasic().disable();
+            .exceptionHandling().authenticationEntryPoint(authEntryPoint).and()
+            .authorizeRequests()
+            .antMatchers("/api/accounts/profileImg/**").permitAll()
+            .antMatchers("/api/auth/**").permitAll()
+            .antMatchers("/graphiql", "/vendor/**").permitAll()
+            .antMatchers("/api/graphql").permitAll()
+            .anyRequest().authenticated()
+            .and()
+            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .and()
+            .addFilterBefore(authTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 
-    
+        return http.build();
+    }
 }
