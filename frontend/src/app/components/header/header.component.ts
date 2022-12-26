@@ -78,7 +78,7 @@ export class HeaderComponent implements OnInit {
   checkToken(fcmSubscriptions:any[], token:any):boolean{
     console.log(fcmSubscriptions);
     if(token){
-      if(fcmSubscriptions.some(fcmToken => token.includes(fcmToken.token))){
+      if(fcmSubscriptions.some(fcmToken => token.match(fcmToken.token))){
         return false;
       } else{
         return true;

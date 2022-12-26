@@ -108,10 +108,22 @@ public class NotificationService {
 
             try {
                 json.put("to", fcmToken);
-    
+                
+                JSONObject action = new JSONObject();
+                action.put("operation","openWindow");
+                action.put("url","http://localhost:4200/#/notifications");
+
+                JSONObject onActionClick = new JSONObject();
+                onActionClick.put("default", action);
+
+                JSONObject data = new JSONObject();
+                data.put("onActionClick", onActionClick);
+
                 JSONObject notification = new JSONObject();
                 notification.put("title", notificationObject.getTitle());
-                notification.put("body", notificationObject.getBody()); 
+                notification.put("body", notificationObject.getBody());
+                notification.put("data", data);
+
                 json.put("notification", notification);
             } catch (JSONException e1) {
                 e1.printStackTrace();
