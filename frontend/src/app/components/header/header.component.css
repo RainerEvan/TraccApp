@@ -7,5 +7,5 @@
 }
 
 :host ::ng-deep .p-toast-message-custom {
-    @apply bg-stone-200 text-stone-600;
+    @apply bg-gray-200 text-inherit;
 }

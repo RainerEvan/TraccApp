@@ -32,7 +32,7 @@
       "name": "tracc-api",
       "urls": [
         "http://localhost:8080/api",
-        "http://localhost:8080/graphql"
+        "http://localhost:8080/api/graphql"
       ],
       "cacheConfig": {
         "strategy": "freshness",
