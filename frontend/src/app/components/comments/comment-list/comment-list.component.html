@@ -50,7 +50,7 @@
                         <button *ngIf="comment.author.id == currAuthorId" (click)="commentDrop.toggle($event)" class="flex items-center justify-center rounded-full p-2 text-gray-400 hover:bg-gray-100">
                             <i class="pi pi-ellipsis-v" style="font-size: 12px;"></i>
                         </button>
-
+                        
                         <!-- Dropdown Comment -->
                         <p-overlayPanel #commentDrop [dismissable]="true" [showTransitionOptions]="'0ms'" [hideTransitionOptions]="'10ms'" [style]="{width:'10rem'}">
                             <ng-template pTemplate>

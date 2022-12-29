@@ -32,7 +32,7 @@ public class NotificationController {
         try {
             Notifications notification = notificationService.getNotification(id);
 
-            String result = notificationService.sendPushNotification(notification);
+            String result = notificationService.sendEmail(notification);
         
             return ResponseHandler.generateResponse("Push Notifications", HttpStatus.OK, result);
         } catch (Exception e) {

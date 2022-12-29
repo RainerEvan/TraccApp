@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import javax.mail.Message;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.transaction.Transactional;
 
 import com.traccapp.demo.exception.AbstractGraphQLException;
@@ -138,14 +141,33 @@ public class NotificationService {
         return result;
     }
 
+    // @Transactional
+    // public String sendEmail(Notifications notificationObject){
+    //     try {
+    //         SimpleMailMessage mailMessage = new SimpleMailMessage();
+    //         mailMessage.setFrom(sender);
+    //         mailMessage.setTo(notificationObject.getReceiver().getEmail());
+    //         mailMessage.setText(notificationObject.getBody());
+    //         mailMessage.setSubject(notificationObject.getTitle());
+
+    //         javaMailSender.send(mailMessage);
+
+    //         return "Mail sent successfully";
+
+    //     } catch (Exception e) {
+    //         return "Error sending email: "+e.getMessage();
+    //     }
+
+    // }
+
     @Transactional
     public String sendEmail(Notifications notificationObject){
         try {
-            SimpleMailMessage mailMessage = new SimpleMailMessage();
-            mailMessage.setFrom(sender);
-            mailMessage.setTo("wowormaman@gmail.com");
-            mailMessage.setText(notificationObject.getBody());
+            MimeMessage mailMessage = javaMailSender.createMimeMessage();
+            mailMessage.setFrom(new InternetAddress(sender));
+            mailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(notificationObject.getReceiver().getEmail()));
             mailMessage.setSubject(notificationObject.getTitle());
+            mailMessage.setText(notificationObject.getBody()+"<br><a href=\"http://localhost:4200/\">See Ticket</a>","UTF-8","html");
 
             javaMailSender.send(mailMessage);
 
