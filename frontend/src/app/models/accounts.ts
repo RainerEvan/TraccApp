@@ -8,7 +8,7 @@ export type Accounts ={
     email: string;
     contactNo: string;
     division: Divisions;
-    profileImg: any;
+    profileImg: string;
     isActive: boolean;
     roles: Roles[];
 }

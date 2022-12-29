@@ -23,6 +23,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -39,12 +41,17 @@ public class NotificationService {
     private final NotificationRepository notificationRepository;
     @Autowired
     private final AccountRepository accountRepository;
+    @Autowired
+    private final JavaMailSender javaMailSender;
 
     @Value("${fcm.firebaseServerKey}")
     private String firebaseServerKey;
 
     @Value("${fcm.firebaseApiUrl}")
     private String firebaseApiUrl;
+    
+    @Value("${spring.mail.username}")
+    private String sender;
 
     @Transactional
     public List<Notifications> getAllNotificationsForAccount(UUID accountId){
@@ -130,4 +137,24 @@ public class NotificationService {
         
         return result;
     }
+
+    @Transactional
+    public String sendEmail(Notifications notificationObject){
+        try {
+            SimpleMailMessage mailMessage = new SimpleMailMessage();
+            mailMessage.setFrom(sender);
+            mailMessage.setTo("wowormaman@gmail.com");
+            mailMessage.setText(notificationObject.getBody());
+            mailMessage.setSubject(notificationObject.getTitle());
+
+            javaMailSender.send(mailMessage);
+
+            return "Mail sent successfully";
+
+        } catch (Exception e) {
+            return "Error sending email: "+e.getMessage();
+        }
+
+    }
+
 }

@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   error: string;
-  show: boolean = false;
+  showPass: boolean = false;
 
   constructor(private route: ActivatedRoute, private router: Router, private authService: AuthService, private messageService: MessageService, private formBuilder: FormBuilder) {
     if(this.authService.accountValue){
@@ -54,5 +54,9 @@ export class LoginComponent implements OnInit {
         }
       });
     }
+  }
+
+  togglePass(){
+    this.showPass = !this.showPass;
   }
 }
