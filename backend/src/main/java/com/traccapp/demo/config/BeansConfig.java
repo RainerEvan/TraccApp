@@ -6,9 +6,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
 @Configuration
-public class CorsConfig {
+public class BeansConfig {
     @Bean
 	public CorsFilter corsFilter() {
 		UrlBasedCorsConfigurationSource urlBasedCorsConfigurationSource = new UrlBasedCorsConfigurationSource();
@@ -23,5 +24,13 @@ public class CorsConfig {
 		corsConfiguration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
 		urlBasedCorsConfigurationSource.registerCorsConfiguration("/**", corsConfiguration);
 		return new CorsFilter(urlBasedCorsConfigurationSource);
+	}
+
+	@Bean
+	public FreeMarkerConfigurer freeMarkerConfigurer(){
+		FreeMarkerConfigurer freeMarkerConfigurer = new FreeMarkerConfigurer();
+		freeMarkerConfigurer.setTemplateLoaderPath("classpath:/templates");
+		freeMarkerConfigurer.setDefaultEncoding("UTF-8");
+		return freeMarkerConfigurer;
 	}
 }

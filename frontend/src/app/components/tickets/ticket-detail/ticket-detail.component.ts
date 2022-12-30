@@ -72,7 +72,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
       next: (result: any) => {
         console.log(result);
         this.showResultDialog("Success","Ticket has been added to your task list",null);
-        this.sendNotification(this.ticket.reporter.id,"Ticket Taken By Developer","Your ticket has been taken by a developer, check it out", data);
+        this.sendNotification(this.ticket.reporter.id,"Ticket Taken By Developer","Hey, your ticket has been taken by a developer", data);
       },
       error: (error: any) => {
         console.log(error);
@@ -187,7 +187,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     this.ref.onClose.subscribe((success:boolean) =>{
       if (success) {
         this.getTicket();
-        this.sendNotification(this.ticket.reporter.id,"Ticket Solved By Developer","Your ticket has been solved by a developer, check it out",data);
+        this.sendNotification(this.ticket.reporter.id,"Ticket Solved By Developer","Hey, your ticket has been solved by a developer",data);
       } 
     });
   }
@@ -246,7 +246,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     this.ref.onClose.subscribe((success:boolean) =>{
       if (success) {
         this.getTicket();
-        this.sendNotification(this.ticket.reporter.id,"Ticket Taken By Developer","Your ticket has been taken by a developer, check it out", data);
+        this.sendNotification(this.ticket.reporter.id,"Ticket Taken By Developer","Hey, your ticket has been taken by a developer", data);
       } 
     });
   }
@@ -277,8 +277,8 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
     this.ref.onClose.subscribe((success:boolean) =>{
       if (success) {
         this.getTicket();
-        this.sendNotification(this.ticket.reporter.id,"Ticket Reassigned By Developer","Your ticket has been reassigned to a new developer, check it out",data);
-        this.sendNotification(ticketInfo.currDeveloperId,"Ticket Reassigned By Supervisor","Your support has been reassigned to a new developer, check it out",data);
+        this.sendNotification(this.ticket.reporter.id,"Ticket Reassigned By Developer","Hey, your ticket has been reassigned to a new developer",data);
+        this.sendNotification(ticketInfo.currDeveloperId,"Ticket Reassigned By Supervisor","Hey, your support has been reassigned to a new developer",data);
       } 
     });
   }

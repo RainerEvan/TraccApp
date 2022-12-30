@@ -18,7 +18,9 @@ import com.traccapp.demo.service.NotificationService;
 import com.traccapp.demo.utils.ResponseHandler;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/notifications")
 @AllArgsConstructor
@@ -44,9 +46,14 @@ public class NotificationController {
     public ResponseEntity<Object> addNotification(@RequestBody NotificationRequest notificationRequest){
         try {
             Notifications notification = notificationService.addNotification(notificationRequest);
-            String result = notificationService.sendPushNotification(notification);
+
+            String push = notificationService.sendPushNotification(notification);
+            log.info("Push notification: {}",push);
+
+            String email = notificationService.sendEmail(notification);
+            log.info("Send email: {}",email);
         
-            return ResponseHandler.generateResponse("Notification has been sent successfully!", HttpStatus.OK, result);
+            return ResponseHandler.generateResponse("Notification has been added successfully!", HttpStatus.OK, notification.getCreatedAt());
         } catch (Exception e) {
             return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.BAD_REQUEST, null);
         }

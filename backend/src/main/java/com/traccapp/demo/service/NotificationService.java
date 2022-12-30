@@ -2,7 +2,9 @@ package com.traccapp.demo.service;
 
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -20,17 +22,20 @@ import com.traccapp.demo.repository.FcmSubscriptionRepository;
 import com.traccapp.demo.repository.NotificationRepository;
 import com.traccapp.demo.utils.HeaderRequestInterceptor;
 
+import freemarker.template.Template;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
 import lombok.RequiredArgsConstructor;
 
@@ -46,6 +51,8 @@ public class NotificationService {
     private final AccountRepository accountRepository;
     @Autowired
     private final JavaMailSender javaMailSender;
+    @Autowired
+    private final FreeMarkerConfigurer freeMarkerConfigurer;
 
     @Value("${fcm.firebaseServerKey}")
     private String firebaseServerKey;
@@ -160,18 +167,25 @@ public class NotificationService {
 
     // }
 
+    @Async
     @Transactional
     public String sendEmail(Notifications notificationObject){
         try {
+            Map<String,Object> data = new HashMap<>();
+            data.put("notification", notificationObject);
+
+            Template template = freeMarkerConfigurer.getConfiguration().getTemplate("email-template.ftl");
+            String html = FreeMarkerTemplateUtils.processTemplateIntoString(template, data);
+
             MimeMessage mailMessage = javaMailSender.createMimeMessage();
             mailMessage.setFrom(new InternetAddress(sender));
             mailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(notificationObject.getReceiver().getEmail()));
             mailMessage.setSubject(notificationObject.getTitle());
-            mailMessage.setText(notificationObject.getBody()+"<br><a href=\"http://localhost:4200/\">See Ticket</a>","UTF-8","html");
+            mailMessage.setText(html,"UTF-8","html");
 
             javaMailSender.send(mailMessage);
 
-            return "Mail sent successfully";
+            return "Email sent successfully";
 
         } catch (Exception e) {
             return "Error sending email: "+e.getMessage();

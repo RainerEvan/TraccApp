@@ -195,7 +195,7 @@ public class StartAppConfig {
             notification.setReceiver(account2);
             notification.setCreatedAt(OffsetDateTime.now());
             notification.setTitle("Ticket Taken by Developer");
-            notification.setBody("Your ticket has been taken by a developer, check it out right here");
+            notification.setBody("Your ticket has been taken by a developer");
             notificationRepository.save(notification);
 
             // Notifications notification2 = new Notifications();

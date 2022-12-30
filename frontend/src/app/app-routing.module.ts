@@ -20,6 +20,7 @@ import { TeamListComponent } from './components/teams/team-list/team-list.compon
 import { TicketDetailComponent } from './components/tickets/ticket-detail/ticket-detail.component';
 import { TicketListComponent } from './components/tickets/ticket-list/ticket-list.component';
 import { AuthGuard } from './helpers/auth-guard';
+import { NotificationDetailComponent } from './components/notifications/notification-detail/notification-detail.component';
 
 const routes: Routes = [
   {
@@ -108,6 +109,18 @@ const routes: Routes = [
         path:'notifications', 
         component: NotificationPageComponent,
         canActivate:[AuthGuard],
+        children: [
+          {
+            path:'',
+            redirectTo: 'detail/',
+            pathMatch: 'full'
+          },
+          {
+            path:'detail/:id', 
+            component: NotificationDetailComponent,
+            canActivate:[AuthGuard]
+          },
+        ]
       },
       {
         path:'my-tickets',
