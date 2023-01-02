@@ -111,12 +111,12 @@ const routes: Routes = [
         canActivate:[AuthGuard],
         children: [
           {
-            path:'',
-            redirectTo: 'detail/',
-            pathMatch: 'full'
+            path:'', 
+            component: NotificationDetailComponent,
+            canActivate:[AuthGuard]
           },
           {
-            path:'detail/:id', 
+            path:':id', 
             component: NotificationDetailComponent,
             canActivate:[AuthGuard]
           },

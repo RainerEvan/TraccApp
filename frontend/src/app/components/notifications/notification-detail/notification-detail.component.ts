@@ -13,7 +13,7 @@ export class NotificationDetailComponent implements OnInit {
 
   notification:Notifications;
   loading:boolean;
-  data?:any;
+  data:any;
 
   constructor(private route:ActivatedRoute, private notificationService:NotificationService) { }
 
@@ -24,18 +24,19 @@ export class NotificationDetailComponent implements OnInit {
   }
 
   public getNotification(notificationId:string): void{
-    console.log(notificationId);
-    this.loading = true;
-    this.notificationService.getNotification(notificationId).subscribe({
-      next: (notification: Notifications) => {
-        this.notification = cloneDeep(notification);
-        this.data = JSON.parse(this.notification.data);
-        this.loading = false;
-      },
-      error: (error: any) => {
-        console.log(error);
-      }
-    });
+    if(notificationId){
+      this.loading = true;
+      this.notificationService.getNotification(notificationId).subscribe({
+        next: (notification: Notifications) => {
+          this.notification = notification;
+          this.data = JSON.parse(this.notification.data);
+          this.loading = false;
+        },
+        error: (error: any) => {
+          console.log(error);
+        }
+      });
+    }
   }
 
 }

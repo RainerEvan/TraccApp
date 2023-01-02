@@ -42,9 +42,6 @@ export class NotificationPageComponent implements OnInit {
   }
 
   onSelect(notification:Notifications){
-    this.selected = notification;
-    this.notificationData = JSON.parse(notification.data);
-
     if(!notification.readAt){
       this.notificationService.readNotification(notification.id).subscribe({
         next: () => {

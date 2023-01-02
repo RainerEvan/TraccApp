@@ -9,19 +9,19 @@
     <div class="w-full">
         <p class="text-sm text-justify">{{notification.body}}</p>
     </div>
-    <div *ngIf="data" class="w-full flex flex-col space-y-2">
+    <div *ngIf="data.details" class="w-full flex flex-col space-y-2">
         <span class="text-sm">Request Details:</span>
         <div class="flex flex-col">
             <span class="font-semibold text-sm">Result:</span>
-            <p class="text-sm text-justify">{{data.details?.result}}</p>
+            <p class="text-sm text-justify">{{data.details.result}}</p>
         </div>
         <div class="flex flex-col">
             <span class="font-semibold text-sm">Description:</span>
-            <p class="text-sm text-justify">{{data.details?.description}}</p>
+            <p class="text-sm text-justify">{{data.details.description}}</p>
         </div>
         <div class="flex flex-col">
             <span class="font-semibold text-sm">Reason:</span>
-            <p class="text-sm text-justify" [innerHTML]="data.details?.devNote"></p>
+            <p class="text-sm text-justify" [innerHTML]="data.details.devNote"></p>
         </div>
     </div>
     <div class="flex flex-col items-start">

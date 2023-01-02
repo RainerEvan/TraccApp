@@ -191,13 +191,6 @@ public class StartAppConfig {
             member1.setDeveloper(account2);
             memberRepository.save(member1);
 
-            Notifications notification = new Notifications();
-            notification.setReceiver(account2);
-            notification.setCreatedAt(OffsetDateTime.now());
-            notification.setTitle("Ticket Taken by Developer");
-            notification.setBody("Your ticket has been taken by a developer");
-            notificationRepository.save(notification);
-
             // Notifications notification2 = new Notifications();
             // notification2.setReceiver(account);
             // notification2.setCreatedAt(OffsetDateTime.now());
@@ -449,6 +442,14 @@ public class StartAppConfig {
             support.setDeveloper(account2);
             support.setIsActive(true);
             supportRepository.save(support);
+
+            Notifications notification = new Notifications();
+            notification.setReceiver(ticket.getReporter());
+            notification.setCreatedAt(OffsetDateTime.now());
+            notification.setTitle("Ticket Taken by Developer");
+            notification.setBody("Your ticket has been taken by a developer");
+            notification.setData("{\"ticketNo\":\""+ticket.getTicketNo()+"\",\"ticketId\":\""+ticket.getTicketId()+"\"}");
+            notificationRepository.save(notification);
 
             Tickets ticket2 = new Tickets();
             ticket2.setDateAdded(OffsetDateTime.now());

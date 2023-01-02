@@ -8,8 +8,6 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-import javax.mail.Message;
-import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.transaction.Transactional;
 
@@ -28,9 +26,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
@@ -178,10 +178,12 @@ public class NotificationService {
             String html = FreeMarkerTemplateUtils.processTemplateIntoString(template, data);
 
             MimeMessage mailMessage = javaMailSender.createMimeMessage();
-            mailMessage.setFrom(new InternetAddress(sender));
-            mailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(notificationObject.getReceiver().getEmail()));
-            mailMessage.setSubject(notificationObject.getTitle());
-            mailMessage.setText(html,"UTF-8","html");
+            MimeMessageHelper helper = new MimeMessageHelper(mailMessage,true,"UTF-8");
+            helper.setFrom(sender);
+            helper.setTo(notificationObject.getReceiver().getEmail());
+            helper.setSubject(notificationObject.getTitle());
+            helper.setText(html,true);
+            helper.addInline("tracc.png", new ClassPathResource("image/tracc.png"));
 
             javaMailSender.send(mailMessage);
 
