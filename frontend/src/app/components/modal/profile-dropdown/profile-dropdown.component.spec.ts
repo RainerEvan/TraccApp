@@ -11,9 +11,7 @@ describe('ProfileDropdownComponent', () => {
       declarations: [ ProfileDropdownComponent ]
     })
     .compileComponents();
-  });
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(ProfileDropdownComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

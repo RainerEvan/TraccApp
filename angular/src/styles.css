@@ -1,0 +1,174 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+    @apply font-montserrat font-regular text-base text-gray-800 bg-gradient-to-b from-gray-200 via-gray-100 to-gray-200 !important;
+}
+
+.p-component{
+    @apply font-montserrat font-regular text-base text-gray-800 !important;
+}
+
+.p-datatable-header{
+    @apply bg-gray-200 !important;
+}
+
+.p-datatable .p-sortable-column.p-highlight{
+    @apply ring-0 py-2 px-3 bg-transparent rounded-md font-regular text-gray-500 text-sm hover:bg-gray-300/60 !important;
+}
+
+.p-datatable .p-sortable-column.p-highlight .p-sortable-column-icon{
+    @apply text-inherit !important;
+}
+
+.p-inputtext {
+    @apply w-full ring-0 border border-gray-400 text-sm placeholder:text-gray-400 hover:border-gray-400 focus:border-gray-400 !important;
+}
+
+.p-paginator {
+    @apply text-sm !important;
+}
+
+.p-paginator .p-paginator-page{
+    @apply font-medium text-sm text-gray-500 ring-0 hover:bg-gray-100/80 !important;
+}
+
+.p-paginator .p-link{
+    @apply font-medium text-sm text-gray-500 ring-0 hover:bg-gray-100/80 !important;
+}
+
+.p-paginator .p-highlight{
+    @apply border-gray-400 bg-gray-100 hover:bg-gray-100 text-inherit !important;
+}
+
+.p-skeleton {
+    @apply bg-gray-100 !important;
+}
+
+.p-autocomplete {
+    @apply w-full ring-0 outline-none rounded-md border border-gray-400 hover:border-gray-400 font-montserrat !important;
+}
+
+.p-autocomplete-dropdown {
+    @apply bg-transparent text-gray-500 ring-0 outline-none border-none !important;
+}
+
+.p-autocomplete .p-autocomplete-multiple-container {
+    @apply w-full ring-0 border-none bg-transparent flex-nowrap overflow-auto !important;
+}
+
+.p-autocomplete .p-autocomplete-multiple-container .p-autocomplete-input-token input {
+    @apply w-full ring-0 border-none outline-none font-montserrat placeholder:text-gray-500 !important;
+}
+
+.p-autocomplete-token {
+    @apply rounded-full bg-gray-500 hover:bg-gray-600 text-sm text-white items-center !important;
+}
+
+.p-autocomplete-token-icon {
+    @apply text-sm !important;
+}
+
+.p-dropdown {
+    @apply w-full ring-0 border border-gray-400 hover:border-gray-400 font-montserrat !important;
+}
+
+.p-dropdown-label {
+    @apply p-3 font-montserrat !important;
+}
+
+.p-editor-container {
+    @apply w-full ring-0 rounded-md border border-gray-400 hover:border-gray-400 !important;
+}
+
+.p-editor-toolbar {
+    @apply w-full ring-0 border-none font-montserrat !important;
+}
+
+.p-editor-content {
+    @apply w-full ring-0 bg-white outline-none border-none font-montserrat !important;
+}
+
+.p-editor-container .p-editor-content .ql-editor{
+    @apply bg-white border-none !important;
+}
+
+.p-inputswitch {
+    @apply flex items-center !important;
+}
+
+.p-inputswitch-slider {
+    @apply ring-0 outline-none bg-rose-600 hover:bg-rose-700 !important;
+}
+
+.p-inputswitch-checked .p-inputswitch-slider {
+    @apply bg-emerald-500 hover:bg-emerald-600 !important;
+}
+
+.p-toast-message-content {
+    @apply border-gray-500 text-inherit !important;
+}
+
+.drag-area{
+    @apply text-sm text-gray-400 border border-dashed border-gray-400 bg-gray-50 cursor-pointer;
+}
+
+.form-label{
+    @apply font-medium !important;
+}
+
+.form-field{
+    @apply disabled:pointer-events-none !important;
+}
+
+.card{
+    @apply w-full bg-white border border-gray-100 shadow-md !important;
+}
+
+.button-primary{
+    @apply bg-gray-500 border-2 border-gray-500 rounded-md px-3 py-1.5 text-sm text-white transition ease-in-out duration-200 hover:bg-gray-400 hover:border-gray-400 disabled:text-gray-400 disabled:bg-gray-200 disabled:border-gray-200;
+}
+
+.button-secondary{
+    @apply bg-white border-2 border-gray-400 rounded-md px-3 py-1.5 text-sm transition ease-in-out duration-200 hover:bg-gray-100 hover:border-gray-400 disabled:text-gray-400 disabled:bg-white disabled:border-gray-200;
+}
+
+.table-list{
+    @apply border-gray-500 shadow-sm transition ease-in-out duration-100 hover:border-l-4 hover:rounded-l-sm hover:bg-gray-50;
+}
+
+.ticket-status-PENDING{
+    @apply bg-gray-200 !important;
+}
+
+.ticket-status-IN_PROGRESS{
+    @apply bg-gray-300 !important;
+}
+
+.ticket-status-AWAITING{
+    @apply bg-gray-300 !important;
+}
+
+.ticket-status-RESOLVED{
+    @apply bg-gray-400 text-white  !important;
+}
+
+.ticket-status-CLOSED{
+    @apply bg-gray-500 text-white  !important;
+}
+
+.ticket-status-DROPPED{
+    @apply bg-gray-600 text-white  !important;
+}
+
+.account-status-true{
+    @apply bg-emerald-500 text-white !important;
+}
+
+.account-status-false{
+    @apply bg-rose-600 text-white !important;
+}

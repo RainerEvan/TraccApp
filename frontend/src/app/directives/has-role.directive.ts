@@ -4,7 +4,8 @@ import { AuthService } from '../services/auth/auth.service';
 @Directive({
   selector: '[appHasRole]'
 })
-export class HasRoleDirective implements OnInit {
+export class HasRoleDirective {
+
   @Input('appHasRole') appHasRole: string[];
 
   isVisible = false;
@@ -28,5 +29,4 @@ export class HasRoleDirective implements OnInit {
       this.viewContainerRef.clear();
     }
   }
-
 }

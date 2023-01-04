@@ -11,9 +11,7 @@ describe('NotificationDropdownComponent', () => {
       declarations: [ NotificationDropdownComponent ]
     })
     .compileComponents();
-  });
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(NotificationDropdownComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

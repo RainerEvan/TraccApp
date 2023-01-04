@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
-import { map, Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { FcmSubscriptions } from 'src/app/models/fcmsubscriptions';
 import { environment } from 'src/environments/environment';
 
@@ -36,5 +36,4 @@ export class FcmsubscriptionService {
     const params = new HttpParams().set('token',token);
     return this.http.post(API_URL+'/add',null,{params:params});
   }
-
 }

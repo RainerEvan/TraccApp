@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://localhost:8080/api',
+  apiUrl:'http://localhost:8080/api',
   firebase: {
     apiKey: "AIzaSyC1AKF1YxGB46Fn_ibpxRA8R-z_qTkh2Fk",
     authDomain: "tracc-app.firebaseapp.com",

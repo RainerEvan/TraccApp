@@ -1,12 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
-
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body{
-    @apply font-montserrat font-regular text-base text-gray-800 bg-gradient-to-b from-gray-200 via-gray-100 to-gray-200 !important;
+    @apply font-montserrat font-regular text-base text-gray-800 bg-no-repeat bg-gradient-to-b from-gray-200 via-gray-100 to-gray-200 !important;
 }
 
 .p-component{

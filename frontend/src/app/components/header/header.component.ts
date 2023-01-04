@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireMessaging } from '@angular/fire/compat/messaging';
 import { MessageService } from 'primeng/api';
-import { BehaviorSubject } from 'rxjs';
 import { AuthDetails } from 'src/app/models/authdetails';
 import { FcmSubscriptions } from 'src/app/models/fcmsubscriptions';
 import { AuthService } from 'src/app/services/auth/auth.service';
@@ -87,4 +86,5 @@ export class HeaderComponent implements OnInit {
 
     return false;
   }
+
 }

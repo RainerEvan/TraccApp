@@ -1,0 +1,36 @@
+<div class="flex min-h-screen items-center justify-center py-12 px-4">
+    <div class="w-full max-w-md">
+        <div class="w-full flex flex-row space-x-1 items-center justify-center py-4">
+            <img src="assets/icons/tracc-512x512.png" alt="Tracc Logo" class="w-14 h-14">
+            <h1 class="text-center font-semibold text-4xl italic tracking-widest">TRACC</h1>
+        </div>
+    
+        <div class="w-full bg-white rounded-sm px-8 sm:px-12 py-8 shadow-md flex flex-col space-y-4">
+            <h2 class="font-semibold text-xl text-center">LOGIN</h2>
+            <form [formGroup]="loginForm" (ngSubmit)="login()" class="flex flex-col space-y-4">
+                <div class="flex flex-col space-y-1">
+                    <label for="username" class="">Username</label>
+                    <input pInputText type="text" placeholder="Enter your username" class="p-inputtext-sm form-field" formControlName="username" required>
+                    <div *ngIf="username.invalid && (username.dirty || username.touched)" class="font-regular text-xs text-red-300">
+                        Username is required
+                    </div>
+                </div>
+                <div class="flex flex-col space-y-1">
+                    <label for="password" class="">Password</label>
+                    <span class="p-input-icon-right">
+                        <i (click)="togglePass()" class="pi cursor-pointer" [ngClass]="showPass ? 'pi-eye-slash':'pi-eye'"></i>
+                        <input pInputText [type]="showPass ? 'text' : 'password'" placeholder="Enter your password" class="p-inputtext-sm form-field" formControlName="password" required>
+                    </span>
+                    <div *ngIf="password.invalid && (password.dirty || password.touched)" class="font-regular text-xs text-red-300">
+                        Password is required
+                    </div>
+                </div>
+                <div class="flex items-center justify-center pt-4">
+                    <button [disabled]="loginForm.invalid" type="submit" class="w-24 button-primary">Login</button>
+                </div>
+            </form>
+        </div>
+    
+        <p-toast position="top-center" key="login"></p-toast>
+    </div>
+</div>

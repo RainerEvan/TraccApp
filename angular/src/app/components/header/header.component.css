@@ -1,0 +1,11 @@
+.nav-button{
+    @apply pb-1.5 text-gray-400 text-sm font-semibold hover:text-gray-500 transition duration-200;
+}
+
+.active{
+    @apply text-gray-800 border-b-2 hover:text-gray-800;
+}
+
+:host ::ng-deep .p-toast-message-custom {
+    @apply bg-gray-200 text-inherit;
+}

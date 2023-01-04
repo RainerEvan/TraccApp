@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Apollo,gql } from 'apollo-angular';
-import { map, Observable } from 'rxjs';
+import { Apollo, gql } from 'apollo-angular';
+import { Observable, map } from 'rxjs';
 import { Accounts } from 'src/app/models/accounts';
 import { environment } from 'src/environments/environment';
 

@@ -1,7 +1,7 @@
-import { HttpClient, HttpHeaderResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, map, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, map } from 'rxjs';
 import { AuthDetails } from 'src/app/models/authdetails';
 import { environment } from 'src/environments/environment';
 
@@ -11,6 +11,7 @@ const API_URL = environment.apiUrl+'/auth';
   providedIn: 'root'
 })
 export class AuthService {
+
   private accountSubject: BehaviorSubject<AuthDetails>;
 
   constructor(private router: Router, private http: HttpClient) { 

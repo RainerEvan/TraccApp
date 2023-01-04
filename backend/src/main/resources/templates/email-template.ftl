@@ -7,6 +7,6 @@
 <h1 style="font-weight:600;font-size:1.5rem">${notification.title}</h1>
 <span>Dear, </span><span style="font-weight:600">${notification.receiver.fullname}</span><br><br>
 <span>${notification.body}. See more details in the Tracc App or by clicking the button below</span><br><br>
-<a href="http://localhost:4200/#/notifications/${notification.id}" style="background-color:slategrey;padding:0.75rem;font-weight:500;font-size:0.875rem;text-decoration:none;color:white;">See Details</a>
+<a href="http://localhost:4200/#/notifications/${notification.id}" style="box-sizing: border-box;background-color:slategrey;padding:0.75rem;font-weight:500;font-size:0.875rem;text-decoration:none;color:white;">See Details</a>
 </div>
  </body>  
