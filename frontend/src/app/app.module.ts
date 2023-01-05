@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -8,7 +9,7 @@ import { AngularFireModule } from '@angular/fire/compat/';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { GraphQLModule } from './graphql.module';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { JwtInterceptor } from './utils/jwt-interceptor/jwt.interceptor';
 import { ErrorInterceptor } from './utils/error-interceptor/error.interceptor';
@@ -19,10 +20,12 @@ import { ProfileDropdownComponent } from './components/modal/profile-dropdown/pr
 import { NotificationDropdownComponent } from './components/modal/notification-dropdown/notification-dropdown.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MessageService } from 'primeng/api';
+import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
 import { InputTextModule } from 'primeng/inputtext';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
-import { HasRoleDirective } from './directives/has-role.directive';
+import { DialogService } from 'primeng/dynamicdialog';
+import { SharedModule } from './modules/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -32,14 +35,17 @@ import { HasRoleDirective } from './directives/has-role.directive';
     HeaderComponent,
     ProfileDropdownComponent,
     NotificationDropdownComponent,
-    HasRoleDirective
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
+    HttpClientModule,
     GraphQLModule,
     FormsModule,
     ReactiveFormsModule,
+    SharedModule,
+    TableModule,
     ToastModule,
     InputTextModule,
     OverlayPanelModule,
@@ -63,6 +69,7 @@ import { HasRoleDirective } from './directives/has-role.directive';
       provide: LocationStrategy, useClass:HashLocationStrategy
     },
     MessageService,
+    DialogService,
   ],
   bootstrap: [AppComponent]
 })

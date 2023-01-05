@@ -13,7 +13,7 @@ body{
 }
 
 .p-datatable-header{
-    @apply bg-gray-200 !important;
+    @apply bg-gray-200 font-regular !important;
 }
 
 .p-datatable .p-sortable-column.p-highlight{
@@ -25,7 +25,7 @@ body{
 }
 
 .p-inputtext {
-    @apply w-full ring-0 border border-gray-400 text-sm placeholder:text-gray-400 hover:border-gray-400 focus:border-gray-400 !important;
+    @apply w-full ring-0 border border-gray-400 text-sm placeholder:text-gray-400 hover:border-gray-400 focus:border-gray-400 disabled:pointer-events-none !important;
 }
 
 .p-paginator {
@@ -118,10 +118,6 @@ body{
 
 .form-label{
     @apply font-medium !important;
-}
-
-.form-field{
-    @apply disabled:pointer-events-none !important;
 }
 
 .card{

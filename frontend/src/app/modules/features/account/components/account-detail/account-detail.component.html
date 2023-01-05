@@ -1,0 +1,83 @@
+<div class="bg-white shadow-md mb-8 p-10">
+    <h1 class="font-bold text-lg text-center mb-4">
+        Account Details
+    </h1>
+    <div class="card py-10 px-14">
+        <!-- Header -->
+        <div class="py-4 px-4 border-b-2 border-gray-400 lg:px-10">
+            <div class="flex flex-row px-4 justify-between">
+                <div class="flex flex-row items-center space-x-6">
+                    <span class="font-semibold text-sm">Status</span>
+                    <div *ngIf="account" [class]="'account-status-'+account.isActive">{{account.isActive ? 'ACTIVE':'DISABLED'}}</div>
+                    <p-skeleton *ngIf="loading" width="8rem"></p-skeleton>
+                </div>
+                <div *appHasRole="['ADMIN']" class="flex flex-row items-center space-x-6">
+                    <button [disabled]="loading" (click)="showEditAccountDialog()" class="button-primary">Edit Details</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Body -->
+        <div class="px-4 mt-8 lg:px-8">
+            <!-- Report -->
+            <div class="my-2">
+                <div class="bg-gray-400/70 px-4 py-2">
+                    <span class="font-bold text-base">DETAILS</span>
+                </div>
+                <div class="flex flex-col p-4 justify-between lg:flex-row">
+                    <div class="w-full flex items-center justify-center py-4">
+                        <div *ngIf="account" class="bg-gray-100 shadow-md">
+                            <img class="object-fill w-44" [src]="imageUrl+account.id" alt="Profile Image">
+                        </div>
+                        <p-skeleton *ngIf="loading" width="11rem" height="11rem"></p-skeleton>
+                    </div>
+
+                    <div class="w-full flex flex-col space-y-6 py-6">
+                        <div class="flex flex-row items-center space-x-8">
+                            <span class="w-1/2 account-field lg:w-1/3">Username</span>
+                            <span *ngIf="account" class="w-1/2 account-value lg:w-2/3">{{account.username}}</span>
+                            <div *ngIf="loading" class="w-1/2 self-center lg:w-2/3">
+                                <p-skeleton width="50%"></p-skeleton>
+                            </div>
+                        </div>
+                        <div class="flex flex-row items-center space-x-8">
+                            <span class="w-1/2 account-field lg:w-1/3">Email</span>
+                            <span *ngIf="account" class="w-1/2 account-value lg:w-2/3">{{account.email}}</span>
+                            <div *ngIf="loading" class="w-1/2 self-center lg:w-2/3">
+                                <p-skeleton width="50%"></p-skeleton>
+                            </div>
+                        </div>
+                        <div class="flex flex-row items-center space-x-8">
+                            <span class="w-1/2 account-field lg:w-1/3">Full Name</span>
+                            <span *ngIf="account" class="w-1/2 account-value lg:w-2/3">{{account.fullname}}</span>
+                            <div *ngIf="loading" class="w-1/2 self-center lg:w-2/3">
+                                <p-skeleton width="50%"></p-skeleton>
+                            </div>
+                        </div>
+                        <div class="flex flex-row items-center space-x-8">
+                            <span class="w-1/2 account-field lg:w-1/3">Role</span>
+                            <span *ngIf="account" class="w-1/2 account-value lg:w-2/3">{{account.roles[0].name}}</span>
+                            <div *ngIf="loading" class="w-1/2 self-center lg:w-2/3">
+                                <p-skeleton width="50%"></p-skeleton>
+                            </div>
+                        </div>
+                        <div class="flex flex-row items-center space-x-8">
+                            <span class="w-1/2 account-field lg:w-1/3">Division</span>
+                            <span *ngIf="account" class="w-1/2 account-value lg:w-2/3">{{account.division.name}}</span>
+                            <div *ngIf="loading" class="w-1/2 self-center lg:w-2/3">
+                                <p-skeleton width="50%"></p-skeleton>
+                            </div>
+                        </div>
+                        <div class="flex flex-row items-center space-x-8">
+                            <span class="w-1/2 account-field lg:w-1/3">Contact No</span>
+                            <span *ngIf="account" class="w-1/2 account-value lg:w-2/3">{{account.contactNo}}</span>
+                            <div *ngIf="loading" class="w-1/2 self-center lg:w-2/3">
+                                <p-skeleton width="50%"></p-skeleton>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,46 @@
+<form [formGroup]="accountForm" (ngSubmit)="editAccount()" class="flex flex-col space-y-6 py-4 px-6 text-black">
+    <div class="w-full flex items-center justify-center">
+        <div class="">
+            <div draggable="true" [ngClass]="fileDropArea" (click)="fileInput.click()" class="drag-area w-24 h-24 flex items-center justify-center rounded-full">
+                <img *ngIf="imageUrl" [src]="imageUrl" class="object-cover w-full h-full rounded-full">
+                <input #fileInput accept="image/*" type="file" class="hidden" (change)="onSelectFile($event)"/>
+            </div>
+        </div>
+    </div>
+    <div class="w-full">
+        <label for="username" class="form-label">Username</label>
+        <input type="text" pInputText placeholder="Enter username" formControlName="username">
+    </div>
+    <div class="w-full">
+        <label for="fullname" class="form-label">Full Name</label>
+        <input type="text" pInputText placeholder="Enter fullname" formControlName="fullname">
+    </div>
+    <div class="w-full">
+        <label for="email" class="form-label">Email</label>
+        <input type="text" pInputText placeholder="Enter email" formControlName="email">
+    </div>
+    <div class="w-full">
+        <label for="contactNo" class="form-label">Contact No</label>
+        <input type="text" pInputText placeholder="Enter contact no" formControlName="contactNo">
+    </div>
+    <div class="w-full">
+        <label for="division" class="form-label">Division</label>
+        <p-dropdown [options]="divisions" optionLabel="name" optionValue="id" [autoDisplayFirst]="false" placeholder="Select division" formControlName="divisionId"></p-dropdown>
+    </div>
+    <div class="w-full">
+        <label for="rolesName" class="form-label">Role</label>
+        <input type="text" pInputText placeholder="Enter role name" formControlName="rolesName">
+    </div>
+    <div class="w-full">
+        <label for="isActive" class="form-label">Status</label>
+        <div class="py-2 flex flex-row items-center space-x-3">
+            <p-inputSwitch formControlName="isActive"></p-inputSwitch>
+            <span class="text-xs text-gray-400">{{isActive.value ? 'ACTIVE':'DISABLED'}}</span>
+        </div>
+    </div>
+    
+    <div class="w-full flex flex-row items-center justify-center space-x-6">
+        <button type="submit" class="button-primary scale-110">Submit</button>
+        <button type="button" (click)="resetForm()" class="button-secondary scale-110">Reset</button>
+    </div>
+</form>

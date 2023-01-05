@@ -1,0 +1,49 @@
+<p-table #tagTable [value]="tags" [loading]="loading" [totalRecords]="totalRecords" [scrollable]="true" scrollHeight="20rem" selectionMode="single" responsiveLayout="scroll" [filterDelay]="0" sortField="name" [sortOrder]="1"
+    [globalFilterFields]="['name']">
+    <ng-template pTemplate="caption">
+        <div class="flex items-center place-content-between">
+            <span class="p-input-icon-left scale-90">
+                <i class="pi pi-search pl-1 opacity-60"></i>
+                <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Search Tags" />
+            </span>
+            <div class="flex flex-row space-x-4 scale-90">
+                <button (click)="getAllTags()" class="py-2 px-3 flex flex-row items-center space-x-2 rounded-md text-gray-500 hover:bg-gray-300/60">
+                    <i class="pi pi-sync" [ngClass]="loading ? 'pi-spin':''" style="font-size:14px"></i>
+                    <span class="font-medium text-sm text-inherit">Refresh</span>
+                </button>
+                <button *appHasRole="['ADMIN']" (click)="showAddTagDialog()" class="button-primary">Add Tag</button>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <div class="grid grid-cols-6 auto-cols-auto py-4 px-6 font-semibold text-sm text-black bg-white border-b-2">
+            <div class="col-span-1">
+                No
+            </div>
+            <div class="col-span-4">
+                Tag
+            </div>
+            <div class="col-span-1">
+                Action
+            </div>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="body" let-tag let-i="rowIndex">
+        <div class="grid grid-cols-6 auto-cols-auto py-4 px-6 text-sm text-black shadow-sm hover:bg-gray-100/40">
+            <div class="col-span-1 flex items-center">
+                {{i+1}}
+            </div>
+            <div class="col-span-4 flex items-center">
+                {{tag.name}}
+            </div>
+            <div class="col-span-1 flex items-center">
+                <button (click)="showConfirmationDialog('Delete','Do you want to delete this tag?','delete',tag.id)" class="flex items-center justify-center bg-gray-500 rounded-md p-2 font-regular text-white hover:bg-gray-400 hover:border-gray-400">
+                    <i class="pi pi-trash"></i>
+                </button>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+        <div class="font-medium text-sm text-gray-400 text-center my-6">NO TAGS FOUND</div>
+    </ng-template>
+</p-table>

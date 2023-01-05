@@ -1,0 +1,7 @@
+.menu-button{
+    @apply h-24 flex flex-col items-center justify-center space-y-1 bg-white shadow-md border border-gray-100 hover:bg-gray-100;
+}
+
+.active{
+    @apply bg-gray-200 border-none shadow-inner hover:bg-gray-200;
+}

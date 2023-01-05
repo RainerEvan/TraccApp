@@ -1,0 +1,3 @@
+:host ::ng-deep .p-inputtext {
+    @apply h-10 text-sm;
+}

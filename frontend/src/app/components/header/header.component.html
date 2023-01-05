@@ -29,25 +29,25 @@
                 <a routerLink="/dashboard" routerLinkActive="active" class="nav-button border-gray-800">Dashboard</a>
             </li>
             <li *appHasRole="['ADMIN','SUPERVISOR','DEVELOPER']">
-                <a routerLink="/tickets" routerLinkActive="active" class="nav-button border-gray-800">Tickets</a>
+                <a routerLink="/ticket" routerLinkActive="active" class="nav-button border-gray-800">Tickets</a>
             </li>
             <li *appHasRole="['ADMIN']">
                 <a routerLink="/config" routerLinkActive="active" class="nav-button border-gray-800">Config</a>
             </li>
             <li *appHasRole="['ADMIN']">
-                <a routerLink="/accounts" routerLinkActive="active" class="nav-button border-gray-800">Accounts</a>
+                <a routerLink="/account" routerLinkActive="active" class="nav-button border-gray-800">Accounts</a>
             </li>
             <li *appHasRole="['USER']">
-                <a routerLink="/my-tickets" routerLinkActive="active" class="nav-button border-gray-800">My Tickets</a>
+                <a routerLink="/my-ticket" routerLinkActive="active" class="nav-button border-gray-800">My Tickets</a>
             </li>
             <li *appHasRole="['DEVELOPER']">
-                <a routerLink="/my-tasks" routerLinkActive="active" class="nav-button border-gray-800">My Tasks</a>
+                <a routerLink="/my-task" routerLinkActive="active" class="nav-button border-gray-800">My Tasks</a>
             </li>
             <li *appHasRole="['DEVELOPER']">
                 <a routerLink="/my-performance" routerLinkActive="active" class="nav-button border-gray-800">My Performance</a>
             </li>
             <li *appHasRole="['SUPERVISOR']">
-                <a routerLink="/teams" routerLinkActive="active" class="nav-button border-gray-800">Teams</a>
+                <a routerLink="/team" routerLinkActive="active" class="nav-button border-gray-800">Teams</a>
             </li>
         </ul>
     </div>

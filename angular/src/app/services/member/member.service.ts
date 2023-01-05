@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Apollo, gql } from 'apollo-angular';
 import { map, Observable } from 'rxjs';
-import { Members } from 'src/app/models/Members';
+import { Members } from 'src/app/models/members';
 import { environment } from 'src/environments/environment';
 
 const API_URL = environment.apiUrl+'/members';
