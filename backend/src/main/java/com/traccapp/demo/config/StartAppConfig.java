@@ -467,6 +467,14 @@ public class StartAppConfig {
             support2.setIsActive(true);
             supportRepository.save(support2);
 
+            Notifications notification2 = new Notifications();
+            notification2.setReceiver(ticket2.getReporter());
+            notification2.setCreatedAt(OffsetDateTime.now());
+            notification2.setTitle("Ticket Taken by Developer");
+            notification2.setBody("Your ticket has been taken by a developer");
+            notification2.setData("{\"ticketNo\":\""+ticket2.getTicketNo()+"\",\"ticketId\":\""+ticket2.getTicketId()+"\"}");
+            notificationRepository.save(notification2);
+
             Tickets ticket3 = new Tickets();
             ticket3.setDateAdded(OffsetDateTime.now().minusWeeks(1));
             ticket3.setApplication(application3);

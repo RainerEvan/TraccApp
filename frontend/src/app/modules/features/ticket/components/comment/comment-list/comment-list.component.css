@@ -5,7 +5,3 @@
 :host ::ng-deep .p-datatable-tbody{
     @apply divide-y-2;
 }
-
-:host ::ng-deep .p-paginator {
-    @apply scale-90;
-}

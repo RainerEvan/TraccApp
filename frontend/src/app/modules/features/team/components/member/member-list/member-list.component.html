@@ -1,1 +1,44 @@
-<p>member-list works!</p>
+<p-table #memberTable [value]="members" [loading]="loading" [totalRecords]="totalRecords" selectionMode="single" [scrollable]="true" scrollHeight="25rem" responsiveLayout="scroll" [filterDelay]="0" sortField="developer.fullname" [sortOrder]="1">
+    <ng-template pTemplate="caption">
+        <div class="flex items-center place-content-between">
+            <span class="font-semibold">MEMBERS</span>
+            <div class="flex flex-row space-x-4">
+                <button (click)="getAllMembers()" class="py-2 px-3 flex flex-row items-center space-x-2 rounded-md stroke-gray-500 text-gray-500 hover:bg-gray-300/60">
+                    <i class="pi pi-sync" [ngClass]="loading ? 'pi-spin':''" style="font-size:14px"></i>
+                    <span class="text-sm text-inherit">Refresh</span>
+                </button>
+                <button *appHasRole="['SUPERVISOR']" (click)="showAddMemberDialog()" class="button-primary">Add Member</button>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="body" let-member>
+        <div class="table-list grid grid-cols-4 auto-cols-auto gap-6 py-4 px-6 md:grid-cols-6">
+            <div class="col-span-1">
+                <div class="aspect-square w-full h-full flex items-center justify-center p-2 bg-white shadow-md">
+                    <img [src]="imageUrl+member.developer.id" alt="Profile" class="rounded-full w-full h-full">
+                </div>
+            </div>
+            <div class="col-span-2 md:col-span-4">
+                <div class="w-full h-full flex items-center space-y-2 py-2">
+                    <div class="flex flex-col">
+                        <span class="font-semibold text-sm uppercase break-words">{{member.developer.fullname}}</span>
+                        <span class="font-regular text-xs">{{member.developer.roles[0].name}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-span-1">
+                <div class="w-full h-full flex items-center justify-end space-x-2">
+                    <a routerLink="../../account/{{member.developer.id}}" class="z-10 flex items-center justify-center bg-gray-500 rounded-md p-2 font-regular text-white hover:bg-gray-400 hover:border-gray-400">
+                        <i class="pi pi-info-circle"></i>
+                    </a>
+                    <button (click)="showConfirmationDialog('Delete','Do you want to delete this member?','delete',member.id)" class="z-10 flex items-center justify-center bg-gray-500 rounded-md p-2 font-regular text-white hover:bg-gray-400 hover:border-gray-400">
+                        <i class="pi pi-trash"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+        <div class="font-medium text-sm text-gray-400 text-center my-10">NO ACCOUNTS FOUND</div>
+    </ng-template>
+</p-table>

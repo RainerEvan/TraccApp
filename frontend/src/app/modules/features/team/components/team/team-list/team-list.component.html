@@ -1,1 +1,36 @@
-<p>team-list works!</p>
+<div class="w-full">
+    <p-table #teamTable [value]="teams" [loading]="loading" [totalRecords]="totalRecords" selectionMode="single" [scrollable]="true" scrollHeight="34rem" responsiveLayout="scroll" [filterDelay]="0" sortField="name" [sortOrder]="1">
+        <ng-template pTemplate="caption">
+            <div class="flex items-center justify-between">
+                <span class="font-bold">TEAMS</span>
+                <div class="flex flex-row space-x-4">
+                    <button *appHasRole="['SUPERVISOR']" (click)="showAddTeamDialog()" class="button-primary">Add Team</button>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="body" let-team let-i="rowIndex">
+            <a class="grid grid-cols-5 gap-4 p-4 shadow-sm hover:bg-gray-100/40">
+                <div class="col-span-1 flex flex-col justify-center">
+                    <div class="flex items-center justify-center p-2 rounded-md bg-gray-200">
+                        <span class="font-medium text-lg">{{i+1}}</span>
+                    </div>
+                </div>
+                <div class="col-span-2 flex flex-col justify-center">
+                    <span class="font-semibold text-sm">{{team.name}}</span>
+                    <span class="text-xs">{{team.members.length}} Members</span>
+                </div>
+                <div class="col-span-2 flex items-center justify-end space-x-2">
+                    <a routerLink="./{{team.id}}" class="z-10 flex items-center justify-center bg-gray-500 rounded-md p-2 font-regular text-white hover:bg-gray-400 hover:border-gray-400">
+                        <i class="pi pi-info-circle"></i>
+                    </a>
+                    <button (click)="showConfirmationDialog('Delete','Do you want to delete this team?','delete',team.id)" class="z-10 flex items-center justify-center bg-gray-500 rounded-md p-2 font-regular text-white hover:bg-gray-400 hover:border-gray-400">
+                        <i class="pi pi-trash"></i>
+                    </button>
+                </div>
+            </a>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+            <div class="font-medium text-sm text-gray-400 text-center my-10">NO TEAMS FOUND</div>
+        </ng-template>
+    </p-table>
+</div>

@@ -18,6 +18,8 @@ import { SolveTicketComponent } from './components/ticket/solve-ticket/solve-tic
 import { TicketDetailComponent } from './components/ticket/ticket-detail/ticket-detail.component';
 import { CommentListComponent } from './components/comment/comment-list/comment-list.component';
 import { EditCommentComponent } from './components/comment/edit-comment/edit-comment.component';
+import { DialogService } from 'primeng/dynamicdialog';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
 
 
 @NgModule({
@@ -42,7 +44,11 @@ import { EditCommentComponent } from './components/comment/edit-comment/edit-com
     InputTextareaModule,
     AutoCompleteModule,
     DropdownModule,
+    OverlayPanelModule,
     EditorModule
-  ]
+  ],
+  providers: [
+    DialogService,
+  ],
 })
 export class TicketModule { }

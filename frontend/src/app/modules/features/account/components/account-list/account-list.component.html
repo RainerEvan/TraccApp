@@ -22,10 +22,10 @@
                 </div>
             </ng-template>
             <ng-template pTemplate="body" let-account>
-                <a routerLink="./{{account.id}}" class="table-list grid grid-cols-2 auto-cols-auto gap-6 py-4 px-6 lg:grid-cols-8">
+                <a routerLink="./{{account.id}}" class="table-list grid grid-cols-2 auto-cols-auto gap-6 py-4 px-6 md:grid-cols-4 lg:grid-cols-8">
                     <div class="col-span-1">
-                        <div class="flex items-center justify-center py-2 bg-white shadow-md">
-                            <img [src]="imageUrl+account.id" alt="Profile" class="rounded-full w-36 lg:w-20">
+                        <div class="aspect-square w-full h-full flex items-center justify-center p-2 bg-white shadow-md">
+                            <img [src]="imageUrl+account.id" alt="Profile" class="rounded-full w-full h-full">
                         </div>
                     </div>
                     <div class="col-span-1 lg:col-span-2">
@@ -41,7 +41,7 @@
                         </div>
                     </div>
                     <div class="col-span-1 lg:col-span-2">
-                        <div class="w-full h-full flex flex-col justify-between space-y-2 lg:py-2">
+                        <div class="w-full h-full flex flex-col justify-between space-y-2 py-2">
                             <div class="flex flex-col justify-center">
                                 <span class="font-medium text-xs">Username</span>
                                 <span class="font-regular text-sm text-gray-500">{{account.username}}</span>
@@ -54,7 +54,7 @@
                         </div>
                     </div>
                     <div class="col-span-1 lg:col-span-2">
-                        <div class="w-full h-full flex flex-col justify-between space-y-2 lg:py-2">
+                        <div class="w-full h-full flex flex-col justify-between space-y-2 py-2">
                             <div class="flex flex-col justify-center">
                                 <span class="font-medium text-xs">Division</span>
                                 <span class="font-regular text-sm text-gray-500">{{account.division.name}}</span>

@@ -1,12 +1,10 @@
 <div class="flex flex-col space-y-6">
     <p-table #developerTable [value]="developers" [loading]="loading" selectionMode="single" [(selection)]="selectedDeveloper" dataKey="id" [scrollable]="true" scrollHeight="300px" [responsive]="true" responsiveLayout="scroll">
-        <ng-template pTemplate="header">
-            <tr>
-                <th class="font-medium">Developers</th>
-            </tr>
+        <ng-template pTemplate="caption">
+            <div class="font-medium">Developers</div>
         </ng-template>
         <ng-template pTemplate="body" let-developer>
-            <div [pSelectableRow]="developer" class="grid grid-cols-5 auto-cols-auto gap-2 p-2 transition ease-in-out duration-100 hover:border-l-4 hover:rounded-l-sm hover:bg-gray-100/40 hover:border-gray-200 cursor-pointer">
+            <div [pSelectableRow]="developer" class="grid grid-cols-5 auto-cols-auto gap-2 p-2">
                 <div class="col-span-1">
                     <div class="w-full h-full flex items-center justify-center">
                         <img [src]="imageUrl+developer.id" alt="Profile" class="rounded-full w-12">
@@ -16,7 +14,7 @@
                     <div class="w-full h-full flex flex-col justify-between py-2">
                         <div class="flex flex-col">
                             <span class="font-medium text-sm">{{developer.fullname}}</span>
-                            <span class="text-sm">{{developer.division.name}}</span>
+                            <span class="font-normal text-sm">{{developer.division.name}}</span>
                         </div>
                     </div>
                 </div>

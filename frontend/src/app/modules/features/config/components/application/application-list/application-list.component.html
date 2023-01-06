@@ -1,4 +1,4 @@
-<p-table #applicationTable [value]="applications" [loading]="loading" [totalRecords]="totalRecords" [scrollable]="true" scrollHeight="20rem" selectionMode="single" responsiveLayout="scroll" [filterDelay]="0"  sortField="name" [sortOrder]="1"
+<p-table #applicationTable [value]="applications" [loading]="loading" [totalRecords]="totalRecords" [scrollable]="true" scrollHeight="25rem" selectionMode="single" responsiveLayout="scroll" [filterDelay]="0"  sortField="name" [sortOrder]="1"
     [globalFilterFields]="['name']">
     <ng-template pTemplate="caption">
         <div class="flex items-center place-content-between">
@@ -16,7 +16,7 @@
         </div>
     </ng-template>
     <ng-template pTemplate="header">
-        <div class="grid grid-cols-6 auto-cols-auto py-4 px-6 font-semibold text-sm text-black bg-white border-b-2">
+        <div class="grid grid-cols-6 auto-cols-auto py-4 px-6 font-semibold text-sm bg-white border-b-2">
             <div class="col-span-1">
                 No
             </div>
@@ -29,7 +29,7 @@
         </div>
     </ng-template>
     <ng-template pTemplate="body" let-application let-i="rowIndex">
-        <div class="grid grid-cols-6 auto-cols-auto py-4 px-6 text-sm text-black shadow-sm hover:bg-gray-100/40">
+        <div class="grid grid-cols-6 auto-cols-auto py-4 px-6 text-sm shadow-sm hover:bg-gray-100/40">
             <div class="col-span-1 flex items-center">
                 {{i+1}}
             </div>

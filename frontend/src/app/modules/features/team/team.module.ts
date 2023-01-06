@@ -11,6 +11,7 @@ import { MemberListComponent } from './components/member/member-list/member-list
 import { AddMemberComponent } from './components/member/add-member/add-member.component';
 import { TeamShellComponent } from './components/team-shell/team-shell.component';
 import { InputTextModule } from 'primeng/inputtext';
+import { TeamDetailComponent } from './components/team/team-detail/team-detail.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { InputTextModule } from 'primeng/inputtext';
     AddTeamComponent,
     MemberListComponent,
     AddMemberComponent,
-    TeamShellComponent
+    TeamShellComponent,
+    TeamDetailComponent
   ],
   imports: [
     CommonModule,

@@ -2,6 +2,10 @@
     @apply shadow-md shadow-gray-200;
 }
 
+:host ::ng-deep .p-datatable-header{
+    @apply p-4 bg-gray-200;
+}
+
 :host ::ng-deep .p-datatable .p-datatable-tbody div.p-highlight{
     @apply font-regular drop-shadow-sm border-gray-400 border-l-4 rounded-l-sm bg-gray-200/50;
 }

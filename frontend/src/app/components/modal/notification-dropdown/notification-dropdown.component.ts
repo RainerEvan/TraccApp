@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { cloneDeep } from '@apollo/client/utilities';
 import { Notifications } from 'src/app/models/notifications';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { NotificationService } from 'src/app/services/notification/notification.service';
@@ -25,7 +26,7 @@ export class NotificationDropdownComponent implements OnInit {
     this.loading = true;
     this.notificationService.getTopNotificationsForAccount(this.accountId).subscribe({
       next: (notifications: Notifications[]) => {
-        this.notifications = notifications;
+        this.notifications = cloneDeep(notifications);
         this.loading = false;
       },
       error: (error: any) => {

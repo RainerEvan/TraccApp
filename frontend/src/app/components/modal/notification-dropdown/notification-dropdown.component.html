@@ -11,12 +11,9 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                         </svg>
                     </div>
-                    <div class="flex flex-col justify-center" [class]="notification.readAt ? 'col-span-3':'col-span-2'">
-                        <span class="font-medium text-xs">{{notification.title}}</span>
-                        <span class="text-[10px]">{{notification.createdAt | date:'d MMM y, h:mm a'}}</span>
-                    </div>
-                    <div class="col-span-1 flex items-center justify-center">
-                        <span *ngIf="!notification.readAt" class="font-medium text-xs text-gray-400">NEW</span>
+                    <div class="col-span-3 flex flex-col justify-center">
+                        <span class="text-xs" [class]="notification.readAt ? 'font-medium':'font-bold'">{{notification.title}}</span>
+                        <span class="text-[10px]" [class]="notification.readAt ? '':'font-semibold'">{{notification.createdAt | date:'d MMM y, h:mm a'}}</span>
                     </div>
                 </a>
             </ng-template>
@@ -24,7 +21,7 @@
                 <div class="font-medium text-sm text-gray-400 text-center p-2">No notifications yet</div>
             </ng-template>
             <ng-template pTemplate="loadingbody">
-                <div class="py-6"></div>
+                <div class="py-8"></div>
             </ng-template>
         </p-table>
     </div>

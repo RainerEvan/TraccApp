@@ -1,1 +1,11 @@
-<p>add-team works!</p>
+<form [formGroup]="teamForm" (ngSubmit)="addTeam()" class="space-y-6 text-black">
+    <div class="w-full">
+        <input type="text" pInputText placeholder="Enter team name" class="form-field" formControlName="name" required>
+        <div *ngIf="name.invalid && (name.dirty || name.touched)" class="font-regular text-sm text-red-400 pt-1">
+            Please enter team name
+        </div>
+    </div>
+    <div class="w-full flex flex-row items-center justify-center">
+        <button type="submit" [disabled]="teamForm.invalid" class="button-primary scale-105">Submit</button>
+    </div>
+</form>

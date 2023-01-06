@@ -5,7 +5,7 @@
 @tailwind utilities;
 
 body{
-    @apply font-montserrat font-regular text-base text-gray-800 bg-no-repeat bg-gradient-to-b from-gray-200 via-gray-100 to-gray-200 !important;
+    @apply font-montserrat font-regular text-base text-gray-800 bg-gray-100 !important;
 }
 
 .p-component{
@@ -29,7 +29,7 @@ body{
 }
 
 .p-paginator {
-    @apply text-sm !important;
+    @apply scale-90 text-sm !important;
 }
 
 .p-paginator .p-paginator-page{
