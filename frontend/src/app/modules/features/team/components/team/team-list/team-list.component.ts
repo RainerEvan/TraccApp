@@ -8,6 +8,7 @@ import { TeamService } from 'src/app/services/team/team.service';
 import { AddTeamComponent } from '../add-team/add-team.component';
 import { ConfirmationDialogComponent } from 'src/app/modules/shared/components/confirmation-dialog/confirmation-dialog.component';
 import { ResultDialogComponent } from 'src/app/modules/shared/components/result-dialog/result-dialog.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-team-list',
@@ -22,7 +23,7 @@ export class TeamListComponent implements OnInit {
   totalRecords: number;
   ref: DynamicDialogRef;
 
-  constructor(public dialogService:DialogService, private teamService: TeamService, private authService: AuthService) { }
+  constructor(public dialogService:DialogService, private router:Router, private teamService: TeamService, private authService: AuthService) { }
 
   ngOnInit() {
     this.accountId = this.authService.accountValue.accountId;
