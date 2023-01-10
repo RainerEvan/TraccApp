@@ -14,6 +14,7 @@ import { FcmsubscriptionService } from 'src/app/services/fcmsubscription/fcmsubs
 export class HeaderComponent implements OnInit {
 
   account: AuthDetails;
+  newNotification: boolean = false;
 
   constructor(private angularFireMessaging: AngularFireMessaging,private authService:AuthService, private fcmSubscriptionService: FcmsubscriptionService, private messageService: MessageService){}
 
@@ -58,6 +59,7 @@ export class HeaderComponent implements OnInit {
     this.angularFireMessaging.messages.subscribe({
       next:(message:any) => {
         console.log("New message received ", message);
+        this.newNotification = true;
         this.messageService.add({severity:'custom', summary: message.notification.title, detail: message.notification.body, life:5000, icon: 'pi-envelope'});
       }
     })

@@ -3,7 +3,7 @@
         <span class="font-medium text-sm">{{totalRecords}} Notification(s)</span>
         <span class="font-medium text-sm">{{totalUnread}} Unread</span>
     </div>
-    <p-table #notificationTable [value]="notifications" [loading]="loading" [totalRecords]="totalRecords" [scrollable]="true" scrollHeight="25rem" responsiveLayout="scroll" sortField="createdAt" [sortOrder]="-1">
+    <p-table #notificationTable [value]="notifications" [loading]="loading" [totalRecords]="totalRecords" [scrollable]="true" scrollHeight="30rem" responsiveLayout="scroll" sortField="createdAt" [sortOrder]="-1">
         <ng-template pTemplate="body" let-notification>
             <a routerLink="./{{notification.id}}" (click)="onSelect(notification)" class="flex items-center space-x-1 text-black shadow-sm hover:bg-gray-100/50 p-4">
                 <div class="flex justify-center px-2">
