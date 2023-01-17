@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+	<localRepository>/var/cache/maven-libs</localRepository>
+	<mirrors>
+		<mirror>
+			<id>bcaartifactory</id>
+			<name>Local proxy of central repo</name>
+			<url>http://10.6.85.36:8080/artifactory</url>
+			<mirrorOf>central</mirrorOf>
+		</mirror>
+		<mirror>
+			<id>maven-default-http-blocker</id>
+			<mirrorOf>external:dummy:central:*</mirrorOf>
+			<name>Pseudo repository to mirror external repositories initially using HTTP.</name>
+			<url>http://0.0.0.0/</url>
+			<blocked>true</blocked>
+		</mirror>
+	</mirrors>
+	<profiles>
+		<profile>
+			<id>bcaartifactory</id>
+			<repositories>
+				<repository>
+					<id>repo1.maven.org</id>
+					<name>repo1.maven.org</name>
+					<url>http://10.6.85.36:8080/artifactory/list/Repo1Maven/</url>
+					<releases>
+						<enabled>true</enabled>
+						<updatePolicy>never</updatePolicy>
+						<checksumPolicy>warn</checksumPolicy>
+					</releases>
+				</repository>
+				<repository>
+					<id>devops</id>
+					<name>RepositoryDevOps</name>
+					<url>http://10.6.85.36:8080/artifactory/list/RepositoryDevOps/</url>
+					<releases>
+						<enabled>true</enabled>
+						<updatePolicy>never</updatePolicy>
+						<checksumPolicy>warn</checksumPolicy>
+					</releases>
+				</repository>
+			</repositories>
+
+			<pluginRepositories>
+				<pluginRepository>
+					<id>repo1.maven.org</id>
+					<name>repo1.maven.org</name>
+					<releases>
+						<enabled>true</enabled>
+						<updatePolicy>never</updatePolicy>
+						<checksumPolicy>warn</checksumPolicy>
+					</releases>
+					<snapshots>
+						<enabled>true</enabled>
+						<updatePolicy>never</updatePolicy>
+						<checksumPolicy>fail</checksumPolicy>
+					</snapshots>
+					<url>http://10.6.85.36:8080/artifactory/list/Repo1Maven/</url>
+					<layout>default</layout>
+				</pluginRepository>
+				<pluginRepository>
+					<id>devops</id>
+					<name>RepositoryDevOps</name>
+					<releases>
+						<enabled>true</enabled>
+						<updatePolicy>never</updatePolicy>
+						<checksumPolicy>warn</checksumPolicy>
+					</releases>
+					<snapshots>
+						<enabled>true</enabled>
+						<updatePolicy>never</updatePolicy>
+						<checksumPolicy>fail</checksumPolicy>
+					</snapshots>
+					<url>http://10.6.85.36:8080/artifactory/list/RepositoryDevOps/</url>
+					<layout>default</layout>
+				</pluginRepository>
+			</pluginRepositories>
+		</profile>
+	</profiles>
+
+	<activeProfiles>
+		<activeProfile>bcaartifactory</activeProfile>
+	</activeProfiles>
+
+</settings>
