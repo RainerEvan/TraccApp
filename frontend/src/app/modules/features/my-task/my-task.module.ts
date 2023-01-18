@@ -5,6 +5,7 @@ import { MyTaskRoutingModule } from './my-task-routing.module';
 import { TaskListComponent } from './components/task-list/task-list.component';
 import { TableModule } from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
+import { SkeletonModule } from 'primeng/skeleton';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { InputTextModule } from 'primeng/inputtext';
     MyTaskRoutingModule,
     TableModule,
     InputTextModule,
+    SkeletonModule
   ]
 })
 export class MyTaskModule { }

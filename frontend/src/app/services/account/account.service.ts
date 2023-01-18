@@ -28,7 +28,7 @@ export class AccountService {
             }
             isActive
             contactNo
-            roles{
+            role{
               name
             }           
           }
@@ -70,7 +70,7 @@ export class AccountService {
               name
             }
             isActive
-            roles{
+            role{
               id
               name
             }           

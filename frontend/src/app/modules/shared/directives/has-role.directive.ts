@@ -13,13 +13,13 @@ export class HasRoleDirective implements OnInit{
   constructor(private viewContainerRef: ViewContainerRef, private templateRef: TemplateRef<any>, private authService: AuthService) {}
 
   ngOnInit():void {
-    const roles: any[]= this.authService.accountValue.roles;
+    const role: any= this.authService.accountValue.role;
 
-    if (!roles) {
+    if (!role) {
       this.viewContainerRef.clear();
     }
     
-    if (roles.some(role => this.appHasRole.includes(role))) {
+    if (this.appHasRole.includes(role)) {
       if (!this.isVisible) {
         this.isVisible = true;
         this.viewContainerRef.createEmbeddedView(this.templateRef);

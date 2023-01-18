@@ -1,8 +1,6 @@
 package com.project.tracc.service;
 
 import java.util.Date;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -47,9 +45,7 @@ public class AuthService {
 
             String token = jwtUtils.generateJwtToken(authentication);
             UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-            List<String> roles = userDetails.getAuthorities().stream()
-                .map(item -> item.getAuthority())
-                .collect(Collectors.toList());
+            String role = userDetails.getAuthorities().iterator().next().getAuthority();
 
             return new JwtResponse(
                 token, 
@@ -57,10 +53,10 @@ public class AuthService {
                 userDetails.getId(),
                 userDetails.getUsername(),
                 userDetails.getIsActive(),
-                roles
+                role
             );
         } catch (Exception e) {
-            throw new RuntimeException("Invalid username or password!");
+            throw new RuntimeException("Authentication Failed! "+e.getMessage());
         }
     }
 }

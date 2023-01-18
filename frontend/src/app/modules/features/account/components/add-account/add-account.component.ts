@@ -85,7 +85,7 @@ export class AddAccountComponent implements OnInit {
       contactNo: [null],
       divisionId: [null, [Validators.required]],
       isActive: [null, [Validators.required]],
-      rolesName: [null, [Validators.required]],
+      roleId: [null, [Validators.required]],
     });
     this.getAllDivisions();
     this.getAllRoles();
@@ -112,8 +112,8 @@ export class AddAccountComponent implements OnInit {
   get isActive(){
     return this.accountForm.get('isActive');
   }
-  get rolesName(){
-    return this.accountForm.get('rolesName');
+  get roleId(){
+    return this.accountForm.get('roleId');
   }
 
   @HostListener("dragover", ["$event"]) onDragOver(event: any) {

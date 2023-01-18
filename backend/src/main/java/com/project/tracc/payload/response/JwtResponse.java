@@ -1,7 +1,6 @@
 package com.project.tracc.payload.response;
 
 import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 
 import lombok.AllArgsConstructor;
@@ -15,5 +14,5 @@ public class JwtResponse {
     private UUID accountId;
     private String username;
     private boolean isActive;
-    private List<String> roles;
+    private String role;
 }

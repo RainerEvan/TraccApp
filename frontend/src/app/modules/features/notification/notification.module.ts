@@ -6,6 +6,7 @@ import { TableModule } from 'primeng/table';
 import { NotificationShellComponent } from './components/notification-shell/notification-shell.component';
 import { NotificationListComponent } from './components/notification-list/notification-list.component';
 import { NotificationDetailComponent } from './components/notification-detail/notification-detail.component';
+import { SkeletonModule } from 'primeng/skeleton';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { NotificationDetailComponent } from './components/notification-detail/no
     CommonModule,
     NotificationRoutingModule,
     TableModule,
+    SkeletonModule
   ]
 })
 export class NotificationModule { }

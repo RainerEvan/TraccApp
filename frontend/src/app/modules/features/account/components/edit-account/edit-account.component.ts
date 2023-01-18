@@ -21,7 +21,6 @@ export class EditAccountComponent implements OnInit {
   accountForm: FormGroup;
   isAccountFormSubmitted: boolean = false;
   divisions: Divisions[];
-  roles: Roles[];
   profileImg: File;
   imageUrl:any;
   fileDropArea:string;
@@ -37,17 +36,6 @@ export class EditAccountComponent implements OnInit {
     this.divisionService.getAllDivisions().subscribe({
       next: (divisions: Divisions[]) => {
         this.divisions = divisions;
-      },
-      error: (error: any) => {
-        console.log(error);
-      }
-    });
-  }
-
-  public getAllRoles(): void{
-    this.roleService.getAllRoles().subscribe({
-      next: (roles: Roles[]) => {
-        this.roles = roles;
       },
       error: (error: any) => {
         console.log(error);
@@ -91,10 +79,9 @@ export class EditAccountComponent implements OnInit {
       contactNo: [this.accountData.contactNo],
       divisionId: [this.accountData.division.id],
       isActive: [this.accountData.isActive],
-      rolesName: [this.accountData.roles[0].name],
+      role: [{value:this.accountData.role.name, disabled:true}],
     });
     this.getAllDivisions();
-    this.getAllRoles();
   }
 
   get username(){
@@ -115,8 +102,8 @@ export class EditAccountComponent implements OnInit {
   get isActive(){
     return this.accountForm.get('isActive');
   }
-  get rolesName(){
-    return this.accountForm.get('rolesName');
+  get role(){
+    return this.accountForm.get('role');
   }
 
   @HostListener("dragover", ["$event"]) onDragOver(event: any) {

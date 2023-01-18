@@ -10,5 +10,5 @@ export type Accounts ={
     division: Divisions;
     profileImg: string;
     isActive: boolean;
-    roles: Roles[];
+    role: Roles;
 }

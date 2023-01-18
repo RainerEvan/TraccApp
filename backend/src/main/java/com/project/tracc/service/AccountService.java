@@ -3,10 +3,8 @@ package com.project.tracc.service;
 import java.io.File;
 import java.io.IOException;
 import java.util.Base64;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 import java.util.UUID;
 
 import javax.transaction.Transactional;
@@ -63,7 +61,7 @@ public class AccountService {
         Roles role = roleRepository.findByName(ERoles.DEVELOPER)
             .orElseThrow(() -> new AbstractGraphQLException("Role with current name cannot be found: "+ERoles.DEVELOPER,"roleName"));
 
-        return accountRepository.findAllByRoles(role);
+        return accountRepository.findAllByRole(role);
     }
 
     public Accounts getAccount(UUID accountId){
@@ -94,13 +92,10 @@ public class AccountService {
         account.setDivision(division);
         account.setProfileImg(addImage(file));
 
-        Roles role = roleRepository.findByName(accountRequest.getRolesName())
-            .orElseThrow(() -> new IllegalStateException("Role with current name cannot be found "+accountRequest.getRolesName()));
+        Roles role = roleRepository.findById(accountRequest.getRoleId())
+            .orElseThrow(() -> new IllegalStateException("Role with current id cannot be found "+accountRequest.getRoleId()));
 
-        Set<Roles> roleSet = new HashSet<>();
-        roleSet.add(role);
-
-        account.setRoles(roleSet);
+        account.setRole(role);
 
         return accountRepository.save(account);
     }
@@ -115,7 +110,6 @@ public class AccountService {
         String email = accountRequest.getEmail();
         String contactNo = accountRequest.getContactNo();
         UUID divisionId = accountRequest.getDivisionId();
-        ERoles rolesName = accountRequest.getRolesName();
         Boolean isActive = accountRequest.getIsActive();
 
         if(accountRepository.existsByUsername(username)){
@@ -147,18 +141,6 @@ public class AccountService {
                 .orElseThrow(() -> new IllegalStateException("Division with current id cannot be found: "+divisionId));
 
             account.setDivision(division);
-        }
-
-        if(rolesName != null){
-            Roles role = roleRepository.findByName(rolesName)
-                .orElseThrow(() -> new IllegalStateException("Role with current name cannot be found "+rolesName));
-
-            if(!account.getRoles().contains(role)){
-                Set<Roles> roleSet = new HashSet<>();
-                roleSet.add(role);
-
-                account.setRoles(roleSet);
-            }
         }
 
         if(isActive != null && !Objects.equals(account.getIsActive(), isActive)){

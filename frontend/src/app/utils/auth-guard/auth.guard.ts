@@ -38,7 +38,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanDeactivate<u
     const account = this.authService.accountValue;
 
     if(account){
-        if (route.data['roles'] && route.data['roles'].indexOf(account.roles) === -1) {
+        if (route.data['roles'] && route.data['roles'].indexOf(account.role) === -1) {
             this.router.navigate(['/']);
             return false;
         }

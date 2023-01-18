@@ -10,6 +10,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { DropdownModule } from 'primeng/dropdown';
+import { SkeletonModule } from 'primeng/skeleton';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { DropdownModule } from 'primeng/dropdown';
     TableModule,
     InputTextModule,
     InputTextareaModule,
-    DropdownModule
+    DropdownModule,
+    SkeletonModule
   ]
 })
 export class MyTicketModule { }

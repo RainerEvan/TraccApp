@@ -56,9 +56,9 @@
         </div>
     </div>
     <div class="w-full">
-        <label for="rolesName" class="form-label">Role*</label>
-        <p-dropdown [options]="roles" optionLabel="name" optionValue="name" [showClear]="true" placeholder="Select role" formControlName="rolesName" required></p-dropdown>
-        <div *ngIf="rolesName.invalid && rolesName.touched" class="font-regular text-sm text-red-400 pt-1">
+        <label for="roleId" class="form-label">Role*</label>
+        <p-dropdown [options]="roles" optionLabel="name" optionValue="id" [showClear]="true" placeholder="Select role" formControlName="roleId" required></p-dropdown>
+        <div *ngIf="roleId.invalid && roleId.touched" class="font-regular text-sm text-red-400 pt-1">
             Please select role
         </div>
     </div>

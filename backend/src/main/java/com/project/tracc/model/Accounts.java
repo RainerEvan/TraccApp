@@ -1,17 +1,12 @@
 package com.project.tracc.model;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -47,10 +42,7 @@ public class Accounts {
     private String profileImg;
     private Boolean isActive;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable( name = "account_role",
-                joinColumns = @JoinColumn(name = "account_id"),
-                inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Roles> roles = new HashSet<>();
-    
+    @ManyToOne
+    @JoinColumn(name="role_id")
+    private Roles role;
 }

@@ -32,7 +32,7 @@
                         <div class="w-full h-full flex flex-col justify-between space-y-2 py-2">
                             <div class="flex flex-col">
                                 <span class="font-semibold text-base uppercase break-words">{{account.fullname}}</span>
-                                <span class="font-regular text-sm">{{account.roles[0].name}}</span>
+                                <span class="font-regular text-sm">{{account.role.name}}</span>
                             </div>
                             <div class="flex flex-row items-center space-x-2">
                                 <div [class]="'account-status-'+account.isActive" class="p-1.5 rounded-full"></div>

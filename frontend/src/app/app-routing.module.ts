@@ -38,7 +38,6 @@ const routes: Routes = [
         path: 'account',
         loadChildren: () => import('./modules/features/account/account.module').then((m) => m.AccountModule),
         canActivate:[AuthGuard],
-        data:{roles:'ADMIN'},
       },
       {
         path: 'my-ticket',

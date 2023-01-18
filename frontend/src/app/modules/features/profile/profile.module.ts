@@ -10,6 +10,7 @@ import { InputSwitchModule } from 'primeng/inputswitch';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../../shared/shared.module';
 import { InputTextModule } from 'primeng/inputtext';
+import { SkeletonModule } from 'primeng/skeleton';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { InputTextModule } from 'primeng/inputtext';
     SharedModule,
     InputTextModule,
     DropdownModule,
-    InputSwitchModule
+    InputSwitchModule,
+    SkeletonModule
   ]
 })
 export class ProfileModule { }

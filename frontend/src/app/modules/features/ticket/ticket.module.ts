@@ -20,6 +20,7 @@ import { CommentListComponent } from './components/comment/comment-list/comment-
 import { EditCommentComponent } from './components/comment/edit-comment/edit-comment.component';
 import { DialogService } from 'primeng/dynamicdialog';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { SkeletonModule } from 'primeng/skeleton';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
     AutoCompleteModule,
     DropdownModule,
     OverlayPanelModule,
-    EditorModule
+    EditorModule,
+    SkeletonModule
   ],
   providers: [
     DialogService,

@@ -12,7 +12,7 @@ import com.project.tracc.model.Roles;
 
 @Repository
 public interface AccountRepository extends JpaRepository<Accounts, UUID> {
-    List<Accounts> findAllByRoles(Roles role);
+    List<Accounts> findAllByRole(Roles role);
     Optional<Accounts> findByUsername(String username);
     Boolean existsByUsername(String username);
 }
