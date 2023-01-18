@@ -30,7 +30,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Table(name = "m_supports")
+@Table(name = "t_supports")
 public class Supports {
     
     @Id

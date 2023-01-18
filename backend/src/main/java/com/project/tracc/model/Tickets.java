@@ -32,7 +32,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Table(name = "m_tickets")
+@Table(name = "t_tickets")
 @IdClass(TicketPK.class)
 public class Tickets {
 
