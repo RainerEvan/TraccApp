@@ -90,14 +90,17 @@
 //             Tags tag3 = tagsService.addTag("Data Output");
 //             Tags tag4 = tagsService.addTag("Network Error");
             
-//             Set<Tags> tags = new HashSet<>();
-//             tags.add(tag);
-//             tags.add(tag2);
+//             // Set<Tags> tags = new HashSet<>();
+//             // tags.add(tag);
+//             // tags.add(tag2);
 
-//             Set<Tags> tags2 = new HashSet<>();
-//             tags2.add(tag);
-//             tags2.add(tag3);
-//             tags2.add(tag4);
+//             // Set<Tags> tags2 = new HashSet<>();
+//             // tags2.add(tag);
+//             // tags2.add(tag3);
+//             // tags2.add(tag4);
+
+//             ScoringRequest scoringRequest = new ScoringRequest(10, 2, 5, 2);
+//             Scorings scoreConfig = scoreConfigService.addScoring(scoringRequest);
 
 //             Applications application = applicationService.addApplication("CAMS");
 //             Applications application2 = applicationService.addApplication("SMILE");
@@ -108,87 +111,87 @@
 //             Divisions division2 = divisionService.addDivision("ITX B");
 //             Divisions division3 = divisionService.addDivision("ITX C");
 
-//             AccountRequest accountRequest = new AccountRequest();
-//             accountRequest.setUsername("maman");
-//             accountRequest.setFullname("Maman Sulaiman");
-//             accountRequest.setPassword("pass123");
-//             accountRequest.setEmail("maman@gmail.com");
-//             accountRequest.setContactNo("092039031");
-//             accountRequest.setDivisionId(division2.getId());
-//             accountRequest.setIsActive(true);
-//             accountRequest.setRoleId(role4.getId());
+//             // AccountRequest accountRequest = new AccountRequest();
+//             // accountRequest.setUsername("maman");
+//             // accountRequest.setFullname("Maman Sulaiman");
+//             // accountRequest.setPassword("pass123");
+//             // accountRequest.setEmail("maman@gmail.com");
+//             // accountRequest.setContactNo("092039031");
+//             // accountRequest.setDivisionId(division2.getId());
+//             // accountRequest.setIsActive(true);
+//             // accountRequest.setRoleId(role4.getId());
             
-//             Accounts account = accountService.addAccount(null,accountRequest);
+//             // Accounts account = accountService.addAccount(null,accountRequest);
 
-//             AccountRequest accountRequest2 = new AccountRequest();
-//             accountRequest2.setUsername("rainer");
-//             accountRequest2.setFullname("Rainer Evan");
-//             accountRequest2.setPassword("pass123");
-//             accountRequest2.setEmail("rainer.evan@binus.ac.id");
-//             accountRequest2.setContactNo("092039031");
-//             accountRequest2.setDivisionId(division2.getId());
-//             accountRequest2.setIsActive(true);
-//             accountRequest2.setRoleId(role3.getId());
+//             // AccountRequest accountRequest2 = new AccountRequest();
+//             // accountRequest2.setUsername("rainer");
+//             // accountRequest2.setFullname("Rainer Evan");
+//             // accountRequest2.setPassword("pass123");
+//             // accountRequest2.setEmail("rainer.evan@binus.ac.id");
+//             // accountRequest2.setContactNo("092039031");
+//             // accountRequest2.setDivisionId(division2.getId());
+//             // accountRequest2.setIsActive(true);
+//             // accountRequest2.setRoleId(role3.getId());
             
-//             Accounts account2 = accountService.addAccount(null,accountRequest2);
+//             // Accounts account2 = accountService.addAccount(null,accountRequest2);
 
-//             AccountRequest accountRequest3 = new AccountRequest();
-//             accountRequest3.setUsername("admin");
-//             accountRequest3.setFullname("Admin 1");
-//             accountRequest3.setPassword("pass123");
-//             accountRequest3.setEmail("admin@gmail.com");
-//             accountRequest3.setContactNo("092039031");
-//             accountRequest3.setDivisionId(division2.getId());
-//             accountRequest3.setIsActive(true);
-//             accountRequest3.setRoleId(role1.getId());
+//             // AccountRequest accountRequest3 = new AccountRequest();
+//             // accountRequest3.setUsername("admin");
+//             // accountRequest3.setFullname("Admin 1");
+//             // accountRequest3.setPassword("pass123");
+//             // accountRequest3.setEmail("admin@gmail.com");
+//             // accountRequest3.setContactNo("092039031");
+//             // accountRequest3.setDivisionId(division2.getId());
+//             // accountRequest3.setIsActive(true);
+//             // accountRequest3.setRoleId(role1.getId());
             
-//             Accounts account3 = accountService.addAccount(null,accountRequest3);
+//             // Accounts account3 = accountService.addAccount(null,accountRequest3);
 
-//             AccountRequest accountRequest4 = new AccountRequest();
-//             accountRequest4.setUsername("bob");
-//             accountRequest4.setFullname("Bob");
-//             accountRequest4.setPassword("pass123");
-//             accountRequest4.setEmail("bob@gmail.com");
-//             accountRequest4.setContactNo("092002031");
-//             accountRequest4.setDivisionId(division2.getId());
-//             accountRequest4.setIsActive(true);
-//             accountRequest4.setRoleId(role2.getId());
+//             // AccountRequest accountRequest4 = new AccountRequest();
+//             // accountRequest4.setUsername("bob");
+//             // accountRequest4.setFullname("Bob");
+//             // accountRequest4.setPassword("pass123");
+//             // accountRequest4.setEmail("bob@gmail.com");
+//             // accountRequest4.setContactNo("092002031");
+//             // accountRequest4.setDivisionId(division2.getId());
+//             // accountRequest4.setIsActive(true);
+//             // accountRequest4.setRoleId(role2.getId());
             
-//             Accounts account4 = accountService.addAccount(null,accountRequest4);
+//             // Accounts account4 = accountService.addAccount(null,accountRequest4);
 
-//             AccountRequest accountRequest5 = new AccountRequest();
-//             accountRequest5.setUsername("evantanu");
-//             accountRequest5.setFullname("Evan Tanu");
-//             accountRequest5.setPassword("pass123");
-//             accountRequest5.setEmail("evan@gmail.com");
-//             accountRequest5.setContactNo("092039031");
-//             accountRequest5.setDivisionId(division2.getId());
-//             accountRequest5.setIsActive(true);
-//             accountRequest5.setRoleId(role3.getId());
+//             // AccountRequest accountRequest5 = new AccountRequest();
+//             // accountRequest5.setUsername("evantanu");
+//             // accountRequest5.setFullname("Evan Tanu");
+//             // accountRequest5.setPassword("pass123");
+//             // accountRequest5.setEmail("evan@gmail.com");
+//             // accountRequest5.setContactNo("092039031");
+//             // accountRequest5.setDivisionId(division2.getId());
+//             // accountRequest5.setIsActive(true);
+//             // accountRequest5.setRoleId(role3.getId());
             
-//             Accounts account5 = accountService.addAccount(null,accountRequest5);
+//             // Accounts account5 = accountService.addAccount(null,accountRequest5);
 
-//             AccountRequest accountRequest6 = new AccountRequest();
-//             accountRequest6.setUsername("dodo");
-//             accountRequest6.setFullname("Dodo Sulaiman");
-//             accountRequest6.setPassword("pass123");
-//             accountRequest6.setEmail("dodo@gmail.com");
-//             accountRequest6.setContactNo("092039031");
-//             accountRequest6.setDivisionId(division2.getId());
-//             accountRequest6.setIsActive(true);
-//             accountRequest6.setRoleId(role3.getId());
+//             // AccountRequest accountRequest6 = new AccountRequest();
+//             // accountRequest6.setUsername("dodo");
+//             // accountRequest6.setFullname("Dodo Sulaiman");
+//             // accountRequest6.setPassword("pass123");
+//             // accountRequest6.setEmail("dodo@gmail.com");
+//             // accountRequest6.setContactNo("092039031");
+//             // accountRequest6.setDivisionId(division2.getId());
+//             // accountRequest6.setIsActive(true);
+//             // accountRequest6.setRoleId(role3.getId());
             
-//             Accounts account6 = accountService.addAccount(null,accountRequest6);
+//             // Accounts account6 = accountService.addAccount(null,accountRequest6);
 
-//             Teams team = new Teams();
-//             team.setName("SMILE");
-//             team.setSupervisor(account4);
-//             teamRepository.save(team);
+//             // Teams team = new Teams();
+//             // team.setName("SMILE");
+//             // team.setSupervisor(account4);
+//             // teamRepository.save(team);
 
-//             Members member1 = new Members();
-//             member1.setTeam(team);
-//             member1.setDeveloper(account2);
-//             memberRepository.save(member1);
+//             // Members member1 = new Members();
+//             // member1.setTeam(team);
+//             // member1.setDeveloper(account2);
+//             // memberRepository.save(member1);
 
 //             // Notifications notification2 = new Notifications();
 //             // notification2.setReceiver(account);
@@ -426,105 +429,103 @@
 //             //     ticketRepository.save(ticket);
 //             // }
 
-//             Tickets ticket = new Tickets();
-//             ticket.setDateAdded(OffsetDateTime.now());
-//             ticket.setApplication(application);
-//             ticket.setReporter(account);
-//             ticket.setTitle("Aplikasi CAMS error");
-//             ticket.setDescription("Form gabisa diisi lagi gimana dong");
-//             ticket.setStatus(status2);
-//             ticketRepository.save(ticket);
+//             // Tickets ticket = new Tickets();
+//             // ticket.setDateAdded(OffsetDateTime.now());
+//             // ticket.setApplication(application);
+//             // ticket.setReporter(account);
+//             // ticket.setTitle("Aplikasi CAMS error");
+//             // ticket.setDescription("Form gabisa diisi lagi gimana dong");
+//             // ticket.setStatus(status2);
+//             // ticketRepository.save(ticket);
 
-//             Supports support = new Supports();
-//             support.setTicket(ticket);
-//             support.setDateTaken(OffsetDateTime.now());
-//             support.setDeveloper(account2);
-//             support.setIsActive(true);
-//             supportRepository.save(support);
+//             // Supports support = new Supports();
+//             // support.setTicket(ticket);
+//             // support.setDateTaken(OffsetDateTime.now());
+//             // support.setDeveloper(account2);
+//             // support.setIsActive(true);
+//             // supportRepository.save(support);
 
-//             Notifications notification = new Notifications();
-//             notification.setReceiver(ticket.getReporter());
-//             notification.setCreatedAt(OffsetDateTime.now());
-//             notification.setTitle("Ticket Taken by Developer");
-//             notification.setBody("Your ticket has been taken by a developer");
-//             notification.setData("{\"ticketNo\":\""+ticket.getTicketNo()+"\",\"ticketId\":\""+ticket.getTicketId()+"\"}");
-//             notificationRepository.save(notification);
+//             // Notifications notification = new Notifications();
+//             // notification.setReceiver(ticket.getReporter());
+//             // notification.setCreatedAt(OffsetDateTime.now());
+//             // notification.setTitle("Ticket Taken by Developer");
+//             // notification.setBody("Your ticket has been taken by a developer");
+//             // notification.setData("{\"ticketNo\":\""+ticket.getTicketNo()+"\",\"ticketId\":\""+ticket.getTicketId()+"\"}");
+//             // notificationRepository.save(notification);
 
-//             Tickets ticket2 = new Tickets();
-//             ticket2.setDateAdded(OffsetDateTime.now());
-//             ticket2.setApplication(application2);
-//             ticket2.setReporter(account);
-//             ticket2.setTitle("Smile Bug pada Form Tidak ada alamat");
-//             ticket2.setDescription("Form gabisa diisi lagi gimana dong");
-//             ticket2.setStatus(status2);
-//             ticketRepository.save(ticket2);
+//             // Tickets ticket2 = new Tickets();
+//             // ticket2.setDateAdded(OffsetDateTime.now());
+//             // ticket2.setApplication(application2);
+//             // ticket2.setReporter(account);
+//             // ticket2.setTitle("Smile Bug pada Form Tidak ada alamat");
+//             // ticket2.setDescription("Form gabisa diisi lagi gimana dong");
+//             // ticket2.setStatus(status2);
+//             // ticketRepository.save(ticket2);
 
-//             Supports support2 = new Supports();
-//             support2.setTicket(ticket2);
-//             support2.setDateTaken(OffsetDateTime.now());
-//             support2.setDeveloper(account2);
-//             support2.setIsActive(true);
-//             supportRepository.save(support2);
+//             // Supports support2 = new Supports();
+//             // support2.setTicket(ticket2);
+//             // support2.setDateTaken(OffsetDateTime.now());
+//             // support2.setDeveloper(account2);
+//             // support2.setIsActive(true);
+//             // supportRepository.save(support2);
 
-//             Notifications notification2 = new Notifications();
-//             notification2.setReceiver(ticket2.getReporter());
-//             notification2.setCreatedAt(OffsetDateTime.now());
-//             notification2.setTitle("Ticket Taken by Developer");
-//             notification2.setBody("Your ticket has been taken by a developer");
-//             notification2.setData("{\"ticketNo\":\""+ticket2.getTicketNo()+"\",\"ticketId\":\""+ticket2.getTicketId()+"\"}");
-//             notificationRepository.save(notification2);
+//             // Notifications notification2 = new Notifications();
+//             // notification2.setReceiver(ticket2.getReporter());
+//             // notification2.setCreatedAt(OffsetDateTime.now());
+//             // notification2.setTitle("Ticket Taken by Developer");
+//             // notification2.setBody("Your ticket has been taken by a developer");
+//             // notification2.setData("{\"ticketNo\":\""+ticket2.getTicketNo()+"\",\"ticketId\":\""+ticket2.getTicketId()+"\"}");
+//             // notificationRepository.save(notification2);
 
-//             Tickets ticket3 = new Tickets();
-//             ticket3.setDateAdded(OffsetDateTime.now().minusWeeks(1));
-//             ticket3.setApplication(application3);
-//             ticket3.setReporter(account);
-//             ticket3.setTitle("App Geospacial Tidak bisa Input Data Perumahan");
-//             ticket3.setDescription("Form gabisa diisi lagi gimana dong");
-//             ticket3.setStatus(status2);
-//             ticketRepository.save(ticket3);
+//             // Tickets ticket3 = new Tickets();
+//             // ticket3.setDateAdded(OffsetDateTime.now().minusWeeks(1));
+//             // ticket3.setApplication(application3);
+//             // ticket3.setReporter(account);
+//             // ticket3.setTitle("App Geospacial Tidak bisa Input Data Perumahan");
+//             // ticket3.setDescription("Form gabisa diisi lagi gimana dong");
+//             // ticket3.setStatus(status2);
+//             // ticketRepository.save(ticket3);
 
-//             Supports support3 = new Supports();
-//             support3.setTicket(ticket3);
-//             support3.setDateTaken(OffsetDateTime.now().minusWeeks(1));
-//             support3.setDeveloper(account2);
-//             support3.setIsActive(true);
-//             supportRepository.save(support3);
+//             // Supports support3 = new Supports();
+//             // support3.setTicket(ticket3);
+//             // support3.setDateTaken(OffsetDateTime.now().minusWeeks(1));
+//             // support3.setDeveloper(account2);
+//             // support3.setIsActive(true);
+//             // supportRepository.save(support3);
 
-//             Tickets ticket4 = new Tickets();
-//             ticket4.setDateAdded(OffsetDateTime.now().minusMonths(1));
-//             ticket4.setApplication(application2);
-//             ticket4.setReporter(account);
-//             ticket4.setTitle("App Smile Tidak bisa Input Data Perumahan");
-//             ticket4.setDescription("Form gabisa diisi lagi gimana dong");
-//             ticket4.setStatus(status2);
-//             ticketRepository.save(ticket4);
+//             // Tickets ticket4 = new Tickets();
+//             // ticket4.setDateAdded(OffsetDateTime.now().minusMonths(1));
+//             // ticket4.setApplication(application2);
+//             // ticket4.setReporter(account);
+//             // ticket4.setTitle("App Smile Tidak bisa Input Data Perumahan");
+//             // ticket4.setDescription("Form gabisa diisi lagi gimana dong");
+//             // ticket4.setStatus(status2);
+//             // ticketRepository.save(ticket4);
 
-//             Supports support4 = new Supports();
-//             support4.setTicket(ticket4);
-//             support4.setDateTaken(OffsetDateTime.now().minusMonths(1));
-//             support4.setDeveloper(account2);
-//             support4.setIsActive(true);
-//             supportRepository.save(support4);
+//             // Supports support4 = new Supports();
+//             // support4.setTicket(ticket4);
+//             // support4.setDateTaken(OffsetDateTime.now().minusMonths(1));
+//             // support4.setDeveloper(account2);
+//             // support4.setIsActive(true);
+//             // supportRepository.save(support4);
 
-//             Tickets ticket5 = new Tickets();
-//             ticket5.setDateAdded(OffsetDateTime.now());
-//             ticket5.setApplication(application2);
-//             ticket5.setReporter(account);
-//             ticket5.setTitle("App Smile Tidak bisa Input Data Perumahan");
-//             ticket5.setDescription("Form gabisa diisi lagi gimana dong");     
-//             ticket5.setStatus(status1);
-//             ticketRepository.save(ticket5);
+//             // Tickets ticket5 = new Tickets();
+//             // ticket5.setDateAdded(OffsetDateTime.now());
+//             // ticket5.setApplication(application2);
+//             // ticket5.setReporter(account);
+//             // ticket5.setTitle("App Smile Tidak bisa Input Data Perumahan");
+//             // ticket5.setDescription("Form gabisa diisi lagi gimana dong");     
+//             // ticket5.setStatus(status1);
+//             // ticketRepository.save(ticket5);
 
-//             Comments comment = new Comments();
-//             comment.setTicket(ticket3);
-//             comment.setAuthor(account);
-//             comment.setBody("Tolong ini gimana caranya saya bener-bener bingung gatau harus gimana lagi");
-//             comment.setCreatedAt(OffsetDateTime.now());
-//             comment.setIsActive(true);
-//             commentRepository.save(comment);
+//             // Comments comment = new Comments();
+//             // comment.setTicket(ticket3);
+//             // comment.setAuthor(account);
+//             // comment.setBody("Tolong ini gimana caranya saya bener-bener bingung gatau harus gimana lagi");
+//             // comment.setCreatedAt(OffsetDateTime.now());
+//             // comment.setIsActive(true);
+//             // commentRepository.save(comment);
 
-//             ScoringRequest scoringRequest = new ScoringRequest(10, 2, 5, 2);
-//             Scorings scoreConfig = scoreConfigService.addScoring(scoringRequest);
 //         };
 //     }
 // }
