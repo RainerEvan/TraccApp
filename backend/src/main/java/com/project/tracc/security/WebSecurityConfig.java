@@ -61,18 +61,18 @@ public class WebSecurityConfig{
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http.cors().and().csrf().disable()
-            .httpBasic().disable();
-            // .exceptionHandling().authenticationEntryPoint(authEntryPoint).and()
-            // .authorizeRequests()
-            // .antMatchers("/api/accounts/profileImg/**").permitAll()
-            // .antMatchers("/api/auth/**").permitAll()
-            // .antMatchers("/graphiql", "/vendor/**").permitAll()
-            // .antMatchers("/api/graphql").permitAll()
-            // .anyRequest().authenticated()
-            // .and()
-            // .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-            // .and()
-            // .addFilterBefore(authTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+            // .httpBasic().disable();
+            .exceptionHandling().authenticationEntryPoint(authEntryPoint).and()
+            .authorizeRequests()
+            .antMatchers("/api/accounts/profileImg/**").permitAll()
+            .antMatchers("/api/auth/**").permitAll()
+            .antMatchers("/graphiql", "/vendor/**").permitAll()
+            .antMatchers("/api/graphql").permitAll()
+            .anyRequest().authenticated()
+            .and()
+            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .and()
+            .addFilterBefore(authTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }

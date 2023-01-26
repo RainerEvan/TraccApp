@@ -25,7 +25,7 @@ body{
 }
 
 .p-inputtext {
-    @apply w-full ring-0 border border-gray-400 text-sm placeholder:text-gray-400 hover:border-gray-400 focus:border-gray-400 disabled:pointer-events-none !important;
+    @apply w-full ring-0 border border-gray-400 text-sm placeholder:text-gray-400 hover:border-gray-400 focus:border-2 disabled:pointer-events-none !important;
 }
 
 .p-paginator {
@@ -76,6 +76,10 @@ body{
     @apply w-full ring-0 border border-gray-400 hover:border-gray-400 font-montserrat !important;
 }
 
+.p-dropdown.p-focus {
+    @apply border-2 !important;
+}
+
 .p-dropdown-label {
     @apply p-3 font-montserrat !important;
 }
@@ -98,6 +102,10 @@ body{
 
 .p-inputswitch {
     @apply flex items-center !important;
+}
+
+.p-inputswitch.p-focus .p-inputswitch-slider{
+    @apply ring ring-offset-2 ring-gray-400 !important;
 }
 
 .p-inputswitch-slider {

@@ -85,10 +85,10 @@
 //             status6.setName(EStatus.AWAITING);
 //             statusRepository.save(status6);
 
-//             Tags tag = tagsService.addTag("Error");
-//             Tags tag2 = tagsService.addTag("Bug");
-//             Tags tag3 = tagsService.addTag("Data Output");
-//             Tags tag4 = tagsService.addTag("Network Error");
+//             // Tags tag = tagsService.addTag("Error");
+//             // Tags tag2 = tagsService.addTag("Bug");
+//             // Tags tag3 = tagsService.addTag("Data Output");
+//             // Tags tag4 = tagsService.addTag("Network Error");
             
 //             // Set<Tags> tags = new HashSet<>();
 //             // tags.add(tag);
@@ -135,17 +135,17 @@
             
 //             // Accounts account2 = accountService.addAccount(null,accountRequest2);
 
-//             // AccountRequest accountRequest3 = new AccountRequest();
-//             // accountRequest3.setUsername("admin");
-//             // accountRequest3.setFullname("Admin 1");
-//             // accountRequest3.setPassword("pass123");
-//             // accountRequest3.setEmail("admin@gmail.com");
-//             // accountRequest3.setContactNo("092039031");
-//             // accountRequest3.setDivisionId(division2.getId());
-//             // accountRequest3.setIsActive(true);
-//             // accountRequest3.setRoleId(role1.getId());
+//             AccountRequest accountRequest3 = new AccountRequest();
+//             accountRequest3.setUsername("admin");
+//             accountRequest3.setFullname("Admin 1");
+//             accountRequest3.setPassword("pass123");
+//             accountRequest3.setEmail("admin@gmail.com");
+//             accountRequest3.setContactNo("092039031");
+//             accountRequest3.setDivisionId(division2.getId());
+//             accountRequest3.setIsActive(true);
+//             accountRequest3.setRoleId(role1.getId());
             
-//             // Accounts account3 = accountService.addAccount(null,accountRequest3);
+//             Accounts account3 = accountService.addAccount(null,accountRequest3);
 
 //             // AccountRequest accountRequest4 = new AccountRequest();
 //             // accountRequest4.setUsername("bob");

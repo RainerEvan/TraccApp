@@ -35,7 +35,7 @@ export class DashboardActivityComponent implements OnInit {
     this.dashboardService.getDashboardActivity().subscribe({
       next: (activity: DashboardActivity[]) => {
         this.dashboardActivity = activity;
-        this.getActivityData(activity[0]);
+        this.getActivityData(this.dashboardActivity[0]);
         this.loading = false;
       },
       error: (error: any) => {
@@ -45,15 +45,17 @@ export class DashboardActivityComponent implements OnInit {
   }
 
   getActivityData(activity:DashboardActivity){
-    this.period = activity.period;
-    this.totalPending = activity.totalPending;
-    this.totalInProgress = activity.totalInProgress;
-    this.totalResolved = activity.totalResolved;
-    this.totalDropped = activity.totalDropped;
-    this.totalTickets = activity.totalTickets;
-    this.label = activity.label;
-    this.data = activity.data
-    this.generateChart();
+    if(activity){
+      this.period = activity.period;
+      this.totalPending = activity.totalPending;
+      this.totalInProgress = activity.totalInProgress;
+      this.totalResolved = activity.totalResolved;
+      this.totalDropped = activity.totalDropped;
+      this.totalTickets = activity.totalTickets;
+      this.label = activity.label;
+      this.data = activity.data
+      this.generateChart();
+    }
   }
 
   generateChart(){
