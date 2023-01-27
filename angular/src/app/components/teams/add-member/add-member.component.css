@@ -1,7 +1,0 @@
-:host ::ng-deep .p-datatable{
-    @apply shadow-md shadow-gray-200;
-}
-
-:host ::ng-deep .p-datatable .p-checkbox .p-checkbox-box.p-highlight{
-    @apply bg-gray-400 border-gray-400;
-}

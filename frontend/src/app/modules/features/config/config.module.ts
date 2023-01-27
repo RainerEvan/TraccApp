@@ -14,6 +14,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { TableModule } from 'primeng/table';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
+import { SkeletonModule } from 'primeng/skeleton';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { InputTextModule } from 'primeng/inputtext';
     SharedModule,
     TableModule,
     InputTextModule,
+    SkeletonModule
   ]
 })
 export class ConfigModule { }

@@ -6,5 +6,5 @@ export class AuthDetails{
     accountId: string;
     username: string;
     isActive: boolean;
-    roles: string[];
+    role: string;
 } 

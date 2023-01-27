@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  // apiUrl:'http://localhost:8080/api',
-  apiUrl:'http://10.43.6.167:3095/api',
+  apiUrl:'http://localhost:8080/api',
+  // apiUrl:'http://10.43.6.167:3095/api',
   firebase: {
     apiKey: "AIzaSyC1AKF1YxGB46Fn_ibpxRA8R-z_qTkh2Fk",
     authDomain: "tracc-app.firebaseapp.com",

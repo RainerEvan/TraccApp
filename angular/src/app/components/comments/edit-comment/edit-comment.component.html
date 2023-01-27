@@ -1,9 +1,0 @@
-<form [formGroup]="commentForm" (ngSubmit)="editComment()" class="flex flex-col items-center justify-center space-y-6">
-    <div>
-        <p-editor [style]="{'height':'350px'}" placeholder="Say something..." formControlName="body"></p-editor>
-        <div *ngIf="body.invalid && (body.dirty || body.touched)" class="font-regular text-sm text-red-400 pt-1">
-            Comment cannot be empty
-        </div>
-    </div>
-    <button [disabled]="commentForm.invalid" type="submit" class="button-primary">Update</button>
-</form>

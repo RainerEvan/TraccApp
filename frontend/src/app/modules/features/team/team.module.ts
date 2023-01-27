@@ -12,6 +12,7 @@ import { AddMemberComponent } from './components/member/add-member/add-member.co
 import { TeamShellComponent } from './components/team-shell/team-shell.component';
 import { InputTextModule } from 'primeng/inputtext';
 import { TeamDetailComponent } from './components/team/team-detail/team-detail.component';
+import { SkeletonModule } from 'primeng/skeleton';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { TeamDetailComponent } from './components/team/team-detail/team-detail.c
     SharedModule,
     TableModule,
     InputTextModule,
+    SkeletonModule
   ]
 })
 export class TeamModule { }

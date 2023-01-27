@@ -1,7 +1,0 @@
-:host ::ng-deep .p-dropdown {
-    @apply w-32 ring-0 rounded-lg border-2 border-gray-400 hover:border-gray-500 font-montserrat !important;
-}
-
-:host ::ng-deep .p-dropdown-label {
-    @apply p-2 px-4 font-montserrat !important;
-}

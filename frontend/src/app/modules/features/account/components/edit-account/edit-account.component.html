@@ -28,8 +28,8 @@
         <p-dropdown [options]="divisions" optionLabel="name" optionValue="id" [autoDisplayFirst]="false" placeholder="Select division" formControlName="divisionId"></p-dropdown>
     </div>
     <div class="w-full">
-        <label for="rolesName" class="form-label">Role</label>
-        <p-dropdown [options]="roles" optionLabel="name" optionValue="name" [autoDisplayFirst]="false" formControlName="rolesName"></p-dropdown>
+        <label for="role" class="form-label">Role</label>
+        <input type="text" pInputText placeholder="Enter role name" formControlName="role">
     </div>
     <div class="w-full">
         <label for="isActive" class="form-label">Status</label>

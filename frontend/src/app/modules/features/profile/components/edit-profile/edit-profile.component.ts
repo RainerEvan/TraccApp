@@ -77,7 +77,7 @@ export class EditProfileComponent implements OnInit {
       contactNo: [this.accountData.contactNo],
       divisionId: [this.accountData.division.id],
       isActive: [{value:this.accountData.isActive, disabled:true}],
-      rolesName: [{value:this.accountData.roles[0].name, disabled:true}],
+      role: [{value:this.accountData.role.name, disabled:true}],
     });
     this.getAllDivisions();
 
@@ -101,8 +101,8 @@ export class EditProfileComponent implements OnInit {
   get isActive(){
     return this.accountForm.get('isActive');
   }
-  get rolesName(){
-    return this.accountForm.get('rolesName');
+  get role(){
+    return this.accountForm.get('role');
   }
 
   @HostListener("dragover", ["$event"]) onDragOver(event: any) {

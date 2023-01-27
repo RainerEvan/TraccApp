@@ -57,7 +57,7 @@
                         </div>
                         <div class="flex flex-row items-center space-x-8">
                             <span class="w-1/2 account-field lg:w-1/3">Role</span>
-                            <span *ngIf="account" class="w-1/2 account-value lg:w-2/3">{{account.roles[0].name}}</span>
+                            <span *ngIf="account" class="w-1/2 account-value lg:w-2/3">{{account.role.name}}</span>
                             <div *ngIf="loading" class="w-1/2 self-center lg:w-2/3">
                                 <p-skeleton width="50%"></p-skeleton>
                             </div>

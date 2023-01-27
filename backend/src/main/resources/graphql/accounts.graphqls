@@ -7,7 +7,7 @@ type Accounts{
     division:Divisions
     profileImg:String
     isActive:Boolean
-    roles:[Roles]
+    role:Roles
 }
 
 extend type Query{

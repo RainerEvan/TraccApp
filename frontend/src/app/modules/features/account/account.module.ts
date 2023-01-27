@@ -12,6 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { InputTextModule } from 'primeng/inputtext';
+import { SkeletonModule } from 'primeng/skeleton';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { InputTextModule } from 'primeng/inputtext';
     TableModule,
     InputTextModule,
     DropdownModule,
-    InputSwitchModule
+    InputSwitchModule,
+    SkeletonModule
   ]
 })
 export class AccountModule { }

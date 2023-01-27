@@ -29,7 +29,7 @@ export class DashboardAnalyticsComponent implements OnInit {
   pieChartData: any;
   pieChartOption: any;
   
-  constructor(private dashboardService:DashboardService) { }
+  constructor(private dashboardService:DashboardService) {}
 
   ngOnInit(): void {
     this.getDashboardAnalytics();
@@ -41,7 +41,7 @@ export class DashboardAnalyticsComponent implements OnInit {
     this.dashboardService.getDashboardAnalytics().subscribe({
       next: (analytics: DashboardAnalytics[]) => {
         this.dashboardAnalytics = analytics;
-        this.getAnalyticsData(analytics[0]);
+        this.getAnalyticsData(this.dashboardAnalytics[0]);
         this.loading = false;
       },
       error: (error: any) => {
@@ -51,19 +51,21 @@ export class DashboardAnalyticsComponent implements OnInit {
   }
 
   getAnalyticsData(analytics:DashboardAnalytics){
-    this.period = analytics.period;
-    this.minTickets = analytics.minTickets;
-    this.maxTickets = analytics.maxTickets;
-    this.avgTickets = analytics.avgTickets;
-    this.totalTickets = analytics.totalTickets;
-    this.label = analytics.label;
-    this.data = analytics.data;
-    this.applications = analytics.topApplications.map(topApplication => topApplication.application);
-    this.count = analytics.topApplications.map(topApplication => topApplication.count);
-    this.topTags = analytics.topTags;
-    this.ticketRate = analytics.ticketRate;
-    this.generateBarChart();
-    this.generatePieChart();
+    if(analytics){
+      this.period = analytics.period;
+      this.minTickets = analytics.minTickets;
+      this.maxTickets = analytics.maxTickets;
+      this.avgTickets = analytics.avgTickets;
+      this.totalTickets = analytics.totalTickets;
+      this.label = analytics.label;
+      this.data = analytics.data;
+      this.applications = analytics.topApplications.map(topApplication => topApplication.application);
+      this.count = analytics.topApplications.map(topApplication => topApplication.count);
+      this.topTags = analytics.topTags;
+      this.ticketRate = analytics.ticketRate;
+      this.generateBarChart();
+      this.generatePieChart();
+    }
   }
 
   generateBarChart(){

@@ -35,7 +35,7 @@ export class MemberService {
                 name
               }
               isActive
-              roles{
+              role{
                 id
                 name
               }           
