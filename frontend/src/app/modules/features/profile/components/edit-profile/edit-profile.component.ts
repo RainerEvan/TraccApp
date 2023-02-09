@@ -18,6 +18,7 @@ export class EditProfileComponent implements OnInit {
   accountData:Accounts;
   accountForm: FormGroup;
   isAccountFormSubmitted: boolean = false;
+  loading: boolean = false;
   divisions: Divisions[];
   profileImg: File;
   imageUrl:any;
@@ -42,6 +43,8 @@ export class EditProfileComponent implements OnInit {
   }
 
   public editAccount(): void{
+    this.loading = true;
+
     if(this.accountForm.valid){
       const formData = new FormData();
       const account = this.accountForm.value;
@@ -54,12 +57,14 @@ export class EditProfileComponent implements OnInit {
         next: (result: any) => {
           console.log(result);
           this.isAccountFormSubmitted = true;
+          this.loading = false;
           this.ref.close(this.isAccountFormSubmitted);
           this.showResultDialog("Success","Account has been updated successfully");
         },
         error: (error: any) => {
           console.log(error);
           this.isAccountFormSubmitted = false;
+          this.loading = false;
           this.ref.close(this.isAccountFormSubmitted);
           this.showResultDialog("Failed","There was a problem, try again later");
         }

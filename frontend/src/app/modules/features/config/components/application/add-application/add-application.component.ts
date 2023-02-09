@@ -13,6 +13,7 @@ export class AddApplicationComponent implements OnInit {
 
   applicationForm: FormGroup;
   isApplicationFormSubmitted: boolean = false;
+  loading: boolean = false;
   
   constructor(public dialogService:DialogService, public ref: DynamicDialogRef, private applicationService: ApplicationService, private formBuilder: FormBuilder) { }
 
@@ -21,6 +22,8 @@ export class AddApplicationComponent implements OnInit {
   }
 
   public addApplication(): void{
+    this.loading = true;
+
     if(this.applicationForm.valid){
       const name = this.applicationForm.value.name;
 
@@ -28,12 +31,14 @@ export class AddApplicationComponent implements OnInit {
         next: (result: any) => {
           console.log(result);
           this.isApplicationFormSubmitted = true;
+          this.loading = false;
           this.ref.close(this.isApplicationFormSubmitted);
           this.showResultDialog("Success","Application has been added successfully");
         },
         error: (error: any) => {
           console.log(error);
           this.isApplicationFormSubmitted = false;
+          this.loading = false;
           this.ref.close(this.isApplicationFormSubmitted);
           this.showResultDialog("Failed","There was a problem, try again later");
         }

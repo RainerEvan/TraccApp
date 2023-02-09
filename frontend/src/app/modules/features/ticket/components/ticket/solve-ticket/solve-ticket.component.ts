@@ -13,9 +13,10 @@ import { TicketSupportService } from 'src/app/services/ticket-support/ticket-sup
 })
 export class SolveTicketComponent implements OnInit {
 
-  solveForm: FormGroup;
   supportId: string;
+  solveForm: FormGroup;
   isSolveFormSubmitted: boolean = false;
+  loading: boolean = false;
   tags: Tags[];
   filteredTags: any;
   supportAttachments: File[]=[];
@@ -40,6 +41,8 @@ export class SolveTicketComponent implements OnInit {
   }
 
   public solveSupport():void{
+    this.loading = true;
+
     if(this.solveForm.valid){
       const formData = new FormData();
       const support = this.solveForm.value;
@@ -54,12 +57,14 @@ export class SolveTicketComponent implements OnInit {
         next: (result: any) => {
           console.log(result);
           this.isSolveFormSubmitted = true;
+          this.loading = false;
           this.ref.close(this.isSolveFormSubmitted);
           this.showResultDialog("Success","Ticket has been updated successfully");
         },
         error: (error: any) => {
           console.log(error);
           this.isSolveFormSubmitted = false;
+          this.loading = false;
           this.ref.close(this.isSolveFormSubmitted);
           this.showResultDialog("Failed","There was a problem, try again later");
         }

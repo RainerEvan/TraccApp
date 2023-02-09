@@ -13,6 +13,7 @@ export class AddTeamComponent implements OnInit {
 
   teamForm: FormGroup;
   isTeamFormSubmitted: boolean = false;
+  loading: boolean = true;
   
   constructor(public dialogService:DialogService, public ref: DynamicDialogRef, private teamService:TeamService, private formBuilder: FormBuilder) { }
 
@@ -21,6 +22,8 @@ export class AddTeamComponent implements OnInit {
   }
 
   public addTeam(): void{
+    this.loading = true;
+
     if(this.teamForm.valid){
       const name = this.teamForm.value.name;
 
@@ -28,12 +31,14 @@ export class AddTeamComponent implements OnInit {
         next: (result: any) => {
           console.log(result);
           this.isTeamFormSubmitted = true;
+          this.loading = false;
           this.ref.close(this.isTeamFormSubmitted);
           this.showResultDialog("Success","Team has been added successfully");
         },
         error: (error: any) => {
           console.log(error);
           this.isTeamFormSubmitted = false;
+          this.loading = false;
           this.ref.close(this.isTeamFormSubmitted);
           this.showResultDialog("Failed","There was a problem, try again later");
         }

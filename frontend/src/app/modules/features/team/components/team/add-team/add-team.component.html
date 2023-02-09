@@ -6,6 +6,9 @@
         </div>
     </div>
     <div class="w-full flex flex-row items-center justify-center">
-        <button type="submit" [disabled]="teamForm.invalid" class="button-primary scale-105">Submit</button>
+        <button type="submit" [disabled]="teamForm.invalid || loading" class="button-primary inline-flex items-center space-x-2 scale-110">
+            <i *ngIf="loading" class="pi pi-spin pi-spinner" style="font-size: 14px;"></i>
+            <span>Submit</span>
+        </button>
     </div>
 </form>

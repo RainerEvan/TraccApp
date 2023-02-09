@@ -13,6 +13,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 export class ChangePasswordComponent implements OnInit {
 
   passwordForm: FormGroup;
+  loading: boolean = false;
   
   constructor(public dialogService:DialogService, public ref: DynamicDialogRef, public config: DynamicDialogConfig, private accountService: AccountService, private authService: AuthService, private formBuilder: FormBuilder) { }
 
@@ -21,6 +22,8 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   public changePassword(): void{
+    this.loading = true;
+
     if(this.passwordForm.valid){
       const formData = new FormData();
       const currentPassword = this.passwordForm.value.currentPassword;
@@ -32,10 +35,12 @@ export class ChangePasswordComponent implements OnInit {
       this.accountService.changePassword(formData).subscribe({
         next: (result: any) => {
           console.log(result);
+          this.loading = false;
           this.showResultDialog("Success","Password has been updated successfully, please login again","logout");
         },
         error: (error: any) => {
           console.log(error);
+          this.loading = false;
           this.showResultDialog("Failed",error,null);
         }
       });

@@ -13,6 +13,7 @@ export class AddDivisionComponent implements OnInit {
 
   divisionForm: FormGroup;
   isDivisionFormSubmitted: boolean = false;
+  loading: boolean = false;
   
   constructor(public dialogService:DialogService, public ref: DynamicDialogRef, private divisionService: DivisionService, private formBuilder: FormBuilder) { }
 
@@ -21,6 +22,8 @@ export class AddDivisionComponent implements OnInit {
   }
 
   public addDivision(): void{
+    this.loading = true;
+
     if(this.divisionForm.valid){
       const name = this.divisionForm.value.name;
 
@@ -28,12 +31,14 @@ export class AddDivisionComponent implements OnInit {
         next: (result: any) => {
           console.log(result);
           this.isDivisionFormSubmitted = true;
+          this.loading = false;
           this.ref.close(this.isDivisionFormSubmitted);
           this.showResultDialog("Success","Division has been added successfully");
         },
         error: (error: any) => {
           console.log(error);
           this.isDivisionFormSubmitted = false;
+          this.loading = false;
           this.ref.close(this.isDivisionFormSubmitted);
           this.showResultDialog("Failed","There was a problem, try again later");
         }

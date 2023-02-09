@@ -17,6 +17,7 @@ export class AddAccountComponent implements OnInit {
 
   accountForm: FormGroup;
   isAccountFormSubmitted: boolean = false;
+  loading: boolean = false;
   divisions: Divisions[];
   roles: Roles[];
   profileImg: File;
@@ -52,6 +53,8 @@ export class AddAccountComponent implements OnInit {
   }
 
   public addAccount(): void{
+    this.loading = true;
+
     if(this.accountForm.valid){
       const formData = new FormData();
       const account = this.accountForm.value;
@@ -63,12 +66,14 @@ export class AddAccountComponent implements OnInit {
         next: (result: any) => {
           console.log(result);
           this.isAccountFormSubmitted = true;
+          this.loading = false;
           this.ref.close(this.isAccountFormSubmitted);
           this.showResultDialog("Success","Account has been created successfully");
         },
         error: (error: any) => {
           console.log(error);
           this.isAccountFormSubmitted = false;
+          this.loading = false;
           this.ref.close(this.isAccountFormSubmitted);
           this.showResultDialog("Failed","There was a problem, try again later");
         }

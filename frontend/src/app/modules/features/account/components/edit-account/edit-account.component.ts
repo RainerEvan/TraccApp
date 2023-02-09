@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Accounts } from 'src/app/models/accounts';
 import { Divisions } from 'src/app/models/divisions';
-import { Roles } from 'src/app/models/roles';
 import { ResultDialogComponent } from 'src/app/modules/shared/components/result-dialog/result-dialog.component';
 import { AccountService } from 'src/app/services/account/account.service';
 import { DivisionService } from 'src/app/services/division/division.service';
@@ -20,6 +19,7 @@ export class EditAccountComponent implements OnInit {
   accountData:Accounts;
   accountForm: FormGroup;
   isAccountFormSubmitted: boolean = false;
+  loading: boolean = false;
   divisions: Divisions[];
   profileImg: File;
   imageUrl:any;
@@ -44,6 +44,8 @@ export class EditAccountComponent implements OnInit {
   }
 
   public editAccount(): void{
+    this.loading = true;
+
     if(this.accountForm.valid){
       const formData = new FormData();
       const account = this.accountForm.value;
@@ -56,12 +58,14 @@ export class EditAccountComponent implements OnInit {
         next: (result: any) => {
           console.log(result);
           this.isAccountFormSubmitted = true;
+          this.loading = false;
           this.ref.close(this.isAccountFormSubmitted);
           this.showResultDialog("Success","Account has been updated successfully");
         },
         error: (error: any) => {
           console.log(error);
           this.isAccountFormSubmitted = false;
+          this.loading = false;
           this.ref.close(this.isAccountFormSubmitted);
           this.showResultDialog("Failed","There was a problem, try again later");
         }

@@ -24,6 +24,7 @@ export class CommentListComponent implements OnInit {
   commentForm: FormGroup;
   isCommentFormSubmitted: boolean = false;
   loading: boolean;
+  loadingPost: boolean = false;
   totalRecords: number = 0;
   ref: DynamicDialogRef;
 
@@ -58,17 +59,21 @@ export class CommentListComponent implements OnInit {
   }
 
   public addComment(): void{
+    this.loadingPost = true;
+
     if(this.commentForm.valid){
       const formData = this.commentForm.value;
 
       this.commentService.addComment(formData).subscribe({
         next: (result: any) => {
+          this.loadingPost = false;
           this.isCommentFormSubmitted = true;
           this.generateCommentForm();
           this.getAllComments();
         },
         error: (error: any) => {
           console.log(error);
+          this.loadingPost = false;
           this.isCommentFormSubmitted = false;
         }
       });

@@ -10,7 +10,10 @@
             <div class="col-span-9 w-full lg:col-span-8">
                 <form [formGroup]="commentForm" (ngSubmit)="addComment()" class="flex flex-col space-y-4">
                     <p-editor [style]="{'height':'8rem'}" placeholder="Say something..." formControlName="body"></p-editor>
-                    <button [disabled]="commentForm.invalid" type="submit" class="w-24 self-end button-primary">Post</button>
+                    <button type="submit" [disabled]="commentForm.invalid || loadingPost" class="w-24 self-end button-primary inline-flex items-center justify-center space-x-2">
+                        <i *ngIf="loadingPost" class="pi pi-spin pi-spinner" style="font-size: 14px;"></i>
+                        <span>Post</span>
+                    </button>
                 </form>
             </div>
         </div>

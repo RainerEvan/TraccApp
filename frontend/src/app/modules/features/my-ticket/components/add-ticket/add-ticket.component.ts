@@ -16,6 +16,7 @@ export class AddTicketComponent implements OnInit {
 
   ticketForm: FormGroup;
   isTicketFormSubmitted: boolean = false;
+  loading: boolean = false;;
   applications: Applications[];
   ticketAttachments: File[]=[];
   fileDropArea:string;
@@ -38,6 +39,8 @@ export class AddTicketComponent implements OnInit {
   }
 
   public addTicket(): void{
+    this.loading = true;
+
     if(this.ticketForm.valid){
       const formData = new FormData();
       const ticket = this.ticketForm.value;
@@ -51,12 +54,14 @@ export class AddTicketComponent implements OnInit {
         next: (result: any) => {
           console.log(result);
           this.isTicketFormSubmitted = true;
+          this.loading = false;
           this.ref.close(this.isTicketFormSubmitted);
           this.showResultDialog("Success","Ticket has been added successfully");
         },
         error: (error: any) => {
           console.log(error);
           this.isTicketFormSubmitted = false;
+          this.loading = false;
           this.ref.close(this.isTicketFormSubmitted);
           this.showResultDialog("Failed","There was a problem, try again later");
         }

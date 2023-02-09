@@ -13,6 +13,7 @@ export class AddTagsComponent implements OnInit {
 
   tagForm: FormGroup;
   isTagFormSubmitted: boolean = false;
+  loading: boolean = false;
   
   constructor(public dialogService:DialogService, public ref: DynamicDialogRef, private tagService: TagsService, private formBuilder: FormBuilder) { }
 
@@ -21,6 +22,8 @@ export class AddTagsComponent implements OnInit {
   }
 
   public addTag(): void{
+    this.loading = true;
+
     if(this.tagForm.valid){
       const name = this.tagForm.value.name;
 
@@ -28,12 +31,14 @@ export class AddTagsComponent implements OnInit {
         next: (result: any) => {
           console.log(result);
           this.isTagFormSubmitted = true;
+          this.loading = false;
           this.ref.close(this.isTagFormSubmitted);
           this.showResultDialog("Success","Tag has been added successfully");
         },
         error: (error: any) => {
           console.log(error);
           this.isTagFormSubmitted = false;
+          this.loading = false;
           this.ref.close(this.isTagFormSubmitted);
           this.showResultDialog("Failed","There was a problem, try again later");
         }

@@ -40,7 +40,10 @@
     </div>
     
     <div class="w-full flex flex-row items-center justify-center space-x-6">
-        <button type="submit" class="button-primary scale-110">Submit</button>
+        <button type="submit" [disabled]="loading" class="button-primary inline-flex items-center space-x-2 scale-110">
+            <i *ngIf="loading" class="pi pi-spin pi-spinner" style="font-size: 14px;"></i>
+            <span>Submit</span>
+        </button>
         <button type="button" (click)="resetForm(accountForm)" class="button-secondary scale-110">Reset</button>
     </div>
 </form>
