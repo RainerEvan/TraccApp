@@ -12,6 +12,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
+  loading: boolean = false;
   error: string;
   showPass: boolean = false;
 
@@ -41,14 +42,18 @@ export class LoginComponent implements OnInit {
   }
 
   login():void{
+    this.loading = true;
+
     if(this.loginForm.valid){
       this.authService.login(this.username.value,this.password.value).subscribe({
         next: () => {
+          this.loading = false;
           this.messageService.add({key:'login', severity:'success', summary: 'Login Success', detail: 'Welcome to Tracc App'});
           const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
           this.router.navigateByUrl(returnUrl);
         },
         error: (error: any) => {
+          this.loading = false;
           this.messageService.add({key:'login', severity:'error', summary: 'Login Failed', detail: error});
           console.log(error);
         }

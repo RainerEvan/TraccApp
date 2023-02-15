@@ -1,7 +1,7 @@
 <form [formGroup]="accountForm" (ngSubmit)="addAccount()" class="flex flex-col space-y-6 py-4 px-6 text-black">
     <div class="w-full flex items-center justify-center">
         <div class="relative">
-            <div draggable="true" [ngClass]="fileDropArea" (click)="fileInput.click()" class="drag-area w-24 h-24 flex items-center justify-center rounded-full">
+            <div [ngClass]="fileDropArea" (click)="fileInput.click()" class="drag-area w-24 h-24 flex items-center justify-center rounded-full">
                 <img *ngIf="profileImg" [src]="imageUrl" class="object-cover w-full h-full rounded-full">
                 <i *ngIf="!profileImg" class="pi pi-camera opacity-60" style="font-size:24px"></i>
                 <input #fileInput accept="image/*" type="file" class="hidden" (change)="onSelectFile($event)"/>
